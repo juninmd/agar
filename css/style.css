@@ -141,3 +141,38 @@ button:hover {
     80% { transform: translate(2px, -2px) }
     100% { transform: translate(0) }
 }
+
+/* Warning Message */
+#warning-message {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: red;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 10;
+    text-shadow: 0 0 20px red;
+    animation: flash 0.5s infinite;
+    font-family: 'Orbitron', sans-serif;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border: 2px solid red;
+    border-radius: 10px;
+}
+
+.sub-warning {
+    font-size: 1.5rem;
+    color: orange;
+    margin-top: 10px;
+    animation: none;
+    text-shadow: 0 0 10px orange;
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}

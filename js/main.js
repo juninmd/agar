@@ -3,6 +3,7 @@ import { Utils } from './utils.js';
 import { Player } from './player.js';
 import { Food } from './food.js';
 import { Bot } from './bot.js';
+import { Firewall } from './firewall.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -16,12 +17,16 @@ const finalScoreDisplay = document.getElementById('final-score');
 const nameInput = document.getElementById('player-name');
 const startBtn = document.getElementById('start-btn');
 const restartBtn = document.getElementById('restart-btn');
+const warningMessage = document.getElementById('warning-message');
 
 let gameRunning = false;
 let animationId;
 let player;
 let foods = [];
 let bots = [];
+let firewall;
+let firewallTimer = 0;
+const FIREWALL_INTERVAL = 1800; // ~30 seconds at 60fps
 
 // Mouse state
 let mouseX = 0;
@@ -56,9 +61,13 @@ function initGame() {
         spawnBot();
     }
 
+    firewall = new Firewall();
+    firewallTimer = 0;
+
     gameRunning = true;
     startScreen.classList.add('hidden');
     gameOverScreen.classList.add('hidden');
+    warningMessage.classList.add('hidden');
     animate();
 }
 
@@ -150,6 +159,37 @@ function update() {
         return;
     }
 
+    // Firewall Logic
+    if (!firewall.active) {
+        firewallTimer++;
+        if (firewallTimer > FIREWALL_INTERVAL) {
+            firewall.start();
+            firewallTimer = 0;
+            warningMessage.classList.remove('hidden');
+            setTimeout(() => warningMessage.classList.add('hidden'), 5000);
+        }
+    } else {
+        firewall.update();
+
+        // Check collisions
+        if (firewall.checkCollision(player)) {
+            player.markedForDeletion = true;
+        }
+
+        bots.forEach(bot => {
+            if (firewall.checkCollision(bot)) {
+                bot.markedForDeletion = true;
+            }
+        });
+
+        // Destroy food behind firewall
+        for (let i = foods.length - 1; i >= 0; i--) {
+            if (firewall.checkCollision(foods[i])) {
+                foods.splice(i, 1);
+            }
+        }
+    }
+
     // Camera
     // Lerp camera for smoothness? No, direct is tighter for this game.
     camX = canvas.width / 2 - player.x;
@@ -212,6 +252,11 @@ function draw() {
     ctx.translate(camX, camY);
 
     drawGrid();
+
+    // Draw Firewall (Background layer)
+    if (firewall.active) {
+        firewall.draw(ctx);
+    }
 
     // Draw Foods
     foods.forEach(food => food.draw(ctx));

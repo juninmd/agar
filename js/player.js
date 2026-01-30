@@ -9,6 +9,7 @@ export class Player extends Entity {
         this.targetX = x;
         this.targetY = y;
         this.velocity = { x: 0, y: 0 };
+        this.speedBoost = 1;
     }
 
     setTarget(x, y) {
@@ -16,14 +17,30 @@ export class Player extends Entity {
         this.targetY = y;
     }
 
+    dash() {
+        // Minimum mass check (don't dash if too small)
+        const minMass = Utils.getMassFromRadius(CONSTANTS.INITIAL_RADIUS);
+        if (this.mass > minMass * 1.2) {
+            this.mass *= 0.8;
+            this.radius = Utils.getRadiusFromMass(this.mass);
+            this.speedBoost = 3.0; // Burst of speed
+        }
+    }
+
     update(worldWidth, worldHeight) {
+        // Decay speed boost
+        if (this.speedBoost > 1) {
+            this.speedBoost *= 0.95;
+            if (this.speedBoost < 1) this.speedBoost = 1;
+        }
+
         // Calculate distance to target
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
 
         // Speed calculation based on size (bigger = slower)
         // Decaying speed but with a minimum limit so you don't stop completely
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
-        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay;
+        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost;
 
         if (dist > 0) {
             // Move towards target

@@ -293,6 +293,12 @@ window.addEventListener('mousemove', (e) => {
     mouseY = e.clientY;
 });
 
+window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && gameRunning && player) {
+        player.dash();
+    }
+});
+
 startBtn.addEventListener('click', () => {
     initGame();
 });

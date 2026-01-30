@@ -84,7 +84,16 @@ function spawnBot() {
     const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
     const radius = Utils.randomRange(CONSTANTS.INITIAL_RADIUS * 0.8, CONSTANTS.INITIAL_RADIUS * 2.5); // Bots vary in size
     const color = Utils.randomColor(CONSTANTS.COLORS);
-    bots.push(new Bot(x, y, radius, color));
+
+    // Determine type
+    const rand = Math.random();
+    let type = "NORMAL";
+    if (rand < 0.20) type = "SEEKER";    // 20%
+    else if (rand < 0.35) type = "GUARDIAN"; // 15%
+    else if (rand < 0.50) type = "GLITCH";   // 15%
+    // Remaining 50% is NORMAL
+
+    bots.push(new Bot(x, y, radius, color, type));
 }
 
 function drawGrid() {

@@ -3,17 +3,30 @@ import { Utils } from './utils.js';
 import { CONSTANTS } from './constants.js';
 
 export class Bot extends Player {
-    constructor(x, y, radius, color) {
-        // Random names for bots
-        const botNames = ["Daemon", "Glitch", "Trojan", "Worm", "Virus", "Null", "NaN", "404", "Root", "Admin"];
-        const name = botNames[Math.floor(Math.random() * botNames.length)] + "_" + Math.floor(Math.random() * 100);
+    constructor(x, y, radius, color, typeKey = "NORMAL") {
+        const typeData = CONSTANTS.BOT_TYPES[typeKey] || CONSTANTS.BOT_TYPES.NORMAL;
 
-        super(x, y, radius, color, name);
+        // Use type specific color if defined, else use provided random color
+        const finalColor = typeData.color || color;
+        const name = typeData.namePrefix + "_" + Math.floor(Math.random() * 999);
 
+        super(x, y, radius, finalColor, name);
+
+        this.type = typeKey;
+        this.typeData = typeData;
         this.changeDirTimer = 0;
-        // Bots start with random mass sometimes larger
-        if (Math.random() < 0.2) {
-            this.grow(Utils.randomRange(100, 500));
+
+        // Custom physics props
+        this.baseSpeedMult = typeData.speedMultiplier;
+
+        // Apply Mass Multiplier
+        if (this.typeData.massMultiplier !== 1.0) {
+            this.grow(this.mass * (this.typeData.massMultiplier - 1));
+        }
+
+        // Glitch effect
+        if (this.type === "GLITCH") {
+            this.isGlitching = true;
         }
     }
 
@@ -21,8 +34,47 @@ export class Bot extends Player {
         // AI Logic
         this.think(entities, foods);
 
-        // Execute movement (parent logic)
-        super.update(worldWidth, worldHeight);
+        // Custom Movement Logic (Overriding Player.update to support baseSpeedMult)
+        // Decay speed boost
+        if (this.speedBoost > 1) {
+            this.speedBoost *= 0.95;
+            if (this.speedBoost < 1) this.speedBoost = 1;
+        }
+
+        // Glitch Teleport Logic
+        if (this.type === "GLITCH") {
+            if (Math.random() < this.typeData.teleportChance) {
+                const angle = Math.random() * Math.PI * 2;
+                const dist = 100;
+                this.x += Math.cos(angle) * dist;
+                this.y += Math.sin(angle) * dist;
+                // Clamp
+                this.checkBounds(worldWidth, worldHeight);
+            }
+        }
+
+        const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
+        const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
+
+        // Apply baseSpeedMult here
+        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.baseSpeedMult;
+
+        if (dist > 0) {
+            if (dist < 5) {
+                this.velocity.x = 0;
+                this.velocity.y = 0;
+            } else {
+                const dx = this.targetX - this.x;
+                const dy = this.targetY - this.y;
+                this.velocity.x = (dx / dist) * maxSpeed;
+                this.velocity.y = (dy / dist) * maxSpeed;
+            }
+        }
+
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+
+        this.checkBounds(worldWidth, worldHeight);
     }
 
     think(entities, foods) {
@@ -31,29 +83,27 @@ export class Bot extends Player {
         let threatVector = { x: 0, y: 0 };
         let hasThreat = false;
 
-        // 1. Check for threats (Larger entities) and Prey (Smaller entities)
-        // We only care about nearby entities to save CPU? For now check all.
-
         entities.forEach(other => {
             if (other === this) return;
 
             const dist = Utils.getDistance(this.x, this.y, other.x, other.y);
 
-            // Optimization: Ignore far away things
-            if (dist > 500 + this.radius) return;
+            // Vision range scaled by aggression
+            const viewRange = (500 + this.radius) * Math.max(0.5, this.typeData.aggression);
+            if (dist > viewRange) return;
 
             if (other.radius > this.radius * 1.1) {
-                // Threat! Run away!
+                // Threat
                 hasThreat = true;
                 const dx = this.x - other.x;
                 const dy = this.y - other.y;
-                // Add to threat vector (weighted by distance)
                 threatVector.x += dx / dist;
                 threatVector.y += dy / dist;
             } else if (other.radius * 1.1 < this.radius) {
-                // Prey! Chase!
-                // Score based on size (bigger prey = better) and distance (closer = better)
-                const score = (other.radius) / (dist + 1);
+                // Prey
+                // Multiply score by aggression
+                // Seeker (2.0) will prioritize chasing much more than Guardian (0.2)
+                const score = ((other.radius) / (dist + 1)) * this.typeData.aggression;
                 if (score > bestScore) {
                     bestScore = score;
                     bestTarget = other;
@@ -62,19 +112,16 @@ export class Bot extends Player {
         });
 
         if (hasThreat) {
-            // Run away from average threat direction
             this.setTarget(this.x + threatVector.x * 100, this.y + threatVector.y * 100);
         } else if (bestTarget) {
-            // Chase prey
             this.setTarget(bestTarget.x, bestTarget.y);
         } else {
-            // No entities nearby. Look for food.
+            // Guardian behavior: stay in area?
+            // For now, if Guardian, they just wander slowly (aggression is low so they rarely chase)
+
             let closestFood = null;
             let minFoodDist = Infinity;
 
-            // Checking ALL food is expensive (400 items * 25 bots).
-            // Just check a random sample or assume food is everywhere and wander?
-            // Let's check 20 random food items to simulate limited vision/cpu
             for (let i = 0; i < 20; i++) {
                 const randomFood = foods[Math.floor(Math.random() * foods.length)];
                 if (!randomFood) continue;
@@ -88,7 +135,6 @@ export class Bot extends Player {
             if (closestFood && minFoodDist < 300) {
                 this.setTarget(closestFood.x, closestFood.y);
             } else {
-                // Wander randomly
                 this.changeDirTimer--;
                 if (this.changeDirTimer <= 0) {
                     const angle = Math.random() * Math.PI * 2;

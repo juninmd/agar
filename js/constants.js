@@ -16,5 +16,36 @@ export const CONSTANTS = {
         '#FFFF00', // Yellow
         '#FF0000', // Red
         '#9D00FF'  // Purple
-    ]
+    ],
+    BOT_TYPES: {
+        SEEKER: {
+            color: '#FF0000', // Red
+            speedMultiplier: 1.5,
+            massMultiplier: 0.8,
+            aggression: 2.0,
+            namePrefix: "SEEKER"
+        },
+        GUARDIAN: {
+            color: '#0000FF', // Blue
+            speedMultiplier: 0.6,
+            massMultiplier: 3.0,
+            aggression: 0.2, // Defensive
+            namePrefix: "WARDEN"
+        },
+        GLITCH: {
+            color: '#00FF41', // Matrix Green (placeholder, will change dynamically)
+            speedMultiplier: 1.2,
+            massMultiplier: 1.0,
+            aggression: 1.0,
+            teleportChance: 0.02,
+            namePrefix: "ERR"
+        },
+        NORMAL: {
+            color: null, // Random
+            speedMultiplier: 1.0,
+            massMultiplier: 1.0,
+            aggression: 1.0,
+            namePrefix: "BOT"
+        }
+    }
 };

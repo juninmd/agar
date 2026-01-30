@@ -2,12 +2,17 @@
 
 Este documento descreve a evolução planejada para o protocolo NEON-PHAGE.
 
-## 🟢 Fase 1: O Protótipo (Versão Atual)
+## 🟢 Fase 1: O Protótipo (Concluído)
 *   **Engine Gráfica:** Renderização Canvas 2D com estética Synthwave/Neon.
 *   **Física de Entidades:** Movimento fluido, inércia simulada.
 *   **Sistema de Crescimento:** Algoritmo de absorção de massa ($Area = \pi r^2$).
 *   **IA Básica (Daemons v1.0):** Comportamento de perseguição e fuga baseado em tamanho relativo.
 *   **Ambiente:** Grid infinito (simulado) com limites de memória.
+
+## 🔵 Fase 1.5: A Evolução (Implementado)
+*   **Daemons v2.0 (Classes de Elite):** Implementação de Seekers, Guardians e Glitches com comportamentos únicos.
+*   **Lore Expandida:** História detalhada sobre a Purga e os Fagos Lendários.
+*   **Efeitos Visuais:** Glitch rendering para entidades corrompidas.
 
 ## 🟡 Fase 2: Conectividade (Em Breve)
 *   **Netcode:** Implementação de WebSockets (Node.js + Socket.io) para multiplayer real.

@@ -20,7 +20,16 @@ Se você crescer o suficiente, talvez... apenas talvez... você consiga furar o 
 
 *   **PHAGE (Você):** Código instável. Cor: Variável (Neon). Habilidade: Absorção Infinita.
 *   **DATA BITS (Comida):** Fragmentos de arquivos corrompidos que restaram da Purga. Hexadecimais flutuantes. Consuma-os para expandir sua alocação de memória.
-*   **DAEMONS (Inimigos):** Protocolos de segurança do sistema. Eles variam de simples `Cleaners` (pequenos e rápidos) a massivos `Kernels` (lentos e mortais). Se o tamanho de alocação deles for maior que o seu, eles vão sobrescrever seu código.
+*   **DAEMONS (Inimigos):** Protocolos de segurança do sistema. A Purga evoluiu, e agora existem classes especializadas:
+    *   **SEEKERS (Caçadores):** Vermelhos e rápidos. Programados com heurísticas de busca agressiva. Eles não crescem muito, mas atacam em bando.
+    *   **GUARDIANS (Guardiões):** Azuis e massivos. São como torres de dados. Lentos, mas exercem uma gravidade digital imensa. Geralmente protegem setores ricos em bits.
+    *   **GLITCHES (Falhas):** Entidades corrompidas (Roxo/Verde). Sua renderização é instável. Eles podem se teletransportar ou mudar de velocidade abruptamente. Imprevisíveis.
+
+### Fagos Lendários (Arquivos Deletados)
+
+Dizem que alguns Fagos conseguiram sobreviver por ciclos inteiros antes de serem deletados. Seus nomes ecoam no cache:
+*   *Null_Pointer*: Ocultava-se na memória não alocada.
+*   *Zero_Day*: Um exploit que cresceu tanto que travou o servidor por 3 milissegundos.
 
 ### Objetivo
 

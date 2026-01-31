@@ -59,6 +59,19 @@ export class Player extends Entity {
             }
         }
 
+        // Corruption Logic: Large mass causes instability
+        // Starts noticeable around mass 1000
+        const corruptionFactor = Math.max(0, (this.mass - 500) / 2000);
+        if (corruptionFactor > 0) {
+            this.velocity.x += (Math.random() - 0.5) * corruptionFactor * 2;
+            this.velocity.y += (Math.random() - 0.5) * corruptionFactor * 2;
+
+            // Visual glitch flag if very corrupted
+            this.isGlitching = (Math.random() < corruptionFactor * 0.1);
+        } else {
+            this.isGlitching = false;
+        }
+
         this.x += this.velocity.x;
         this.y += this.velocity.y;
 

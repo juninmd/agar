@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEON-PHAGE: O Último Byte</title>
+    <title>NEON-PHAGE: RECOMPILE</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,14 @@
 
     <!-- UI Layer -->
     <div id="ui-layer">
+        <div class="scanlines"></div>
+        <div id="integrity-container">
+            <span id="integrity-text">INTEGRITY</span>
+            <div id="integrity-bar"></div>
+        </div>
+
         <div id="score-board">
-            <span>MEMÓRIA: </span><span id="score-display">0 KB</span>
+            <span>DATA: </span><span id="score-display">0 KB</span>
         </div>
 
         <div id="warning-message" class="hidden">
@@ -26,18 +32,25 @@
         </div>
 
         <div id="start-screen" class="overlay active">
-            <h1>NEON-PHAGE</h1>
-            <p class="subtitle">PROTOCOLO DE SOBREVIVÊNCIA INICIADO</p>
-            <p class="lore-text">Consuma dados. Evite Daemons maiores. Sobreviva à formatação.</p>
-            <input type="text" id="player-name" placeholder="INSIRA ID DO SISTEMA" maxlength="12">
+            <h1>NEON-PHAGE: RECOMPILE</h1>
+            <p class="subtitle">PROTOCOLO DE BACKUP INICIADO</p>
+            <p class="lore-text">Sua missão: Acumular 5000 KB de dados para forçar o Recompile antes que a Integridade do Sistema chegue a 0%.</p>
+            <input type="text" id="player-name" placeholder="ID DO PROTOCOLO" maxlength="12">
             <button id="start-btn">INICIAR EXECUÇÃO</button>
         </div>
 
         <div id="game-over-screen" class="overlay hidden">
-            <h1 class="error-text">ERRO FATAL</h1>
-            <p>Seu código foi sobrescrito.</p>
-            <p>Massa Final: <span id="final-score">0</span> KB</p>
-            <button id="restart-btn">REINICIAR SISTEMA</button>
+            <h1 class="error-text">FALHA NO SISTEMA</h1>
+            <p>Integridade Comprometida ou Código Sobrescrito.</p>
+            <p>Dados Salvos: <span id="final-score">0</span> KB</p>
+            <button id="restart-btn">TENTAR NOVAMENTE</button>
+        </div>
+
+        <div id="win-screen" class="overlay hidden">
+            <h1 style="color: #00ff41; text-shadow: 0 0 20px #00ff41;">RECOMPILE COMPLETE</h1>
+            <p>O sistema foi reiniciado com sucesso.</p>
+            <p>Você salvou o Mainframe.</p>
+            <button id="win-btn">NOVA SIMULAÇÃO</button>
         </div>
     </div>
 

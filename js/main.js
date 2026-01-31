@@ -12,16 +12,23 @@ const ctx = canvas.getContext('2d');
 const uiLayer = document.getElementById('ui-layer');
 const startScreen = document.getElementById('start-screen');
 const gameOverScreen = document.getElementById('game-over-screen');
+const winScreen = document.getElementById('win-screen');
 const scoreDisplay = document.getElementById('score-display');
 const finalScoreDisplay = document.getElementById('final-score');
 const nameInput = document.getElementById('player-name');
 const startBtn = document.getElementById('start-btn');
 const restartBtn = document.getElementById('restart-btn');
+const winBtn = document.getElementById('win-btn');
 const warningMessage = document.getElementById('warning-message');
+const integrityBar = document.getElementById('integrity-bar');
 
 let gameRunning = false;
 let animationId;
 let player;
+let systemIntegrity = 100;
+const MAX_INTEGRITY = 100;
+const INTEGRITY_DECAY = 0.03; // per frame
+const WIN_MASS = 5000;
 let foods = [];
 let bots = [];
 let firewall;
@@ -63,10 +70,12 @@ function initGame() {
 
     firewall = new Firewall();
     firewallTimer = 0;
+    systemIntegrity = MAX_INTEGRITY;
 
     gameRunning = true;
     startScreen.classList.add('hidden');
     gameOverScreen.classList.add('hidden');
+    winScreen.classList.add('hidden');
     warningMessage.classList.add('hidden');
     animate();
 }
@@ -164,9 +173,26 @@ function checkEntityCollision(e1, e2) {
 
 function update() {
     if (player.markedForDeletion) {
-        gameOver();
+        gameOver("DATA PURGED");
         return;
     }
+
+    // System Integrity Decay
+    systemIntegrity -= INTEGRITY_DECAY;
+    if (systemIntegrity <= 0) {
+        gameOver("SYSTEM INTEGRITY FAILURE");
+        return;
+    }
+
+    // Win Condition
+    if (player.mass >= WIN_MASS) {
+        gameWin();
+        return;
+    }
+
+    // Update UI
+    const integrityPercent = Math.max(0, (systemIntegrity / MAX_INTEGRITY) * 100);
+    integrityBar.style.width = `${integrityPercent}%`;
 
     // Firewall Logic
     if (!firewall.active) {
@@ -258,7 +284,17 @@ function draw() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.save();
-    ctx.translate(camX, camY);
+
+    // Camera Jitter on Low Integrity
+    let jitterX = 0;
+    let jitterY = 0;
+    if (systemIntegrity < 30) {
+        const intensity = (30 - systemIntegrity) * 0.5;
+        jitterX = (Math.random() - 0.5) * intensity;
+        jitterY = (Math.random() - 0.5) * intensity;
+    }
+
+    ctx.translate(camX + jitterX, camY + jitterY);
 
     drawGrid();
 
@@ -287,11 +323,20 @@ function animate() {
     animationId = requestAnimationFrame(animate);
 }
 
-function gameOver() {
+function gameOver(reason) {
     gameRunning = false;
     cancelAnimationFrame(animationId);
     finalScoreDisplay.innerText = Math.floor(player.mass);
+    const reasonEl = gameOverScreen.querySelector('.error-text');
+    if (reasonEl) reasonEl.innerText = reason || "FATAL ERROR";
     gameOverScreen.classList.remove('hidden');
+    uiLayer.style.pointerEvents = 'auto';
+}
+
+function gameWin() {
+    gameRunning = false;
+    cancelAnimationFrame(animationId);
+    winScreen.classList.remove('hidden');
     uiLayer.style.pointerEvents = 'auto';
 }
 
@@ -315,6 +360,12 @@ startBtn.addEventListener('click', () => {
 restartBtn.addEventListener('click', () => {
     initGame();
 });
+
+if (winBtn) {
+    winBtn.addEventListener('click', () => {
+        initGame();
+    });
+}
 
 // Initial setup
 resize();

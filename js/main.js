@@ -72,6 +72,12 @@ function initGame() {
     firewallTimer = 0;
     systemIntegrity = MAX_INTEGRITY;
 
+    // Expose for auditing
+    window.player = player;
+    window.bots = bots;
+    window.foods = foods;
+    window.firewall = firewall;
+
     gameRunning = true;
     startScreen.classList.add('hidden');
     gameOverScreen.classList.add('hidden');

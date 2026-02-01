@@ -97,7 +97,8 @@ function spawnFood() {
 function spawnBot() {
     const x = Utils.randomRange(0, CONSTANTS.WORLD_WIDTH);
     const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
-    const radius = Utils.randomRange(CONSTANTS.INITIAL_RADIUS * 0.8, CONSTANTS.INITIAL_RADIUS * 2.5); // Bots vary in size
+    // User Feedback: All must start at the same size
+    const radius = CONSTANTS.INITIAL_RADIUS;
     const color = Utils.randomColor(CONSTANTS.COLORS);
 
     // Determine type

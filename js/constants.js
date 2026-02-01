@@ -15,7 +15,8 @@ export const CONSTANTS = {
         '#00FF00', // Lime
         '#FFFF00', // Yellow
         '#FF0000', // Red
-        '#9D00FF'  // Purple
+        '#9D00FF', // Purple
+        '#FF8800'  // Neon Orange
     ],
     BOT_TYPES: {
         SEEKER: {

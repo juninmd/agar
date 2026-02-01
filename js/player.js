@@ -10,6 +10,7 @@ export class Player extends Entity {
         this.targetY = y;
         this.velocity = { x: 0, y: 0 };
         this.speedBoost = 1;
+        this.trail = [];
     }
 
     setTarget(x, y) {
@@ -29,23 +30,32 @@ export class Player extends Entity {
 
     update(worldWidth, worldHeight) {
         // Decay speed boost
+        // User Feedback: Dash needs to be smooth
         if (this.speedBoost > 1) {
-            this.speedBoost *= 0.95;
-            if (this.speedBoost < 1) this.speedBoost = 1;
+            this.speedBoost *= 0.96; // Slower decay for smoother dash
+            if (this.speedBoost < 1.05) this.speedBoost = 1;
+
+            // Add trail point
+            this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 });
+        }
+
+        // Update Trail
+        for (let i = this.trail.length - 1; i >= 0; i--) {
+            this.trail[i].alpha -= 0.05;
+            this.trail[i].radius *= 0.95;
+            if (this.trail[i].alpha <= 0) {
+                this.trail.splice(i, 1);
+            }
         }
 
         // Calculate distance to target
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
 
         // Speed calculation based on size (bigger = slower)
-        // Decaying speed but with a minimum limit so you don't stop completely
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
         const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost;
 
         if (dist > 0) {
-            // Move towards target
-            // If close enough, just snap? No, smooth movement.
-            // But if mouse is close to center, we don't want jitter.
             if (dist < 5) {
                 this.velocity.x = 0;
                 this.velocity.y = 0;
@@ -60,9 +70,11 @@ export class Player extends Entity {
         }
 
         // Corruption Logic: Large mass causes instability
-        // Starts noticeable around mass 1000
         const corruptionFactor = Math.max(0, (this.mass - 500) / 2000);
-        if (corruptionFactor > 0) {
+
+        // User Feedback: Dash cannot look like a glitch
+        // Disable corruption jitter if dashing (speedBoost > 1.2)
+        if (corruptionFactor > 0 && this.speedBoost <= 1.2) {
             this.velocity.x += (Math.random() - 0.5) * corruptionFactor * 2;
             this.velocity.y += (Math.random() - 0.5) * corruptionFactor * 2;
 
@@ -89,6 +101,19 @@ export class Player extends Entity {
     }
 
     draw(ctx) {
+        // Draw Trail
+        if (this.trail.length > 0) {
+            ctx.save();
+            this.trail.forEach(t => {
+                ctx.beginPath();
+                ctx.arc(t.x, t.y, t.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = t.alpha * 0.5;
+                ctx.fill();
+            });
+            ctx.restore();
+        }
+
         super.draw(ctx);
 
         // Draw Name

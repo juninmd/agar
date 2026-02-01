@@ -20,9 +20,10 @@ export class Bot extends Player {
         this.baseSpeedMult = typeData.speedMultiplier;
 
         // Apply Mass Multiplier
-        if (this.typeData.massMultiplier !== 1.0) {
-            this.grow(this.mass * (this.typeData.massMultiplier - 1));
-        }
+        // User Feedback: All bots must start at same size, so we disable initial mass diff.
+        // if (this.typeData.massMultiplier !== 1.0) {
+        //     this.grow(this.mass * (this.typeData.massMultiplier - 1));
+        // }
 
         // Glitch effect
         if (this.type === "GLITCH") {

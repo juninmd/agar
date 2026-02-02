@@ -14,6 +14,7 @@
     *   Scanlines CRT.
     *   Barra de Integridade do Sistema.
     *   Tremor de Tela e Artefatos com baixa integridade.
+    *   **Sistema de Partículas:** Explosões de dados e rastro de dash.
 *   **Expansão da Lore:** De "Sobrevivência" para "Salvação".
 
 ## 🟡 Fase 3: A Rede (Em Breve)

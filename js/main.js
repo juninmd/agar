@@ -4,6 +4,7 @@ import { Player } from './player.js';
 import { Food } from './food.js';
 import { Bot } from './bot.js';
 import { Firewall } from './firewall.js';
+import { ParticleSystem } from './particles.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -31,6 +32,7 @@ const INTEGRITY_DECAY = 0.03; // per frame
 const WIN_MASS = 5000;
 let foods = [];
 let bots = [];
+let particleSystem;
 let firewall;
 let firewallTimer = 0;
 const FIREWALL_INTERVAL = 1800; // ~30 seconds at 60fps
@@ -71,12 +73,14 @@ function initGame() {
     firewall = new Firewall();
     firewallTimer = 0;
     systemIntegrity = MAX_INTEGRITY;
+    particleSystem = new ParticleSystem();
 
     // Expose for auditing
     window.player = player;
     window.bots = bots;
     window.foods = foods;
     window.firewall = firewall;
+    window.particleSystem = particleSystem;
 
     gameRunning = true;
     startScreen.classList.add('hidden');
@@ -174,6 +178,7 @@ function checkEntityCollision(e1, e2) {
             prey.markedForDeletion = true;
 
             // Particle effect? (TODO for polish)
+            particleSystem.emit(prey.x, prey.y, prey.color, 30, 4, 4, 40);
         }
     }
 }
@@ -190,6 +195,8 @@ function update() {
         gameOver("SYSTEM INTEGRITY FAILURE");
         return;
     }
+
+    particleSystem.update();
 
     // Win Condition
     if (player.mass >= WIN_MASS) {
@@ -216,11 +223,13 @@ function update() {
         // Check collisions
         if (firewall.checkCollision(player)) {
             player.markedForDeletion = true;
+            particleSystem.emit(player.x, player.y, player.color, 50, 5, 5, 60);
         }
 
         bots.forEach(bot => {
             if (firewall.checkCollision(bot)) {
                 bot.markedForDeletion = true;
+                particleSystem.emit(bot.x, bot.y, bot.color, 50, 5, 5, 60);
             }
         });
 
@@ -260,6 +269,10 @@ function update() {
                 // Calculation: grow by food mass
                 const areaFood = Math.PI * food.radius * food.radius;
                 entity.grow(areaFood);
+
+                // Visual Effect
+                particleSystem.emit(food.x, food.y, food.color, 5, 1, 2, 20);
+
                 foods.splice(i, 1);
                 spawnFood();
             }
@@ -310,6 +323,8 @@ function draw() {
         firewall.draw(ctx);
     }
 
+    particleSystem.draw(ctx);
+
     // Draw Foods
     foods.forEach(food => food.draw(ctx));
 
@@ -356,7 +371,9 @@ window.addEventListener('mousemove', (e) => {
 
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning && player) {
-        player.dash();
+        if (player.dash()) {
+            particleSystem.emit(player.x, player.y, player.color, 20, 2, 3, 30);
+        }
     }
 });
 

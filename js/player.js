@@ -25,7 +25,9 @@ export class Player extends Entity {
             this.mass *= 0.8;
             this.radius = Utils.getRadiusFromMass(this.mass);
             this.speedBoost = 3.0; // Burst of speed
+            return true;
         }
+        return false;
     }
 
     update(worldWidth, worldHeight) {

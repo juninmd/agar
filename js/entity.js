@@ -8,6 +8,7 @@ export class Entity {
         this.color = color;
         this.markedForDeletion = false;
         this.isGlitching = false;
+        this.firewallHitTimer = 0;
         // Calculate initial mass based on radius
         this.mass = Utils.getMassFromRadius(radius);
     }

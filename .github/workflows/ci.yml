@@ -1,22 +1,24 @@
-name: NEON-PHAGE CI
+name: CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 
 jobs:
-  build:
+  audit:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install uv
+        run: pip install uv
 
     - name: Install uv
       run: pip install uv
@@ -26,10 +28,10 @@ jobs:
         uv pip install --system playwright
         playwright install chromium
 
-    - name: Start Game Server
-      run: |
-        python3 -m http.server 8000 &
-        sleep 3
+      - name: Run Game Server
+        run: |
+          python -m http.server 8000 &
+          echo "Server started"
 
     - name: Run Verification Scripts
       run: |

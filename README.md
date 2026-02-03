@@ -12,6 +12,11 @@ Este projeto foi desenvolvido com foco em ambientação Cyberpunk/Synthwave, apr
 *   **Mouse:** Controla a direção do movimento.
 *   **Barra de Espaço:** **DASH**. Ejeta 20% da sua massa para ganhar um impulso súbito de velocidade. Use para escapar ou caçar.
 
+## ✨ Novidades (Antigravity Update)
+*   **Sistema de Partículas:** Efeitos visuais de explosão ao consumir entidades e rastro de propulsão ao usar o Dash.
+*   **Dash Aprimorado:** Feedback visual e correção na lógica de retorno.
+*   **Pipeline CI/CD:** Verificação automática de estabilidade via GitHub Actions.
+
 ## 🚀 Como Executar
 
 Como este projeto utiliza Módulos ES6 nativos, ele precisa ser servido por um servidor HTTP local para evitar erros de CORS (Cross-Origin Resource Sharing).
@@ -45,6 +50,17 @@ Se preferir Node.js:
     *   `firewall.js`: Mecânica da "Zona da Morte".
 *   `LORE.md`: Detalhes sobre o universo e a narrativa.
 *   `ROADMAP.md`: Planos futuros de desenvolvimento.
+
+## 🧪 Testes e Verificação
+Este projeto inclui scripts de verificação automatizada (Python + Playwright):
+
+1.  Instale as dependências: `pip install -r requirements.txt` e `playwright install`.
+2.  Inicie o servidor: `python3 -m http.server`.
+3.  Execute os testes:
+    *   `python3 verify_game.py`: Verifica inicialização do jogo.
+    *   `python3 verify_bots.py`: Verifica spawn de bots.
+    *   `python3 antigravity_audit.py`: Verifica física e limites do mundo.
+    *   `python3 verify_particles.py`: Verifica renderização de partículas.
 
 ---
 *Desenvolvido por Jules (AI Software Engineer).*

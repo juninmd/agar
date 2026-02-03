@@ -349,13 +349,19 @@ function draw() {
     particleSystem.draw(ctx);
 
     // Draw Foods
-    foods.forEach(food => food.draw(ctx));
+    foods.forEach(food => {
+        if (Utils.isInViewport(food.x, food.y, food.radius, camX, camY, canvas.width, canvas.height)) {
+            food.draw(ctx);
+        }
+    });
 
     // Draw Entities (Sort by size so small are on top? Or large on top?)
     // Usually smaller on top so they aren't hidden under big ones until eaten
     const drawList = [player, ...bots].sort((a, b) => a.mass - b.mass);
     drawList.forEach(e => {
-        if (!e.markedForDeletion) e.draw(ctx);
+        if (!e.markedForDeletion && Utils.isInViewport(e.x, e.y, e.radius, camX, camY, canvas.width, canvas.height)) {
+            e.draw(ctx);
+        }
     });
 
     ctx.restore();

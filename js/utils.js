@@ -29,5 +29,17 @@ export const Utils = {
     // Calculate mass (area) from radius
     getMassFromRadius: (radius) => {
         return Math.PI * radius * radius;
+    },
+
+    // Check if an entity is within the current viewport
+    isInViewport: (x, y, radius, camX, camY, canvasWidth, canvasHeight) => {
+        const screenX = x + camX;
+        const screenY = y + camY;
+        return (
+            screenX + radius >= 0 &&
+            screenX - radius <= canvasWidth &&
+            screenY + radius >= 0 &&
+            screenY - radius <= canvasHeight
+        );
     }
 };

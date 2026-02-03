@@ -180,7 +180,7 @@ function checkEntityCollision(e1, e2) {
             prey.markedForDeletion = true;
 
             // Particle effect? (TODO for polish)
-            particleSystem.emit(prey.x, prey.y, prey.color, 30, 4, 4, 40);
+            particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
         }
     }
 }
@@ -320,6 +320,8 @@ function update() {
     // Update Score UI
     const kb = Math.floor(player.mass);
     scoreDisplay.innerText = `${kb} KB`;
+
+    particleSystem.update();
 }
 
 function draw() {
@@ -350,6 +352,8 @@ function draw() {
 
     // Draw Foods
     foods.forEach(food => food.draw(ctx));
+
+    particleSystem.draw(ctx);
 
     // Draw Entities (Sort by size so small are on top? Or large on top?)
     // Usually smaller on top so they aren't hidden under big ones until eaten
@@ -411,7 +415,7 @@ window.addEventListener('touchmove', (e) => {
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning && player) {
         if (player.dash()) {
-            particleSystem.emit(player.x, player.y, player.color, 20, 2, 3, 30);
+            particleSystem.emitDash(player.x, player.y, player.color);
         }
     }
 });

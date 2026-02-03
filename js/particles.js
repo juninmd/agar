@@ -1,32 +1,35 @@
-class Particle {
-    constructor(x, y, color, speed, size, life) {
+/**
+ * Particle System for visual effects.
+ * Handles explosions, trails, and other temporary visual elements.
+ */
+
+import { Utils } from './utils.js';
+
+export class Particle {
+    constructor(x, y, color, speed, life) {
         this.x = x;
         this.y = y;
         this.color = color;
-        this.size = size;
         this.life = life;
         this.maxLife = life;
         const angle = Math.random() * Math.PI * 2;
         this.velocity = {
-            x: Math.cos(angle) * speed,
-            y: Math.sin(angle) * speed
+            x: Math.cos(angle) * speed * Math.random(),
+            y: Math.sin(angle) * speed * Math.random()
         };
-        this.decay = 0.95; // Friction
-        this.alpha = 1;
+        this.size = Math.random() * 3 + 1;
     }
 
     update() {
         this.x += this.velocity.x;
         this.y += this.velocity.y;
-        this.velocity.x *= this.decay;
-        this.velocity.y *= this.decay;
         this.life--;
-        this.alpha = Math.max(0, this.life / this.maxLife);
+        this.size *= 0.95;
     }
 
     draw(ctx) {
         ctx.save();
-        ctx.globalAlpha = this.alpha;
+        ctx.globalAlpha = this.life / this.maxLife;
         ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -40,16 +43,16 @@ export class ParticleSystem {
         this.particles = [];
     }
 
-    emit(x, y, color, count = 10, speed = 2, size = 3, life = 30) {
+    emitExplosion(x, y, color, count = 20) {
         for (let i = 0; i < count; i++) {
-            this.particles.push(new Particle(
-                x,
-                y,
-                color,
-                speed * (0.5 + Math.random()),
-                size * (0.5 + Math.random()),
-                life * (0.8 + Math.random() * 0.4)
-            ));
+            this.particles.push(new Particle(x, y, color, 5, 30));
+        }
+    }
+
+    emitDash(x, y, color) {
+        // Directional burst opposite to movement would be cool, but radial is easier for generic generic
+        for (let i = 0; i < 10; i++) {
+            this.particles.push(new Particle(x, y, color, 3, 20));
         }
     }
 

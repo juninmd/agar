@@ -234,3 +234,31 @@ button:hover {
     transition: width 0.2s linear;
     z-index: 1;
 }
+
+#mobile-dash-btn {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    font-size: 1rem;
+    padding: 0;
+    display: none; /* Hidden by default, shown via JS if touch detected? Or just show always on active? */
+    z-index: 100;
+    background: rgba(255, 0, 255, 0.5);
+    border: 2px solid white;
+    box-shadow: 0 0 10px white;
+    clip-path: none; /* Override default button clip */
+}
+
+#mobile-dash-btn:active {
+    background: rgba(255, 0, 255, 0.9);
+    transform: scale(0.95);
+}
+
+@media (hover: none) and (pointer: coarse) {
+    #mobile-dash-btn.active-game {
+        display: block;
+    }
+}

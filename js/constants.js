@@ -48,5 +48,10 @@ export const CONSTANTS = {
             aggression: 1.0,
             namePrefix: "BOT"
         }
+    },
+    POWERUP: {
+        COLOR: '#FFD700', // Gold
+        RADIUS: 15,
+        MASS_BONUS: 250 // Significant boost
     }
 };

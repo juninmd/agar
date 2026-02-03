@@ -1,21 +1,23 @@
 # Contributing to NEON-PHAGE
 
-Welcome to the NEON-PHAGE project! We appreciate your interest in contributing.
+Thank you for your interest in contributing to NEON-PHAGE!
 
-## Protocol
-This project follows the **Jules Agent Protocol**.
+## Development Process
 
-### Core Guidelines
-1.  **Code Style**: Use ES6+ modules. Keep functions small (< 100 lines).
-2.  **Testing**: All new features must include verification tests (Python Playwright).
-3.  **Commits**: Use descriptive commit messages.
-4.  **Pull Requests**: Fill out the PR template.
-
-## Setup
 1.  Fork the repository.
-2.  Clone your fork.
-3.  Run `python3 -m http.server` to start the game locally.
-4.  Run tests via `python3 verify_game.py`.
+2.  Create a new branch for your feature or bugfix.
+3.  Ensure you have Python installed to run the local server (`python3 -m http.server`).
+4.  Make your changes.
+5.  Run verification scripts (`python3 verify_game.py`) before committing.
+6.  Submit a Pull Request.
 
-## License
-MIT
+## Code Style
+
+-   **JavaScript**: Use ES6+ features. Keep functions under 100 lines.
+-   **Python**: Follow PEP 8.
+-   **Commits**: Use clear, descriptive commit messages.
+
+## Testing
+
+-   Ensure all existing verification scripts pass.
+-   Add new tests if adding significant logic.

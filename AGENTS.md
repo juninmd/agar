@@ -1,25 +1,29 @@
 # AGENTS.md
 
-## 🤖 Protocol & Guidelines
-This repository is maintained by AI agents (Jules).
+## 🤖 Agent Protocols
 
-### Core Directives
-*   **Logic Limit:** Functions should not exceed 100 lines.
-*   **Package Managers:** Use `uv` for Python, `pnpm` for Node.js.
-*   **Testing:** 100% test coverage for new code.
-*   **Style:** Cyberpunk/Synthwave aesthetic.
+### General Instructions
+1.  **Read First**: Always read `GEMINI.md` and this file before starting.
+2.  **Code Style**:
+    -   Keep JS functions under 100 lines.
+    -   Use ES6+ features.
+    -   Maintain 100% test coverage for new logic.
+3.  **Tools**:
+    -   Python: Use `uv`.
+    -   Node: Use `pnpm`.
 
-## 🏗️ Architecture
-*   **Frontend:** Vanilla JS with ES6 Modules.
-*   **Rendering:** HTML5 Canvas.
-*   **State:** centralized in `main.js`, exposed to `window` for Playwright testing.
-*   **Entities:** `Entity` base class -> `Player`, `Bot`, `Food`.
+## 🗺️ Future Roadmap
 
-## 🔮 Future Roadmap (High Priority)
-1.  **Spatial Partitioning (Quadtree):** Implement a Quadtree for collision detection to resolve O(N^2) performance bottleneck when entity count grows.
-2.  **Audio System:** Implement `AudioManager` using Web Audio API for synthwave background music and sound effects (dash, eat, death).
-3.  **Multiplayer Protocol:** Design a WebSocket server (Node.js) to replace the current single-player `Bot` logic with real-time networking.
+### Priority 1: Performance & Stability
+-   [x] **Viewport Culling**: Optimize rendering by only drawing visible entities. (Completed by Jules)
+-   [ ] **Quadtree/Spatial Hash**: Optimize collision detection from O(N^2) to O(N log N).
+-   [ ] **Asset Optimization**: Compress images and optimize particle system.
 
-## 🧠 Memory Bank
-*   **Particle System:** Implemented in `js/particles.js` to handle visual feedback.
-*   **Verification:** `verify_game.py` and `antigravity_audit.py` are the source of truth for stability.
+### Priority 2: Gameplay Features
+-   [ ] **Multiplayer**: Implement WebSocket server for real-time multiplayer.
+-   [ ] **Chat System**: Hexadecimal chat for player communication.
+-   [ ] **Power-ups**: Spawnable items (Speed boost, Shield, Mass bomb).
+
+### Priority 3: Polish & DX
+-   [ ] **Automated Testing**: Expand Playwright suite to cover specific game mechanics.
+-   [ ] **Mobile Experience**: Improve touch controls and UI responsiveness.

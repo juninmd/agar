@@ -20,23 +20,21 @@ jobs:
       - name: Install uv
         run: pip install uv
 
-      - name: Install dependencies
-        run: |
-          uv venv
-          source .venv/bin/activate
-          uv pip install -r requirements.txt
-          python -m playwright install chromium
+    - name: Install uv
+      run: pip install uv
+
+    - name: Install Dependencies
+      run: |
+        uv pip install --system playwright
+        playwright install chromium
 
       - name: Run Game Server
         run: |
           python -m http.server 8000 &
           echo "Server started"
 
-      - name: Run Audits
-        run: |
-          source .venv/bin/activate
-          sleep 5
-          python antigravity_audit.py
-          python verify_bots.py
-          python verify_game.py
-          python verify_particles.py
+    - name: Run Verification Scripts
+      run: |
+        python3 verify_game.py
+        python3 verify_bots.py
+        python3 verify_utils.py

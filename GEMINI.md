@@ -1,14 +1,18 @@
-# GEMINI.md - Jules Memory Log
+# GEMINI Memory File
 
-## Session 1: Antigravity Audit
-*   **Date:** 2023-10-27
-*   **Agent:** Jules
-*   **Actions:**
-    *   Conducted Codebase Audit.
-    *   Identified missing Particle System and broken Dash return logic.
-    *   Implemented `ParticleSystem` and fixed `Player.dash()`.
-    *   Established CI pipeline (`.github/workflows/ci.yml`).
-    *   Standardized documentation (`CONTRIBUTING.md`, `AGENTS.md`).
-*   **Learnings:**
-    *   The collision detection is O(N^2), which will be a bottleneck at scale. Added to Roadmap.
-    *   The `verify_game.py` script is a robust way to test game state via browser automation.
+## Context
+This project is "NEON-PHAGE", a cyberpunk-themed Agar.io clone using HTML5 Canvas and vanilla JavaScript.
+It runs on a local HTTP server.
+The narrative theme is "System Recompile" where the player is a backup routine fighting daemons.
+
+## Technical Details
+- **Frontend**: Vanilla JS (ES6 Modules), HTML5 Canvas.
+- **Backend**: None (Static serving via Python/Node).
+- **CI**: GitHub Actions using `uv` and Playwright for verification.
+- **Testing**: Python scripts using Playwright (`verify_game.py`, `verify_bots.py`).
+- **Performance**: Canvas rendering optimization is a priority. Viewport Culling implemented (2024-05-24).
+
+## Agent Persona: Jules
+- **Role**: Senior Software Engineer.
+- **Style**: Professional, resourceful, meticulous.
+- **Protocol**: "Antigravity Audit".

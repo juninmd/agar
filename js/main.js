@@ -4,6 +4,7 @@ import { Player } from './player.js';
 import { Food } from './food.js';
 import { Bot } from './bot.js';
 import { Firewall } from './firewall.js';
+import { ParticleSystem } from './particles.js';
 
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -31,6 +32,7 @@ const INTEGRITY_DECAY = 0.03; // per frame
 const WIN_MASS = 5000;
 let foods = [];
 let bots = [];
+let particleSystem;
 let firewall;
 let firewallTimer = 0;
 const FIREWALL_INTERVAL = 1800; // ~30 seconds at 60fps
@@ -71,12 +73,14 @@ function initGame() {
     firewall = new Firewall();
     firewallTimer = 0;
     systemIntegrity = MAX_INTEGRITY;
+    particleSystem = new ParticleSystem();
 
     // Expose for auditing
     window.player = player;
     window.bots = bots;
     window.foods = foods;
     window.firewall = firewall;
+    window.particleSystem = particleSystem;
 
     gameRunning = true;
     startScreen.classList.add('hidden');
@@ -174,6 +178,7 @@ function checkEntityCollision(e1, e2) {
             prey.markedForDeletion = true;
 
             // Particle effect? (TODO for polish)
+            particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
         }
     }
 }
@@ -284,6 +289,8 @@ function update() {
     // Update Score UI
     const kb = Math.floor(player.mass);
     scoreDisplay.innerText = `${kb} KB`;
+
+    particleSystem.update();
 }
 
 function draw() {
@@ -312,6 +319,8 @@ function draw() {
 
     // Draw Foods
     foods.forEach(food => food.draw(ctx));
+
+    particleSystem.draw(ctx);
 
     // Draw Entities (Sort by size so small are on top? Or large on top?)
     // Usually smaller on top so they aren't hidden under big ones until eaten
@@ -356,7 +365,9 @@ window.addEventListener('mousemove', (e) => {
 
 window.addEventListener('keydown', (e) => {
     if (e.code === 'Space' && gameRunning && player) {
-        player.dash();
+        if (player.dash()) {
+            particleSystem.emitDash(player.x, player.y, player.color);
+        }
     }
 });
 

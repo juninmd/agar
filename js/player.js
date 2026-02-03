@@ -2,6 +2,10 @@ import { Entity } from './entity.js';
 import { CONSTANTS } from './constants.js';
 import { Utils } from './utils.js';
 
+/**
+ * Represents the player entity controlled by the user.
+ * Handles movement, input, and specific visual effects like trails.
+ */
 export class Player extends Entity {
     constructor(x, y, radius, color, name) {
         super(x, y, radius, color);
@@ -13,11 +17,21 @@ export class Player extends Entity {
         this.trail = [];
     }
 
+    /**
+     * Updates the target coordinates for the player to move towards.
+     * @param {number} x - The target X coordinate.
+     * @param {number} y - The target Y coordinate.
+     */
     setTarget(x, y) {
         this.targetX = x;
         this.targetY = y;
     }
 
+    /**
+     * Attempts to perform a dash maneuver.
+     * Consumes mass to gain a temporary speed boost.
+     * @returns {boolean} True if dash was successful, false otherwise.
+     */
     dash() {
         // Minimum mass check (don't dash if too small)
         const minMass = Utils.getMassFromRadius(CONSTANTS.INITIAL_RADIUS);
@@ -25,7 +39,9 @@ export class Player extends Entity {
             this.mass *= 0.8;
             this.radius = Utils.getRadiusFromMass(this.mass);
             this.speedBoost = 3.0; // Burst of speed
+            return true;
         }
+        return false;
     }
 
     update(worldWidth, worldHeight) {

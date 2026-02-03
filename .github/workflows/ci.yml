@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv pip install -r requirements.txt
+          python -m playwright install chromium
+
+      - name: Run Game Server
+        run: |
+          python -m http.server 8000 &
+          echo "Server started"
+
+      - name: Run Audits
+        run: |
+          source .venv/bin/activate
+          sleep 5
+          python antigravity_audit.py
+          python verify_bots.py
+          python verify_game.py
+          python verify_particles.py

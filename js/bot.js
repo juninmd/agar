@@ -93,21 +93,38 @@ export class Bot extends Player {
             const viewRange = (500 + this.radius) * Math.max(0.5, this.typeData.aggression);
             if (dist > viewRange) return;
 
-            if (other.radius > this.radius * 1.1) {
-                // Threat
-                hasThreat = true;
-                const dx = this.x - other.x;
-                const dy = this.y - other.y;
-                threatVector.x += dx / dist;
-                threatVector.y += dy / dist;
-            } else if (other.radius * 1.1 < this.radius) {
-                // Prey
-                // Multiply score by aggression
-                // Seeker (2.0) will prioritize chasing much more than Guardian (0.2)
-                const score = ((other.radius) / (dist + 1)) * this.typeData.aggression;
-                if (score > bestScore) {
-                    bestScore = score;
-                    bestTarget = other;
+            // Special Logic for CORRUPTER (Trojan Horse)
+            if (this.type === 'CORRUPTER') {
+                // Seek LARGER entities to infect/destroy
+                if (other.radius > this.radius) {
+                    const score = ((other.radius) / (dist + 1)) * this.typeData.aggression;
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestTarget = other;
+                    }
+                }
+                // They generally ignore smaller entities or flee if they are threatened by something that can safely eat them?
+                // Actually, if a small entity eats a Corrupter (larger than Corrupter), the eater dies.
+                // So the Corrupter is dangerous to EVERYONE larger than it.
+                // It doesn't need to flee from larger entities.
+            } else {
+                // Standard Logic
+                if (other.radius > this.radius * 1.1) {
+                    // Threat
+                    hasThreat = true;
+                    const dx = this.x - other.x;
+                    const dy = this.y - other.y;
+                    threatVector.x += dx / dist;
+                    threatVector.y += dy / dist;
+                } else if (other.radius * 1.1 < this.radius) {
+                    // Prey
+                    // Multiply score by aggression
+                    // Seeker (2.0) will prioritize chasing much more than Guardian (0.2)
+                    const score = ((other.radius) / (dist + 1)) * this.typeData.aggression;
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestTarget = other;
+                    }
                 }
             }
         });

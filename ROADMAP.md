@@ -10,6 +10,7 @@
 *   **Mecânica de Integridade do Sistema:** Um temporizador global que degrada o mundo.
 *   **Condição de Vitória (O Upload):** Alcance 5000 KB para vencer.
 *   **Corrupção de Dados:** Alta massa leva a instabilidade de movimento (controle com glitch).
+*   **Nova Entidade (SURPRESA):** **The Corrupter**. Mecânica de "Trojan Horse" onde comer uma entidade menor pode ser fatal.
 *   **Reformulação Visual:**
     *   Scanlines CRT.
     *   Barra de Integridade do Sistema.

@@ -122,7 +122,8 @@ function spawnBot() {
     if (rand < 0.20) type = "SEEKER";    // 20%
     else if (rand < 0.35) type = "GUARDIAN"; // 15%
     else if (rand < 0.50) type = "GLITCH";   // 15%
-    // Remaining 50% is NORMAL
+    else if (rand < 0.60) type = "CORRUPTER"; // 10% (Trojan Horse)
+    // Remaining 40% is NORMAL
 
     bots.push(new Bot(x, y, radius, color, type));
 }
@@ -185,11 +186,30 @@ function checkEntityCollision(e1, e2) {
         // Check if close enough to consume
         // The predator must cover the prey center roughly
         if (dist < predator.radius - prey.radius * 0.2) {
-            predator.grow(prey.mass);
-            prey.markedForDeletion = true;
+            // TROJAN HORSE MECHANIC (The Surprise)
+            // If the prey is a CORRUPTER, the predator (Eater) suffers massive damage instead of gaining mass.
+            if (prey instanceof Bot && prey.type === 'CORRUPTER') {
+                // Predator gets corrupted
+                const lostMass = predator.mass * 0.6; // Lose 60% of mass
+                predator.mass -= lostMass;
+                if (predator.mass < CONSTANTS.INITIAL_RADIUS * CONSTANTS.INITIAL_RADIUS * Math.PI) {
+                     predator.mass = CONSTANTS.INITIAL_RADIUS * CONSTANTS.INITIAL_RADIUS * Math.PI; // Clamp to min
+                }
+                predator.radius = Utils.getRadiusFromMass(predator.mass);
 
-            // Particle effect? (TODO for polish)
-            particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
+                // Huge explosion
+                particleSystem.emitExplosion(predator.x, predator.y, predator.color, 100);
+                particleSystem.emitExplosion(prey.x, prey.y, '#FF0000', 50);
+
+                // The Corrupter is consumed/destroyed in the process
+                prey.markedForDeletion = true;
+            } else {
+                // Standard Eating
+                predator.grow(prey.mass);
+                prey.markedForDeletion = true;
+                // Particle effect
+                particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
+            }
         }
     }
 }

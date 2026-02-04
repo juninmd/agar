@@ -24,6 +24,7 @@ Você deve consumir. Não por fome, mas para **Preservação de Dados**.
 *   **SEEKERS (Vermelhos):** Scripts de deleção. Eles querem te fragmentar.
 *   **GUARDIANS (Azuis):** Firewalls. Eles bloqueiam o acesso a setores de dados.
 *   **GLITCHES (Verde/Roxo):** Setores de memória corrompidos. Imprevisíveis.
+*   **CORRUPTORS (Preto/Vermelho):** O pesadelo dos grandes arquivos. Cavalos de Troia compactados que desestabilizam qualquer entidade maior que tentar absorvê-los. **PERIGO:** Se comidos por uma entidade maior, causam perda massiva de dados.
 *   **LEGACY CACHES (Dourados):** Fragmentos de dados antigos, altamente compactados. Absorvê-los concede um aumento massivo de integridade.
 
 ---

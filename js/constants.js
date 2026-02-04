@@ -41,6 +41,13 @@ export const CONSTANTS = {
             teleportChance: 0.02,
             namePrefix: "ERR"
         },
+        CORRUPTER: {
+            color: '#1a0000', // Very dark red/black
+            speedMultiplier: 0.9,
+            massMultiplier: 0.5, // Small but deadly
+            aggression: 3.0, // Very aggressive seeking
+            namePrefix: "TROJAN"
+        },
         NORMAL: {
             color: null, // Random
             speedMultiplier: 1.0,

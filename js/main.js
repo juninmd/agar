@@ -2,6 +2,7 @@ import { CONSTANTS } from './constants.js';
 import { Utils } from './utils.js';
 import { Player } from './player.js';
 import { Food } from './food.js';
+import { PowerUp } from './powerup.js';
 import { Bot } from './bot.js';
 import { Firewall } from './firewall.js';
 import { ParticleSystem } from './particles.js';
@@ -82,6 +83,7 @@ function initGame() {
     window.foods = foods;
     window.firewall = firewall;
     window.particleSystem = particleSystem;
+    window.PowerUp = PowerUp; // Expose for testing
 
     gameRunning = true;
     startScreen.classList.add('hidden');
@@ -95,6 +97,13 @@ function initGame() {
 function spawnFood() {
     const x = Utils.randomRange(0, CONSTANTS.WORLD_WIDTH);
     const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
+
+    // 1% chance for PowerUp
+    if (Math.random() < 0.01) {
+        foods.push(new PowerUp(x, y, CONSTANTS.POWERUP.RADIUS, CONSTANTS.POWERUP.COLOR));
+        return;
+    }
+
     const radius = Utils.randomRange(CONSTANTS.MIN_FOOD_RADIUS, CONSTANTS.MAX_FOOD_RADIUS);
     const color = Utils.randomColor(CONSTANTS.COLORS);
     foods.push(new Food(x, y, radius, color));
@@ -290,8 +299,16 @@ function update() {
 
             if (dist < entity.radius + food.radius) {
                 // Calculation: grow by food mass
-                const areaFood = Math.PI * food.radius * food.radius;
-                entity.grow(areaFood);
+                let addedMass = 0;
+                if (food instanceof PowerUp) {
+                     addedMass = CONSTANTS.POWERUP.MASS_BONUS;
+                     particleSystem.emitExplosion(food.x, food.y, '#FFFFFF', 40);
+                } else {
+                     const areaFood = Math.PI * food.radius * food.radius;
+                     addedMass = areaFood;
+                }
+
+                entity.grow(addedMass);
 
                 // Visual Effect
                 particleSystem.emit(food.x, food.y, food.color, 5, 1, 2, 20);

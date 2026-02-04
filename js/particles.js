@@ -56,6 +56,14 @@ export class ParticleSystem {
         }
     }
 
+    emit(x, y, color, count, speed, size, life) {
+        for (let i = 0; i < count; i++) {
+            const p = new Particle(x, y, color, speed, life);
+            if (size) p.size = size * (0.5 + Math.random());
+            this.particles.push(p);
+        }
+    }
+
     update() {
         for (let i = this.particles.length - 1; i >= 0; i--) {
             this.particles[i].update();

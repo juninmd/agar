@@ -37,6 +37,37 @@
             <p class="lore-text">Sua missão: Acumular 5000 KB de dados para forçar o Recompile.</p>
             <input type="text" id="player-name" placeholder="ID DO PROTOCOLO" maxlength="12">
             <button id="start-btn">INICIAR EXECUÇÃO</button>
+            <button id="database-btn" class="secondary-btn">ACESSAR ARQUIVOS</button>
+        </div>
+
+        <div id="database-modal" class="hidden">
+            <div class="modal-content">
+                <button id="close-db-btn">X</button>
+                <h2>ARQUIVOS DO SISTEMA</h2>
+
+                <div class="db-section">
+                    <h3>// LORE</h3>
+                    <p>Você é o <strong>Protocolo 734</strong>, a última esperança do sistema. O "Null Void" (Firewall) está deletando tudo. Acumule <strong>5000 KB</strong> para forçar um <strong>Recompile</strong> e salvar o Mainframe.</p>
+                </div>
+
+                <div class="db-section">
+                    <h3>// ENTIDADES</h3>
+                    <ul>
+                        <li style="color: #FF4444"><strong>SEEKER (Vermelho):</strong> Caçadores rápidos. Evite se forem maiores.</li>
+                        <li style="color: #4444FF"><strong>WARDEN (Azul):</strong> Lentos e massivos. Defensores de setor.</li>
+                        <li style="color: #00FF41"><strong>GLITCH (Verde):</strong> Instáveis. Podem teleportar.</li>
+                        <li style="color: #FF0000; text-shadow: 0 0 5px red;"><strong>CORRUPTER (Escuro):</strong> ⚠️ PERIGO ⚠️<br>
+                        "Trojan Horse". Se você comer um, seus dados serão corrompidos. Causa perda massiva de massa se ingerido, mesmo se você for maior.</li>
+                        <li style="color: #FFD700"><strong>CACHE (Dourado):</strong> Dados antigos. Bônus massivo.</li>
+                    </ul>
+                </div>
+
+                <div class="db-section">
+                    <h3>// CONTROLES</h3>
+                    <p><strong>MOUSE:</strong> Movimento</p>
+                    <p><strong>ESPAÇO:</strong> Dash (Ejeta massa para impulso)</p>
+                </div>
+            </div>
         </div>
 
         <button id="mobile-dash-btn" class="hidden">DASH</button>

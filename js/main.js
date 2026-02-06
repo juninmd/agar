@@ -51,6 +51,7 @@ let mouseY = 0;
 // Camera
 let camX = 0;
 let camY = 0;
+let screenShake = 0;
 
 function resize() {
     canvas.width = window.innerWidth;
@@ -206,6 +207,16 @@ function checkEntityCollision(e1, e2) {
                 particleSystem.emitExplosion(predator.x, predator.y, predator.color, 100);
                 particleSystem.emitExplosion(prey.x, prey.y, '#FF0000', 50);
 
+                // Trigger Screen Shake & Alert if Player is involved
+                if (predator === player) {
+                    screenShake = 30;
+                    const alert = document.createElement('div');
+                    alert.className = 'corruption-alert';
+                    alert.innerText = 'DATA CORRUPTED // MASS LOST';
+                    uiLayer.appendChild(alert);
+                    setTimeout(() => alert.remove(), 2000);
+                }
+
                 // The Corrupter is consumed/destroyed in the process
                 prey.markedForDeletion = true;
             } else {
@@ -231,6 +242,9 @@ function update() {
         systemIntegrity = 0;
         // No Game Over, just visual glitching (handled in draw)
     }
+
+    if (screenShake > 0) screenShake *= 0.9;
+    if (screenShake < 0.5) screenShake = 0;
 
     particleSystem.update();
 
@@ -379,6 +393,12 @@ function draw() {
         const intensity = (30 - systemIntegrity) * 0.5;
         jitterX = (Math.random() - 0.5) * intensity;
         jitterY = (Math.random() - 0.5) * intensity;
+    }
+
+    // Screen Shake
+    if (screenShake > 0) {
+        jitterX += (Math.random() - 0.5) * screenShake;
+        jitterY += (Math.random() - 0.5) * screenShake;
     }
 
     ctx.translate(camX + jitterX, camY + jitterY);

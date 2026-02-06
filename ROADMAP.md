@@ -10,7 +10,7 @@
 *   **Mecânica de Integridade do Sistema:** Um temporizador global que degrada o mundo.
 *   **Condição de Vitória (O Upload):** Alcance 5000 KB para vencer.
 *   **Corrupção de Dados:** Alta massa leva a instabilidade de movimento (controle com glitch).
-*   **Nova Entidade (SURPRESA):** **The Corrupter**. Mecânica de "Trojan Horse" onde comer uma entidade menor pode ser fatal.
+*   **Nova Entidade (SURPRESA):** **The Corrupter** (Concluído). Mecânica de "Trojan Horse" onde comer uma entidade menor pode ser fatal.
 *   **Reformulação Visual:**
     *   Scanlines CRT.
     *   Barra de Integridade do Sistema.
@@ -21,7 +21,7 @@
 ## 🟡 Fase 3: A Rede (Em Breve)
 *   **Protocolo Multiplayer:** Implementação de WebSockets.
 *   **Computação Distribuída:** Jogadores trabalhando juntos para parar o expurgo? Ou lutando por largura de banda?
-*   **Power-ups:** Implementação de Legacy Caches (Boost de Massa).
+*   **Power-ups:** Implementação de Legacy Caches (Boost de Massa) (Concluído).
 *   **Chat:** Comunicação em hexadecimal.
 
 ## 🔴 Fase 4: A Singularidade (Futuro)

@@ -25,6 +25,11 @@ const warningMessage = document.getElementById('warning-message');
 const integrityBar = document.getElementById('integrity-bar');
 const mobileDashBtn = document.getElementById('mobile-dash-btn');
 
+// Database UI
+const databaseBtn = document.getElementById('database-btn');
+const databaseModal = document.getElementById('database-modal');
+const closeDbBtn = document.getElementById('close-db-btn');
+
 let gameRunning = false;
 let animationId;
 let player;
@@ -466,6 +471,23 @@ window.addEventListener('keydown', (e) => {
 startBtn.addEventListener('click', () => {
     initGame();
 });
+
+// Database Modal Logic
+if (databaseBtn && databaseModal && closeDbBtn) {
+    databaseBtn.addEventListener('click', () => {
+        databaseModal.classList.remove('hidden');
+    });
+
+    closeDbBtn.addEventListener('click', () => {
+        databaseModal.classList.add('hidden');
+    });
+
+    databaseModal.addEventListener('click', (e) => {
+        if (e.target === databaseModal) {
+            databaseModal.classList.add('hidden');
+        }
+    });
+}
 
 restartBtn.addEventListener('click', () => {
     initGame();

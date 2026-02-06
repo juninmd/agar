@@ -262,3 +262,117 @@ button:hover {
         display: block;
     }
 }
+
+/* Database Button */
+.secondary-btn {
+    background: transparent;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    margin-top: 15px;
+    font-size: 1rem;
+    padding: 10px 30px;
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.secondary-btn:hover {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 20px var(--neon-blue);
+    transform: scale(1.05);
+}
+
+/* Database Modal */
+#database-modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+}
+
+.modal-content {
+    background: rgba(10, 10, 20, 0.95);
+    border: 2px solid var(--neon-pink);
+    padding: 40px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    color: #ccc;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.modal-content h2 {
+    color: var(--neon-pink);
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px var(--neon-pink);
+    font-size: 2rem;
+}
+
+.db-section {
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 20px;
+}
+
+.db-section h3 {
+    color: var(--neon-green);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.db-section ul {
+    list-style: none;
+}
+
+.db-section li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+}
+
+.db-section li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: var(--neon-blue);
+}
+
+#close-db-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: 1px solid red;
+    color: red;
+    font-size: 1.2rem;
+    padding: 5px 15px;
+    box-shadow: none;
+}
+
+#close-db-btn:hover {
+    background: red;
+    color: white;
+    box-shadow: 0 0 10px red;
+}
+
+/* Scrollbar styling for modal */
+.modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+.modal-content::-webkit-scrollbar-track {
+    background: #000;
+}
+.modal-content::-webkit-scrollbar-thumb {
+    background: var(--neon-pink);
+}

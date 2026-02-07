@@ -44,6 +44,9 @@ let firewall;
 let firewallTimer = 0;
 const FIREWALL_INTERVAL = 1800; // ~30 seconds at 60fps
 
+let purgeTimer = 0;
+const PURGE_INTERVAL = 3600; // 60 seconds
+
 // Mouse state
 let mouseX = 0;
 let mouseY = 0;
@@ -80,6 +83,11 @@ function initGame() {
 
     firewall = new Firewall();
     firewallTimer = 0;
+    purgeTimer = 0;
+    document.body.classList.remove('glitch-mode');
+    const existingAlert = document.querySelector('.purge-alert');
+    if(existingAlert) existingAlert.remove();
+
     systemIntegrity = MAX_INTEGRITY;
     particleSystem = new ParticleSystem();
 
@@ -90,6 +98,7 @@ function initGame() {
     window.firewall = firewall;
     window.particleSystem = particleSystem;
     window.PowerUp = PowerUp; // Expose for testing
+    window.triggerPurge = triggerPurge; // Expose for testing
 
     gameRunning = true;
     startScreen.classList.add('hidden');
@@ -257,6 +266,13 @@ function update() {
     // Update UI
     const integrityPercent = Math.max(0, (systemIntegrity / MAX_INTEGRITY) * 100);
     integrityBar.style.width = `${integrityPercent}%`;
+
+    // System Purge Logic
+    purgeTimer++;
+    if (purgeTimer > PURGE_INTERVAL) {
+        triggerPurge();
+        purgeTimer = 0;
+    }
 
     // Firewall Logic
     if (!firewall.active) {
@@ -431,6 +447,61 @@ function draw() {
     });
 
     ctx.restore();
+}
+
+function triggerPurge() {
+    console.log("SYSTEM PURGE TRIGGERED");
+
+    // 1. Visual Glitch
+    document.body.classList.add('glitch-mode');
+
+    // 2. Alert
+    const alert = document.createElement('div');
+    alert.className = 'purge-alert';
+    alert.innerText = 'SYSTEM PURGE INITIATED // NULL VOID DETECTED';
+    uiLayer.appendChild(alert);
+
+    // 3. Audio/Screen Shake
+    screenShake = 50;
+
+    // 4. Spawn Hunter Bots around player
+    const spawnCount = 8;
+    const distance = 600; // Just off screen or edge of screen
+
+    for (let i = 0; i < spawnCount; i++) {
+        const angle = (Math.PI * 2 / spawnCount) * i;
+        let sx = player.x + Math.cos(angle) * distance;
+        let sy = player.y + Math.sin(angle) * distance;
+
+        // Clamp to world
+        sx = Math.max(0, Math.min(CONSTANTS.WORLD_WIDTH, sx));
+        sy = Math.max(0, Math.min(CONSTANTS.WORLD_HEIGHT, sy));
+
+        // Create Elite Hunter
+        const bot = new Bot(sx, sy, CONSTANTS.INITIAL_RADIUS, '#FF0000', 'SEEKER');
+
+        // Make them dangerous (slightly larger than player to force flight)
+        // Ensure they aren't impossibly huge if player is small
+        let targetMass = player.mass * 1.1;
+        if (targetMass < 500) targetMass = 500; // Minimum threat size
+
+        bot.mass = targetMass;
+        bot.radius = Utils.getRadiusFromMass(bot.mass);
+
+        bot.speedBoost = 1.2; // Fast
+
+        // Visual flair
+        bot.isGlitching = true;
+
+        bots.push(bot);
+        particleSystem.emit(sx, sy, '#FF0000', 20);
+    }
+
+    // 5. Reset Visuals after 10s
+    setTimeout(() => {
+        document.body.classList.remove('glitch-mode');
+        if (alert.parentNode) alert.remove();
+    }, 10000);
 }
 
 function animate() {

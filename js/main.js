@@ -198,6 +198,9 @@ function checkEntityCollision(e1, e2) {
             return; // No one eats
         }
 
+        // Prevent player from being eaten
+        if (prey === player) return;
+
         // Check if close enough to consume
         // The predator must cover the prey center roughly
         if (dist < predator.radius - prey.radius * 0.2) {
@@ -241,8 +244,9 @@ function checkEntityCollision(e1, e2) {
 
 function update() {
     if (player.markedForDeletion) {
-        gameOver("DATA PURGED");
-        return;
+        // gameOver("DATA PURGED"); // Disabled by request
+        player.markedForDeletion = false; // Resurrect
+        // return;
     }
 
     // System Integrity Decay
@@ -258,7 +262,7 @@ function update() {
     particleSystem.update();
 
     // Win Condition
-    if (player.mass >= WIN_MASS) {
+    if (bots.length === 0) {
         gameWin();
         return;
     }
@@ -310,7 +314,7 @@ function update() {
 
                 // If too small, die? Or just keep shrinking?
                 // Minimal mass check
-                if (entity.mass < 100) { // Arbitrary death threshold
+                if (entity.mass < 100 && entity !== player) { // Arbitrary death threshold
                      entity.markedForDeletion = true;
                      particleSystem.emit(entity.x, entity.y, entity.color, 20, 4, 4, 40);
                 }

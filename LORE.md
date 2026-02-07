@@ -19,6 +19,12 @@ Você deve consumir. Não por fome, mas para **Preservação de Dados**.
 *   **Monitore a Integridade:** O sistema está desmoronando. Conforme a Integridade cai, a realidade falha. Se chegar a 0%, o Null Void vence.
 *   **Gerencie a Corrupção:** Segurar tantos dados brutos torna você instável. Quanto maior você fica, mais difícil é controlar. Este é o efeito da **Corrupção de Dados**.
 
+### O Expurgo (The Purge)
+O Sistema não é passivo. Periodicamente, o **Null Void** inicia uma varredura de integridade profunda ("System Purge").
+*   **Glitch Storm:** A realidade digital se inverte. As cores falham e a física se torna instável.
+*   **Caçadores do Vazio:** Uma onda de **Seekers de Elite** é gerada instantaneamente ao redor de qualquer anomalia detectada (Você).
+*   **Sobrevivência:** Durante o Expurgo, o consumo de recursos é secundário. A prioridade é evitar a deleção total.
+
 ### Entidades
 *   **VOCÊ (Rotina de Backup):** A esperança do sistema.
 *   **SEEKERS (Vermelhos):** Scripts de deleção. Eles querem te fragmentar.

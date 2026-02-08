@@ -20,21 +20,21 @@ jobs:
       - name: Install uv
         run: pip install uv
 
-    - name: Install uv
-      run: pip install uv
-
-    - name: Install Dependencies
-      run: |
-        uv pip install --system playwright
-        playwright install chromium
+      - name: Install Dependencies
+        run: |
+          uv pip install --system playwright
+          playwright install chromium
 
       - name: Run Game Server
         run: |
-          python -m http.server 8000 &
+          python3 -m http.server 8000 &
           echo "Server started"
+          sleep 3
 
-    - name: Run Verification Scripts
-      run: |
-        python3 verify_game.py
-        python3 verify_bots.py
-        python3 verify_utils.py
+      - name: Run Verification Scripts
+        run: |
+          python3 verify_game.py
+          python3 verify_bots.py
+          python3 verify_utils.py
+          python3 verify_protocols.py
+          python3 verify_singularity.py

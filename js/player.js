@@ -7,8 +7,19 @@ import { Utils } from './utils.js';
  * Handles movement, input, and specific visual effects like trails.
  */
 export class Player extends Entity {
-    constructor(x, y, radius, color, name) {
-        super(x, y, radius, color);
+    /**
+     * @param {number} x - Start X
+     * @param {number} y - Start Y
+     * @param {string} protocolId - The selected protocol (BASTION, PHANTOM, HACKER)
+     * @param {string} [name] - Player name
+     */
+    constructor(x, y, protocolId, name) {
+        const protocol = CONSTANTS.PROTOCOLS[protocolId] || CONSTANTS.PROTOCOLS.HACKER;
+        const radius = CONSTANTS.INITIAL_RADIUS * Math.sqrt(protocol.massMultiplier);
+
+        super(x, y, radius, protocol.color);
+
+        this.protocol = protocol;
         this.name = name || "Unit 734";
         this.targetX = x;
         this.targetY = y;
@@ -17,28 +28,19 @@ export class Player extends Entity {
         this.trail = [];
     }
 
-    /**
-     * Updates the target coordinates for the player to move towards.
-     * @param {number} x - The target X coordinate.
-     * @param {number} y - The target Y coordinate.
-     */
     setTarget(x, y) {
         this.targetX = x;
         this.targetY = y;
     }
 
-    /**
-     * Attempts to perform a dash maneuver.
-     * Consumes mass to gain a temporary speed boost.
-     * @returns {boolean} True if dash was successful, false otherwise.
-     */
     dash() {
-        // Minimum mass check (don't dash if too small)
+        // Dash cooldown or cost can be protocol dependent
+        // For now, keep standard
         const minMass = Utils.getMassFromRadius(CONSTANTS.INITIAL_RADIUS);
         if (this.mass > minMass * 1.2) {
             this.mass *= 0.8;
             this.radius = Utils.getRadiusFromMass(this.mass);
-            this.speedBoost = 3.0; // Burst of speed
+            this.speedBoost = 3.0;
             return true;
         }
         return false;
@@ -46,12 +48,9 @@ export class Player extends Entity {
 
     update(worldWidth, worldHeight) {
         // Decay speed boost
-        // User Feedback: Dash needs to be smooth
         if (this.speedBoost > 1) {
-            this.speedBoost *= 0.96; // Slower decay for smoother dash
+            this.speedBoost *= 0.96;
             if (this.speedBoost < 1.05) this.speedBoost = 1;
-
-            // Add trail point
             this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 });
         }
 
@@ -59,17 +58,15 @@ export class Player extends Entity {
         for (let i = this.trail.length - 1; i >= 0; i--) {
             this.trail[i].alpha -= 0.05;
             this.trail[i].radius *= 0.95;
-            if (this.trail[i].alpha <= 0) {
-                this.trail.splice(i, 1);
-            }
+            if (this.trail[i].alpha <= 0) this.trail.splice(i, 1);
         }
 
-        // Calculate distance to target
+        // Movement Logic
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
-
-        // Speed calculation based on size (bigger = slower)
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
-        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost;
+
+        // Apply Protocol Speed Multiplier
+        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.protocol.speedMultiplier;
 
         if (dist > 0) {
             if (dist < 5) {
@@ -78,23 +75,16 @@ export class Player extends Entity {
             } else {
                 const dx = this.targetX - this.x;
                 const dy = this.targetY - this.y;
-
-                // Normalize
                 this.velocity.x = (dx / dist) * maxSpeed;
                 this.velocity.y = (dy / dist) * maxSpeed;
             }
         }
 
-        // Corruption Logic: Large mass causes instability
+        // Corruption / Glitch Logic
         const corruptionFactor = Math.max(0, (this.mass - 500) / 2000);
-
-        // User Feedback: Dash cannot look like a glitch
-        // Disable corruption jitter if dashing (speedBoost > 1.2)
         if (corruptionFactor > 0 && this.speedBoost <= 1.2) {
             this.velocity.x += (Math.random() - 0.5) * corruptionFactor * 2;
             this.velocity.y += (Math.random() - 0.5) * corruptionFactor * 2;
-
-            // Visual glitch flag if very corrupted
             this.isGlitching = (Math.random() < corruptionFactor * 0.1);
         } else {
             this.isGlitching = false;
@@ -102,7 +92,6 @@ export class Player extends Entity {
 
         this.x += this.velocity.x;
         this.y += this.velocity.y;
-
         this.checkBounds(worldWidth, worldHeight);
     }
 

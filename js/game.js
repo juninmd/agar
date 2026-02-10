@@ -2,6 +2,8 @@ import { Player } from './player.js';
 import { Bot } from './bot.js';
 import { Food } from './food.js';
 import { PowerUp } from './powerup.js';
+import { LoreFragment } from './lore_fragment.js';
+import { LoreSystem } from './lore_system.js';
 import { Firewall } from './firewall.js';
 import { ParticleSystem } from './particles.js';
 import { CollisionSystem } from './collision.js';
@@ -19,8 +21,9 @@ export class Game {
         this.bots = [];
         this.foods = [];
         this.firewall = null;
+        this.loreSystem = new LoreSystem();
         this.particleSystem = new ParticleSystem();
-        this.collisionSystem = new CollisionSystem(this.particleSystem, ui);
+        this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
 
         this.gameRunning = false;
         this.animationId = null;
@@ -32,6 +35,7 @@ export class Game {
         this.ui.onStart = (name, protocol) => this.start(name, protocol);
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id);
         this.input.onDash = () => this.handleDash();
+        this.input.onAbility = () => this.handleAbility();
     }
 
     start(name, protocol) {
@@ -49,7 +53,9 @@ export class Game {
     spawnFood() {
         const x = Utils.randomRange(0, CONSTANTS.WORLD_WIDTH);
         const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
-        if (Math.random() < 0.01) return new PowerUp(x, y, CONSTANTS.POWERUP.RADIUS, CONSTANTS.POWERUP.COLOR);
+        const rand = Math.random();
+        if (rand < 0.005) return new LoreFragment(x, y);
+        if (rand < 0.015) return new PowerUp(x, y, CONSTANTS.POWERUP.RADIUS, CONSTANTS.POWERUP.COLOR);
         return new Food(x, y, Utils.randomRange(CONSTANTS.MIN_FOOD_RADIUS, CONSTANTS.MAX_FOOD_RADIUS), Utils.randomColor(CONSTANTS.COLORS));
     }
 
@@ -63,6 +69,12 @@ export class Game {
     handleDash() {
         if (this.gameRunning && this.player && this.player.dash()) {
             this.particleSystem.emitDash(this.player.x, this.player.y, this.player.color);
+        }
+    }
+
+    handleAbility() {
+        if (this.gameRunning && this.player) {
+            this.player.triggerAbility(this.bots);
         }
     }
 
@@ -125,6 +137,9 @@ export class Game {
 
         this.ui.updateScore(this.player.mass);
         this.ui.updateIntegrity(this.systemIntegrity);
+        if (this.player.abilities) {
+            this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+        }
     }
 
     triggerPurge() {

@@ -12,6 +12,7 @@ export class InputHandler {
         this.mouseX = window.innerWidth / 2;
         this.mouseY = window.innerHeight / 2;
         this.onDash = null; // Callback for dash action
+        this.onAbility = null; // Callback for ability action
 
         this._initListeners();
     }
@@ -44,11 +45,20 @@ export class InputHandler {
             }
         }, { passive: false });
 
-        // Keyboard (Dash)
+        // Keyboard (Dash and Ability)
         window.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 if (this.onDash) this.onDash();
             }
+            if (e.code === 'KeyE') {
+                if (this.onAbility) this.onAbility();
+            }
+        });
+
+        // Right Click (Ability)
+        window.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            if (this.onAbility) this.onAbility();
         });
 
         // Mobile Dash Button

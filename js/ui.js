@@ -17,6 +17,7 @@ export class UIManager {
         this.warningMessage = document.getElementById('warning-message');
         this.integrityBar = document.getElementById('integrity-bar');
         this.mobileDashBtn = document.getElementById('mobile-dash-btn');
+        this.abilityOverlay = document.getElementById('ability-overlay');
 
         // Database UI
         this.databaseBtn = document.getElementById('database-btn');
@@ -117,6 +118,27 @@ export class UIManager {
      */
     updateIntegrity(percent) {
         this.integrityBar.style.width = `${Math.max(0, percent)}%`;
+    }
+
+    updateAbilityCooldown(percent) {
+        if (this.abilityOverlay) {
+            this.abilityOverlay.style.height = `${percent}%`;
+        }
+    }
+
+    showLorePopup(text) {
+        const popup = document.createElement('div');
+        popup.className = 'lore-popup';
+        popup.innerHTML = `
+            <div class="lore-header">DATA FRAGMENT RECOVERED</div>
+            <div class="lore-body">${text}</div>
+        `;
+        this.uiLayer.appendChild(popup);
+
+        setTimeout(() => {
+            popup.classList.add('fade-out');
+            setTimeout(() => popup.remove(), 1000);
+        }, 5000);
     }
 
     /**

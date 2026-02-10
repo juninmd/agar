@@ -1,6 +1,7 @@
 import { Entity } from './entity.js';
 import { CONSTANTS } from './constants.js';
 import { Utils } from './utils.js';
+import { AbilitySystem } from './ability_system.js';
 
 /**
  * Represents the player entity controlled by the user.
@@ -26,6 +27,13 @@ export class Player extends Entity {
         this.velocity = { x: 0, y: 0 };
         this.speedBoost = 1;
         this.trail = [];
+
+        // Ability System
+        this.abilities = new AbilitySystem(this.protocol.id);
+
+        // Status Effects
+        this.invulnerable = false;
+        this.alpha = 1.0;
     }
 
     setTarget(x, y) {
@@ -33,9 +41,11 @@ export class Player extends Entity {
         this.targetY = y;
     }
 
+    triggerAbility(bots) {
+        return this.abilities.activate(this, bots);
+    }
+
     dash() {
-        // Dash cooldown or cost can be protocol dependent
-        // For now, keep standard
         const minMass = Utils.getMassFromRadius(CONSTANTS.INITIAL_RADIUS);
         if (this.mass > minMass * 1.2) {
             this.mass *= 0.8;
@@ -47,11 +57,14 @@ export class Player extends Entity {
     }
 
     update(worldWidth, worldHeight) {
+        // Update Ability State
+        this.abilities.update(this);
+
         // Decay speed boost
         if (this.speedBoost > 1) {
             this.speedBoost *= 0.96;
             if (this.speedBoost < 1.05) this.speedBoost = 1;
-            this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 });
+            this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 * this.alpha });
         }
 
         // Update Trail
@@ -106,6 +119,9 @@ export class Player extends Entity {
     }
 
     draw(ctx) {
+        // Draw Ability Effects
+        this.abilities.draw(ctx, this);
+
         // Draw Trail
         if (this.trail.length > 0) {
             ctx.save();
@@ -113,11 +129,15 @@ export class Player extends Entity {
                 ctx.beginPath();
                 ctx.arc(t.x, t.y, t.radius, 0, Math.PI * 2);
                 ctx.fillStyle = this.color;
-                ctx.globalAlpha = t.alpha * 0.5;
+                ctx.globalAlpha = t.alpha * 0.5 * this.alpha;
                 ctx.fill();
             });
             ctx.restore();
         }
+
+        // Set global alpha for stealth effect
+        const originalAlpha = ctx.globalAlpha;
+        ctx.globalAlpha = this.alpha;
 
         super.draw(ctx);
 
@@ -134,5 +154,7 @@ export class Player extends Entity {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius - 5, 0, Math.PI * 2);
         ctx.stroke();
+
+        ctx.globalAlpha = originalAlpha;
     }
 }

@@ -6,22 +6,25 @@
 *   **IA:** Padrões comportamentais básicos (Buscar, Guardar, Vagar).
 *   **Tipos de Entidade:** Seeker, Guardian, Glitch.
 
-## 🔵 Fase 2: O Recompile (Implementado)
+## 🔵 Fase 2: O Recompile (Concluído)
 *   **Mecânica de Integridade do Sistema:** Um temporizador global que degrada o mundo.
 *   **Condição de Vitória (O Upload):** Alcance 5000 KB para vencer.
-*   **Corrupção de Dados:** Alta massa leva a instabilidade de movimento (controle com glitch).
-*   **Nova Entidade (SURPRESA):** **The Corrupter** (Concluído). Mecânica de "Trojan Horse" onde comer uma entidade menor pode ser fatal.
-*   **Reformulação Visual:**
-    *   Scanlines CRT.
-    *   Barra de Integridade do Sistema.
-    *   Tremor de Tela e Artefatos com baixa integridade.
-    *   **Sistema de Partículas:** Explosões de dados e rastro de dash.
-*   **Expansão da Lore:** De "Sobrevivência" para "Salvação".
+*   **Corrupção de Dados:** Alta massa leva a instabilidade de movimento.
+*   **Nova Entidade:** **The Corrupter** (Trojan Horse).
+*   **Reformulação Visual:** Scanlines, Screen Shake, Partículas.
+
+## 🟣 Fase 2.5: The Awakening (Em Progresso)
+*   **Maestria de Protocolo (Habilidades Ativas):**
+    *   **BASTION:** *Aegis Shield* (Invulnerabilidade).
+    *   **PHANTOM:** *Ghost Walk* (Invisibilidade).
+    *   **HACKER:** *Viral Injection* (Congelamento de Bots).
+*   **Fragmentos de Dados:** Sistema de lore colecionável.
+*   **HUD Expandido:** Indicadores de Cooldown e Popups de Lore.
 
 ## 🟡 Fase 3: A Rede (Em Breve)
 *   **Protocolo Multiplayer:** Implementação de WebSockets.
-*   **Computação Distribuída:** Jogadores trabalhando juntos para parar o expurgo? Ou lutando por largura de banda?
-*   **Power-ups:** Implementação de Legacy Caches (Boost de Massa) (Concluído).
+*   **Computação Distribuída:** Jogadores trabalhando juntos para parar o expurgo?
+*   **Power-ups:** Implementação de Legacy Caches (Boost de Massa).
 *   **Chat:** Comunicação em hexadecimal.
 
 ## 🔴 Fase 4: A Singularidade (Futuro)

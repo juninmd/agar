@@ -22,7 +22,7 @@
 ### Priority 2: Gameplay Features
 -   [ ] **Multiplayer**: Implement WebSocket server for real-time multiplayer.
 -   [ ] **Chat System**: Hexadecimal chat for player communication.
--   [ ] **Power-ups**: Spawnable items (Speed boost, Shield, Mass bomb).
+-   [x] **Power-ups**: Spawnable items (Speed boost, Shield, Mass bomb).
 
 ### Priority 3: Polish & DX
 -   [ ] **Automated Testing**: Expand Playwright suite to cover specific game mechanics.

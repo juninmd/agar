@@ -24,7 +24,7 @@
 ## 🟡 Fase 3: A Rede (Em Breve)
 *   **Protocolo Multiplayer:** Implementação de WebSockets.
 *   **Computação Distribuída:** Jogadores trabalhando juntos para parar o expurgo?
-*   **Power-ups:** Implementação de Legacy Caches (Boost de Massa).
+*   **Power-ups:** Sistema de Cache Expandido (Massa, Velocidade, Escudo). [CONCLUÍDO]
 *   **Chat:** Comunicação em hexadecimal.
 
 ## 🔴 Fase 4: A Singularidade (Futuro)

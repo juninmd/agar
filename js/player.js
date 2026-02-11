@@ -34,6 +34,20 @@ export class Player extends Entity {
         // Status Effects
         this.invulnerable = false;
         this.alpha = 1.0;
+        this.speedEffectTimer = 0;
+        this.shieldEffectTimer = 0;
+    }
+
+    applyPowerUp(type) {
+        if (type.id === 'MASS') {
+            this.grow(type.value);
+        } else if (type.id === 'SPEED') {
+            this.speedEffectTimer = type.duration;
+            this.speedBoost = Math.max(this.speedBoost, type.value);
+        } else if (type.id === 'SHIELD') {
+            this.shieldEffectTimer = type.duration;
+            this.invulnerable = true;
+        }
     }
 
     setTarget(x, y) {
@@ -60,11 +74,32 @@ export class Player extends Entity {
         // Update Ability State
         this.abilities.update(this);
 
+        // Handle PowerUp Timers
+        if (this.speedEffectTimer > 0) {
+            this.speedEffectTimer--;
+            if (this.speedBoost < 2.5) this.speedBoost = 2.5;
+        }
+
+        if (this.shieldEffectTimer > 0) {
+            this.shieldEffectTimer--;
+            this.invulnerable = true;
+        }
+
         // Decay speed boost
         if (this.speedBoost > 1) {
-            this.speedBoost *= 0.96;
-            if (this.speedBoost < 1.05) this.speedBoost = 1;
-            this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 * this.alpha });
+            // Only decay if above the floor set by powerups
+            const floor = (this.speedEffectTimer > 0) ? 2.5 : 1.0;
+
+            if (this.speedBoost > floor) {
+                this.speedBoost *= 0.96;
+            } else if (this.speedBoost < floor) {
+                this.speedBoost = floor;
+            }
+
+            // Generate trail
+            if (this.speedBoost > 1.1) {
+                this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 * this.alpha });
+            }
         }
 
         // Update Trail
@@ -121,6 +156,29 @@ export class Player extends Entity {
     draw(ctx) {
         // Draw Ability Effects
         this.abilities.draw(ctx, this);
+
+        // Draw Shield PowerUp Effect
+        if (this.shieldEffectTimer > 0) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius + 10, 0, Math.PI * 2);
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // Draw Speed PowerUp Effect
+        if (this.speedEffectTimer > 0) {
+             ctx.save();
+             ctx.beginPath();
+             ctx.arc(this.x, this.y, this.radius + 5, 0, Math.PI * 2);
+             ctx.strokeStyle = '#00FFFF';
+             ctx.lineWidth = 2;
+             ctx.stroke();
+             ctx.restore();
+        }
 
         // Draw Trail
         if (this.trail.length > 0) {

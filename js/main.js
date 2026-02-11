@@ -30,11 +30,8 @@ Object.defineProperties(window, {
     triggerPurge: { get: () => game.triggerPurge.bind(game) }
 });
 
-// Import modules for potential console usage if needed
-// window.Bot = Bot; // but Bot is not imported here.
-// If tests need specific classes exposed on window, main.js usually did it.
-// Original main.js: window.PowerUp = PowerUp; window.triggerPurge = triggerPurge;
-// I should import PowerUp to expose it.
-
 import { PowerUp } from './powerup.js';
+import { Bot } from './bot.js';
+
 window.PowerUp = PowerUp;
+window.Bot = Bot;

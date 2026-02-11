@@ -57,9 +57,30 @@ export const CONSTANTS = {
         }
     },
     POWERUP: {
-        COLOR: '#FFD700', // Gold
-        RADIUS: 15,
-        MASS_BONUS: 250 // Significant boost
+        RADIUS: 15
+    },
+    POWERUP_TYPES: {
+        MASS: {
+            id: 'MASS',
+            color: '#FFD700', // Gold
+            value: 500, // Mass added
+            duration: 0,
+            symbol: 'DATA'
+        },
+        SPEED: {
+            id: 'SPEED',
+            color: '#00FFFF', // Cyan
+            value: 2.5, // Speed multiplier
+            duration: 300, // 5 seconds at 60fps
+            symbol: 'SPD'
+        },
+        SHIELD: {
+            id: 'SHIELD',
+            color: '#FFFFFF', // White
+            value: 1,
+            duration: 300, // 5 seconds
+            symbol: 'SHLD'
+        }
     },
     PROTOCOLS: {
         BASTION: {

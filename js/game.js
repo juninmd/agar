@@ -55,7 +55,11 @@ export class Game {
         const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
         const rand = Math.random();
         if (rand < 0.005) return new LoreFragment(x, y);
-        if (rand < 0.015) return new PowerUp(x, y, CONSTANTS.POWERUP.RADIUS, CONSTANTS.POWERUP.COLOR);
+        if (rand < 0.015) {
+            const keys = Object.keys(CONSTANTS.POWERUP_TYPES);
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            return new PowerUp(x, y, randomKey);
+        }
         return new Food(x, y, Utils.randomRange(CONSTANTS.MIN_FOOD_RADIUS, CONSTANTS.MAX_FOOD_RADIUS), Utils.randomColor(CONSTANTS.COLORS));
     }
 

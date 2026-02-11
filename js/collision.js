@@ -30,7 +30,8 @@ export class CollisionSystem {
             let predator = e1.mass > e2.mass * 1.1 ? e1 : (e2.mass > e1.mass * 1.1 ? e2 : null);
             let prey = predator === e1 ? e2 : e1;
 
-            if (!predator || prey === player) return result;
+            // Allow player death unless invulnerable
+            if (!predator || (prey === player && player.invulnerable)) return result;
 
             if (dist < predator.radius - prey.radius * 0.2) {
                 // Trojan Horse Check
@@ -60,7 +61,7 @@ export class CollisionSystem {
     resolveFoodCollision(entity, food) {
         const dist = Utils.getDistance(entity.x, entity.y, food.x, food.y);
         if (dist < entity.radius + food.radius) {
-            let addedMass = (food instanceof PowerUp) ? CONSTANTS.POWERUP.MASS_BONUS : Math.PI * food.radius * food.radius;
+            let addedMass = Math.PI * food.radius * food.radius;
 
             if (food instanceof LoreFragment) {
                 addedMass = 500; // Fixed bonus for lore
@@ -73,11 +74,15 @@ export class CollisionSystem {
                 }
             }
 
-            entity.grow(addedMass);
-
             if (food instanceof PowerUp) {
+                if (typeof entity.applyPowerUp === 'function') {
+                    entity.applyPowerUp(food.powerUpType);
+                }
                 this.particleSystem.emitExplosion(food.x, food.y, '#FFFFFF', 40);
             }
+
+            entity.grow(addedMass);
+
             if (food instanceof LoreFragment) {
                 this.particleSystem.emitExplosion(food.x, food.y, '#FFD700', 30);
             }

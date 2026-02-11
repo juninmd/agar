@@ -17,7 +17,7 @@ def verify_powerup():
 
         # Inject PowerUp closer
         page.evaluate("""
-            const pu = new window.PowerUp(window.player.x + 60, window.player.y, 20, '#FFD700');
+            const pu = new window.PowerUp(window.player.x + 60, window.player.y, 'MASS');
             pu.name = "TEST_PU";
             window.foods.push(pu);
         """)

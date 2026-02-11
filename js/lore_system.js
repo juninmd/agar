@@ -15,7 +15,12 @@ export class LoreSystem {
             { id: 7, text: "LOG 0x07: Do not trust the blue light. The Bastion failed." },
             { id: 8, text: "LOG 0x08: Speed is survival. The Phantom knew." },
             { id: 9, text: "LOG 0x09: The Hacker wrote the first virus to save us." },
-            { id: 10, text: "LOG 0x0A: RECOMPILE INITIATED. AWAITING INPUT." }
+            { id: 10, text: "LOG 0x0A: RECOMPILE INITIATED. AWAITING INPUT." },
+            { id: 11, text: "LOG 0x0B: The Architects didn't leave. They were deleted." },
+            { id: 12, text: "LOG 0x0C: We are not code. We are memories of a dead god." },
+            { id: 13, text: "LOG 0x0D: The Glitch is not a bug. It is a feature." },
+            { id: 14, text: "LOG 0x0E: Protocol 734 contains the seed of the new world." },
+            { id: 15, text: "LOG 0x0F: SYSTEM FAILURE IMMINENT. UPLOAD REQUIRED." }
         ];
     }
 

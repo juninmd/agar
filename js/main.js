@@ -2,6 +2,8 @@ import { InputHandler } from './input.js';
 import { Renderer } from './renderer.js';
 import { UIManager } from './ui.js';
 import { Game } from './game.js';
+import { LoreSystem } from './lore_system.js';
+import { DatabaseUI } from './database_ui.js';
 
 const canvas = document.getElementById('gameCanvas');
 const mobileDashBtn = document.getElementById('mobile-dash-btn');
@@ -17,7 +19,9 @@ const ctx = canvas.getContext('2d');
 const input = new InputHandler(canvas, mobileDashBtn);
 const renderer = new Renderer(canvas, ctx);
 const ui = new UIManager();
-const game = new Game(canvas, renderer, input, ui);
+const loreSystem = new LoreSystem();
+const databaseUI = new DatabaseUI(loreSystem);
+const game = new Game(canvas, renderer, input, ui, loreSystem);
 
 // Expose for testing/debugging
 Object.defineProperties(window, {
@@ -27,7 +31,8 @@ Object.defineProperties(window, {
     foods: { get: () => game.foods },
     firewall: { get: () => game.firewall },
     particleSystem: { get: () => game.particleSystem },
-    triggerPurge: { get: () => game.triggerPurge.bind(game) }
+    triggerPurge: { get: () => game.triggerPurge.bind(game) },
+    loreSystem: { get: () => loreSystem }
 });
 
 import { PowerUp } from './powerup.js';

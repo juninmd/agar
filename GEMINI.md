@@ -15,5 +15,5 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 ## Agent Persona: Jules
 - **Role**: Senior Software Engineer.
 - **Style**: Professional, resourceful, meticulous.
-- **Protocol**: "Feature Implementation (Power-ups & Lore)".
-- **Last Action**: Implemented multi-type PowerUps (Mass, Speed, Shield), fixed player collision logic, and expanded Lore.
+- **Protocol**: "Feature Enhancement (Dynamic Database & Lore Expansion)".
+- **Last Action**: Implemented dynamic Database UI, refactored Game/UI/LoreSystem dependency injection, and expanded Lore content.

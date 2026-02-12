@@ -19,11 +19,6 @@ export class UIManager {
         this.mobileDashBtn = document.getElementById('mobile-dash-btn');
         this.abilityOverlay = document.getElementById('ability-overlay');
 
-        // Database UI
-        this.databaseBtn = document.getElementById('database-btn');
-        this.databaseModal = document.getElementById('database-modal');
-        this.closeDbBtn = document.getElementById('close-db-btn');
-
         // Callbacks
         /** @type {function(string): void} */
         this.onStart = null;
@@ -64,23 +59,6 @@ export class UIManager {
         if (this.winBtn) {
             this.winBtn.addEventListener('click', () => {
                 if (this.onRestart) this.onRestart();
-            });
-        }
-
-        // Database Modal
-        if (this.databaseBtn && this.databaseModal && this.closeDbBtn) {
-            this.databaseBtn.addEventListener('click', () => {
-                this.databaseModal.classList.remove('hidden');
-            });
-
-            this.closeDbBtn.addEventListener('click', () => {
-                this.databaseModal.classList.add('hidden');
-            });
-
-            this.databaseModal.addEventListener('click', (e) => {
-                if (e.target === this.databaseModal) {
-                    this.databaseModal.classList.add('hidden');
-                }
             });
         }
     }

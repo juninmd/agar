@@ -11,7 +11,7 @@ import { Utils } from './utils.js';
 import { CONSTANTS } from './constants.js';
 
 export class Game {
-    constructor(canvas, renderer, input, ui) {
+    constructor(canvas, renderer, input, ui, loreSystem) {
         this.canvas = canvas;
         this.renderer = renderer;
         this.input = input;
@@ -21,7 +21,7 @@ export class Game {
         this.bots = [];
         this.foods = [];
         this.firewall = null;
-        this.loreSystem = new LoreSystem();
+        this.loreSystem = loreSystem;
         this.particleSystem = new ParticleSystem();
         this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
 

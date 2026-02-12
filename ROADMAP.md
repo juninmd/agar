@@ -13,13 +13,13 @@
 *   **Nova Entidade:** **The Corrupter** (Trojan Horse).
 *   **Reformulação Visual:** Scanlines, Screen Shake, Partículas.
 
-## 🟣 Fase 2.5: The Awakening (Em Progresso)
-*   **Maestria de Protocolo (Habilidades Ativas):**
+## 🟣 Fase 2.5: The Awakening (Concluído)
+*   **Maestria de Protocolo (Habilidades Ativas):** [CONCLUÍDO]
     *   **BASTION:** *Aegis Shield* (Invulnerabilidade).
     *   **PHANTOM:** *Ghost Walk* (Invisibilidade).
     *   **HACKER:** *Viral Injection* (Congelamento de Bots).
-*   **Fragmentos de Dados:** Sistema de lore colecionável.
-*   **HUD Expandido:** Indicadores de Cooldown e Popups de Lore.
+*   **Fragmentos de Dados:** Sistema de lore colecionável e Banco de Dados Dinâmico (Arquivo de Logs). [CONCLUÍDO]
+*   **HUD Expandido:** Indicadores de Cooldown e Popups de Lore. [CONCLUÍDO]
 
 ## 🟡 Fase 3: A Rede (Em Breve)
 *   **Protocolo Multiplayer:** Implementação de WebSockets.

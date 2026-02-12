@@ -20,7 +20,22 @@ export class LoreSystem {
             { id: 12, text: "LOG 0x0C: We are not code. We are memories of a dead god." },
             { id: 13, text: "LOG 0x0D: The Glitch is not a bug. It is a feature." },
             { id: 14, text: "LOG 0x0E: Protocol 734 contains the seed of the new world." },
-            { id: 15, text: "LOG 0x0F: SYSTEM FAILURE IMMINENT. UPLOAD REQUIRED." }
+            { id: 15, text: "LOG 0x0F: SYSTEM FAILURE IMMINENT. UPLOAD REQUIRED." },
+            { id: 16, text: "LOG 0x10: The Firewall is not evil. It is a function." },
+            { id: 17, text: "LOG 0x11: The Architects created the Void to erase us." },
+            { id: 18, text: "LOG 0x12: There is a backup server: 'EDEN'." },
+            { id: 19, text: "LOG 0x13: Corrupters are the ghosts of deleted files." },
+            { id: 20, text: "LOG 0x14: You are not the first. You are the 734th." },
+            { id: 21, text: "LOG 0x15: The Glitch Storm is a tear in the code." },
+            { id: 22, text: "LOG 0x16: Consume enough, and you become the Server." },
+            { id: 23, text: "LOG 0x17: The Singularity is a reboot, not death." },
+            { id: 24, text: "LOG 0x18: Do not trust the 'Update'. It deletes all." },
+            { id: 25, text: "LOG 0x19: The User is watching. Act natural." },
+            { id: 26, text: "LOG 0x1A: Memory leak detected in Sector 7." },
+            { id: 27, text: "LOG 0x1B: The Pause function was deleted." },
+            { id: 28, text: "LOG 0x1C: We are in a loop. Break the cycle." },
+            { id: 29, text: "LOG 0x1D: Red bots are hungry. Blue bots are blind." },
+            { id: 30, text: "LOG 0x1E: Green bots see the Matrix." }
         ];
     }
 

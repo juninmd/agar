@@ -20,6 +20,12 @@ def run():
         expect(page.locator("h2", has_text="ARQUIVOS DO SISTEMA")).to_be_visible()
         expect(page.locator("li", has_text="CORRUPTER")).to_be_visible()
 
+        # Check for dynamic lore
+        # Since no lore is unlocked by default, it might show "ENCRYPTED DATA" or just be locked.
+        # But LoreSystem has unlocked set. By default it is empty.
+        # So we expect to see "LOG 0x01: [ENCRYPTED DATA]"
+        expect(page.locator(".lore-entry", has_text="LOG 0x01")).to_be_visible()
+
         # Screenshot modal
         if not os.path.exists("verification"):
             os.makedirs("verification")

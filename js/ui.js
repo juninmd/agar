@@ -1,37 +1,27 @@
+import { UIHud } from './ui_hud.js';
+
 /**
  * Manages all UI interactions and updates.
  */
 export class UIManager {
     constructor() {
-        // UI Elements
-        this.uiLayer = document.getElementById('ui-layer');
+        this.hud = new UIHud();
         this.startScreen = document.getElementById('start-screen');
         this.gameOverScreen = document.getElementById('game-over-screen');
         this.winScreen = document.getElementById('win-screen');
-        this.scoreDisplay = document.getElementById('score-display');
         this.finalScoreDisplay = document.getElementById('final-score');
         this.nameInput = document.getElementById('player-name');
         this.startBtn = document.getElementById('start-btn');
         this.restartBtn = document.getElementById('restart-btn');
         this.winBtn = document.getElementById('win-btn');
-        this.warningMessage = document.getElementById('warning-message');
-        this.integrityBar = document.getElementById('integrity-bar');
         this.mobileDashBtn = document.getElementById('mobile-dash-btn');
-        this.abilityOverlay = document.getElementById('ability-overlay');
 
-        // Callbacks
-        /** @type {function(string): void} */
         this.onStart = null;
-        /** @type {function(): void} */
         this.onRestart = null;
 
         this._initListeners();
     }
 
-    /**
-     * Initialize DOM event listeners.
-     * @private
-     */
     _initListeners() {
         if (this.startBtn) {
             this.startBtn.addEventListener('click', () => {
@@ -41,7 +31,6 @@ export class UIManager {
             });
         }
 
-        // Protocol Selection
         const protocolCards = document.querySelectorAll('.protocol-card');
         protocolCards.forEach(card => {
             card.addEventListener('click', () => {
@@ -63,80 +52,28 @@ export class UIManager {
         }
     }
 
-    /**
-     * Set the visibility of game UI elements.
-     * @param {boolean} active - Whether the game is running.
-     */
     setGameActive(active) {
         if (active) {
             this.startScreen.classList.add('hidden');
             this.gameOverScreen.classList.add('hidden');
             this.winScreen.classList.add('hidden');
-            this.warningMessage.classList.add('hidden');
+            this.hud.showWarning(false);
             this.mobileDashBtn.classList.add('active-game');
-            this.uiLayer.style.pointerEvents = 'none';
+            this.hud.uiLayer.style.pointerEvents = 'none';
         } else {
-            this.uiLayer.style.pointerEvents = 'auto';
+            this.hud.uiLayer.style.pointerEvents = 'auto';
             this.mobileDashBtn.classList.remove('active-game');
         }
     }
 
-    /**
-     * Update the score display.
-     * @param {number} mass - Current player mass.
-     */
-    updateScore(mass) {
-        const kb = Math.floor(mass);
-        this.scoreDisplay.innerText = `${kb} KB`;
-    }
+    updateScore(mass) { this.hud.updateScore(mass); }
+    updateIntegrity(percent) { this.hud.updateIntegrity(percent); }
+    updateAbilityCooldown(percent) { this.hud.updateAbilityCooldown(percent); }
+    showLorePopup(text) { this.hud.showLorePopup(text); }
+    showWarning(show) { this.hud.showWarning(show); }
+    showPurgeAlert() { this.hud.showPurgeAlert(); }
+    showCorruptionAlert(message) { this.hud.showCorruptionAlert(message); }
 
-    /**
-     * Update the system integrity bar.
-     * @param {number} percent - Integrity percentage (0-100).
-     */
-    updateIntegrity(percent) {
-        this.integrityBar.style.width = `${Math.max(0, percent)}%`;
-    }
-
-    updateAbilityCooldown(percent) {
-        if (this.abilityOverlay) {
-            this.abilityOverlay.style.height = `${percent}%`;
-        }
-    }
-
-    showLorePopup(text) {
-        const popup = document.createElement('div');
-        popup.className = 'lore-popup';
-        popup.innerHTML = `
-            <div class="lore-header">DATA FRAGMENT RECOVERED</div>
-            <div class="lore-body">${text}</div>
-        `;
-        this.uiLayer.appendChild(popup);
-
-        setTimeout(() => {
-            popup.classList.add('fade-out');
-            setTimeout(() => popup.remove(), 1000);
-        }, 5000);
-    }
-
-    /**
-     * Show or hide the warning message.
-     * @param {boolean} show - Whether to show the warning.
-     */
-    showWarning(show) {
-        if (show) {
-            this.warningMessage.classList.remove('hidden');
-            setTimeout(() => this.warningMessage.classList.add('hidden'), 5000);
-        } else {
-            this.warningMessage.classList.add('hidden');
-        }
-    }
-
-    /**
-     * Display the Game Over screen.
-     * @param {string} reason - The reason for game over.
-     * @param {number} score - The final score.
-     */
     showGameOver(reason, score) {
         this.finalScoreDisplay.innerText = Math.floor(score);
         const reasonEl = this.gameOverScreen.querySelector('.error-text');
@@ -145,36 +82,8 @@ export class UIManager {
         this.setGameActive(false);
     }
 
-    /**
-     * Display the Win screen.
-     */
     showWin() {
         this.winScreen.classList.remove('hidden');
         this.setGameActive(false);
-    }
-
-    /**
-     * Show the System Purge alert overlay.
-     */
-    showPurgeAlert() {
-        const alert = document.createElement('div');
-        alert.className = 'purge-alert';
-        alert.innerText = 'SYSTEM PURGE INITIATED // NULL VOID DETECTED';
-        this.uiLayer.appendChild(alert);
-        setTimeout(() => {
-            if (alert.parentNode) alert.remove();
-        }, 10000);
-    }
-
-    /**
-     * Show a corruption/data loss alert.
-     * @param {string} [message] - Custom message.
-     */
-    showCorruptionAlert(message) {
-        const alert = document.createElement('div');
-        alert.className = 'corruption-alert';
-        alert.innerText = message || 'DATA CORRUPTED // MASS LOST';
-        this.uiLayer.appendChild(alert);
-        setTimeout(() => alert.remove(), 2000);
     }
 }

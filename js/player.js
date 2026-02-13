@@ -2,6 +2,7 @@ import { Entity } from './entity.js';
 import { CONSTANTS } from './constants.js';
 import { Utils } from './utils.js';
 import { AbilitySystem } from './ability_system.js';
+import { VisualEffects } from './visual_effects.js';
 
 /**
  * Represents the player entity controlled by the user.
@@ -28,10 +29,7 @@ export class Player extends Entity {
         this.speedBoost = 1;
         this.trail = [];
 
-        // Ability System
         this.abilities = new AbilitySystem(this.protocol.id);
-
-        // Status Effects
         this.invulnerable = false;
         this.alpha = 1.0;
         this.speedEffectTimer = 0;
@@ -39,9 +37,8 @@ export class Player extends Entity {
     }
 
     applyPowerUp(type) {
-        if (type.id === 'MASS') {
-            this.grow(type.value);
-        } else if (type.id === 'SPEED') {
+        if (type.id === 'MASS') this.grow(type.value);
+        else if (type.id === 'SPEED') {
             this.speedEffectTimer = type.duration;
             this.speedBoost = Math.max(this.speedBoost, type.value);
         } else if (type.id === 'SHIELD') {
@@ -71,10 +68,13 @@ export class Player extends Entity {
     }
 
     update(worldWidth, worldHeight) {
-        // Update Ability State
         this.abilities.update(this);
 
-        // Handle PowerUp Timers
+        if (this.protocol.id === 'VIRAL' && this.mass > 100) {
+             this.mass *= 0.9995;
+             this.radius = Utils.getRadiusFromMass(this.mass);
+        }
+
         if (this.speedEffectTimer > 0) {
             this.speedEffectTimer--;
             if (this.speedBoost < 2.5) this.speedBoost = 2.5;
@@ -85,35 +85,21 @@ export class Player extends Entity {
             this.invulnerable = true;
         }
 
-        // Decay speed boost
         if (this.speedBoost > 1) {
-            // Only decay if above the floor set by powerups
             const floor = (this.speedEffectTimer > 0) ? 2.5 : 1.0;
-
             if (this.speedBoost > floor) {
                 this.speedBoost *= 0.96;
             } else if (this.speedBoost < floor) {
                 this.speedBoost = floor;
             }
-
-            // Generate trail
-            if (this.speedBoost > 1.1) {
-                this.trail.push({ x: this.x, y: this.y, radius: this.radius, alpha: 0.6 * this.alpha });
-            }
         }
 
-        // Update Trail
-        for (let i = this.trail.length - 1; i >= 0; i--) {
-            this.trail[i].alpha -= 0.05;
-            this.trail[i].radius *= 0.95;
-            if (this.trail[i].alpha <= 0) this.trail.splice(i, 1);
-        }
+        // Delegate trail update
+        VisualEffects.updateTrail(this);
 
         // Movement Logic
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
-
-        // Apply Protocol Speed Multiplier
         const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.protocol.speedMultiplier;
 
         if (dist > 0) {
@@ -128,7 +114,6 @@ export class Player extends Entity {
             }
         }
 
-        // Corruption / Glitch Logic
         const corruptionFactor = Math.max(0, (this.mass - 500) / 2000);
         if (corruptionFactor > 0 && this.speedBoost <= 1.2) {
             this.velocity.x += (Math.random() - 0.5) * corruptionFactor * 2;
@@ -143,75 +128,24 @@ export class Player extends Entity {
         this.checkBounds(worldWidth, worldHeight);
     }
 
-    checkBounds(width, height) {
-        this.x = Math.max(this.radius, Math.min(width - this.radius, this.x));
-        this.y = Math.max(this.radius, Math.min(height - this.radius, this.y));
-    }
-
     grow(amount) {
         this.mass += amount;
         this.radius = Utils.getRadiusFromMass(this.mass);
     }
 
     draw(ctx) {
-        // Draw Ability Effects
         this.abilities.draw(ctx, this);
+        VisualEffects.drawShield(ctx, this);
+        VisualEffects.drawSpeedEffect(ctx, this);
+        VisualEffects.drawTrail(ctx, this);
 
-        // Draw Shield PowerUp Effect
-        if (this.shieldEffectTimer > 0) {
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius + 10, 0, Math.PI * 2);
-            ctx.strokeStyle = '#FFFFFF';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.stroke();
-            ctx.restore();
-        }
-
-        // Draw Speed PowerUp Effect
-        if (this.speedEffectTimer > 0) {
-             ctx.save();
-             ctx.beginPath();
-             ctx.arc(this.x, this.y, this.radius + 5, 0, Math.PI * 2);
-             ctx.strokeStyle = '#00FFFF';
-             ctx.lineWidth = 2;
-             ctx.stroke();
-             ctx.restore();
-        }
-
-        // Draw Trail
-        if (this.trail.length > 0) {
-            ctx.save();
-            this.trail.forEach(t => {
-                ctx.beginPath();
-                ctx.arc(t.x, t.y, t.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.globalAlpha = t.alpha * 0.5 * this.alpha;
-                ctx.fill();
-            });
-            ctx.restore();
-        }
-
-        // Set global alpha for stealth effect
         const originalAlpha = ctx.globalAlpha;
         ctx.globalAlpha = this.alpha;
 
         super.draw(ctx);
 
-        // Draw Name
-        ctx.fillStyle = '#FFF';
-        ctx.font = `bold ${Math.max(12, this.radius / 2)}px 'Orbitron'`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(this.name, this.x, this.y);
-
-        // Draw decorative ring
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius - 5, 0, Math.PI * 2);
-        ctx.stroke();
+        VisualEffects.drawName(ctx, this);
+        VisualEffects.drawDecorativeRing(ctx, this);
 
         ctx.globalAlpha = originalAlpha;
     }

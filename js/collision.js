@@ -49,7 +49,11 @@ export class CollisionSystem {
                     }
                     prey.markedForDeletion = true;
                 } else {
-                    predator.grow(prey.mass);
+                    let massGain = prey.mass;
+                    if (predator.protocol && predator.protocol.id === 'VIRAL' && prey instanceof Bot) {
+                        massGain *= 2;
+                    }
+                    predator.grow(massGain);
                     prey.markedForDeletion = true;
                     this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
                 }

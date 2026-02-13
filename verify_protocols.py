@@ -14,42 +14,29 @@ def verify_protocols():
         print("Testing BASTION protocol...")
         page.click('.protocol-card[data-id="BASTION"]')
         page.click("#start-btn")
-
-        # Immediate bot clear to prevent spawn collisions
         page.evaluate("window.game.bots = []")
-
         time.sleep(0.5)
-
         protocol_name = page.evaluate("window.player.protocol.name")
-        mass_mult = page.evaluate("window.player.protocol.massMultiplier")
         radius = page.evaluate("window.player.radius")
         expected = CONSTANTS_INITIAL_RADIUS * math.sqrt(2.0)
+        assert protocol_name == "BASTION"
+        assert abs(radius - expected) < 2.0
+        print("BASTION OK")
 
-        print(f"BASTION Protocol: {protocol_name}, MassMult: {mass_mult}, Radius: {radius}, Expected: {expected}")
-        assert protocol_name == "BASTION", f"Expected BASTION, got {protocol_name}"
-        assert abs(radius - expected) < 2.0, f"BASTION radius mismatch! Got {radius} but expected {expected}"
-
-        # Test PHANTOM
+        # Test VIRAL
         page.reload()
-        print("Testing PHANTOM protocol...")
-        page.click('.protocol-card[data-id="PHANTOM"]')
+        print("Testing VIRAL protocol...")
+        page.click('.protocol-card[data-id="VIRAL"]')
         page.click("#start-btn")
-
-        # Immediate bot clear
         page.evaluate("window.game.bots = []")
-
         time.sleep(0.5)
-
         protocol_name = page.evaluate("window.player.protocol.name")
-        mass_mult = page.evaluate("window.player.protocol.massMultiplier")
         radius = page.evaluate("window.player.radius")
-        expected = CONSTANTS_INITIAL_RADIUS * math.sqrt(0.8)
+        expected = CONSTANTS_INITIAL_RADIUS * math.sqrt(0.5)
+        assert protocol_name == "VIRAL"
+        assert abs(radius - expected) < 2.0
+        print("VIRAL OK")
 
-        print(f"PHANTOM Protocol: {protocol_name}, MassMult: {mass_mult}, Radius: {radius}, Expected: {expected}")
-        assert protocol_name == "PHANTOM", f"Expected PHANTOM, got {protocol_name}"
-        assert abs(radius - expected) < 2.0, f"PHANTOM radius mismatch! Got {radius}"
-
-        print("Protocol Verification Passed!")
         browser.close()
 
 if __name__ == "__main__":

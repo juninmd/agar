@@ -1,33 +1,45 @@
 # 🗺️ Roadmap: NEON-PHAGE RECOMPILE
 
-## 🟢 Fase 1: O Kernel (Concluído)
-*   **Engine Central:** Renderização em HTML5 Canvas.
-*   **Física:** Momento, velocidade baseada em massa.
-*   **IA:** Padrões comportamentais básicos (Buscar, Guardar, Vagar).
-*   **Tipos de Entidade:** Seeker, Guardian, Glitch.
+## 🟢 Phase 1: The Kernel (Complete)
+*   **Core Engine:** HTML5 Canvas Rendering.
+*   **Physics:** Mass-based movement and collision.
+*   **AI:** Basic Seeking/Wandering behaviors.
+*   **Entities:** Seeker, Guardian, Glitch.
 
-## 🔵 Fase 2: O Recompile (Concluído)
-*   **Mecânica de Integridade do Sistema:** Um temporizador global que degrada o mundo.
-*   **Condição de Vitória (O Upload):** Alcance 5000 KB para vencer.
-*   **Corrupção de Dados:** Alta massa leva a instabilidade de movimento.
-*   **Nova Entidade:** **The Corrupter** (Trojan Horse).
-*   **Reformulação Visual:** Scanlines, Screen Shake, Partículas.
+## 🔵 Phase 2: The Recompile (Complete)
+*   **System Integrity:** Global timer mechanic.
+*   **Win Condition:** Singularity Event (Mass > 5000).
+*   **Corruption:** High mass instability.
+*   **Visual Overhaul:** Scanlines, Chromatic Aberration, Screen Shake.
+*   **Corrupter Entity:** "Trojan Horse" mechanics.
 
-## 🟣 Fase 2.5: The Awakening (Concluído)
-*   **Maestria de Protocolo (Habilidades Ativas):** [CONCLUÍDO]
-    *   **BASTION:** *Aegis Shield* (Invulnerabilidade).
-    *   **PHANTOM:** *Ghost Walk* (Invisibilidade).
-    *   **HACKER:** *Viral Injection* (Congelamento de Bots).
-*   **Fragmentos de Dados:** Sistema de lore colecionável e Banco de Dados Dinâmico (Arquivo de Logs). [CONCLUÍDO]
-*   **HUD Expandido:** Indicadores de Cooldown e Popups de Lore. [CONCLUÍDO]
+## 🟣 Phase 2.5: The Awakening (Complete)
+*   **Protocol Mastery:**
+    *   **BASTION:** *Aegis Shield*.
+    *   **PHANTOM:** *Ghost Walk*.
+    *   **HACKER:** *Viral Injection*.
+*   **Lore System:** Collectible Data Fragments & Database UI.
+*   **HUD 2.0:** Cooldowns, Popups, and Alerts.
 
-## 🟡 Fase 3: A Rede (Em Breve)
-*   **Protocolo Multiplayer:** Implementação de WebSockets.
-*   **Computação Distribuída:** Jogadores trabalhando juntos para parar o expurgo?
-*   **Power-ups:** Sistema de Cache Expandido (Massa, Velocidade, Escudo). [CONCLUÍDO]
-*   **Chat:** Comunicação em hexadecimal.
+## 🟡 Phase 3: The Viral Outbreak (Current Focus)
+*   **New Protocol: VIRAL (The Fourth Strain)** [IN PROGRESS]
+    *   *Concept:* High risk/reward class.
+    *   *Trait:* Gains mass from bots faster, starves faster.
+    *   *Ability:* "Outbreak" (AOE Life Drain).
+*   **Singularity Event V2:**
+    *   *Visuals:* Massive black hole distortion effect.
+    *   *Mechanics:* Gravity well pulling all entities inward.
+*   **System Purge V2:**
+    *   *Glitch Storm:* Screen inversion and elite hunters.
+    *   *Safe Zones:* Dynamic areas safe from purge effects.
 
-## 🔴 Fase 4: A Singularidade (Futuro)
-*   **Setores Procedurais:** Geração infinita de mapas.
-*   **IA Neural:** Bots que aprendem padrões de movimento dos jogadores.
-*   **Port Mobile:** "Pocket Phage".
+## 🔴 Phase 4: The Network (Future)
+*   **Multiplayer Protocol:** WebSocket integration.
+*   **Distributed Computing:** Collaborative boss fights.
+*   **Procedural Sectors:** Infinite map generation.
+*   **Neural AI:** Bots that learn player movement patterns.
+
+## ⚫ Phase 5: The Architect's Domain (Concept)
+*   **Meta-Game:** Persistent unlocks across runs.
+*   **Boss Battles:** Direct confrontation with "Null Void Avatars".
+*   **Mobile Port:** "Pocket Phage".

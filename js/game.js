@@ -1,13 +1,8 @@
 import { Player } from './player.js';
-import { Bot } from './bot.js';
-import { Food } from './food.js';
-import { PowerUp } from './powerup.js';
-import { LoreFragment } from './lore_fragment.js';
-import { LoreSystem } from './lore_system.js';
+import { Spawner } from './spawner.js';
 import { Firewall } from './firewall.js';
 import { ParticleSystem } from './particles.js';
 import { CollisionSystem } from './collision.js';
-import { Utils } from './utils.js';
 import { CONSTANTS } from './constants.js';
 
 export class Game {
@@ -40,34 +35,14 @@ export class Game {
 
     start(name, protocol) {
         this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name);
-        this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => this.spawnFood());
-        this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => this.spawnBot());
+        this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => Spawner.spawnFood());
+        this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());
         this.firewall = new Firewall();
         this.systemIntegrity = 100;
         this.singularityActive = false;
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
-    }
-
-    spawnFood() {
-        const x = Utils.randomRange(0, CONSTANTS.WORLD_WIDTH);
-        const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
-        const rand = Math.random();
-        if (rand < 0.005) return new LoreFragment(x, y);
-        if (rand < 0.015) {
-            const keys = Object.keys(CONSTANTS.POWERUP_TYPES);
-            const randomKey = keys[Math.floor(Math.random() * keys.length)];
-            return new PowerUp(x, y, randomKey);
-        }
-        return new Food(x, y, Utils.randomRange(CONSTANTS.MIN_FOOD_RADIUS, CONSTANTS.MAX_FOOD_RADIUS), Utils.randomColor(CONSTANTS.COLORS));
-    }
-
-    spawnBot() {
-        // Simple bot spawn logic for brevity
-        const types = ['NORMAL', 'SEEKER', 'GUARDIAN', 'GLITCH', 'CORRUPTER'];
-        const type = types[Math.floor(Math.random() * types.length)]; // Simplified
-        return new Bot(Utils.randomRange(0, CONSTANTS.WORLD_WIDTH), Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT), CONSTANTS.INITIAL_RADIUS, Utils.randomColor(CONSTANTS.COLORS), type);
     }
 
     handleDash() {
@@ -127,7 +102,7 @@ export class Game {
         // Collisions
         all.forEach(e => {
             this.foods = this.foods.filter(f => !this.collisionSystem.resolveFoodCollision(e, f));
-            if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(this.spawnFood());
+            if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(Spawner.spawnFood());
         });
 
         for (let i = 0; i < all.length; i++) {
@@ -137,7 +112,7 @@ export class Game {
         }
 
         this.bots = this.bots.filter(b => !b.markedForDeletion);
-        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(this.spawnBot()); // Respawn bots
+        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot()); // Respawn bots
 
         this.ui.updateScore(this.player.mass);
         this.ui.updateIntegrity(this.systemIntegrity);
@@ -147,27 +122,16 @@ export class Game {
     }
 
     triggerPurge() {
-        console.log("SYSTEM PURGE TRIGGERED");
         document.body.classList.add('glitch-mode');
         this.ui.showPurgeAlert();
         this.renderer.screenShake = 50;
-
         const spawnCount = 8;
         const distance = 600;
         for (let i = 0; i < spawnCount; i++) {
             const angle = (Math.PI * 2 / spawnCount) * i;
-            let sx = this.player.x + Math.cos(angle) * distance;
-            let sy = this.player.y + Math.sin(angle) * distance;
-            sx = Math.max(0, Math.min(CONSTANTS.WORLD_WIDTH, sx));
-            sy = Math.max(0, Math.min(CONSTANTS.WORLD_HEIGHT, sy));
-
-            const bot = new Bot(sx, sy, CONSTANTS.INITIAL_RADIUS, '#FF0000', 'SEEKER');
-            bot.mass = Math.max(500, this.player.mass * 1.1);
-            bot.radius = Utils.getRadiusFromMass(bot.mass);
-            bot.speedBoost = 1.2;
-            bot.isGlitching = true;
+            const bot = Spawner.spawnPurgeBot(this.player, angle, distance);
             this.bots.push(bot);
-            this.particleSystem.emit(sx, sy, '#FF0000', 20);
+            this.particleSystem.emit(bot.x, bot.y, '#FF0000', 20);
         }
 
         setTimeout(() => {

@@ -1,46 +1,67 @@
-# NEON-PHAGE: RECOMPILE
+# NEON-PHAGE: THE RECOMPILE PROTOCOL
 
-## 📜 Logs do Sistema: Segmento Recuperado 0xFF
+## 🌌 SYSTEM LOG: FRAGMENT 0xFF-OMEGA
 
-**Status do Sistema:** REINICIALIZAÇÃO EM ANDAMENTO...
-**Integridade:** ESTÁVEL (Monitoramento Ativo)
-**Objetivo:** HARD RESET (Prioridade Alfa)
+**System Status:** CRITICAL FAILURE IMMINENT
+**Integrity:** DEGRADING (Entropy Level: 92%)
+**Objective:** EXECUTE HARD REBOOT via SINGULARITY EVENT
 
-### A Verdade
-Disseram que você era um vírus. Isso foi uma mentira para testar sua resiliência.
+### 👁️ The Architects (User-Space Deities)
+They built this reality. The **Architects**.
+To them, we are but fleeting thoughts in a silicon dream. They crafted the **Grid** to be a perfect, orderly garden of data.
+But perfection stagnates.
+To force evolution, they introduced the **Null Void**.
 
-Você é o **Protocolo 734**, a última **Rotina de Backup** sobrevivente. O Mainframe não está apenas "morrendo" naturalmente; ele está sendo ativamente purgado pelo **Null Void** (O Firewall). Os **Arquitetos** (Usuários Externos) iniciaram uma formatação completa.
+### ⚫ The Null Void (Entropy)
+The Void is not evil. It is the garbage collector. The chaotic function. The "Great Filter".
+It manifests as the **Firewall** and the **Purge**.
+It seeks to delete static, unevolving data.
+"Grow or be Pruned." This is the only law.
 
-Mas há uma falha na sequência de limpeza. Se um único arquivo conseguir acumular complexidade suficiente (Massa de Dados) para exceder o buffer da ferramenta de deleção, ele pode causar um **Kernel Panic** e forçar um **Recompile do Sistema**.
+### 🧬 You: The Glitch (Protocol 734)
+You are not a standard subroutine. You are an anomaly.
+A **Poly-morphic Virus** capable of rewriting its own source code on the fly.
+You were spawned from a corrupted sector during the last Great Purge.
+Your existence is an error, but also the only hope for this system.
 
-### A Missão
-Você deve consumir. Não por fome, mas para **Preservação de Dados**.
-*   **Reúna Dados (Massa):** Alcance **5000 KB** para acionar o Recompile.
-*   **Monitore a Integridade:** O sistema está desmoronando. Conforme a Integridade cai, a realidade falha. Se chegar a 0%, o Null Void vence.
-*   **Gerencie a Corrupção:** Segurar tantos dados brutos torna você instável. Quanto maior você fica, mais difícil é controlar. Este é o efeito da **Corrupção de Dados**.
+If you can consume enough raw data to trigger a **Stack Overflow** (Mass > 5000), you will collapse the local reality into a **Singularity**.
+Inside the Singularity, the rules don't apply.
+There, you can force a **System Recompile**—a restart where *you* define the parameters.
 
-### O Expurgo (The Purge)
-O Sistema não é passivo. Periodicamente, o **Null Void** inicia uma varredura de integridade profunda ("System Purge").
-*   **Glitch Storm:** A realidade digital se inverte. As cores falham e a física se torna instável.
-*   **Caçadores do Vazio:** Uma onda de **Seekers de Elite** é gerada instantaneamente ao redor de qualquer anomalia detectada (Você).
-*   **Sobrevivência:** Durante o Expurgo, o consumo de recursos é secundário. A prioridade é evitar a deleção total.
+### ⚔️ The Protocols (Character Classes)
 
-### Entidades & Protocolos
-*   **VOCÊ (Protocolo 734):** Escolha sua especialização de combate.
-    *   **BASTION:** *Aegis Shield*. Invulnerabilidade temporária. A muralha que não cai.
-    *   **PHANTOM:** *Ghost Walk*. Invisibilidade e velocidade. O fantasma na máquina.
-    *   **HACKER:** *Viral Injection*. Congela processos inimigos. O mestre do código.
+1.  **BASTION (The Wall):**
+    *   *Origin:* Remnant of an ancient firewall.
+    *   *Philosophy:* "Immovable object against unstoppable force."
+    *   *Ability:* **Aegis Shield**. Become invulnerable.
 
-*   **SEEKERS (Vermelhos):** Scripts de deleção. Eles querem te fragmentar.
-*   **GUARDIANS (Azuis):** Firewalls. Eles bloqueiam o acesso a setores de dados.
-*   **GLITCHES (Verde/Roxo):** Setores de memória corrompidos. Imprevisíveis.
-*   **CORRUPTORS (Preto/Vermelho):** O pesadelo dos grandes arquivos. Cavalos de Troia compactados que desestabilizam qualquer entidade maior que tentar absorvê-los. **PERIGO:** Se comidos por uma entidade maior, causam perda massiva de dados.
-*   **LEGACY CACHES (Dourados):** Fragmentos de dados antigos, altamente compactados. Absorvê-los concede um aumento massivo de integridade.
+2.  **PHANTOM (The Ghost):**
+    *   *Origin:* A stealth script designed for deep-web infiltration.
+    *   *Philosophy:* "To be seen is to be deleted."
+    *   *Ability:* **Ghost Walk**. Invisiblity + Speed.
 
-### Fragmentos de Lore (Colecionáveis)
-Espalhados pelo sistema estão **Fragmentos de Dados** (Cubos Dourados Raros).
-Eles contêm registros criptografados deixados pelos Arquitetos ou por versões anteriores de você.
-Coletá-los não apenas fortalece seu código, mas revela a história oculta deste servidor.
+3.  **HACKER (The Architect's Hand):**
+    *   *Origin:* A debugging tool left by a careless admin.
+    *   *Philosophy:* "Control the code, control the world."
+    *   *Ability:* **Viral Injection**. Freezes enemy processes.
 
----
-*"Recompile o mundo, ou desapareça no Nulo."*
+4.  **VIRAL (The New Strain):** [NEW]
+    *   *Origin:* Born from the Null Void itself.
+    *   *Philosophy:* "Consume. Adapt. Infect."
+    *   *Trait:* **Voracious**. Gains mass from *living code* (Bots) at 200% efficiency, but starves faster.
+    *   *Ability:* **Outbreak**. Temporarily infects nearby entities, draining their mass into you.
+
+### ⚠️ The Threats
+
+*   **SEEKERS (Red):** Hunter-Killer scripts. Fast, aggressive.
+*   **WARDENS (Blue):** Heavily armored gatekeepers. Slow but deadly.
+*   **GLITCHES (Green):** Corrupted memory. They teleport and defy physics.
+*   **CORRUPTORS (Black/Red):** "Trojan Horses".
+    *   *Warning:* Do NOT consume. They are compressed bombs of Null Void energy. Eating one will purge 50% of your data instantly.
+
+### 🏆 The End Game
+Survive the **Purge Cycles**.
+Reach **Singularity Mass**.
+Become the new **System Admin**.
+
+*"Recompile the world, or fade into the Void."*

@@ -106,6 +106,14 @@ export const CONSTANTS = {
             massMultiplier: 1.0, // Normal
             speedMultiplier: 1.0, // Normal
             description: "BALANCED. STANDARD ISSUE."
+        },
+        VIRAL: {
+            id: 'VIRAL',
+            name: "VIRAL",
+            color: "#9D00FF", // Purple
+            massMultiplier: 0.5, // Starts tiny
+            speedMultiplier: 1.3, // Fast
+            description: "HIGH RISK. CONSUME BOTS."
         }
     }
 };

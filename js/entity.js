@@ -84,4 +84,9 @@ export class Entity {
             height: this.radius * 2
         };
     }
+
+    checkBounds(width, height) {
+        this.x = Math.max(this.radius, Math.min(width - this.radius, this.x));
+        this.y = Math.max(this.radius, Math.min(height - this.radius, this.y));
+    }
 }

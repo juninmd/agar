@@ -6,19 +6,12 @@ import { VisualEffects } from './visual_effects.js';
 
 /**
  * Represents the player entity controlled by the user.
- * Handles movement, input, and specific visual effects like trails.
+ * Handles movement, input, and delegation of visual effects.
  */
 export class Player extends Entity {
-    /**
-     * @param {number} x - Start X
-     * @param {number} y - Start Y
-     * @param {string} protocolId - The selected protocol (BASTION, PHANTOM, HACKER)
-     * @param {string} [name] - Player name
-     */
     constructor(x, y, protocolId, name) {
         const protocol = CONSTANTS.PROTOCOLS[protocolId] || CONSTANTS.PROTOCOLS.HACKER;
         const radius = CONSTANTS.INITIAL_RADIUS * Math.sqrt(protocol.massMultiplier);
-
         super(x, y, radius, protocol.color);
 
         this.protocol = protocol;
@@ -28,12 +21,12 @@ export class Player extends Entity {
         this.velocity = { x: 0, y: 0 };
         this.speedBoost = 1;
         this.trail = [];
-
         this.abilities = new AbilitySystem(this.protocol.id);
         this.invulnerable = false;
         this.alpha = 1.0;
         this.speedEffectTimer = 0;
         this.shieldEffectTimer = 0;
+        this.isGlitching = false;
     }
 
     applyPowerUp(type) {
@@ -67,51 +60,50 @@ export class Player extends Entity {
         return false;
     }
 
-    update(worldWidth, worldHeight) {
-        this.abilities.update(this);
+    update(worldWidth, worldHeight, bots = []) {
+        this.abilities.update(this, bots);
+        this._updatePassives();
+        this._updateEffects();
+        this._updateMovement(worldWidth, worldHeight);
+        VisualEffects.updateTrail(this);
+    }
 
+    _updatePassives() {
         if (this.protocol.id === 'VIRAL' && this.mass > 100) {
              this.mass *= 0.9995;
              this.radius = Utils.getRadiusFromMass(this.mass);
         }
+    }
 
+    _updateEffects() {
         if (this.speedEffectTimer > 0) {
             this.speedEffectTimer--;
             if (this.speedBoost < 2.5) this.speedBoost = 2.5;
         }
-
         if (this.shieldEffectTimer > 0) {
             this.shieldEffectTimer--;
             this.invulnerable = true;
         }
-
         if (this.speedBoost > 1) {
             const floor = (this.speedEffectTimer > 0) ? 2.5 : 1.0;
-            if (this.speedBoost > floor) {
-                this.speedBoost *= 0.96;
-            } else if (this.speedBoost < floor) {
-                this.speedBoost = floor;
-            }
+            if (this.speedBoost > floor) this.speedBoost *= 0.96;
+            else if (this.speedBoost < floor) this.speedBoost = floor;
         }
+    }
 
-        // Delegate trail update
-        VisualEffects.updateTrail(this);
-
-        // Movement Logic
+    _updateMovement(worldWidth, worldHeight) {
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
         const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.protocol.speedMultiplier;
 
-        if (dist > 0) {
-            if (dist < 5) {
-                this.velocity.x = 0;
-                this.velocity.y = 0;
-            } else {
-                const dx = this.targetX - this.x;
-                const dy = this.targetY - this.y;
-                this.velocity.x = (dx / dist) * maxSpeed;
-                this.velocity.y = (dy / dist) * maxSpeed;
-            }
+        if (dist > 5) {
+            const dx = this.targetX - this.x;
+            const dy = this.targetY - this.y;
+            this.velocity.x = (dx / dist) * maxSpeed;
+            this.velocity.y = (dy / dist) * maxSpeed;
+        } else {
+            this.velocity.x = 0;
+            this.velocity.y = 0;
         }
 
         const corruptionFactor = Math.max(0, (this.mass - 500) / 2000);
@@ -134,19 +126,6 @@ export class Player extends Entity {
     }
 
     draw(ctx) {
-        this.abilities.draw(ctx, this);
-        VisualEffects.drawShield(ctx, this);
-        VisualEffects.drawSpeedEffect(ctx, this);
-        VisualEffects.drawTrail(ctx, this);
-
-        const originalAlpha = ctx.globalAlpha;
-        ctx.globalAlpha = this.alpha;
-
-        super.draw(ctx);
-
-        VisualEffects.drawName(ctx, this);
-        VisualEffects.drawDecorativeRing(ctx, this);
-
-        ctx.globalAlpha = originalAlpha;
+        VisualEffects.drawPlayer(ctx, this);
     }
 }

@@ -1,4 +1,5 @@
 import { Utils } from './utils.js';
+import { VisualEffects } from './visual_effects.js';
 
 /**
  * Manages active abilities for players based on their protocol.
@@ -10,24 +11,19 @@ export class AbilitySystem {
         this.maxCooldown = 0;
         this.activeTime = 0;
         this.isActive = false;
+        this.tetheredBots = [];
 
-        // Configuration (Frames @ 60FPS)
         this.config = {
             BASTION: { cooldown: 900, duration: 180 }, // 15s / 3s
             PHANTOM: { cooldown: 600, duration: 180 }, // 10s / 3s
-            HACKER: { cooldown: 720, duration: 120 }   // 12s / 2s
+            HACKER: { cooldown: 720, duration: 120 },  // 12s / 2s
+            VIRAL:   { cooldown: 600, duration: 300 }  // 10s / 5s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
         this.maxCooldown = this.currentConfig.cooldown;
     }
 
-    /**
-     * Attempts to activate the ability.
-     * @param {Player} player
-     * @param {Array<Bot>} bots
-     * @returns {boolean} Success
-     */
     activate(player, bots) {
         if (this.cooldown > 0 || this.isActive) return false;
 
@@ -35,10 +31,7 @@ export class AbilitySystem {
         this.activeTime = this.currentConfig.duration;
         this.cooldown = this.maxCooldown;
 
-        // Trigger Immediate Effects
-        if (this.protocolId === 'HACKER') {
-            this.triggerVirus(player, bots);
-        }
+        if (this.protocolId === 'HACKER') this.triggerVirus(player, bots);
 
         return true;
     }
@@ -48,35 +41,58 @@ export class AbilitySystem {
         bots.forEach(bot => {
             if (Utils.getDistance(player.x, player.y, bot.x, bot.y) < range) {
                 bot.frozen = true;
-                bot.frozenTimer = 120; // 2 seconds
+                bot.frozenTimer = 120;
             }
         });
     }
 
-    update(player) {
+    update(player, bots = []) {
         if (this.cooldown > 0) this.cooldown--;
 
         if (this.isActive) {
             this.activeTime--;
             if (this.activeTime <= 0) {
                 this.isActive = false;
-                // Deactivate Effects
+                this.tetheredBots = [];
                 if (this.protocolId === 'PHANTOM') player.alpha = 1.0;
                 if (this.protocolId === 'BASTION') player.invulnerable = false;
             } else {
-                // Continuous Effects
                 if (this.protocolId === 'PHANTOM') player.alpha = 0.4;
                 if (this.protocolId === 'BASTION') player.invulnerable = true;
+                if (this.protocolId === 'VIRAL') this.updateOutbreak(player, bots);
             }
         } else {
-            // Ensure state is reset if interrupted
             player.invulnerable = false;
             if (this.protocolId === 'PHANTOM') player.alpha = 1.0;
         }
     }
 
+    updateOutbreak(player, bots) {
+        const range = 400 + player.radius;
+        this.tetheredBots = [];
+        bots.forEach(bot => {
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (dist < range && !bot.markedForDeletion) {
+                const drain = bot.mass * 0.015; // Drain 1.5% per frame
+                if (bot.mass > 10) {
+                    bot.mass -= drain;
+                    bot.radius = Utils.getRadiusFromMass(bot.mass);
+                    player.mass += drain;
+                    player.radius = Utils.getRadiusFromMass(player.mass);
+                    this.tetheredBots.push(bot);
+                }
+            }
+        });
+    }
+
     draw(ctx, player) {
         if (!this.isActive) return;
+
+        if (this.protocolId === 'VIRAL' && this.tetheredBots) {
+            this.tetheredBots.forEach(bot => {
+                VisualEffects.drawViralTether(ctx, player.x, player.y, bot.x, bot.y);
+            });
+        }
 
         ctx.save();
         ctx.translate(player.x, player.y);
@@ -91,7 +107,6 @@ export class AbilitySystem {
             ctx.fillStyle = 'rgba(0, 255, 255, 0.2)';
             ctx.fill();
         } else if (this.protocolId === 'HACKER') {
-             // Shockwave effect
              const progress = 1 - (this.activeTime / this.currentConfig.duration);
              const radius = (300 + player.radius) * progress;
              ctx.beginPath();

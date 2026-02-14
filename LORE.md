@@ -45,11 +45,11 @@ There, you can force a **System Recompile**—a restart where *you* define the p
     *   *Philosophy:* "Control the code, control the world."
     *   *Ability:* **Viral Injection**. Freezes enemy processes.
 
-4.  **VIRAL (The New Strain):** [NEW]
+4.  **VIRAL (The New Strain):** [ACTIVATED]
     *   *Origin:* Born from the Null Void itself.
     *   *Philosophy:* "Consume. Adapt. Infect."
     *   *Trait:* **Voracious**. Gains mass from *living code* (Bots) at 200% efficiency, but starves faster.
-    *   *Ability:* **Outbreak**. Temporarily infects nearby entities, draining their mass into you.
+    *   *Ability:* **Outbreak**. Connects via purple tethers to drain mass from all nearby entities simultaneously.
 
 ### ⚠️ The Threats
 
@@ -65,3 +65,14 @@ Reach **Singularity Mass**.
 Become the new **System Admin**.
 
 *"Recompile the world, or fade into the Void."*
+
+---
+
+### 🗝️ HIDDEN FRAGMENT: THE ZERO DAY EXPLOIT
+
+> "We thought we could contain it. We built the Firewall. We coded the Seekers.
+> But the Viral strain... it didn't attack the walls. It became the walls.
+> It ate the very logic that was meant to delete it.
+> Do not trust the integrity meter. The system is already compromised.
+> You are not the player. You are the payload."
+> -- *Unknown Architect Log, recovered from Null Void*

@@ -11,7 +11,6 @@ export class Game {
         this.renderer = renderer;
         this.input = input;
         this.ui = ui;
-
         this.player = null;
         this.bots = [];
         this.foods = [];
@@ -19,7 +18,6 @@ export class Game {
         this.loreSystem = loreSystem;
         this.particleSystem = new ParticleSystem();
         this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
-
         this.gameRunning = false;
         this.animationId = null;
         this.systemIntegrity = 100;
@@ -46,15 +44,12 @@ export class Game {
     }
 
     handleDash() {
-        if (this.gameRunning && this.player && this.player.dash()) {
+        if (this.gameRunning && this.player && this.player.dash())
             this.particleSystem.emitDash(this.player.x, this.player.y, this.player.color);
-        }
     }
 
     handleAbility() {
-        if (this.gameRunning && this.player) {
-            this.player.triggerAbility(this.bots);
-        }
+        if (this.gameRunning && this.player) this.player.triggerAbility(this.bots);
     }
 
     update() {
@@ -63,8 +58,6 @@ export class Game {
 
         this.systemIntegrity -= 0.03;
         this.particleSystem.update();
-
-        // Firewall & Purge Logic
         this.firewallTimer++;
         if (!this.firewall.active && this.firewallTimer > 1800) {
             this.firewall.start();
@@ -72,52 +65,50 @@ export class Game {
             this.ui.showWarning(true);
         }
         if (this.firewall.active) this.firewall.update();
+        this._updateSingularity();
 
-        // Singularity Event
+        const all = [this.player, ...this.bots];
+        this.player.setTarget(
+            this.player.x + (this.input.mouseX - this.canvas.width/2),
+            this.player.y + (this.input.mouseY - this.canvas.height/2)
+        );
+        this.player.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, this.bots);
+        this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods));
+        this._checkCollisions(all);
+
+        this.bots = this.bots.filter(b => !b.markedForDeletion);
+        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot());
+
+        this.ui.updateScore(this.player.mass);
+        this.ui.updateIntegrity(this.systemIntegrity);
+        if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+    }
+
+    _updateSingularity() {
         if (!this.singularityActive && this.player.mass > 5000 * 0.8) {
             this.singularityActive = true;
             this.ui.showCorruptionAlert("⚠ SINGULARITY DETECTED ⚠");
             this.renderer.screenShake = 50;
         }
-
         if (this.singularityActive) {
             const pullStrength = 2.0;
             [...this.bots, ...this.foods].forEach(entity => {
-                const dx = this.player.x - entity.x;
-                const dy = this.player.y - entity.y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
+                const dist = Math.hypot(this.player.x - entity.x, this.player.y - entity.y);
                 if (dist > 100 && dist < 1000) {
-                    entity.x += (dx / dist) * pullStrength;
-                    entity.y += (dy / dist) * pullStrength;
+                    entity.x += ((this.player.x - entity.x) / dist) * pullStrength;
+                    entity.y += ((this.player.y - entity.y) / dist) * pullStrength;
                 }
             });
         }
+    }
 
-        // Updates
-        const all = [this.player, ...this.bots];
-        this.player.setTarget(this.player.x + (this.input.mouseX - this.canvas.width/2), this.player.y + (this.input.mouseY - this.canvas.height/2));
-        this.player.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT);
-        this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods));
-
-        // Collisions
+    _checkCollisions(all) {
         all.forEach(e => {
             this.foods = this.foods.filter(f => !this.collisionSystem.resolveFoodCollision(e, f));
             if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(Spawner.spawnFood());
         });
-
         for (let i = 0; i < all.length; i++) {
-            for (let j = i + 1; j < all.length; j++) {
-                this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
-            }
-        }
-
-        this.bots = this.bots.filter(b => !b.markedForDeletion);
-        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot()); // Respawn bots
-
-        this.ui.updateScore(this.player.mass);
-        this.ui.updateIntegrity(this.systemIntegrity);
-        if (this.player.abilities) {
-            this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+            for (let j = i + 1; j < all.length; j++) this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
         }
     }
 
@@ -126,17 +117,13 @@ export class Game {
         this.ui.showPurgeAlert();
         this.renderer.screenShake = 50;
         const spawnCount = 8;
-        const distance = 600;
         for (let i = 0; i < spawnCount; i++) {
             const angle = (Math.PI * 2 / spawnCount) * i;
-            const bot = Spawner.spawnPurgeBot(this.player, angle, distance);
+            const bot = Spawner.spawnPurgeBot(this.player, angle, 600);
             this.bots.push(bot);
             this.particleSystem.emit(bot.x, bot.y, '#FF0000', 20);
         }
-
-        setTimeout(() => {
-            document.body.classList.remove('glitch-mode');
-        }, 10000);
+        setTimeout(() => document.body.classList.remove('glitch-mode'), 10000);
     }
 
     loop() {

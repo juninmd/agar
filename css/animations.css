@@ -1,0 +1,32 @@
+@keyframes glitch {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+}
+
+@keyframes flash {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+@keyframes scrollScanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+@keyframes purgeShake {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    25% { transform: translate(-51%, -49%) rotate(-1deg); }
+    50% { transform: translate(-49%, -51%) rotate(1deg); }
+    75% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-51%, -51%) rotate(-1deg); }
+}
+
+@keyframes slideDown {
+    from { transform: translate(-50%, -100%); opacity: 0; }
+    to { transform: translate(-50%, -50%); opacity: 1; }
+}

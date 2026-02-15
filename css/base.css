@@ -1,0 +1,45 @@
+:root {
+    --neon-blue: #00f3ff;
+    --neon-pink: #ff00ff;
+    --neon-green: #00ff41;
+    --dark-bg: #050505;
+    --grid-color: rgba(0, 243, 255, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background-color: var(--dark-bg);
+    overflow: hidden;
+    font-family: 'Share Tech Mono', monospace;
+    color: white;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 4rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 20px var(--neon-blue), 0 0 40px var(--neon-blue);
+    margin-bottom: 10px;
+    letter-spacing: 5px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--neon-pink);
+    margin-bottom: 30px;
+    text-shadow: 0 0 5px var(--neon-pink);
+}
+
+.lore-text {
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    color: #ccc;
+}

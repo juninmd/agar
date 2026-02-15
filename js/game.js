@@ -3,6 +3,7 @@ import { Spawner } from './spawner.js';
 import { Firewall } from './firewall.js';
 import { ParticleSystem } from './particles.js';
 import { CollisionSystem } from './collision.js';
+import { SingularitySystem } from './singularity_system.js';
 import { CONSTANTS } from './constants.js';
 
 export class Game {
@@ -18,12 +19,10 @@ export class Game {
         this.loreSystem = loreSystem;
         this.particleSystem = new ParticleSystem();
         this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
+        this.singularitySystem = new SingularitySystem(ui, renderer);
         this.gameRunning = false;
-        this.animationId = null;
         this.systemIntegrity = 100;
-        this.purgeTimer = 0;
         this.firewallTimer = 0;
-        this.singularityActive = false;
 
         this.ui.onStart = (name, protocol) => this.start(name, protocol);
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id);
@@ -37,7 +36,7 @@ export class Game {
         this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());
         this.firewall = new Firewall();
         this.systemIntegrity = 100;
-        this.singularityActive = false;
+        this.singularitySystem.active = false;
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
@@ -58,14 +57,11 @@ export class Game {
 
         this.systemIntegrity -= 0.03;
         this.particleSystem.update();
-        this.firewallTimer++;
-        if (!this.firewall.active && this.firewallTimer > 1800) {
-            this.firewall.start();
-            this.firewallTimer = 0;
-            this.ui.showWarning(true);
-        }
-        if (this.firewall.active) this.firewall.update();
-        this._updateSingularity();
+        this.updateFirewall();
+
+        const allEntities = [...this.bots, ...this.foods];
+        this.singularitySystem.update(this.player, allEntities);
+        this.singularityActive = this.singularitySystem.active; // Sync for renderer
 
         const all = [this.player, ...this.bots];
         this.player.setTarget(
@@ -84,22 +80,14 @@ export class Game {
         if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
     }
 
-    _updateSingularity() {
-        if (!this.singularityActive && this.player.mass > 5000 * 0.8) {
-            this.singularityActive = true;
-            this.ui.showCorruptionAlert("⚠ SINGULARITY DETECTED ⚠");
-            this.renderer.screenShake = 50;
+    updateFirewall() {
+        this.firewallTimer++;
+        if (!this.firewall.active && this.firewallTimer > 1800) {
+            this.firewall.start();
+            this.firewallTimer = 0;
+            this.ui.showWarning(true);
         }
-        if (this.singularityActive) {
-            const pullStrength = 2.0;
-            [...this.bots, ...this.foods].forEach(entity => {
-                const dist = Math.hypot(this.player.x - entity.x, this.player.y - entity.y);
-                if (dist > 100 && dist < 1000) {
-                    entity.x += ((this.player.x - entity.x) / dist) * pullStrength;
-                    entity.y += ((this.player.y - entity.y) / dist) * pullStrength;
-                }
-            });
-        }
+        if (this.firewall.active) this.firewall.update();
     }
 
     _checkCollisions(all) {
@@ -110,20 +98,6 @@ export class Game {
         for (let i = 0; i < all.length; i++) {
             for (let j = i + 1; j < all.length; j++) this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
         }
-    }
-
-    triggerPurge() {
-        document.body.classList.add('glitch-mode');
-        this.ui.showPurgeAlert();
-        this.renderer.screenShake = 50;
-        const spawnCount = 8;
-        for (let i = 0; i < spawnCount; i++) {
-            const angle = (Math.PI * 2 / spawnCount) * i;
-            const bot = Spawner.spawnPurgeBot(this.player, angle, 600);
-            this.bots.push(bot);
-            this.particleSystem.emit(bot.x, bot.y, '#FF0000', 20);
-        }
-        setTimeout(() => document.body.classList.remove('glitch-mode'), 10000);
     }
 
     loop() {

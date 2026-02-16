@@ -26,6 +26,19 @@ export class AISystem {
                         bestTarget = other;
                     }
                 }
+            } else if (bot.type === 'ELITE_HUNTER') {
+                // Elite Hunters prioritize the player above all else
+                if (other.constructor.name === 'Player') {
+                    bestTarget = other;
+                    bestScore = Infinity; // Override any other target
+                } else if (bestScore !== Infinity && other.radius < bot.radius) {
+                     // Secondary targets: smaller bots if player not found yet
+                     const score = ((other.radius) / (dist + 1)) * bot.typeData.aggression;
+                     if (score > bestScore) {
+                         bestScore = score;
+                         bestTarget = other;
+                     }
+                }
             } else {
                 // Standard Logic
                 if (other.radius > bot.radius * 1.1) {

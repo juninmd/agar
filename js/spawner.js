@@ -20,9 +20,12 @@ export class Spawner {
     }
 
     static spawnBot() {
-        const types = ['NORMAL', 'SEEKER', 'GUARDIAN', 'GLITCH', 'CORRUPTER'];
+        const types = Object.keys(CONSTANTS.BOT_TYPES).filter(k => k !== 'NORMAL');
         const type = types[Math.floor(Math.random() * types.length)];
-        return new Bot(Utils.randomRange(0, CONSTANTS.WORLD_WIDTH), Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT), CONSTANTS.INITIAL_RADIUS, Utils.randomColor(CONSTANTS.COLORS), type);
+        // 20% chance for special bot, else NORMAL
+        const finalType = (Math.random() < 0.2) ? type : 'NORMAL';
+
+        return new Bot(Utils.randomRange(0, CONSTANTS.WORLD_WIDTH), Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT), CONSTANTS.INITIAL_RADIUS, Utils.randomColor(CONSTANTS.COLORS), finalType);
     }
 
     static spawnPurgeBot(player, angle, distance) {
@@ -31,10 +34,13 @@ export class Spawner {
         sx = Math.max(0, Math.min(CONSTANTS.WORLD_WIDTH, sx));
         sy = Math.max(0, Math.min(CONSTANTS.WORLD_HEIGHT, sy));
 
-        const bot = new Bot(sx, sy, CONSTANTS.INITIAL_RADIUS, '#FF0000', 'SEEKER');
-        bot.mass = Math.max(500, player.mass * 1.1);
-        bot.radius = Utils.getRadiusFromMass(bot.mass);
-        bot.speedBoost = 1.2;
+        // Use ELITE_HUNTER type
+        const mass = Math.max(500, player.mass * 1.1);
+        const radius = Utils.getRadiusFromMass(mass);
+
+        const bot = new Bot(sx, sy, radius, '#FFFFFF', 'ELITE_HUNTER');
+        bot.mass = mass;
+        bot.radius = radius;
         bot.isGlitching = true;
         return bot;
     }

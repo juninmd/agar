@@ -9,8 +9,12 @@ export class Bot extends Player {
         const finalColor = typeData.color || color;
         const name = typeData.namePrefix + "_" + Math.floor(Math.random() * 999);
 
-        super(x, y, radius, finalColor, name);
+        // Use HACKER protocol as base, then override stats
+        super(x, y, 'HACKER', name);
 
+        this.radius = radius;
+        this.color = finalColor;
+        this.mass = Utils.getMassFromRadius(radius);
         this.type = typeKey;
         this.typeData = typeData;
         this.changeDirTimer = 0;

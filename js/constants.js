@@ -48,6 +48,13 @@ export const CONSTANTS = {
             aggression: 3.0, // Very aggressive seeking
             namePrefix: "TROJAN"
         },
+        ELITE_HUNTER: {
+            color: '#FFFFFF', // White
+            speedMultiplier: 1.8,
+            massMultiplier: 1.1,
+            aggression: 5.0, // Extreme aggression
+            namePrefix: "PURGE_UNIT"
+        },
         NORMAL: {
             color: null, // Random
             speedMultiplier: 1.0,

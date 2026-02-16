@@ -1,6 +1,7 @@
 import { Utils } from './utils.js';
 import { CONSTANTS } from './constants.js';
 import { RendererBackground } from './renderer_background.js';
+import { VisualEffects } from './visual_effects.js';
 
 /**
  * Handles all canvas rendering operations.
@@ -56,7 +57,7 @@ export class Renderer {
         RendererBackground.drawGrid(this.ctx, this.camX, this.camY, this.canvas.width, this.canvas.height);
 
         if (gameState.singularityActive) {
-            RendererBackground.drawSingularity(this.ctx, gameState.player);
+            VisualEffects.drawSingularity(this.ctx, gameState.player);
         }
 
         if (gameState.firewall.active) {

@@ -4,6 +4,7 @@ import { Firewall } from './firewall.js';
 import { ParticleSystem } from './particles.js';
 import { CollisionSystem } from './collision.js';
 import { SingularitySystem } from './singularity_system.js';
+import { PurgeSystem } from './purge_system.js';
 import { CONSTANTS } from './constants.js';
 
 export class Game {
@@ -20,6 +21,7 @@ export class Game {
         this.particleSystem = new ParticleSystem();
         this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
         this.singularitySystem = new SingularitySystem(ui, renderer);
+        this.purgeSystem = new PurgeSystem(ui);
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -37,6 +39,8 @@ export class Game {
         this.firewall = new Firewall();
         this.systemIntegrity = 100;
         this.singularitySystem.active = false;
+        this.purgeSystem.isActive = false;
+        this.purgeSystem.timer = 0;
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
@@ -61,6 +65,7 @@ export class Game {
 
         const allEntities = [...this.bots, ...this.foods];
         this.singularitySystem.update(this.player, allEntities);
+        this.purgeSystem.update(this.player, this.bots);
         this.singularityActive = this.singularitySystem.active; // Sync for renderer
 
         const all = [this.player, ...this.bots];

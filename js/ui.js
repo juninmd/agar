@@ -86,4 +86,13 @@ export class UIManager {
         this.winScreen.classList.remove('hidden');
         this.setGameActive(false);
     }
+
+    showBSOD() {
+        document.body.classList.remove('crash-mode');
+        const bsod = document.getElementById('bsod-screen');
+        if (bsod) {
+            bsod.classList.remove('hidden');
+            document.querySelectorAll('#ui-layer > div:not(#bsod-screen)').forEach(el => el.style.display = 'none');
+        }
+    }
 }

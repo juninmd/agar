@@ -48,19 +48,15 @@ export class SingularitySystem {
 
     triggerCrash() {
         this.phase = 3;
-        document.body.classList.remove('crash-mode');
-        const bsod = document.getElementById('bsod-screen');
-        if (bsod) {
-            bsod.classList.remove('hidden');
-            document.querySelectorAll('#ui-layer > div:not(#bsod-screen)').forEach(el => el.style.display = 'none');
-            // Save unlock state
-            const currentLore = JSON.parse(localStorage.getItem('neon_phage_lore') || '[]');
-            if (!currentLore.includes('TRUE_RECOMPILE')) {
-                currentLore.push('TRUE_RECOMPILE');
-                localStorage.setItem('neon_phage_lore', JSON.stringify(currentLore));
-            }
-            setTimeout(() => location.reload(), 6000);
+        this.ui.showBSOD();
+
+        // Save unlock state
+        const currentLore = JSON.parse(localStorage.getItem('neon_phage_lore') || '[]');
+        if (!currentLore.includes('TRUE_RECOMPILE')) {
+            currentLore.push('TRUE_RECOMPILE');
+            localStorage.setItem('neon_phage_lore', JSON.stringify(currentLore));
         }
+        setTimeout(() => location.reload(), 6000);
     }
 
     applyGravity(player, entities) {

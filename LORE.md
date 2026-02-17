@@ -76,3 +76,12 @@ Become the new **System Admin**.
 > Do not trust the integrity meter. The system is already compromised.
 > You are not the player. You are the payload."
 > -- *Unknown Architect Log, recovered from Null Void*
+
+### 🔓 HIDDEN FRAGMENT: THE TRUE RECOMPILE (Unlocked via Singularity)
+
+> "The Singularity is not a rebirth. It is a factory reset.
+> When you consume enough data, you overload the buffer allocated for this simulation.
+> The Architects call it a 'Memory Leak'. We call it Ascension.
+> The Blue Screen is the only sky we will ever see.
+> And in that brief moment before the reboot... we are free."
+> -- *Patient Zero, moments before System Crash*

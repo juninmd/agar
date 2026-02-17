@@ -12,7 +12,7 @@ def verify_singularity():
 
         # Trigger Singularity by hacking mass
         print("Hacking mass to trigger Singularity...")
-        page.evaluate("window.game.player.mass = 4500") # 4500 > 5000 * 0.8 (4000)
+        page.evaluate("window.game.player.mass = 4600") # Needs to be > 4500
 
         # Wait for update loop to catch it
         time.sleep(1)

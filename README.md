@@ -54,7 +54,7 @@ Se preferir Node.js:
 ## 🧪 Testes e Verificação
 Este projeto inclui scripts de verificação automatizada (Python + Playwright):
 
-1.  Instale as dependências: `pip install -r requirements.txt` e `playwright install`.
+1.  Instale as dependências: `pip install -r requirements.dev.txt` e `playwright install`.
 2.  Inicie o servidor: `python3 -m http.server`.
 3.  Execute os testes:
     *   `python3 verify_game.py`: Verifica inicialização do jogo.

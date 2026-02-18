@@ -1,7 +1,15 @@
 import { Utils } from './utils.js';
 import { Spawner } from './spawner.js';
 
+/**
+ * Manages the Singularity Event V2 mechanics.
+ * Handles gravity wells, event horizon consumption, instability, and Void Walker spawning.
+ */
 export class SingularitySystem {
+    /**
+     * @param {UIManager} ui - UI manager for alerts.
+     * @param {Renderer} renderer - Renderer for screen shake.
+     */
     constructor(ui, renderer) {
         this.ui = ui;
         this.renderer = renderer;
@@ -12,6 +20,12 @@ export class SingularitySystem {
         this.instability = 0;
     }
 
+    /**
+     * Updates the singularity state each frame.
+     * @param {Player} player - The player instance.
+     * @param {Entity[]} entities - All game entities (bots + foods).
+     * @param {Bot[]} bots - Array of bots for Void Walker spawning.
+     */
     update(player, entities, bots = []) {
         if (!this.active && player.mass > this.massThreshold) this.activate();
 
@@ -25,6 +39,7 @@ export class SingularitySystem {
         }
     }
 
+    /** Triggers the start of the Singularity Event. */
     activate() {
         this.active = true;
         this.ui.showCorruptionAlert("⚠ SINGULARITY DETECTED ⚠");
@@ -33,6 +48,7 @@ export class SingularitySystem {
         setTimeout(() => document.body.classList.remove('glitch-mode'), 2000);
     }
 
+    /** Applies gravitational pull to entities within range. */
     applyGravity(player, entities) {
         entities.forEach(e => {
             if (e === player || e.type === 'VOID_WALKER') return; // Void Walkers are immune
@@ -49,6 +65,7 @@ export class SingularitySystem {
         });
     }
 
+    /** Consumes entities that cross the Event Horizon. */
     checkEventHorizon(player, entities) {
         // Horizon extends beyond physical body due to intense gravity
         const horizon = player.radius * 1.2;
@@ -64,6 +81,7 @@ export class SingularitySystem {
         });
     }
 
+    /** Handles instability growth/decay and random Void Walker spawns. */
     manageInstability(player, bots) {
         if (this.instability >= 100) {
             this.discharge(player);
@@ -80,17 +98,16 @@ export class SingularitySystem {
         player.instability = this.instability; // Sync for visuals
     }
 
+    /** Triggers a Critical Mass Discharge, resetting instability and halving player mass. */
     discharge(player) {
         this.instability = 0;
         player.mass *= 0.5;
         player.radius = Utils.getRadiusFromMass(player.mass);
         this.renderer.screenShake = 100;
         this.ui.showCorruptionAlert("⚠ CRITICAL MASS DISCHARGE ⚠");
-        // Push entities away
-        // Implemented by physics engine naturally via explosion or we can add force here?
-        // For now, visual + mass loss is enough punishment.
     }
 
+    /** Applies screen shake effects based on instability. */
     triggerEffects() {
         if (Math.random() > 0.9 || this.instability > 80) {
             this.renderer.screenShake = Math.max(this.renderer.screenShake, this.instability * 0.1);

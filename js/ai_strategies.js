@@ -1,6 +1,15 @@
 import { Utils } from './utils.js';
 
+/**
+ * Strategy pattern implementation for different bot behaviors.
+ * Encapsulates logic for Normal, Hunter, Corrupter, and Void Walker AI.
+ */
 export class AIStrategies {
+    /**
+     * AI logic for Void Walkers: Relentlessly hunts the player, ignoring fear.
+     * @param {Bot} bot - The bot instance.
+     * @param {Entity[]} entities - List of all entities.
+     */
     static thinkVoidWalker(bot, entities) {
         let bestTarget = null;
         entities.forEach(other => {

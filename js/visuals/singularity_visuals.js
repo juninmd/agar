@@ -7,17 +7,21 @@ export class SingularityVisuals {
         // Visual radius is larger than physical collider
         const radius = player.radius * 1.5;
 
+        const instability = player.instability || 0;
+        const pulseSpeed = 1 + (instability / 20);
+
         // 1. Accretion Disk (Swirling Lines)
         const diskRadius = radius * 6;
         ctx.lineWidth = 2;
 
         // Draw multiple spiral arms
         for (let i = 0; i < 12; i++) {
-            const angleOffset = (Math.PI * 2 / 12) * i - time * 2; // Rotate counter-clockwise
+            const angleOffset = (Math.PI * 2 / 12) * i - time * (2 * pulseSpeed); // Rotate counter-clockwise
 
             ctx.beginPath();
-            // Color gradient from purple to transparent
-            const hue = 280 + Math.sin(time + i) * 20;
+            // Color gradient from purple (280) to red (0) based on instability
+            const baseHue = 280 * (1 - instability / 100);
+            const hue = baseHue + Math.sin(time * pulseSpeed + i) * 20;
             ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 0.4)`;
 
             for (let r = radius; r < diskRadius; r += 20) {
@@ -44,7 +48,8 @@ export class SingularityVisuals {
         ctx.fill();
 
         // 3. Event Horizon (The Void)
-        ctx.fillStyle = '#000000';
+        const coreLightness = instability; // 0 to 100
+        ctx.fillStyle = `hsl(0, 0%, ${coreLightness}%)`;
         ctx.beginPath();
         ctx.arc(x, y, radius, 0, Math.PI * 2);
         ctx.fill();

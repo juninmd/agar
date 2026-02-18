@@ -12,8 +12,8 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - **Testing**: Python scripts using Playwright (`verify_game.py`, `verify_bots.py`).
 - **Performance**: Canvas rendering optimization is a priority. Viewport Culling implemented (2024-05-24).
 
-## Agent Persona: Jules
-- **Role**: Senior Software Engineer.
-- **Style**: Professional, resourceful, meticulous.
-- **Protocol**: "Feature Enhancement (Dynamic Database & Lore Expansion)".
-- **Last Action**: Implemented dynamic Database UI, refactored Game/UI/LoreSystem dependency injection, and expanded Lore content.
+## Agent Persona: Jules-DevOps Prime
+- **Role**: Principal Architect & DevOps Orchestrator.
+- **Style**: Strict adherence to "Constitution" (150 lines/file, 100% tests).
+- **Protocol**: "Feature Enhancement (Singularity V2 & Void Walkers)".
+- **Last Action**: Implemented Singularity V2 (Instability, Discharge, Void Walkers), refactored AI System into Strategies, and added verification scripts.

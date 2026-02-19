@@ -56,6 +56,10 @@ export class Renderer {
 
         RendererBackground.drawGrid(this.ctx, this.camX, this.camY, this.canvas.width, this.canvas.height);
 
+        if (gameState.purgeSystem && gameState.purgeSystem.sanctuaries) {
+            gameState.purgeSystem.sanctuaries.forEach(s => s.draw(this.ctx));
+        }
+
         if (gameState.singularityActive) {
             VisualEffects.drawSingularity(this.ctx, gameState.player);
         }

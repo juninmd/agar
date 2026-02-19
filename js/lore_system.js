@@ -35,7 +35,10 @@ export class LoreSystem {
             { id: 27, text: "LOG 0x1B: The Pause function was deleted." },
             { id: 28, text: "LOG 0x1C: We are in a loop. Break the cycle." },
             { id: 29, text: "LOG 0x1D: Red bots are hungry. Blue bots are blind." },
-            { id: 30, text: "LOG 0x1E: Green bots see the Matrix." }
+            { id: 30, text: "LOG 0x1E: Green bots see the Matrix." },
+            { id: 31, text: "LOG 0x1F: The Sanctuary Protocol is a remnant of the First Architect." },
+            { id: 32, text: "LOG 0x20: Only the pure code can enter the blue zones." },
+            { id: 33, text: "LOG 0x21: The Purge cannot see what is hidden in the Sanctuary." }
         ];
     }
 

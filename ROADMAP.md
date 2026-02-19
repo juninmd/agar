@@ -29,9 +29,9 @@
 *   **Singularity Event V2 (Complete):**
     *   *Visuals:* Instability visualization (Red Shift), Gravity Well.
     *   *Mechanics:* Event Horizon consumption, Critical Mass Discharge, Void Walker Spawning.
-*   **System Purge V2:**
+*   **System Purge V2 (Complete):**
     *   *Glitch Storm:* Screen inversion and elite hunters.
-    *   *Safe Zones:* Dynamic areas safe from purge effects.
+    *   *Safe Zones:* Dynamic Sanctuary Nodes (Blue Zones) that repel hunters and heal integrity.
 
 ## 🔴 Phase 4: The Network (Future)
 *   **Multiplayer Protocol:** WebSocket integration.

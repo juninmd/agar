@@ -59,7 +59,12 @@ export class Game {
         if (this.player.markedForDeletion) return this.ui.showGameOver("DATA PURGED", this.player.mass);
         if (this.bots.length === 0) return this.ui.showWin();
 
-        this.systemIntegrity -= 0.03;
+        if (this.player.inSanctuary) {
+            this.systemIntegrity = Math.min(100, this.systemIntegrity + 0.05);
+        } else {
+            this.systemIntegrity -= 0.03;
+        }
+
         this.particleSystem.update();
         this.updateFirewall();
 

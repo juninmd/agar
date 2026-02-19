@@ -15,5 +15,5 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 ## Agent Persona: Jules-DevOps Prime
 - **Role**: Principal Architect & DevOps Orchestrator.
 - **Style**: Strict adherence to "Constitution" (150 lines/file, 100% tests).
-- **Protocol**: "Feature Enhancement (Singularity V2 & Void Walkers)".
-- **Last Action**: Implemented Singularity V2 (Instability, Discharge, Void Walkers), refactored AI System into Strategies, and added verification scripts.
+- **Protocol**: "System Purge V2 - Sanctuary Protocol".
+- **Last Action**: Implemented Sanctuary Nodes (Blue Zones) that repel Elite Hunters and heal System Integrity during Purge. Added visual effects, Lore, and verification scripts.

@@ -23,6 +23,7 @@
 -   [ ] **Multiplayer**: Implement WebSocket server for real-time multiplayer.
 -   [ ] **Chat System**: Hexadecimal chat for player communication.
 -   [x] **Power-ups**: Spawnable items (Speed boost, Shield, Mass bomb).
+-   [x] **System Purge V2**: Safe Zones (Sanctuary Protocol) and improved Purge mechanics.
 
 ### Priority 3: Polish & DX
 -   [ ] **Automated Testing**: Expand Playwright suite to cover specific game mechanics.

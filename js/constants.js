@@ -55,6 +55,13 @@ export const CONSTANTS = {
             aggression: 5.0, // Extreme aggression
             namePrefix: "PURGE_UNIT"
         },
+        VOID_WALKER: {
+            color: '#110011', // Almost Black
+            speedMultiplier: 1.4,
+            massMultiplier: 0.8,
+            aggression: 10.0, // Absolute Hunter
+            namePrefix: "VOID"
+        },
         NORMAL: {
             color: null, // Random
             speedMultiplier: 1.0,

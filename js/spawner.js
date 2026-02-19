@@ -44,4 +44,22 @@ export class Spawner {
         bot.isGlitching = true;
         return bot;
     }
+
+    static spawnVoidWalker(player) {
+        const angle = Math.random() * Math.PI * 2;
+        const dist = 600 + Math.random() * 400;
+        let sx = player.x + Math.cos(angle) * dist;
+        let sy = player.y + Math.sin(angle) * dist;
+        sx = Math.max(0, Math.min(CONSTANTS.WORLD_WIDTH, sx));
+        sy = Math.max(0, Math.min(CONSTANTS.WORLD_HEIGHT, sy));
+
+        // Void Walkers scale with player to be deadly threats
+        const mass = Math.max(100, player.mass * 1.2);
+        const radius = Utils.getRadiusFromMass(mass);
+
+        const bot = new Bot(sx, sy, radius, CONSTANTS.BOT_TYPES.VOID_WALKER.color, 'VOID_WALKER');
+        bot.mass = mass;
+        bot.radius = radius;
+        return bot;
+    }
 }

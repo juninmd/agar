@@ -26,9 +26,9 @@
     *   *Concept:* High risk/reward class.
     *   *Trait:* Gains mass from bots faster, starves faster.
     *   *Ability:* "Outbreak" (AOE Life Drain).
-*   **Singularity Event V2:**
-    *   *Visuals:* Massive black hole distortion effect.
-    *   *Mechanics:* Gravity well pulling all entities inward.
+*   **Singularity Event V2 (Complete):**
+    *   *Visuals:* Instability visualization (Red Shift), Gravity Well.
+    *   *Mechanics:* Event Horizon consumption, Critical Mass Discharge, Void Walker Spawning.
 *   **System Purge V2:**
     *   *Glitch Storm:* Screen inversion and elite hunters.
     *   *Safe Zones:* Dynamic areas safe from purge effects.

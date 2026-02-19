@@ -64,7 +64,11 @@ export class Game {
         this.updateFirewall();
 
         const allEntities = [...this.bots, ...this.foods];
-        this.singularitySystem.update(this.player, allEntities);
+        this.singularitySystem.update(this.player, allEntities, this.bots);
+
+        this.foods = this.foods.filter(f => !f.markedForDeletion);
+        this.bots = this.bots.filter(b => !b.markedForDeletion);
+
         this.purgeSystem.update(this.player, this.bots);
         this.singularityActive = this.singularitySystem.active; // Sync for renderer
 

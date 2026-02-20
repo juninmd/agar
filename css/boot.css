@@ -1,0 +1,67 @@
+#boot-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 9999;
+    color: #0f0;
+    font-family: 'Share Tech Mono', monospace;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.boot-line {
+    margin: 5px 0;
+    white-space: pre-wrap;
+    opacity: 0;
+    animation: fadeIn 0.1s forwards;
+}
+
+.boot-line.error {
+    color: #f00;
+}
+
+.boot-line.warning {
+    color: #ff0;
+}
+
+.boot-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1em;
+    background: #0f0;
+    animation: blink 1s infinite;
+    margin-left: 5px;
+    vertical-align: text-bottom;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ascii-logo {
+    color: #0ff;
+    white-space: pre;
+    font-size: 10px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px #0ff;
+}
+
+@media (min-width: 768px) {
+    .ascii-logo {
+        font-size: 14px;
+    }
+}

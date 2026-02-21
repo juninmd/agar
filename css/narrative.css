@@ -14,7 +14,7 @@
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
     z-index: 500;
     pointer-events: none;
-    animation: slideDown 0.5s ease-out;
+    animation: slideDownToast 0.5s ease-out;
     opacity: 1;
     transition: opacity 0.5s ease-in;
     white-space: nowrap;
@@ -56,9 +56,18 @@
     transform: translate(-50%, -20px);
 }
 
-@keyframes slideDown {
+@keyframes slideDownToast {
     from { transform: translate(-50%, -100%); opacity: 0; }
     to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@keyframes glitch-anim {
+    0% { transform: translate(-50%, 0); }
+    20% { transform: translate(-52%, 2px); }
+    40% { transform: translate(-48%, -2px); }
+    60% { transform: translate(-50%, 2px); }
+    80% { transform: translate(-52%, -2px); }
+    100% { transform: translate(-50%, 0); }
 }
 
 @keyframes glitch-text {

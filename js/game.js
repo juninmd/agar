@@ -5,6 +5,7 @@ import { ParticleSystem } from './particles.js';
 import { CollisionSystem } from './collision.js';
 import { SingularitySystem } from './singularity_system.js';
 import { PurgeSystem } from './purge_system.js';
+import { NarrativeSystem } from './narrative_system.js';
 import { CONSTANTS } from './constants.js';
 
 export class Game {
@@ -22,6 +23,7 @@ export class Game {
         this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
         this.singularitySystem = new SingularitySystem(ui, renderer);
         this.purgeSystem = new PurgeSystem(ui);
+        this.narrativeSystem = new NarrativeSystem(ui);
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -92,6 +94,8 @@ export class Game {
         this.ui.updateScore(this.player.mass);
         this.ui.updateIntegrity(this.systemIntegrity);
         if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+
+        this.narrativeSystem.update(this.player, this.systemIntegrity);
     }
 
     updateFirewall() {

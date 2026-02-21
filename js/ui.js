@@ -1,4 +1,5 @@
 import { UIHud } from './ui_hud.js';
+import { NarrativeHUD } from './narrative_hud.js';
 
 /**
  * Manages all UI interactions and updates.
@@ -6,6 +7,7 @@ import { UIHud } from './ui_hud.js';
 export class UIManager {
     constructor() {
         this.hud = new UIHud();
+        this.narrative = new NarrativeHUD(this.hud.uiLayer);
         this.startScreen = document.getElementById('start-screen');
         this.gameOverScreen = document.getElementById('game-over-screen');
         this.winScreen = document.getElementById('win-screen');
@@ -73,6 +75,7 @@ export class UIManager {
     showWarning(show) { this.hud.showWarning(show); }
     showPurgeAlert() { this.hud.showPurgeAlert(); }
     showCorruptionAlert(message) { this.hud.showCorruptionAlert(message); }
+    showNarrative(text, type) { this.narrative.show(text, type); }
 
     showGameOver(reason, score) {
         this.finalScoreDisplay.innerText = Math.floor(score);

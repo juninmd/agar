@@ -27,6 +27,8 @@ export class Player extends Entity {
         this.speedEffectTimer = 0;
         this.shieldEffectTimer = 0;
         this.isGlitching = false;
+        this.invertedControls = false;
+        this.invertedTimer = 0;
     }
 
     applyPowerUp(type) {
@@ -37,6 +39,10 @@ export class Player extends Entity {
         } else if (type.id === 'SHIELD') {
             this.shieldEffectTimer = type.duration;
             this.invulnerable = true;
+        } else if (type.id === 'VIRUS') {
+            this.grow(type.value);
+            this.invertedControls = true;
+            this.invertedTimer = type.duration;
         }
     }
 
@@ -84,6 +90,10 @@ export class Player extends Entity {
             this.shieldEffectTimer--;
             this.invulnerable = true;
         }
+        if (this.invertedTimer > 0) {
+            this.invertedTimer--;
+            if (this.invertedTimer <= 0) this.invertedControls = false;
+        }
         if (this.speedBoost > 1) {
             const floor = (this.speedEffectTimer > 0) ? 2.5 : 1.0;
             if (this.speedBoost > floor) this.speedBoost *= 0.96;
@@ -97,8 +107,14 @@ export class Player extends Entity {
         const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.protocol.speedMultiplier;
 
         if (dist > 5) {
-            const dx = this.targetX - this.x;
-            const dy = this.targetY - this.y;
+            let dx = this.targetX - this.x;
+            let dy = this.targetY - this.y;
+
+            if (this.invertedControls) {
+                dx = -dx;
+                dy = -dy;
+            }
+
             this.velocity.x = (dx / dist) * maxSpeed;
             this.velocity.y = (dy / dist) * maxSpeed;
         } else {

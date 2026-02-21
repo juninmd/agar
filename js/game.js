@@ -43,6 +43,14 @@ export class Game {
         this.purgeSystem.timer = 0;
         this.gameRunning = true;
         this.ui.setGameActive(true);
+        this.narrativeState = {
+            virus: false,
+            mass1000: false,
+            criticalIntegrity: false
+        };
+        // Initial narrative
+        setTimeout(() => this.ui.showNarrative("SYSTEM BOOT: PID 734 ONLINE", "info"), 1000);
+
         this.loop();
     }
 
@@ -92,6 +100,29 @@ export class Game {
         this.ui.updateScore(this.player.mass);
         this.ui.updateIntegrity(this.systemIntegrity);
         if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+
+        this._checkNarrativeTriggers();
+    }
+
+    _checkNarrativeTriggers() {
+        if (this.player.invertedControls && !this.narrativeState.virus) {
+            this.ui.showNarrative("SYSTEM ERROR: INPUT MATRIX CORRUPTED", "glitch");
+            this.narrativeState.virus = true;
+            // Allow re-trigger after cooldown
+            setTimeout(() => { this.narrativeState.virus = false; }, 15000);
+        }
+
+        if (this.player.mass > 1000 && !this.narrativeState.mass1000) {
+            this.ui.showNarrative("WARNING: SINGULARITY APPROACHING", "warning");
+            this.narrativeState.mass1000 = true;
+        }
+
+        if (this.systemIntegrity < 20 && !this.narrativeState.criticalIntegrity) {
+             this.ui.showNarrative("CRITICAL: FIREWALL BREACH IMMINENT", "critical");
+             this.narrativeState.criticalIntegrity = true;
+        } else if (this.systemIntegrity > 30) {
+             this.narrativeState.criticalIntegrity = false;
+        }
     }
 
     updateFirewall() {

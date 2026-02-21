@@ -94,6 +94,13 @@ export const CONSTANTS = {
             value: 1,
             duration: 300, // 5 seconds
             symbol: 'SHLD'
+        },
+        VIRUS: {
+            id: 'VIRUS',
+            color: '#32CD32', // Lime Green
+            value: 1000, // High Mass Reward
+            duration: 300, // 5 seconds of Inverted Controls
+            symbol: 'ERR'
         }
     },
     PROTOCOLS: {

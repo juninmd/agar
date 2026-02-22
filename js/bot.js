@@ -26,7 +26,16 @@ export class Bot extends Player {
     }
 
     update(worldWidth, worldHeight, entities, foods) {
-        AISystem.think(this, entities, foods);
+        if (this.type === 'ELITE_HUNTER') {
+             // Elite Hunters always know where the player is
+             const player = entities.find(e => e.constructor.name === 'Player');
+             if (player) {
+                 this.targetX = player.x;
+                 this.targetY = player.y;
+             }
+        } else {
+             AISystem.think(this, entities, foods);
+        }
 
         if (this.speedBoost > 1) {
             this.speedBoost *= 0.95;

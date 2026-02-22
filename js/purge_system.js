@@ -1,112 +1,87 @@
 import { CONSTANTS } from './constants.js';
 import { Utils } from './utils.js';
-import { Spawner } from './spawner.js';
-import { Sanctuary } from './sanctuary.js';
+import { Bot } from './bot.js';
 
+/**
+ * Manages the "System Purge" event (Kernel Panic).
+ * Triggers when player reaches critical mass, spawning Elite Hunters and glitching the UI.
+ */
 export class PurgeSystem {
-    constructor(ui) {
-        this.ui = ui;
-        this.timer = 0;
+    constructor() {
         this.isActive = false;
-        this.nextPurgeTime = 3600; // 60 seconds
-        this.duration = 900; // 15 seconds
-        this.activeTime = 0;
-        this.sanctuaries = [];
+        this.timer = 0;
+        this.cooldown = 0;
+        this.duration = 1800; // 30 seconds at 60fps
+        this.minMassThreshold = 2500;
+        this.huntersSpawned = false;
     }
 
-    update(player, bots) {
-        if (this.isActive) {
-            this.activeTime--;
-            this.updateSanctuaries(player, bots);
-
-            if (this.activeTime <= 0) {
-                this.endPurge(bots, player);
-            } else {
-                // Ensure Elite Hunters exist (min 3)
-                const hunters = bots.filter(b => b.type === 'ELITE_HUNTER');
-                if (hunters.length < 3) {
-                     const angle = Math.random() * Math.PI * 2;
-                     const dist = 500 + Math.random() * 500;
-                     const hunter = Spawner.spawnPurgeBot(player, angle, dist);
-                     bots.push(hunter);
-                }
-            }
-        } else {
-            this.timer++;
-            if (this.timer >= this.nextPurgeTime) {
-                this.startPurge();
-            }
-        }
+    canStart(player) {
+        return !this.isActive && this.cooldown <= 0 && player.mass >= this.minMassThreshold;
     }
 
-    startPurge() {
+    startPurge(game) {
+        console.log("PURGE STARTED");
         this.isActive = true;
-        this.timer = 0;
-        this.activeTime = this.duration;
-        this.spawnSanctuaries();
-        if (this.ui && this.ui.showCorruptionAlert) {
-            this.ui.showCorruptionAlert("⚠ SYSTEM PURGE INITIATED ⚠");
-        }
+        this.timer = this.duration;
+        this.huntersSpawned = false;
+
+        // Visual Effect
         document.body.classList.add('glitch-mode');
+        game.ui.showCorruptionAlert("⚠️ KERNEL PANIC: SYSTEM PURGE INITIATED ⚠️");
+
+        // Spawn Elite Hunters
+        this.spawnHunters(game);
     }
 
-    spawnSanctuaries() {
-        this.sanctuaries = [];
-        const count = 2; // Spawn 2 safe zones
-        for (let i = 0; i < count; i++) {
-            const x = Utils.randomRange(200, CONSTANTS.WORLD_WIDTH - 200);
-            const y = Utils.randomRange(200, CONSTANTS.WORLD_HEIGHT - 200);
-            const radius = 300;
-            this.sanctuaries.push(new Sanctuary(x, y, radius));
+    spawnHunters(game) {
+        if (this.huntersSpawned) return;
+
+        const hunterCount = 3;
+        const spawnRadius = 800;
+        const hunterType = CONSTANTS.BOT_TYPES.ELITE_HUNTER || { color: '#FFFFFF' };
+
+        for (let i = 0; i < hunterCount; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const x = game.player.x + Math.cos(angle) * spawnRadius;
+            const y = game.player.y + Math.sin(angle) * spawnRadius;
+
+            // Constructor: x, y, radius, color, typeKey
+            const hunter = new Bot(x, y, 60, hunterType.color, 'ELITE_HUNTER');
+            game.bots.push(hunter);
         }
+        this.huntersSpawned = true;
     }
 
-    updateSanctuaries(player, bots) {
-        let playerSafe = false;
-
-        this.sanctuaries.forEach(s => {
-            if (s.checkCollision(player)) {
-                playerSafe = true;
-            }
-
-            // Repel Elite Hunters
-            bots.forEach(bot => {
-                if (bot.type === 'ELITE_HUNTER') {
-                    const dx = bot.x - s.x;
-                    const dy = bot.y - s.y;
-                    const dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < s.radius + bot.radius) {
-                        const angle = Math.atan2(dy, dx);
-                        bot.x += Math.cos(angle) * 5;
-                        bot.y += Math.sin(angle) * 5;
-                        // Force redirect
-                        bot.targetX = bot.x + Math.cos(angle) * 200;
-                        bot.targetY = bot.y + Math.sin(angle) * 200;
-                    }
-                }
-            });
-        });
-
-        player.inSanctuary = playerSafe;
-        if (playerSafe) {
-            document.body.classList.remove('glitch-mode');
-        } else {
-            document.body.classList.add('glitch-mode');
-        }
-    }
-
-    endPurge(bots, player) {
+    endPurge(game) {
         this.isActive = false;
-        this.timer = 0;
-        this.sanctuaries = [];
+        this.cooldown = 3600; // 60 seconds cooldown
         document.body.classList.remove('glitch-mode');
-        if (player) player.inSanctuary = false;
+    }
 
-        // Remove all Elite Hunters
-        bots.forEach(bot => {
-            if (bot.type === 'ELITE_HUNTER') {
-                bot.markedForDeletion = true;
+    update(game) {
+        if (this.cooldown > 0) this.cooldown--;
+
+        if (this.isActive) {
+            this.timer--;
+
+            // Glitch screen shake intensity management
+            if (this.timer % 60 === 0) {
+                 game.renderer.screenShake = 10;
             }
-        });
+
+            if (this.timer <= 0) {
+                this.endPurge(game);
+                game.ui.showNarrative("SYSTEM STABILIZED. PURGE FAILED.", "SUCCESS");
+            } else if (game.player.mass < this.minMassThreshold * 0.8) {
+                // End early if player loses too much mass
+                this.endPurge(game);
+                game.ui.showNarrative("THREAT REDUCED. PURGE CANCELED.", "INFO");
+            }
+        }
+    }
+
+    draw(ctx) {
+        // Visuals are handled via CSS class 'glitch-mode' and Renderer screen shake
     }
 }

@@ -22,7 +22,7 @@ export class Game {
         this.particleSystem = new ParticleSystem();
         this.collisionSystem = new CollisionSystem(this.particleSystem, ui, this.loreSystem);
         this.singularitySystem = new SingularitySystem(ui, renderer);
-        this.purgeSystem = new PurgeSystem(ui);
+        this.purgeSystem = new PurgeSystem();
         this.narrativeSystem = new NarrativeSystem(ui);
         this.gameRunning = false;
         this.systemIntegrity = 100;
@@ -76,7 +76,12 @@ export class Game {
         this.foods = this.foods.filter(f => !f.markedForDeletion);
         this.bots = this.bots.filter(b => !b.markedForDeletion);
 
-        this.purgeSystem.update(this.player, this.bots);
+        // Check for Purge Trigger
+        if (this.purgeSystem.canStart(this.player)) {
+            this.purgeSystem.startPurge(this);
+        }
+        this.purgeSystem.update(this);
+
         this.singularityActive = this.singularitySystem.active; // Sync for renderer
 
         const all = [this.player, ...this.bots];

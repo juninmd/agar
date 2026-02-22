@@ -1,6 +1,8 @@
 [build]
+  command = "echo 'Skipping build step'"
   publish = "."
 
+# Minimal SPA rule, preserving query parameters
 [[redirects]]
   from = "/*"
   to = "/index.html"

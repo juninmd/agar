@@ -59,6 +59,16 @@ There, you can force a **System Recompile**—a restart where *you* define the p
 *   **CORRUPTORS (Black/Red):** "Trojan Horses".
     *   *Warning:* Do NOT consume. They are compressed bombs of Null Void energy. Eating one will purge 50% of your data instantly.
 
+### 🚨 THE SYSTEM PURGE (KERNEL PANIC)
+When a single entity consumes over **2500 TB** of data (Mass > 2500), the Architects perceive a critical threat.
+The system enters **PANIC MODE**.
+
+*   **Visual Shift:** The world inverts. Light becomes dark. The Grid distorts.
+*   **ELITE HUNTERS (White/Gold):** Spawned directly from the Kernel.
+    *   *Origin:* Pure, uncorrupted anti-virus logic.
+    *   *Directive:* `Target: PLAYER_ID. Priority: ABSOLUTE.`
+    *   *Stats:* 2x Speed, Massive Damage. They do not wander. They hunt.
+
 ### 🏆 The End Game
 Survive the **Purge Cycles**.
 Reach **Singularity Mass**.

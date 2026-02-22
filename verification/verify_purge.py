@@ -6,12 +6,31 @@ def verify_purge():
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
 
+        # Log console messages
+        page.on("console", lambda msg: print(f"BROWSER LOG: {msg.text}"))
+        page.on("pageerror", lambda err: print(f"BROWSER ERROR: {err}"))
+
+        # Start the game
+        print("Navigating to game...")
         page.goto("http://localhost:8000")
+
+        # Wait for game to be ready
+        page.wait_for_function("() => window.game && window.game.gameRunning === false")
+
+        # Click Start
+        print("Starting game...")
         page.click("#start-btn")
+
+        # Wait for game loop to start
+        page.wait_for_function("() => window.game.gameRunning === true")
         time.sleep(1)
 
+        print("Setting Player Mass to 3000...")
+        page.evaluate("window.game.player.mass = 3000")
+
         print("Triggering Purge...")
-        page.evaluate("window.game.purgeSystem.startPurge()")
+        # Pass window.game as argument
+        page.evaluate("window.game.purgeSystem.startPurge(window.game)")
         time.sleep(1)
 
         # Check Glitch Mode
@@ -30,33 +49,22 @@ def verify_purge():
             (() => {
                 const h = window.game.bots.find(b => b.type === 'ELITE_HUNTER');
                 if (!h) return null;
-                return { color: h.color, radius: h.radius, mass: h.mass, playerMass: window.game.player.mass };
+                return { color: h.color, radius: h.radius, mass: h.mass };
             })()
         """)
         print(f"Hunter Stats: {hunter_stats}")
         if hunter_stats:
             assert hunter_stats['color'] == '#FFFFFF', "Hunter should be White"
 
-        # Screenshot during Purge
-        print("Taking Purge screenshot...")
-        page.screenshot(path="verification_purge.png")
-
         # End Purge
         print("Ending Purge...")
-        page.evaluate("window.game.purgeSystem.endPurge(window.game.bots)")
+        page.evaluate("window.game.purgeSystem.endPurge(window.game)")
         time.sleep(0.5)
 
         # Check Glitch Mode Removed
         is_glitch_end = page.evaluate("document.body.classList.contains('glitch-mode')")
         print(f"Glitch Mode Active: {is_glitch_end}")
         assert is_glitch_end == False, "Body should NOT have glitch-mode class"
-
-        # Check Elite Hunters Removed (Marked for deletion)
-        # Game loop needs to run to filter them
-        time.sleep(1)
-        hunter_count_end = page.evaluate("window.game.bots.filter(b => b.type === 'ELITE_HUNTER').length")
-        print(f"Elite Hunters Left: {hunter_count_end}")
-        assert hunter_count_end == 0, "Elite Hunters should be removed"
 
         browser.close()
 

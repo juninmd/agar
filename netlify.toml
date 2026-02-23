@@ -1,9 +1,3 @@
 [build]
-  command = "echo Build Success"
+  command = "#"
   publish = "."
-
-# Minimal SPA rule, preserving query parameters
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

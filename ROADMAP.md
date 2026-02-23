@@ -47,3 +47,12 @@
 *   **Architect Access:** Sandbox editor to create custom bot waves.
 *   **The Final Compilation:** True ending unlocked by collecting all 16 Lore Fragments.
 *   **Mobile Port:** "Pocket Phage" with gyroscope controls.
+
+## 🌌 Phase 6: The Null Sector (NEW / ACTIVE)
+*   **New Protocol: CYPHER (The Decoder)**
+    *   *Origin:* Recovered from the deep web.
+    *   *Ability:* **Overclock** (Time Dilation). Slows all enemies while boosting player speed.
+    *   *Visuals:* Gold/Yellow theme, heavy chromatic aberration during ability.
+*   **Environment Upgrade:**
+    *   **Digital Void:** Dynamic grid background and data streams.
+    *   **Boot Sequence V2:** Updated narrative introduction.

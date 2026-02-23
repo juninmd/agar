@@ -15,9 +15,11 @@ export class BootSequence {
             { text: "> HACKER... FOUND", delay: 100 },
             { text: "> PHANTOM... FOUND", delay: 100 },
             { text: "> VIRAL... [CORRUPTED]", delay: 200, class: "error" },
-            { text: "WARNING: Unauthorized access detected in Sector 7G", delay: 500, class: "warning" },
-            { text: "Bypassing Security Firewall...", delay: 600 },
-            { text: "Welcome, User 734.", delay: 400 }
+            { text: "Detecting anomalous signal...", delay: 600, class: "warning" },
+            { text: "Decrypting source code from Null Sector...", delay: 500 },
+            { text: "> PROTOCOL 'CYPHER' UNLOCKED", delay: 300, class: "warning" },
+            { text: "WARNING: Null Sector containment breached.", delay: 400, class: "error" },
+            { text: "Welcome, Administrator.", delay: 800 }
         ];
         this.asciiArt = `
    _   _  _____  ____  _   _       ____  _   _    _    ____  _____
@@ -25,6 +27,7 @@ export class BootSequence {
   |  \\| ||  _| | |  | |  \\| |_____| |_) | |_| | / _ \\| |  _ |  _|
   | |\\  || |___| |__| | |\\  |_____|  __/|  _  |/ ___ \\ |_| || |___
   |_| \\_||_____|\\____/|_| \\_|     |_|   |_| |_/_/   \\_\\____||_____|
+         :: SYSTEM RECOMPILE V2.0 ::
         `;
     }
 

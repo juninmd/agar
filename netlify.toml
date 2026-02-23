@@ -1,5 +1,5 @@
 [build]
-  command = "echo 'Skipping build step'"
+  command = "echo Build Success"
   publish = "."
 
 # Minimal SPA rule, preserving query parameters

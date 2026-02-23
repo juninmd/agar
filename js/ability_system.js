@@ -17,7 +17,8 @@ export class AbilitySystem {
             BASTION: { cooldown: 900, duration: 180 }, // 15s / 3s
             PHANTOM: { cooldown: 600, duration: 180 }, // 10s / 3s
             HACKER: { cooldown: 720, duration: 120 },  // 12s / 2s
-            VIRAL:   { cooldown: 600, duration: 300 }  // 10s / 5s
+            VIRAL:   { cooldown: 600, duration: 300 }, // 10s / 5s
+            CYPHER:  { cooldown: 900, duration: 300 }  // 15s / 5s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -60,6 +61,10 @@ export class AbilitySystem {
                 if (this.protocolId === 'PHANTOM') player.alpha = 0.4;
                 if (this.protocolId === 'BASTION') player.invulnerable = true;
                 if (this.protocolId === 'VIRAL') this.updateOutbreak(player, bots);
+                if (this.protocolId === 'CYPHER') {
+                     player.speedBoost = Math.max(player.speedBoost, 2.0);
+                     bots.forEach(b => b.isSlowed = true);
+                }
             }
         } else {
             player.invulnerable = false;
@@ -106,6 +111,14 @@ export class AbilitySystem {
             ctx.stroke();
             ctx.fillStyle = 'rgba(0, 255, 255, 0.2)';
             ctx.fill();
+        } else if (this.protocolId === 'CYPHER') {
+             const pulse = Math.sin(Date.now() / 100) * 0.2 + 1.0;
+             ctx.beginPath();
+             ctx.arc(0, 0, player.radius * 1.5 * pulse, 0, Math.PI * 2);
+             ctx.strokeStyle = '#FFD700';
+             ctx.lineWidth = 3;
+             ctx.setLineDash([5, 10]);
+             ctx.stroke();
         } else if (this.protocolId === 'HACKER') {
              const progress = 1 - (this.activeTime / this.currentConfig.duration);
              const radius = (300 + player.radius) * progress;

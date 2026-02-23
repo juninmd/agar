@@ -135,6 +135,14 @@ export const CONSTANTS = {
             massMultiplier: 0.5, // Starts tiny
             speedMultiplier: 1.3, // Fast
             description: "HIGH RISK. CONSUME BOTS."
+        },
+        CYPHER: {
+            id: 'CYPHER',
+            name: "CYPHER",
+            color: "#FFD700", // Gold
+            massMultiplier: 1.0, // Normal
+            speedMultiplier: 1.1, // Slightly Faster
+            description: "OVERCLOCK. TIME DILATION."
         }
     }
 };

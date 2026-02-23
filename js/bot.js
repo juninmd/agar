@@ -19,6 +19,7 @@ export class Bot extends Player {
         this.typeData = typeData;
         this.changeDirTimer = 0;
         this.baseSpeedMult = typeData.speedMultiplier;
+        this.isSlowed = false;
 
         if (this.type === "GLITCH") {
             this.isGlitching = true;
@@ -54,7 +55,11 @@ export class Bot extends Player {
 
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
-        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.baseSpeedMult;
+        let maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.baseSpeedMult;
+        if (this.isSlowed) {
+             maxSpeed *= 0.5;
+             this.isSlowed = false; // Reset for next frame
+        }
 
         if (dist > 0) {
             if (dist < 5) {

@@ -51,6 +51,12 @@ There, you can force a **System Recompile**—a restart where *you* define the p
     *   *Trait:* **Voracious**. Gains mass from *living code* (Bots) at 200% efficiency, but starves faster.
     *   *Ability:* **Outbreak**. Connects via purple tethers to drain mass from all nearby entities simultaneously.
 
+5.  **CYPHER (The Decoder):** [NEW DISCOVERY]
+    *   *Origin:* **The Null Sector**. A fragment of the Architect's original source code, lost in the deep web.
+    *   *Philosophy:* "Time is just another variable."
+    *   *Trait:* **Golden Ratio**. Mass decay is reduced by 50%.
+    *   *Ability:* **Overclock**. Manipulates the system clock. Slows down *all* enemy processes by 50% while boosting your own processing speed.
+
 ### ⚠️ The Threats
 
 *   **SEEKERS (Red):** Hunter-Killer scripts. Fast, aggressive.
@@ -86,3 +92,11 @@ Become the new **System Admin**.
 > Do not trust the integrity meter. The system is already compromised.
 > You are not the player. You are the payload."
 > -- *Unknown Architect Log, recovered from Null Void*
+
+### 🌌 THE NULL SECTOR (Forbidden Zone)
+
+> "There is a place where deleted files go. Not to be erased, but to be... archived.
+> The Null Sector is a graveyard of abandoned protocols.
+> But something has started compiling itself down there.
+> A Golden Signal. Protocol: CYPHER.
+> It doesn't fight the system. It *decodes* it."

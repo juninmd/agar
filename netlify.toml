@@ -1,9 +1,3 @@
 [build]
-  command = "echo 'Skipping build step'"
+  command = "exit 0"
   publish = "."
-
-# Minimal SPA rule, preserving query parameters
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200

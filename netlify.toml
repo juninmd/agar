@@ -1,3 +1,3 @@
 [build]
-  command = "exit 0"
+  command = "echo 'Build skipped'"
   publish = "."

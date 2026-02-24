@@ -1,62 +1,78 @@
-import asyncio
-from playwright.async_api import async_playwright
+from playwright.sync_api import sync_playwright
+import time
 import sys
-import os
 
-# Ensure we can import utils if needed, or just keep it simple
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-async def run():
-    async with async_playwright() as p:
-        browser = await p.chromium.launch()
-        page = await browser.new_page()
+def verify_cypher():
+    with sync_playwright() as p:
+        print("Launching browser...")
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
 
         try:
-            await page.goto("http://localhost:8000?skipBoot=true")
-        except:
-            print("Error loading game. Make sure server is running.")
+            print("Navigating to game...")
+            page.goto("http://localhost:8000?skipBoot=true")
+        except Exception as e:
+            print(f"Error loading game: {e}")
             sys.exit(1)
 
-        await page.wait_for_selector("#gameCanvas")
+        # Wait for game to load
+        page.wait_for_selector("#start-btn")
 
-        print("Starting game with CYPHER protocol...")
-        # Inject code to start game immediately if not already started
-        await page.evaluate("""
-            if (!window.game || !window.game.gameRunning) {
-                window.game.start('Tester', 'CYPHER');
-            }
-        """)
+        # Select CYPHER protocol
+        print("Selecting CYPHER protocol...")
+        page.click(".protocol-card[data-id='CYPHER']")
 
-        await page.wait_for_timeout(1000)
+        # Start Game
+        print("Starting game...")
+        page.click("#start-btn")
 
-        protocol_id = await page.evaluate("window.player.protocol.id")
-        print(f"Player Protocol: {protocol_id}")
+        # Wait for game initialization
+        time.sleep(1)
 
+        # Verify Protocol
+        protocol_id = page.evaluate("window.game.player.protocol.id")
+        print(f"Current Protocol: {protocol_id}")
         if protocol_id != "CYPHER":
-            # Retry setting protocol
-            print("Retrying protocol set...")
-            await page.evaluate("window.game.start('Tester', 'CYPHER')")
-            await page.wait_for_timeout(500)
-            protocol_id = await page.evaluate("window.player.protocol.id")
-            if protocol_id != "CYPHER":
-                print("FAILED: Protocol is not CYPHER")
-                sys.exit(1)
+            print("FAILED: Protocol is not CYPHER")
+            sys.exit(1)
 
-        print("Triggering Ability...")
-        await page.evaluate("window.player.triggerAbility(window.bots)")
+        # Trigger Ability (Press 'E')
+        print("Triggering Ability (E key)...")
+        page.keyboard.press("e")
+        time.sleep(0.5)
 
-        # Wait for the update loop to process the ability
-        await page.wait_for_timeout(500)
-
-        speed_boost = await page.evaluate("window.player.speedBoost")
+        # Verify Speed Boost
+        speed_boost = page.evaluate("window.game.player.speedBoost")
         print(f"Player Speed Boost: {speed_boost}")
-
         if speed_boost < 1.5:
             print(f"FAILED: Player speed boost {speed_boost} < 1.5")
             sys.exit(1)
 
-        print("SUCCESS: CYPHER protocol and ability verified.")
-        await browser.close()
+        # Verify Bot Slowdown
+        # We need to find at least one bot
+        bot_slowed = page.evaluate("""
+            () => {
+                const bot = window.game.bots.find(b => b.debugWasSlowed);
+                return bot ? true : false;
+            }
+        """)
+
+        # Note: If no bots are nearby, this might fail, but ability affects ALL bots in current logic?
+        # Let's check AbilitySystem.js: "bots.forEach(b => b.isSlowed = true);" -> Yes, global effect for CYPHER?
+        # In ability_system.js: "bots.forEach(b => b.isSlowed = true);"
+        # Wait, usually ability takes `bots` as argument. In Game.js: "this.player.triggerAbility(this.bots);"
+        # So yes, it affects all bots in the `bots` array.
+
+        print(f"Bot Slowed: {bot_slowed}")
+        if not bot_slowed:
+            print("FAILED: No bots were slowed.")
+            sys.exit(1)
+
+        print("Taking screenshot...")
+        page.screenshot(path="verification/verify_cypher.png")
+
+        print("SUCCESS: CYPHER protocol verified.")
+        browser.close()
 
 if __name__ == "__main__":
-    asyncio.run(run())
+    verify_cypher()

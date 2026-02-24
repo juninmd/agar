@@ -56,6 +56,9 @@ export class Bot extends Player {
         const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
         let maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.baseSpeedMult;
+
+        this.debugWasSlowed = this.isSlowed; // For verification
+
         if (this.isSlowed) {
              maxSpeed *= 0.5;
              this.isSlowed = false; // Reset for next frame

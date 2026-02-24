@@ -48,11 +48,16 @@
 *   **The Final Compilation:** True ending unlocked by collecting all 16 Lore Fragments.
 *   **Mobile Port:** "Pocket Phage" with gyroscope controls.
 
-## 🌌 Phase 6: The Null Sector (NEW / ACTIVE)
-*   **New Protocol: CYPHER (The Decoder)**
+## 🌌 Phase 6: The Null Sector (COMPLETE)
+*   [x] **New Protocol: CYPHER (The Decoder)**
     *   *Origin:* Recovered from the deep web.
     *   *Ability:* **Overclock** (Time Dilation). Slows all enemies while boosting player speed.
     *   *Visuals:* Gold/Yellow theme, heavy chromatic aberration during ability.
-*   **Environment Upgrade:**
-    *   **Digital Void:** Dynamic grid background and data streams.
-    *   **Boot Sequence V2:** Updated narrative introduction.
+*   [x] **Environment Upgrade:**
+    *   [x] **Digital Void:** Dynamic grid background and data streams.
+    *   [ ] **Boot Sequence V2:** Updated narrative introduction.
+
+## ⚕️ Phase 7: The Architect's Return (PLANNED)
+*   **Boss Encounter:** The Great Firewall.
+*   **Multiplayer Sync:** WebSocket implementation for cross-player echoes.
+*   **Mobile Optimizations:** Gyro controls for tablet users.

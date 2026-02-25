@@ -37,9 +37,9 @@
     *   *Mechanic:* Automated response when player > 2500 mass.
     *   *Effect:* Global screen inversion (Glitch Mode).
     *   *Threat:* Spawn **Elite Hunter** bots (White/Gold) that track player coordinates.
-*   **Ghost Protocol (Async Multiplayer):**
-    *   Encounter "Ghost Data" of other players' failed runs.
-    *   Harvesting ghosts yields "Legacy Fragments".
+*   **Ghost Protocol (Async Multiplayer):** [COMPLETE]
+    *   Encounter "Ghost Data" (Echoes) of other players' failed runs.
+    *   Spawns transparent bots that retain mass, color, and name from previous sessions.
 *   **Distributed Defense:**
     *   Collaborative "Raid Boss" events where global player damage contributes to defeating a "Null Void Titan".
 

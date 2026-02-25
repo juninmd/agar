@@ -1,6 +1,6 @@
-import { BOT_TYPES } from './constants/bot_types.js';
-import { POWERUP_TYPES } from './constants/powerup_types.js';
-import { PROTOCOLS } from './constants/protocols.js';
+import { BOT_TYPES } from './config/bot_types.js';
+import { POWERUP_TYPES } from './config/powerup_types.js';
+import { PROTOCOLS } from './config/protocols.js';
 
 export const CONSTANTS = {
     WORLD_WIDTH: 3000,

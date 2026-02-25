@@ -7,6 +7,7 @@ import { SingularitySystem } from './singularity_system.js';
 import { PurgeSystem } from './purge_system.js';
 import { NarrativeSystem } from './narrative_system.js';
 import { CONSTANTS } from './constants.js';
+import { GhostSystem } from './ghost_system.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -24,6 +25,7 @@ export class Game {
         this.singularitySystem = new SingularitySystem(ui, renderer);
         this.purgeSystem = new PurgeSystem();
         this.narrativeSystem = new NarrativeSystem(ui);
+        this.ghostSystem = new GhostSystem(this);
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -38,6 +40,7 @@ export class Game {
         this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name);
         this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => Spawner.spawnFood());
         this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());
+        this.ghostSystem.spawnGhosts(this);
         this.firewall = new Firewall();
         this.systemIntegrity = 100;
         this.singularitySystem.active = false;
@@ -58,7 +61,11 @@ export class Game {
     }
 
     update() {
-        if (this.player.markedForDeletion) return this.ui.showGameOver("DATA PURGED", this.player.mass);
+        if (this.player.markedForDeletion) {
+            this.ghostSystem.saveGhost(this.player);
+            this.gameRunning = false;
+            return this.ui.showGameOver("DATA PURGED", this.player.mass);
+        }
         if (this.bots.length === 0) return this.ui.showWin();
 
         if (this.player.inSanctuary) {

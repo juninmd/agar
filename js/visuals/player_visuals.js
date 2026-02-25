@@ -73,7 +73,8 @@ export class PlayerVisuals {
         this.drawSpeedEffect(ctx, player);
         this.drawTrail(ctx, player);
         const originalAlpha = ctx.globalAlpha;
-        ctx.globalAlpha = player.alpha;
+        // Ghosts are semi-transparent
+        ctx.globalAlpha = (player.type === 'GHOST') ? 0.4 : player.alpha;
 
         if (player.isGlitching) {
             GlitchVisuals.drawGlitch(ctx, player);
@@ -83,12 +84,13 @@ export class PlayerVisuals {
             ctx.fillStyle = player.color;
             ctx.fill();
             ctx.shadowColor = player.color;
-            ctx.shadowBlur = 15;
+            ctx.shadowBlur = (player.type === 'GHOST') ? 5 : 15;
             ctx.stroke();
             ctx.shadowBlur = 0;
         }
         this.drawName(ctx, player);
-        this.drawDecorativeRing(ctx, player);
+        // Ghosts don't get the decorative ring
+        if (player.type !== 'GHOST') this.drawDecorativeRing(ctx, player);
         ctx.globalAlpha = originalAlpha;
     }
 }

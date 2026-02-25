@@ -62,6 +62,13 @@ export const CONSTANTS = {
             aggression: 10.0, // Absolute Hunter
             namePrefix: "VOID"
         },
+        GHOST: {
+            color: '#FFFFFF', // White with low alpha
+            speedMultiplier: 0.1, // Drifting
+            massMultiplier: 1.0,
+            aggression: 0.0, // Passive
+            namePrefix: "ECHO"
+        },
         NORMAL: {
             color: null, // Random
             speedMultiplier: 1.0,

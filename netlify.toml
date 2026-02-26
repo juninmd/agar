@@ -1,3 +1,6 @@
 [build]
-  command = "true"
-  publish = "."
+  command = "mkdir -p public && cp index.html _redirects public/ 2>/dev/null || true && cp -r css js public/ 2>/dev/null || true"
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "20"

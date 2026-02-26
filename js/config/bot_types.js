@@ -49,6 +49,13 @@ export const BOT_TYPES = {
         aggression: 0.0, // Passive
         namePrefix: "ECHO"
     },
+    SENTINEL: {
+        color: '#FF0000', // Bright Red
+        speedMultiplier: 0.5, // Slow but menacing
+        massMultiplier: 5.0, // Massive
+        aggression: 10.0, // Relentless
+        namePrefix: "KERNEL_GUARDIAN"
+    },
     NORMAL: {
         color: null, // Random
         speedMultiplier: 1.0,

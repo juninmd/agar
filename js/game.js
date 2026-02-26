@@ -8,6 +8,7 @@ import { PurgeSystem } from './purge_system.js';
 import { NarrativeSystem } from './narrative_system.js';
 import { CONSTANTS } from './constants.js';
 import { GhostSystem } from './ghost_system.js';
+import { BossSystem } from './boss_system.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -26,6 +27,7 @@ export class Game {
         this.purgeSystem = new PurgeSystem();
         this.narrativeSystem = new NarrativeSystem(ui);
         this.ghostSystem = new GhostSystem(this);
+        this.bossSystem = new BossSystem(this);
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -46,6 +48,8 @@ export class Game {
         this.singularitySystem.active = false;
         this.purgeSystem.isActive = false;
         this.purgeSystem.timer = 0;
+        this.bossSystem.activeBoss = null;
+        this.bossSystem.bossSpawned = false;
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
@@ -88,6 +92,8 @@ export class Game {
             this.purgeSystem.startPurge(this);
         }
         this.purgeSystem.update(this);
+
+        this.bossSystem.update(this.player);
 
         this.singularityActive = this.singularitySystem.active; // Sync for renderer
 

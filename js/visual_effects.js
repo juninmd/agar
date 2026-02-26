@@ -2,6 +2,7 @@ import { PlayerVisuals } from './visuals/player_visuals.js';
 import { AbilityVisuals } from './visuals/ability_visuals.js';
 import { GlitchVisuals } from './visuals/glitch_visuals.js';
 import { SingularityVisuals } from './visuals/singularity_visuals.js';
+import { BossVisuals } from './visuals/boss_visuals.js';
 
 /**
  * Facade for all visual effects.
@@ -9,6 +10,10 @@ import { SingularityVisuals } from './visuals/singularity_visuals.js';
  */
 export class VisualEffects {
     static drawPlayer(ctx, player) {
+        if (player.type === 'SENTINEL') {
+            this.drawBoss(ctx, player);
+            return;
+        }
         PlayerVisuals.drawPlayer(ctx, player);
     }
 
@@ -46,5 +51,9 @@ export class VisualEffects {
 
     static drawSingularity(ctx, player) {
         SingularityVisuals.drawSingularity(ctx, player);
+    }
+
+    static drawBoss(ctx, boss) {
+        BossVisuals.drawSentinel(ctx, boss);
     }
 }

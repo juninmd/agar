@@ -1,17 +1,17 @@
+import { Utils } from './utils.js';
+
 /**
  * AI Logic for the Sentinel Boss.
- * Manages the state machine and behavioral transitions.
  * Phases:
- * - IDLE: Drifts slowly, observing the area.
+ * - IDLE: Drifts slowly.
  * - CHASE: Relentlessly pursues the player.
- * - CHARGE: Executes a sudden burst of speed towards the last known player position.
+ * - CHARGE: Sudden burst of speed.
  */
 export class AIBoss {
     /**
-     * Updates the boss's behavior based on its current state timer.
-     * Delegates to specific state handlers.
-     * @param {Bot} boss - The boss entity instance.
-     * @param {Player} player - The player entity instance.
+     * Updates the boss's behavior based on its state.
+     * @param {Bot} boss - The boss entity.
+     * @param {Player} player - The player entity.
      */
     static think(boss, player) {
         if (!boss.aiState) boss.aiState = 'IDLE';
@@ -37,46 +37,24 @@ export class AIBoss {
         }
     }
 
-    /**
-     * Handles the IDLE state logic.
-     * @param {Bot} boss - The boss entity.
-     * @param {Player} player - The player entity.
-     * @private
-     */
     static _idle(boss, player) {
         // Slow drift
         boss.targetX = boss.x + (Math.random() - 0.5) * 100;
         boss.targetY = boss.y + (Math.random() - 0.5) * 100;
     }
 
-    /**
-     * Handles the CHASE state logic.
-     * @param {Bot} boss - The boss entity.
-     * @param {Player} player - The player entity.
-     * @private
-     */
     static _chase(boss, player) {
         // Track player directly
         boss.targetX = player.x;
         boss.targetY = player.y;
     }
 
-    /**
-     * Handles the CHARGE state logic.
-     * @param {Bot} boss - The boss entity.
-     * @private
-     */
     static _charge(boss) {
         // Keep moving in current direction with high speed
         // Target is locked from previous state
         boss.speedBoost = 2.5; // Temporary boost
     }
 
-    /**
-     * Transitions the boss to a new state based on probabilities.
-     * @param {Bot} boss - The boss entity.
-     * @private
-     */
     static _transition(boss) {
         const rand = Math.random();
         if (boss.aiState === 'IDLE') {

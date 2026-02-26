@@ -1,13 +1,4 @@
-/**
- * Handles the visual rendering of the Sentinel Boss.
- * Includes effects for shields, core pulsing, and warning radii.
- */
 export class BossVisuals {
-    /**
-     * Draws the Sentinel Boss and its effects.
-     * @param {CanvasRenderingContext2D} ctx - The canvas context.
-     * @param {Boss} boss - The boss entity.
-     */
     static drawSentinel(ctx, boss) {
         // Base Circle
         ctx.beginPath();

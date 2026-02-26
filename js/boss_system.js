@@ -1,12 +1,6 @@
 import { Boss } from './boss.js';
 
-/**
- * Manages the Boss lifecycle: Spawning, Updates, and Event Handling.
- */
 export class BossSystem {
-    /**
-     * @param {Game} game - The main game instance.
-     */
     constructor(game) {
         this.game = game;
         this.activeBoss = null;
@@ -15,10 +9,6 @@ export class BossSystem {
         this.bossSpawned = false; // Flag to ensure only one boss per run or session
     }
 
-    /**
-     * Updates the boss system state. Checks for spawn conditions or boss death.
-     * @param {Player} player - The player entity.
-     */
     update(player) {
         // Check if boss is dead
         if (this.activeBoss && this.activeBoss.markedForDeletion) {
@@ -33,10 +23,6 @@ export class BossSystem {
         }
     }
 
-    /**
-     * Spawns the Sentinel Boss.
-     * @param {Player} player - The player entity (used for distance calculation).
-     */
     spawnBoss(player) {
         const angle = Math.random() * Math.PI * 2;
         const dist = 1200; // Far enough to be ominous
@@ -52,10 +38,6 @@ export class BossSystem {
         this.game.renderer.screenShake = 50;
     }
 
-    /**
-     * Handles logic when the boss is defeated.
-     * @private
-     */
     _handleBossDeath() {
         this.activeBoss = null;
         this.game.ui.showNarrative("ARCHIVE UNLOCKED: SENTINEL DEFEATED.", "SUCCESS");

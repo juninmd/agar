@@ -1,6 +1,6 @@
 [build]
-  command = "true"
+  command = "echo 'No Build'"
   publish = "."
 
-[dev]
-  framework = "#static"
+[build.environment]
+  NODE_VERSION = "20"

@@ -9,6 +9,7 @@ import { NarrativeSystem } from './narrative_system.js';
 import { CONSTANTS } from './constants.js';
 import { GhostSystem } from './ghost_system.js';
 import { BossSystem } from './boss_system.js';
+import { RaidSystem } from './raid_system.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -28,6 +29,7 @@ export class Game {
         this.narrativeSystem = new NarrativeSystem(ui);
         this.ghostSystem = new GhostSystem(this);
         this.bossSystem = new BossSystem(this);
+        this.raidSystem = new RaidSystem();
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -50,6 +52,8 @@ export class Game {
         this.purgeSystem.timer = 0;
         this.bossSystem.activeBoss = null;
         this.bossSystem.bossSpawned = false;
+        this.raidSystem.isActive = false;
+        this.raidSystem.activeTitan = null;
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
@@ -65,37 +69,43 @@ export class Game {
     }
 
     update() {
-        if (this.player.markedForDeletion) {
-            this.ghostSystem.saveGhost(this.player);
-            this.gameRunning = false;
-            return this.ui.showGameOver("DATA PURGED", this.player.mass);
-        }
+        if (this.player.markedForDeletion) return this._handleGameOver();
         if (this.bots.length === 0) return this.ui.showWin();
 
-        if (this.player.inSanctuary) {
-            this.systemIntegrity = Math.min(100, this.systemIntegrity + 0.05);
-        } else {
-            this.systemIntegrity -= 0.03;
-        }
+        this._updateSystems();
+        this._updateEntities();
+        this._checkCollisions();
+
+        this.ui.updateScore(this.player.mass);
+        this.ui.updateIntegrity(this.systemIntegrity);
+        if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+        this.narrativeSystem.update(this.player, this.systemIntegrity);
+    }
+
+    _handleGameOver() {
+        this.ghostSystem.saveGhost(this.player);
+        this.gameRunning = false;
+        return this.ui.showGameOver("DATA PURGED", this.player.mass);
+    }
+
+    _updateSystems() {
+        if (this.player.inSanctuary) this.systemIntegrity = Math.min(100, this.systemIntegrity + 0.05);
+        else this.systemIntegrity -= 0.03;
 
         this.particleSystem.update();
         this.updateFirewall();
+        this.singularitySystem.update(this.player, [...this.bots, ...this.foods], this.bots);
 
-        const allEntities = [...this.bots, ...this.foods];
-        this.singularitySystem.update(this.player, allEntities, this.bots);
+        if (this.purgeSystem.canStart(this.player)) this.purgeSystem.startPurge(this);
+        this.purgeSystem.update(this);
+        this.bossSystem.update(this.player);
+        this.raidSystem.update(this);
+        this.singularityActive = this.singularitySystem.active;
+    }
 
+    _updateEntities() {
         this.foods = this.foods.filter(f => !f.markedForDeletion);
         this.bots = this.bots.filter(b => !b.markedForDeletion);
-
-        // Check for Purge Trigger
-        if (this.purgeSystem.canStart(this.player)) {
-            this.purgeSystem.startPurge(this);
-        }
-        this.purgeSystem.update(this);
-
-        this.bossSystem.update(this.player);
-
-        this.singularityActive = this.singularitySystem.active; // Sync for renderer
 
         const all = [this.player, ...this.bots];
         this.player.setTarget(
@@ -103,17 +113,9 @@ export class Game {
             this.player.y + (this.input.mouseY - this.canvas.height/2)
         );
         this.player.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, this.bots);
-        this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods));
-        this._checkCollisions(all);
+        this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods, this));
 
-        this.bots = this.bots.filter(b => !b.markedForDeletion);
         if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot());
-
-        this.ui.updateScore(this.player.mass);
-        this.ui.updateIntegrity(this.systemIntegrity);
-        if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
-
-        this.narrativeSystem.update(this.player, this.systemIntegrity);
     }
 
     updateFirewall() {
@@ -126,7 +128,8 @@ export class Game {
         if (this.firewall.active) this.firewall.update();
     }
 
-    _checkCollisions(all) {
+    _checkCollisions() {
+        const all = [this.player, ...this.bots];
         all.forEach(e => {
             this.foods = this.foods.filter(f => !this.collisionSystem.resolveFoodCollision(e, f));
             if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(Spawner.spawnFood());

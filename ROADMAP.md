@@ -32,16 +32,19 @@
     *   *Visuals:* Instability visualization (Red Shift), Gravity Well.
     *   *Mechanics:* Event Horizon consumption, Critical Mass Discharge.
 
-## 🟠 Phase 4: The Network (IN PROGRESS)
-*   **System Purge V2 (Kernel Panic):** [ACTIVE]
+## 🟠 Phase 4: The Network (Complete)
+*   **System Purge V2 (Kernel Panic):** [COMPLETE]
     *   *Mechanic:* Automated response when player > 2500 mass.
     *   *Effect:* Global screen inversion (Glitch Mode).
     *   *Threat:* Spawn **Elite Hunter** bots (White/Gold) that track player coordinates.
 *   **Ghost Protocol (Async Multiplayer):** [COMPLETE]
     *   Encounter "Ghost Data" (Echoes) of other players' failed runs.
     *   Spawns transparent bots that retain mass, color, and name from previous sessions.
-*   **Distributed Defense:**
-    *   Collaborative "Raid Boss" events where global player damage contributes to defeating a "Null Void Titan".
+*   **Distributed Defense:** [COMPLETE]
+    *   **Raid Boss Event:** "Null Void Titan".
+    *   *Trigger:* System Integrity < 20% & Player Mass > 2000.
+    *   *Mechanic:* Massive entity with health bar and minion spawns.
+    *   *UI:* Dedicated warning system and HUD health bar.
 
 ## ⚫ Phase 5: The Source Code (Concept)
 *   **Architect Access:** Sandbox editor to create custom bot waves.

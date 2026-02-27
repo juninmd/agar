@@ -5,7 +5,14 @@ import { Bot } from './bot.js';
 import { Utils } from './utils.js';
 import { CONSTANTS } from './constants.js';
 
+/**
+ * Handles spawning of all game entities.
+ */
 export class Spawner {
+    /**
+     * Spawns a food item, powerup, or lore fragment.
+     * @returns {Food|PowerUp|LoreFragment}
+     */
     static spawnFood() {
         const x = Utils.randomRange(0, CONSTANTS.WORLD_WIDTH);
         const y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
@@ -19,6 +26,10 @@ export class Spawner {
         return new Food(x, y, Utils.randomRange(CONSTANTS.MIN_FOOD_RADIUS, CONSTANTS.MAX_FOOD_RADIUS), Utils.randomColor(CONSTANTS.COLORS));
     }
 
+    /**
+     * Spawns a random bot.
+     * @returns {Bot}
+     */
     static spawnBot() {
         const types = Object.keys(CONSTANTS.BOT_TYPES).filter(k => k !== 'NORMAL');
         const type = types[Math.floor(Math.random() * types.length)];
@@ -28,6 +39,13 @@ export class Spawner {
         return new Bot(Utils.randomRange(0, CONSTANTS.WORLD_WIDTH), Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT), CONSTANTS.INITIAL_RADIUS, Utils.randomColor(CONSTANTS.COLORS), finalType);
     }
 
+    /**
+     * Spawns an Elite Hunter for the Purge event.
+     * @param {Player} player
+     * @param {number} angle
+     * @param {number} distance
+     * @returns {Bot}
+     */
     static spawnPurgeBot(player, angle, distance) {
         let sx = player.x + Math.cos(angle) * distance;
         let sy = player.y + Math.sin(angle) * distance;
@@ -45,6 +63,11 @@ export class Spawner {
         return bot;
     }
 
+    /**
+     * Spawns a Void Walker minion for the Titan.
+     * @param {Player} player - The player to target.
+     * @returns {Bot}
+     */
     static spawnVoidWalker(player) {
         const angle = Math.random() * Math.PI * 2;
         const dist = 600 + Math.random() * 400;

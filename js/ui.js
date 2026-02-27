@@ -75,6 +75,8 @@ export class UIManager {
     showWarning(show) { this.hud.showWarning(show); }
     showPurgeAlert() { this.hud.showPurgeAlert(); }
     showCorruptionAlert(message) { this.hud.showCorruptionAlert(message); }
+    showRaidWarning() { this.hud.showRaidWarning(); }
+    updateTitanHealth(percent) { this.hud.updateTitanHealth(percent); }
     showNarrative(text, type) { this.narrative.show(text, type); }
 
     showGameOver(reason, score) {

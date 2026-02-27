@@ -14,6 +14,10 @@ export class VisualEffects {
             this.drawBoss(ctx, player);
             return;
         }
+        if (player.type === 'TITAN') {
+            this.drawTitan(ctx, player);
+            return;
+        }
         PlayerVisuals.drawPlayer(ctx, player);
     }
 
@@ -55,5 +59,9 @@ export class VisualEffects {
 
     static drawBoss(ctx, boss) {
         BossVisuals.drawSentinel(ctx, boss);
+    }
+
+    static drawTitan(ctx, titan) {
+        BossVisuals.drawTitan(ctx, titan);
     }
 }

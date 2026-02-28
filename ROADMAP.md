@@ -59,6 +59,8 @@
 *   [x] **Environment Upgrade:**
     *   [x] **Digital Void:** Dynamic grid background and data streams.
     *   [ ] **Boot Sequence V2:** Updated narrative introduction.
+*   [x] **CI/CD Stabilization:**
+    *   Fixed Netlify deployment rules (Pages changed, Header rules, Redirect rules) to correctly serve static root directory.
 
 ## ⚕️ Phase 7: The Architect's Return (PLANNED)
 *   **Boss Encounter:** The Great Firewall.

@@ -17,3 +17,4 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - **Style**: Strict adherence to "Constitution" (150 lines/file, 100% tests).
 - **Protocol**: "Distributed Defense - Null Void Titan".
 - **Last Action**: Implemented "Raid System" featuring the Null Void Titan boss. Triggered by low integrity (<20%) and high mass (>2000). Includes dedicated UI warnings, health bar, and visual effects. Verified with `verify_raid.py`.
+- **Current Action**: Fixed Netlify CI deployment failure by updating `netlify.toml` publish directory to root and removing invalid `_redirects` configuration.

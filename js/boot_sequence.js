@@ -18,7 +18,9 @@ export class BootSequence {
             { text: "Detecting anomalous signal...", delay: 600, class: "warning" },
             { text: "Decrypting source code from Null Sector...", delay: 500 },
             { text: "> PROTOCOL 'CYPHER' UNLOCKED", delay: 300, class: "warning" },
+            { text: "> CYPHER... [OVERCLOCKED]", delay: 200, class: "warning" },
             { text: "WARNING: Null Sector containment breached.", delay: 400, class: "error" },
+            { text: "WARNING: THE GREAT FIREWALL IS AWAKE.", delay: 600, class: "error" },
             { text: "Welcome, Administrator.", delay: 800 }
         ];
         this.asciiArt = `

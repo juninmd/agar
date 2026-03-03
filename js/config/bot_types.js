@@ -56,6 +56,13 @@ export const BOT_TYPES = {
         aggression: 10.0, // Relentless
         namePrefix: "KERNEL_GUARDIAN"
     },
+    GREAT_FIREWALL: {
+        color: '#FF4400', // Deep Orange
+        speedMultiplier: 1.0,
+        massMultiplier: 200.0, // Wall
+        aggression: 0.0,
+        namePrefix: "FIREWALL"
+    },
     NORMAL: {
         color: null, // Random
         speedMultiplier: 1.0,

@@ -1,0 +1,62 @@
+name: Main Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [published]
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Set up Python & uv
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install Python Dependencies
+        run: |
+          uv pip install --system playwright
+          playwright install chromium
+
+      - name: Lint
+        run: |
+          # Node-based linting placeholder
+          echo "Linting complete"
+
+      - name: Test
+        run: |
+          python3 -m http.server 8000 &
+          echo "Server started"
+          sleep 3
+          python3 verification/verify_game.py
+          python3 verification/verify_bots.py
+          python3 verification/verify_utils.py
+          python3 verification/verify_protocols.py
+          python3 verification/verify_singularity.py
+          python3 verification/verify_firewall.py
+
+      - name: Build
+        run: |
+          # No build steps for this static vanilla JS project
+          echo "Build complete"
+
+      - name: Release (Semantic Versioning)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Deploying and tagging release..."

@@ -18,6 +18,10 @@ export class VisualEffects {
             this.drawTitan(ctx, player);
             return;
         }
+        if (player.type === 'GREAT_FIREWALL') {
+            this.drawGreatFirewall(ctx, player);
+            return;
+        }
         PlayerVisuals.drawPlayer(ctx, player);
     }
 
@@ -63,5 +67,9 @@ export class VisualEffects {
 
     static drawTitan(ctx, titan) {
         BossVisuals.drawTitan(ctx, titan);
+    }
+
+    static drawGreatFirewall(ctx, firewall) {
+        BossVisuals.drawGreatFirewall(ctx, firewall);
     }
 }

@@ -26,6 +26,26 @@ export class CollisionSystem {
         const minOverlap = e1.radius + e2.radius;
         let result = {};
 
+        // Handle Great Firewall custom collision
+        if (e1.type === 'GREAT_FIREWALL' || e2.type === 'GREAT_FIREWALL') {
+            const firewall = e1.type === 'GREAT_FIREWALL' ? e1 : e2;
+            const target = e1.type === 'GREAT_FIREWALL' ? e2 : e1;
+
+            if (firewall.checkCollision && firewall.checkCollision(target)) {
+                // Instakill for target (unless player has invulnerable)
+                if (target === player && player.invulnerable) return result;
+
+                target.markedForDeletion = true;
+                this.particleSystem.emitExplosion(target.x, target.y, '#FF0000', 100);
+
+                if (target === player) {
+                    result.screenShake = 50;
+                    this.ui.showCorruptionAlert("DELETED BY THE GREAT FIREWALL");
+                }
+            }
+            return result; // Don't process normal mass collision for the wall
+        }
+
         if (dist < minOverlap) {
             let predator = e1.mass > e2.mass * 1.1 ? e1 : (e2.mass > e1.mass * 1.1 ? e2 : null);
             let prey = predator === e1 ? e2 : e1;

@@ -52,6 +52,7 @@ export class Game {
         this.purgeSystem.timer = 0;
         this.bossSystem.activeBoss = null;
         this.bossSystem.bossSpawned = false;
+        this.bossSystem.firewallSpawned = false;
         this.raidSystem.isActive = false;
         this.raidSystem.activeTitan = null;
         this.gameRunning = true;

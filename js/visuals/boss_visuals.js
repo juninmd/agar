@@ -82,4 +82,37 @@ export class BossVisuals {
         ctx.textAlign = 'center';
         ctx.fillText("NULL VOID TITAN", titan.x, titan.y - titan.radius - 30);
     }
+
+    static drawGreatFirewall(ctx, firewall) {
+        // firewall is x, y, width, sweepDirection, gapY, gapHeight
+        const halfWidth = firewall.width / 2;
+        const leftX = firewall.x - halfWidth;
+        const topHeight = firewall.gapY - (firewall.gapHeight / 2);
+        const bottomY = firewall.gapY + (firewall.gapHeight / 2);
+        const bottomHeight = firewall.height - bottomY;
+
+        ctx.fillStyle = 'rgba(255, 68, 0, 0.8)';
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = '#FF4400';
+
+        // Draw top part
+        if (topHeight > 0) {
+            ctx.fillRect(leftX, 0, firewall.width, topHeight);
+        }
+
+        // Draw bottom part
+        if (bottomHeight > 0) {
+            ctx.fillRect(leftX, bottomY, firewall.width, bottomHeight);
+        }
+
+        ctx.shadowBlur = 0;
+
+        // Draw warning signs on the wall
+        ctx.fillStyle = '#FFF';
+        ctx.font = 'bold 30px Orbitron';
+        ctx.textAlign = 'center';
+
+        ctx.fillText("GREAT FIREWALL", firewall.x, 100);
+        ctx.fillText("GREAT FIREWALL", firewall.x, firewall.height - 100);
+    }
 }

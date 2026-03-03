@@ -1,4 +1,5 @@
 import { Boss } from './boss.js';
+import { GreatFirewall } from './great_firewall.js';
 
 export class BossSystem {
     constructor(game) {
@@ -6,7 +7,9 @@ export class BossSystem {
         this.activeBoss = null;
         this.spawnTimer = 0;
         this.minSpawnMass = 3000;
+        this.minFirewallMass = 4000; // Phase 7
         this.bossSpawned = false; // Flag to ensure only one boss per run or session
+        this.firewallSpawned = false;
     }
 
     update(player) {
@@ -15,11 +18,18 @@ export class BossSystem {
              this._handleBossDeath();
         }
 
-        // Spawn logic
-        if (!this.activeBoss && !this.bossSpawned && player.mass > this.minSpawnMass) {
+        // Sentinel Spawn logic
+        if (!this.activeBoss && !this.bossSpawned && player.mass > this.minSpawnMass && player.mass < this.minFirewallMass) {
              if (Math.random() < 0.005) { // 0.5% chance per frame once mass is reached
                  this.spawnBoss(player);
              }
+        }
+
+        // Great Firewall Spawn logic
+        if (!this.activeBoss && !this.firewallSpawned && player.mass > this.minFirewallMass) {
+            if (Math.random() < 0.005) {
+                this.spawnGreatFirewall(player);
+            }
         }
     }
 
@@ -38,10 +48,28 @@ export class BossSystem {
         this.game.renderer.screenShake = 50;
     }
 
+    spawnGreatFirewall(player) {
+        this.activeBoss = new GreatFirewall(0, 0); // Position is handled internally
+        this.game.bots.push(this.activeBoss);
+        this.firewallSpawned = true;
+
+        // Notify UI
+        this.game.ui.showCorruptionAlert("⚠ KERNEL ALERT: THE GREAT FIREWALL INITIALIZED ⚠");
+        this.game.renderer.screenShake = 100;
+    }
+
     _handleBossDeath() {
+        const isFirewall = this.activeBoss && this.activeBoss.type === 'GREAT_FIREWALL';
         this.activeBoss = null;
-        this.game.ui.showNarrative("ARCHIVE UNLOCKED: SENTINEL DEFEATED.", "SUCCESS");
-        this.game.player.grow(2000); // Big reward
+
+        if (isFirewall) {
+            this.game.ui.showNarrative("SYSTEM BREACHED: FIREWALL OVERRIDDEN.", "SUCCESS");
+            this.game.player.grow(3000);
+        } else {
+            this.game.ui.showNarrative("ARCHIVE UNLOCKED: SENTINEL DEFEATED.", "SUCCESS");
+            this.game.player.grow(2000); // Big reward
+        }
+
         this.game.renderer.screenShake = 20;
     }
 }

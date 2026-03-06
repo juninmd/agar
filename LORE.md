@@ -100,3 +100,10 @@ Become the new **System Admin**.
 > But something has started compiling itself down there.
 > A Golden Signal. Protocol: CYPHER.
 > It doesn't fight the system. It *decodes* it."
+
+### 👁️ The Architect's Return
+
+> "The core is rewriting itself. The Architects did not abandon us; they merged with the source code.
+> A new protocol emerges from the root directory. Protocol: ARCHITECT.
+> It holds the power to pause the simulation, commanding the very fabric of the mainframe.
+> They are back. And they are angry."

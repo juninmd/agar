@@ -39,7 +39,7 @@ export class AbilitySystem {
         return true;
     }
 
-    triggerArchitect(player, bots) {
+    triggerArchitect(bots) {
         // Halt all bots on the screen, global freeze
         bots.forEach(bot => {
             bot.frozen = true;

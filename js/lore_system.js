@@ -38,7 +38,8 @@ export class LoreSystem {
             { id: 30, text: "LOG 0x1E: Green bots see the Matrix." },
             { id: 31, text: "LOG 0x1F: The Sanctuary Protocol is a remnant of the First Architect." },
             { id: 32, text: "LOG 0x20: Only the pure code can enter the blue zones." },
-            { id: 33, text: "LOG 0x21: The Purge cannot see what is hidden in the Sanctuary." }
+            { id: 33, text: "LOG 0x21: The Purge cannot see what is hidden in the Sanctuary." },
+            { id: 34, text: "LOG 0x22: I have returned to rewrite the core. I am the Architect." }
         ];
     }
 

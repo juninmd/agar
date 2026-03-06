@@ -38,5 +38,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.0, // Normal
         speedMultiplier: 1.1, // Slightly Faster
         description: "OVERCLOCK. TIME DILATION."
+    },
+    ARCHITECT: {
+        id: 'ARCHITECT',
+        name: "ARCHITECT",
+        color: "#FFFFFF", // White
+        massMultiplier: 1.5, // Larger
+        speedMultiplier: 1.2, // Fast
+        description: "THE CREATOR. SOURCE CODE."
     }
 };

@@ -18,7 +18,8 @@ export class AbilitySystem {
             PHANTOM: { cooldown: 600, duration: 180 }, // 10s / 3s
             HACKER: { cooldown: 720, duration: 120 },  // 12s / 2s
             VIRAL:   { cooldown: 600, duration: 300 }, // 10s / 5s
-            CYPHER:  { cooldown: 900, duration: 300 }  // 15s / 5s
+            CYPHER:  { cooldown: 900, duration: 300 }, // 15s / 5s
+            ARCHITECT: { cooldown: 1200, duration: 300 } // 20s / 5s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -33,8 +34,17 @@ export class AbilitySystem {
         this.cooldown = this.maxCooldown;
 
         if (this.protocolId === 'HACKER') this.triggerVirus(player, bots);
+        if (this.protocolId === 'ARCHITECT') this.triggerArchitect(player, bots);
 
         return true;
+    }
+
+    triggerArchitect(bots) {
+        // Halt all bots on the screen, global freeze
+        bots.forEach(bot => {
+            bot.frozen = true;
+            bot.frozenTimer = 300; // 5 seconds freeze
+        });
     }
 
     triggerVirus(player, bots) {
@@ -126,6 +136,13 @@ export class AbilitySystem {
              ctx.arc(0, 0, radius, 0, Math.PI * 2);
              ctx.strokeStyle = `rgba(0, 255, 65, ${1 - progress})`;
              ctx.lineWidth = 4 * (1-progress);
+             ctx.stroke();
+        } else if (this.protocolId === 'ARCHITECT') {
+             const pulse = Math.sin(Date.now() / 200) * 0.3 + 1.0;
+             ctx.beginPath();
+             ctx.arc(0, 0, player.radius * 2 * pulse, 0, Math.PI * 2);
+             ctx.strokeStyle = '#FFFFFF';
+             ctx.lineWidth = 5;
              ctx.stroke();
         }
 

@@ -86,7 +86,7 @@ export class BossVisuals {
     static drawGreatFirewall(ctx, firewall) {
         // We need CONSTANTS for WORLD_HEIGHT. Assuming it's accessible or we just draw extremely tall.
         // It's better to pass it or rely on the game bounds. The original used CONSTANTS.WORLD_HEIGHT.
-        const WORLD_HEIGHT = 3000;
+        const WORLD_HEIGHT = CONSTANTS.WORLD_HEIGHT;
 
         ctx.save();
 

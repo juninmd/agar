@@ -82,4 +82,51 @@ export class BossVisuals {
         ctx.textAlign = 'center';
         ctx.fillText("NULL VOID TITAN", titan.x, titan.y - titan.radius - 30);
     }
+
+    static drawGreatFirewall(ctx, firewall) {
+        // We need CONSTANTS for WORLD_HEIGHT. Assuming it's accessible or we just draw extremely tall.
+        // It's better to pass it or rely on the game bounds. The original used CONSTANTS.WORLD_HEIGHT.
+        const WORLD_HEIGHT = 3000;
+
+        ctx.save();
+
+        // Draw the sweeping laser beam (the wall itself)
+        const wallAlpha = 0.4 + Math.sin(Date.now() / 200) * 0.2;
+        ctx.fillStyle = `rgba(255, 69, 0, ${wallAlpha})`;
+        ctx.fillRect(firewall.x - firewall.width / 2, 0, firewall.width, WORLD_HEIGHT);
+
+        ctx.strokeStyle = '#FF0000';
+        ctx.lineWidth = 4;
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = '#FF0000';
+        ctx.beginPath();
+        ctx.moveTo(firewall.x, 0);
+        ctx.lineTo(firewall.x, WORLD_HEIGHT);
+        ctx.stroke();
+
+        // Draw active nodes
+        firewall.nodes.forEach(node => {
+            if (!node.active) return;
+
+            ctx.beginPath();
+            ctx.arc(firewall.x, node.y, node.radius, 0, Math.PI * 2);
+            ctx.fillStyle = node.color;
+            ctx.fill();
+
+            // Core pulsing
+            const pulse = 1 + Math.sin(Date.now() / 150 + node.y) * 0.2;
+            ctx.beginPath();
+            ctx.arc(firewall.x, node.y, node.radius * 0.5 * pulse, 0, Math.PI * 2);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fill();
+
+            // Name tag
+            ctx.fillStyle = '#FFF';
+            ctx.font = '14px Orbitron';
+            ctx.textAlign = 'center';
+            ctx.fillText("CORE NODE", firewall.x, node.y - node.radius - 10);
+        });
+
+        ctx.restore();
+    }
 }

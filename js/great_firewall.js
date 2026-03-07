@@ -70,7 +70,7 @@ export class GreatFirewall {
         if (player.markedForDeletion) return;
 
         // Fast check: is player near the X coordinate?
-        if (Math.abs(player.x - this.x) > player.radius + this.width) return;
+        if (Math.abs(player.x - this.x) > player.radius + (this.width / 2)) return;
 
         this.nodes.forEach(node => {
             if (!node.active) return;

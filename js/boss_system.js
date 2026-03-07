@@ -1,4 +1,5 @@
 import { Boss } from './boss.js';
+import { GreatFirewall } from './great_firewall.js';
 
 export class BossSystem {
     constructor(game) {
@@ -7,6 +8,9 @@ export class BossSystem {
         this.spawnTimer = 0;
         this.minSpawnMass = 3000;
         this.bossSpawned = false; // Flag to ensure only one boss per run or session
+
+        this.activeGreatFirewall = null;
+        this.greatFirewallSpawned = false;
     }
 
     update(player) {
@@ -15,10 +19,28 @@ export class BossSystem {
              this._handleBossDeath();
         }
 
-        // Spawn logic
+        // Spawn logic Sentinel
         if (!this.activeBoss && !this.bossSpawned && player.mass > this.minSpawnMass) {
              if (Math.random() < 0.005) { // 0.5% chance per frame once mass is reached
                  this.spawnBoss(player);
+             }
+        }
+
+        // Spawn logic Great Firewall
+        if (!this.activeGreatFirewall && !this.greatFirewallSpawned && player.mass > 4000) {
+             if (Math.random() < 0.005) {
+                 this.spawnGreatFirewall();
+             }
+        }
+
+        // Update Great Firewall
+        if (this.activeGreatFirewall) {
+             this.activeGreatFirewall.update(this.game);
+             if (this.activeGreatFirewall.markedForDeletion) {
+                  this.activeGreatFirewall = null;
+                  this.game.ui.showNarrative("ARCHIVE UNLOCKED: GREAT FIREWALL BREACHED.", "SUCCESS");
+                  this.game.player.grow(3000); // Big reward
+                  this.game.renderer.screenShake = 30;
              }
         }
     }
@@ -43,5 +65,18 @@ export class BossSystem {
         this.game.ui.showNarrative("ARCHIVE UNLOCKED: SENTINEL DEFEATED.", "SUCCESS");
         this.game.player.grow(2000); // Big reward
         this.game.renderer.screenShake = 20;
+    }
+
+    spawnGreatFirewall() {
+        this.activeGreatFirewall = new GreatFirewall();
+        this.greatFirewallSpawned = true;
+        this.game.ui.showCorruptionAlert("⚠ SIGNAL DETECTED: THE GREAT FIREWALL ⚠");
+        this.game.renderer.screenShake = 50;
+    }
+
+    draw(ctx) {
+        if (this.activeGreatFirewall) {
+            this.activeGreatFirewall.draw(ctx);
+        }
     }
 }

@@ -64,4 +64,8 @@ export class VisualEffects {
     static drawTitan(ctx, titan) {
         BossVisuals.drawTitan(ctx, titan);
     }
+
+    static drawGreatFirewall(ctx, firewall) {
+        BossVisuals.drawGreatFirewall(ctx, firewall);
+    }
 }

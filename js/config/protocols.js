@@ -46,5 +46,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.5, // Larger
         speedMultiplier: 1.2, // Fast
         description: "THE CREATOR. SOURCE CODE."
+    },
+    OMNI: {
+        id: 'OMNI',
+        name: "OMNI",
+        color: "#FFFFFF", // White/Rainbow handled via effects if needed
+        massMultiplier: 3.0, // Massive start
+        speedMultiplier: 2.0, // Extreme speed
+        description: "ALL PROTOCOLS ACTIVE. THE AWAKENING."
     }
 };

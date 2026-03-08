@@ -67,5 +67,9 @@
 *   [x] **Lore Update:** Architect's Return log fragment added.
 *   [x] **CI/CD Stabilization:** Created GitHub Actions pipeline main.yml.
 *   [x] **Boss Encounter:** The Great Firewall. (COMPLETE)
+
+## 🌟 Phase 8: The Omni Awakening (COMPLETE)
+*   [x] **Persistent Progression:** Lore fragments now save across sessions via LocalStorage.
+*   [x] **The True Ending:** Added the OMNI protocol, unlocked only when all lore is found, featuring a true win screen and ending.
 *   **Multiplayer Sync:** WebSocket implementation for cross-player echoes. (PLANNED)
 *   **Mobile Optimizations:** Gyro controls for tablet users. (PLANNED)

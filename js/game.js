@@ -70,7 +70,13 @@ export class Game {
 
     update() {
         if (this.player.markedForDeletion) return this._handleGameOver();
-        if (this.bots.length === 0) return this.ui.showWin();
+        if (this.bots.length === 0) {
+             if (this.player.protocol.id === 'OMNI') {
+                 return this.ui.showTrueWin();
+             } else {
+                 return this.ui.showWin();
+             }
+        }
 
         this._updateSystems();
         this._updateEntities();

@@ -16,6 +16,8 @@ export class UIManager {
         this.startBtn = document.getElementById('start-btn');
         this.restartBtn = document.getElementById('restart-btn');
         this.winBtn = document.getElementById('win-btn');
+        this.trueWinScreen = document.getElementById('true-win-screen');
+        this.trueWinBtn = document.getElementById('true-win-btn');
         this.mobileDashBtn = document.getElementById('mobile-dash-btn');
 
         this.onStart = null;
@@ -52,6 +54,12 @@ export class UIManager {
                 if (this.onRestart) this.onRestart();
             });
         }
+
+        if (this.trueWinBtn) {
+            this.trueWinBtn.addEventListener('click', () => {
+                if (this.onRestart) this.onRestart();
+            });
+        }
     }
 
     setGameActive(active) {
@@ -59,6 +67,7 @@ export class UIManager {
             this.startScreen.classList.add('hidden');
             this.gameOverScreen.classList.add('hidden');
             this.winScreen.classList.add('hidden');
+            if (this.trueWinScreen) this.trueWinScreen.classList.add('hidden');
             this.hud.showWarning(false);
             this.mobileDashBtn.classList.add('active-game');
             this.hud.uiLayer.style.pointerEvents = 'none';
@@ -90,5 +99,23 @@ export class UIManager {
     showWin() {
         this.winScreen.classList.remove('hidden');
         this.setGameActive(false);
+    }
+
+    showTrueWin() {
+        if (this.trueWinScreen) {
+            this.trueWinScreen.classList.remove('hidden');
+            this.setGameActive(false);
+        } else {
+            this.showWin(); // Fallback
+        }
+    }
+
+    checkOmniUnlock(loreSystem) {
+        if (loreSystem.unlocked.size >= 34) {
+            const omniCard = document.getElementById('omni-protocol-card');
+            if (omniCard) {
+                omniCard.classList.remove('hidden');
+            }
+        }
     }
 }

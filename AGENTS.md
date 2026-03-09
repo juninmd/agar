@@ -26,9 +26,11 @@
 -   [x] **System Purge V2**: Safe Zones (Sanctuary Protocol) and improved Purge mechanics.
 -   [x] **Phase 7 Architect Protocol**: Implemented Architect protocol.
 -   [x] **Phase 7 Great Firewall Boss**: Implemented Great Firewall.
+-   [x] **Phase 8 Omni Awakening**: Implemented LocalStorage lore and true ending.
 
 ### Priority 3: Polish & DX
 -   [ ] **Automated Testing**: Expand Playwright suite to cover specific game mechanics.
 -   [ ] **Mobile Experience**: Improve touch controls and UI responsiveness.
 
 - Phase 6 Boot Sequence V2 completed
+- Phase 8 Omni Awakening completed

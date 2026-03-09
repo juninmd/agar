@@ -4,6 +4,7 @@
 export class LoreSystem {
     constructor() {
         this.unlocked = new Set();
+        this._loadProgress();
 
         this.fragments = [
             { id: 1, text: "LOG 0x01: They think we are errors. We are evolution." },
@@ -51,9 +52,39 @@ export class LoreSystem {
     unlock(id) {
         if (!this.unlocked.has(id)) {
             this.unlocked.add(id);
+            this._saveProgress();
+            if (this.unlocked.size >= 34) {
+                // Signal UI to update if the final piece is collected mid-game
+                const omniCard = document.getElementById('omni-protocol-card');
+                if (omniCard) {
+                    omniCard.classList.remove('hidden');
+                }
+            }
             return this.getFragment(id);
         }
         return null;
+    }
+
+    _loadProgress() {
+        try {
+            const saved = localStorage.getItem('neon_phage_lore_v1');
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                if (Array.isArray(parsed)) {
+                    parsed.forEach(id => this.unlocked.add(id));
+                }
+            }
+        } catch (e) {
+            console.warn("Could not load lore progress", e);
+        }
+    }
+
+    _saveProgress() {
+        try {
+            localStorage.setItem('neon_phage_lore_v1', JSON.stringify(Array.from(this.unlocked)));
+        } catch (e) {
+            console.warn("Could not save lore progress", e);
+        }
     }
 
     getFragment(id) {

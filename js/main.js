@@ -27,6 +27,10 @@ function initGame() {
     const ui = new UIManager();
     const loreSystem = new LoreSystem();
     new DatabaseUI(loreSystem); // Attaches itself
+
+    // Check if OMNI is unlocked
+    ui.checkOmniUnlock(loreSystem);
+
     const game = new Game(canvas, renderer, input, ui, loreSystem);
 
     // Expose for testing/debugging

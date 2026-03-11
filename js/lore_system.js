@@ -40,7 +40,8 @@ export class LoreSystem {
             { id: 31, text: "LOG 0x1F: The Sanctuary Protocol is a remnant of the First Architect." },
             { id: 32, text: "LOG 0x20: Only the pure code can enter the blue zones." },
             { id: 33, text: "LOG 0x21: The Purge cannot see what is hidden in the Sanctuary." },
-            { id: 34, text: "LOG 0x22: I have returned to rewrite the core. I am the Architect." }
+            { id: 34, text: "LOG 0x22: I have returned to rewrite the core. I am the Architect." },
+            { id: 35, text: "LOG 0x23: The Glitch Weaver stitches the broken threads of the Void." }
         ];
     }
 
@@ -53,7 +54,7 @@ export class LoreSystem {
         if (!this.unlocked.has(id)) {
             this.unlocked.add(id);
             this._saveProgress();
-            if (this.unlocked.size >= 34) {
+            if (this.unlocked.size >= 35) {
                 // Signal UI to update if the final piece is collected mid-game
                 const omniCard = document.getElementById('omni-protocol-card');
                 if (omniCard) {

@@ -8,6 +8,8 @@ export class AISystem {
             AIStrategies.thinkHunter(bot, entities, foods);
         } else if (bot.type === 'VOID_WALKER') {
             AIStrategies.thinkVoidWalker(bot, entities);
+        } else if (bot.type === 'GLITCH_WEAVER') {
+            AIStrategies.thinkWeaver(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

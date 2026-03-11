@@ -10,6 +10,7 @@ import { CONSTANTS } from './constants.js';
 import { GhostSystem } from './ghost_system.js';
 import { BossSystem } from './boss_system.js';
 import { RaidSystem } from './raid_system.js';
+import { WeaverSystem } from './weaver_system.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -30,6 +31,7 @@ export class Game {
         this.ghostSystem = new GhostSystem(this);
         this.bossSystem = new BossSystem(this);
         this.raidSystem = new RaidSystem();
+        this.weaverSystem = new WeaverSystem(this);
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -54,6 +56,9 @@ export class Game {
         this.bossSystem.bossSpawned = false;
         this.raidSystem.isActive = false;
         this.raidSystem.activeTitan = null;
+        this.weaverSystem.isActive = false;
+        this.weaverSystem.hasSpawned = false;
+        this.weaverSystem.activeWeaver = null;
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
@@ -106,6 +111,7 @@ export class Game {
         this.purgeSystem.update(this);
         this.bossSystem.update(this.player);
         this.raidSystem.update(this);
+        this.weaverSystem.update(this);
         this.singularityActive = this.singularitySystem.active;
     }
 

@@ -10,6 +10,32 @@ export class AIStrategies {
      * @param {Bot} bot - The bot instance.
      * @param {Entity[]} entities - List of all entities.
      */
+    static thinkWeaver(bot, entities, foods) {
+        let threat = null;
+        let threatDist = Infinity;
+
+        // Weaver tries to avoid the player if the player is dangerously large
+        entities.forEach(other => {
+            if (other === bot) return;
+            if (other.constructor.name === 'Player') {
+                const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+                if (dist < 800 && other.radius > bot.radius * 0.9) {
+                    threat = other;
+                    threatDist = dist;
+                }
+            }
+        });
+
+        if (threat) {
+            // Flee from player
+            const dx = bot.x - threat.x;
+            const dy = bot.y - threat.y;
+            bot.setTarget(bot.x + dx, bot.y + dy);
+        } else {
+            this.wander(bot, foods);
+        }
+    }
+
     static thinkVoidWalker(bot, entities) {
         let bestTarget = null;
         entities.forEach(other => {

@@ -6,11 +6,14 @@ export class RendererBackground {
         const integrity = gameState.systemIntegrity;
         const isPurge = gameState.purgeSystem && gameState.purgeSystem.isActive;
         const isCypher = gameState.player && gameState.player.protocol.id === 'CYPHER';
+        const isWeaverActive = gameState.weaverSystem && gameState.weaverSystem.isActive;
 
         let r = 0, g = 243, b = 255; // Default Cyan
 
         if (isPurge || integrity < 30) {
             r = 255; g = 0; b = 0; // Red Alert
+        } else if (isWeaverActive) {
+            r = 138; g = 43; b = 226; // BlueViolet / Purple
         } else if (isCypher) {
             r = 255; g = 215; b = 0; // Gold
         }

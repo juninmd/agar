@@ -71,5 +71,6 @@
 ## 🌟 Phase 8: The Omni Awakening (COMPLETE)
 *   [x] **Persistent Progression:** Lore fragments now save across sessions via LocalStorage.
 *   [x] **The True Ending:** Added the OMNI protocol, unlocked only when all lore is found, featuring a true win screen and ending.
+*   [x] **The Glitch Weaver Encounter**: Added Weaver entity, Thread mechanics, and Lore Fragment 35.
 *   **Multiplayer Sync:** WebSocket implementation for cross-player echoes. (PLANNED)
 *   **Mobile Optimizations:** Gyro controls for tablet users. (PLANNED)

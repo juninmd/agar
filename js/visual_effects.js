@@ -49,6 +49,10 @@ export class VisualEffects {
         PlayerVisuals.drawDecorativeRing(ctx, player);
     }
 
+    static drawAbility(ctx, player, system) {
+        AbilityVisuals.drawAbility(ctx, player, system);
+    }
+
     static drawViralTether(ctx, startX, startY, endX, endY, intensity = 1.0) {
         AbilityVisuals.drawViralTether(ctx, startX, startY, endX, endY, intensity);
     }

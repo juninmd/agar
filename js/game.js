@@ -11,6 +11,7 @@ import { GhostSystem } from './ghost_system.js';
 import { BossSystem } from './boss_system.js';
 import { RaidSystem } from './raid_system.js';
 import { WeaverSystem } from './weaver_system.js';
+import { GameSystems } from './game_systems.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -32,6 +33,7 @@ export class Game {
         this.bossSystem = new BossSystem(this);
         this.raidSystem = new RaidSystem();
         this.weaverSystem = new WeaverSystem(this);
+        this.systems = new GameSystems(this);
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -100,19 +102,7 @@ export class Game {
     }
 
     _updateSystems() {
-        if (this.player.inSanctuary) this.systemIntegrity = Math.min(100, this.systemIntegrity + 0.05);
-        else this.systemIntegrity -= 0.03;
-
-        this.particleSystem.update();
-        this.updateFirewall();
-        this.singularitySystem.update(this.player, [...this.bots, ...this.foods], this.bots);
-
-        if (this.purgeSystem.canStart(this.player)) this.purgeSystem.startPurge(this);
-        this.purgeSystem.update(this);
-        this.bossSystem.update(this.player);
-        this.raidSystem.update(this);
-        this.weaverSystem.update(this);
-        this.singularityActive = this.singularitySystem.active;
+        this.systems.update();
     }
 
     _updateEntities() {
@@ -128,16 +118,6 @@ export class Game {
         this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods, this));
 
         if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot());
-    }
-
-    updateFirewall() {
-        this.firewallTimer++;
-        if (!this.firewall.active && this.firewallTimer > 1800) {
-            this.firewall.start();
-            this.firewallTimer = 0;
-            this.ui.showWarning(true);
-        }
-        if (this.firewall.active) this.firewall.update();
     }
 
     _checkCollisions() {

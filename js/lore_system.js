@@ -54,7 +54,7 @@ export class LoreSystem {
         if (!this.unlocked.has(id)) {
             this.unlocked.add(id);
             this._saveProgress();
-            if (this.unlocked.size >= 35) {
+            if (this.unlocked.size >= this.fragments.length) {
                 // Signal UI to update if the final piece is collected mid-game
                 const omniCard = document.getElementById('omni-protocol-card');
                 if (omniCard) {

@@ -62,5 +62,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.0,
         aggression: 1.0,
         namePrefix: "BOT"
+    },
+    GLITCH_WEAVER: {
+        color: '#8A2BE2', // BlueViolet
+        speedMultiplier: 0.8,
+        massMultiplier: 3.0,
+        aggression: 0.5,
+        namePrefix: "WEAVER"
     }
 };

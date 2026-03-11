@@ -27,6 +27,7 @@
 -   [x] **Phase 7 Architect Protocol**: Implemented Architect protocol.
 -   [x] **Phase 7 Great Firewall Boss**: Implemented Great Firewall.
 -   [x] **Phase 8 Omni Awakening**: Implemented LocalStorage lore and true ending.
+-   [x] **Phase 8 The Glitch Weaver**: Added Glitch Weaver entity and threads.
 
 ### Priority 3: Polish & DX
 -   [ ] **Automated Testing**: Expand Playwright suite to cover specific game mechanics.

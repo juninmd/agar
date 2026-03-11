@@ -107,3 +107,12 @@ Become the new **System Admin**.
 > A new protocol emerges from the root directory. Protocol: ARCHITECT.
 > It holds the power to pause the simulation, commanding the very fabric of the mainframe.
 > They are back. And they are angry."
+
+### 🕸️ THE GLITCH WEAVER (Entropy's Needle)
+
+> "In the deepest sectors of the Void, where corrupted memory pools, an entity weaves the broken code together.
+> It is not a hunter, nor a guardian. It is the Glitch Weaver.
+> It sews 'Data Threads'—pockets of dense, unstable corruption—into the fabric of the Grid.
+> To consume the Weaver is to ingest the raw, unfiltered essence of the Null Void itself.
+> It is a test of capacity. Only those who have grown beyond 1500 TB will ever see its purple hue."
+> -- *Log 0x23*

@@ -18,6 +18,10 @@ export class VisualEffects {
             this.drawTitan(ctx, player);
             return;
         }
+        if (player.type === 'GLITCH_WEAVER') {
+            BossVisuals.drawWeaver(ctx, player);
+            return;
+        }
         PlayerVisuals.drawPlayer(ctx, player);
     }
 

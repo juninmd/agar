@@ -2,7 +2,7 @@ import { Rift } from './rift.js';
 import { RiftVisuals } from './visuals/rift_visuals.js';
 
 /**
- * Manages the lifecycle, spawning, and despicably of `Rift` entities (Quantum Wormholes).
+ * Manages the lifecycle, spawning, and despawning of `Rift` entities (Quantum Wormholes).
  */
 export class RiftSystem {
     /**
@@ -20,7 +20,7 @@ export class RiftSystem {
      * Updates all existing rifts and randomly spawns new ones.
      * @param {Object} game
      */
-    update(game) {
+    update() {
         this.spawnTimer++;
 
         // Randomly attempt to spawn a Rift if below max limit

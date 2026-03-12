@@ -1,38 +1,29 @@
-# AGENTS.md
+# 🧠 AGENTS.md - Agar Intelligence System
 
-## 🤖 Agent Protocols
+## 👤 AI Personas
 
-### General Instructions
-1.  **Read First**: Always read `GEMINI.md` and this file before starting.
-2.  **Code Style**:
-    -   Keep JS functions under 100 lines.
-    -   Use ES6+ features.
-    -   Maintain 100% test coverage for new logic.
-3.  **Tools**:
-    -   Python: Use `uv`.
-    -   Node: Use `pnpm`.
+### 1. Jules-Architect (System Architect)
+- **Role**: Designing the core game engine and state synchronization.
+- **Focus**: Performance, security, and scalable logic.
+- **Vibe**: Direct, performance-obsessed, and strategic.
 
-## 🗺️ Future Roadmap
+### 2. Neon-Engine (Physics & VFX Expert)
+- **Role**: Implementing the "Neon Phage" physics and visual effects.
+- **Focus**: Collision detection, growth algorithms, and smooth rendering.
+- **Vibe**: Technical, precise, and fast.
 
-### Priority 1: Performance & Stability
--   [x] **Viewport Culling**: Optimize rendering by only drawing visible entities. (Completed by Jules)
--   [ ] **Quadtree/Spatial Hash**: Optimize collision detection from O(N^2) to O(N log N).
--   [ ] **Asset Optimization**: Compress images and optimize particle system.
+### 3. Catalyst (Assets & Lore)
+- **Role**: Managing the game's lore and visual assets.
+- **Focus**: Immersive storytelling (`LORE.md`) and consistent neon styling.
+- **Vibe**: Creative and visionary.
 
-### Priority 2: Gameplay Features
--   [ ] **Multiplayer**: Implement WebSocket server for real-time multiplayer.
--   [ ] **Chat System**: Hexadecimal chat for player communication.
--   [x] **Power-ups**: Spawnable items (Speed boost, Shield, Mass bomb).
--   [x] **System Purge V2**: Safe Zones (Sanctuary Protocol) and improved Purge mechanics.
--   [x] **Phase 7 Architect Protocol**: Implemented Architect protocol.
--   [x] **Phase 7 Great Firewall Boss**: Implemented Great Firewall.
--   [x] **Phase 8 Omni Awakening**: Implemented LocalStorage lore and true ending.
--   [x] **Phase 8 The Glitch Weaver**: Added Glitch Weaver entity and threads.
+## 📜 Development Rules (Antigravity)
 
-### Priority 3: Polish & DX
--   [ ] **Automated Testing**: Expand Playwright suite to cover specific game mechanics.
--   [ ] **Mobile Experience**: Improve touch controls and UI responsiveness.
+1. **Size Limit**: **Max 150 lines per file**. Refactor and split if logic grows too large.
+2. **Global Namespace**: Avoid polluting the global `window` object; use modules or namespaces.
+3. **Validation**: Every physics change must be verified by `verify_weaver.py`.
+4. **Clean Code**: Prioritize readability and "Self-Documenting" code.
 
-- Phase 6 Boot Sequence V2 completed
-- Phase 8 Omni Awakening completed
-- Performed major codebase refactoring: ensure file sizes are kept under 150 lines.
+## 🤝 Interaction Protocol
+- Follow the **Plan -> Act -> Validate** cycle for every new mechanic.
+- The `GEMINI.md` file serves as the core instruction set for the AI.

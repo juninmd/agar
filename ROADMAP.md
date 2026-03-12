@@ -73,5 +73,13 @@
 *   [x] **The True Ending:** Added the OMNI protocol, unlocked only when all lore is found, featuring a true win screen and ending.
 *   [x] **The Glitch Weaver Encounter**: Added Weaver entity, Thread mechanics, and Lore Fragment 35.
 *   [x] **Phase 1: The Antigravity Audit (Start)**: Scanned codebase and strictly enforced <150 lines/file rule across `js/game.js`, `js/ability_system.js`, and `js/visuals/boss_visuals.js`.
+
+## 🌀 Phase 9: The Quantum Rift (COMPLETE)
+*   [x] **New Hazard: Quantum Rifts**
+    *   *Mechanic:* Spawns up to 3 active rifts simultaneously.
+    *   *Effect:* Entities colliding with a rift are instantly teleported to a random location on the map.
+    *   *Visuals:* Implemented neon spinning portals via `RiftVisuals`.
+
+## 🔮 Future Priorities
 *   **Multiplayer Sync:** WebSocket implementation for cross-player echoes. (PLANNED)
 *   **Mobile Optimizations:** Gyro controls for tablet users. (PLANNED)

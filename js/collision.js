@@ -62,6 +62,27 @@ export class CollisionSystem {
         return result;
     }
 
+    resolveRiftCollision(entity, rift) {
+        if (rift.markedForDeletion) return false;
+
+        const dist = Utils.getDistance(entity.x, entity.y, rift.x, rift.y);
+        const minOverlap = entity.radius + rift.radius;
+
+        if (dist < minOverlap) {
+            // Teleport the entity
+            entity.x = Math.random() * CONSTANTS.WORLD_WIDTH;
+            entity.y = Math.random() * CONSTANTS.WORLD_HEIGHT;
+
+            // Mark the rift for deletion (despawn after use)
+            rift.markedForDeletion = true;
+
+            // Emit a particle explosion
+            this.particleSystem.emitExplosion(rift.x, rift.y, rift.color, 50);
+            return true;
+        }
+        return false;
+    }
+
     resolveFoodCollision(entity, food) {
         const dist = Utils.getDistance(entity.x, entity.y, food.x, food.y);
         if (dist < entity.radius + food.radius) {

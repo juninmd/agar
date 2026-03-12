@@ -11,6 +11,7 @@ import { GhostSystem } from './ghost_system.js';
 import { BossSystem } from './boss_system.js';
 import { RaidSystem } from './raid_system.js';
 import { WeaverSystem } from './weaver_system.js';
+import { RiftSystem } from './rift_system.js';
 import { GameSystems } from './game_systems.js';
 
 export class Game {
@@ -33,6 +34,7 @@ export class Game {
         this.bossSystem = new BossSystem(this);
         this.raidSystem = new RaidSystem();
         this.weaverSystem = new WeaverSystem(this);
+        this.riftSystem = new RiftSystem(this);
         this.systems = new GameSystems(this);
         this.gameRunning = false;
         this.systemIntegrity = 100;
@@ -61,6 +63,7 @@ export class Game {
         this.weaverSystem.isActive = false;
         this.weaverSystem.hasSpawned = false;
         this.weaverSystem.activeWeaver = null;
+        this.riftSystem.reset();
         this.gameRunning = true;
         this.ui.setGameActive(true);
         this.loop();
@@ -122,10 +125,21 @@ export class Game {
 
     _checkCollisions() {
         const all = [this.player, ...this.bots];
+
         all.forEach(e => {
+            // Check Food collisions
             this.foods = this.foods.filter(f => !this.collisionSystem.resolveFoodCollision(e, f));
             if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(Spawner.spawnFood());
+
+            // Check Rift collisions
+            this.riftSystem.rifts.forEach(rift => {
+                this.collisionSystem.resolveRiftCollision(e, rift);
+            });
         });
+
+        // Ensure marked rifts are removed
+        this.riftSystem.rifts = this.riftSystem.rifts.filter(r => !r.markedForDeletion);
+
         for (let i = 0; i < all.length; i++) {
             for (let j = i + 1; j < all.length; j++) this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
         }

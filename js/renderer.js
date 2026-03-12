@@ -74,6 +74,10 @@ export class Renderer {
             gameState.bossSystem.draw(this.ctx);
         }
 
+        if (gameState.riftSystem) {
+            gameState.riftSystem.draw(this.ctx);
+        }
+
         gameState.foods.forEach(food => {
             if (Utils.isInViewport(food.x, food.y, food.radius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
                 food.draw(this.ctx);

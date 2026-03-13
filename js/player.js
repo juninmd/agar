@@ -79,6 +79,10 @@ export class Player extends Entity {
              this.mass *= 0.9995;
              this.radius = Utils.getRadiusFromMass(this.mass);
         }
+        if (this.protocol.id === 'SYMBIOTE' && this.mass > 50) {
+             this.mass *= 0.998; // Extreme decay
+             this.radius = Utils.getRadiusFromMass(this.mass);
+        }
     }
 
     _updateEffects() {

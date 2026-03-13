@@ -50,6 +50,7 @@ jobs:
           python3 verification/verify_utils.py
           python3 verification/verify_protocols.py
           python3 verification/verify_singularity.py
+          python3 verification/verify_symbiote.py
 
   build-and-release:
     needs: setup-lint-test

@@ -54,5 +54,13 @@ export const PROTOCOLS = {
         massMultiplier: 3.0, // Massive start
         speedMultiplier: 2.0, // Extreme speed
         description: "ALL PROTOCOLS ACTIVE. THE AWAKENING."
+    },
+    SYMBIOTE: {
+        id: 'SYMBIOTE',
+        name: "SYMBIOTE",
+        color: "#00FF88", // Bio-Green
+        massMultiplier: 1.2, // Good start
+        speedMultiplier: 1.2, // Fast
+        description: "EXTREME DECAY. HEALS BY PARASITISM."
     }
 };

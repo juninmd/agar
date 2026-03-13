@@ -27,3 +27,7 @@
 ## 🤝 Interaction Protocol
 - Follow the **Plan -> Act -> Validate** cycle for every new mechanic.
 - The `GEMINI.md` file serves as the core instruction set for the AI.
+
+## 🧬 Jules-DevOps Prime Directives
+- Initiated the "Bio-Digital Integration" expansion, adding organic and parasitic entities.
+- Enforced strict Antigravity rules and created tests for new entities.

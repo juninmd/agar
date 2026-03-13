@@ -69,5 +69,12 @@ export const BOT_TYPES = {
         massMultiplier: 3.0,
         aggression: 0.5,
         namePrefix: "WEAVER"
+    },
+    PARASITE: {
+        color: '#00FF88', // Bio-Green
+        speedMultiplier: 2.0, // Very fast
+        massMultiplier: 0.3, // Very small
+        aggression: 4.0, // Highly aggressive, like a leech
+        namePrefix: "PARASITE"
     }
 };

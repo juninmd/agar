@@ -53,10 +53,22 @@ export class CollisionSystem {
                     if (predator.protocol && predator.protocol.id === 'VIRAL' && prey instanceof Bot) {
                         massGain *= 2;
                     }
+                    if (predator.protocol && predator.protocol.id === 'SYMBIOTE' && prey instanceof Bot) {
+                        massGain *= 3; // Extreme regen on kill
+                    }
                     predator.grow(massGain);
                     prey.markedForDeletion = true;
                     this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
                 }
+            } else if (prey instanceof Bot && prey.type === 'PARASITE') {
+                 // Parasite draining logic (doesn't have to be eaten, just touching)
+                 if (predator.mass > prey.typeData.drainMassThreshold) {
+                     const drainAmount = prey.typeData.drainAmount; // drain per tick
+                     predator.mass -= drainAmount;
+                     predator.radius = Utils.getRadiusFromMass(predator.mass);
+                     prey.mass += drainAmount;
+                     prey.radius = Utils.getRadiusFromMass(prey.mass);
+                 }
             }
         }
         return result;

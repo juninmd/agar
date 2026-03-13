@@ -33,18 +33,22 @@ def verify_symbiote():
         assert decayed_mass < 100, f"Expected mass to decay from 100, got {decayed_mass}"
 
         # Test Parasite Spawn and Drain
-        page.evaluate('''
+        page.evaluate("window.game.player.mass = 150") # Set mass > 100 to trigger drain
+        initial_parasite_mass = page.evaluate('''
             const Parasite = window.Bot;
-            const parasite = new Parasite(window.game.player.x, window.game.player.y, 10, "#00FF88", "PARASITE");
+            const radius = 10;
+            const parasite = new Parasite(window.game.player.x, window.game.player.y, radius, "#00FF88", "PARASITE");
             window.game.bots.push(parasite);
+            return parasite.mass;
         ''')
-        time.sleep(1)
 
-        # Make sure game resolves collision naturally over a few ticks
-        time.sleep(0.5)
+        # Wait for the parasite to drain mass, which will increase its own mass.
+        try:
+            page.wait_for_function(f"window.game.bots.find(b => b.type === 'PARASITE').mass > {initial_parasite_mass}", timeout=2000)
+        except Exception:
+            assert False, "Parasite drain did not occur within timeout."
 
-        parasite_exists = page.evaluate("window.game.bots.some(b => b.type === 'PARASITE')")
-        print("Parasite test run, entity injected. Exists:", parasite_exists)
+        print("SUCCESS: Parasite drain verified.")
 
         page.screenshot(path="verification_symbiote.png")
         print("SUCCESS: SYMBIOTE and PARASITE verified.")

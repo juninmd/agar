@@ -60,10 +60,10 @@ export class CollisionSystem {
                     prey.markedForDeletion = true;
                     this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));
                 }
-            } else if (dist < minOverlap && prey instanceof Bot && prey.type === 'PARASITE') {
+            } else if (prey instanceof Bot && prey.type === 'PARASITE') {
                  // Parasite draining logic (doesn't have to be eaten, just touching)
-                 if (predator.mass > 100) {
-                     const drainAmount = 2; // drain per tick
+                 if (predator.mass > prey.typeData.drainMassThreshold) {
+                     const drainAmount = prey.typeData.drainAmount; // drain per tick
                      predator.mass -= drainAmount;
                      predator.radius = Utils.getRadiusFromMass(predator.mass);
                      prey.mass += drainAmount;

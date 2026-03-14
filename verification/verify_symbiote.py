@@ -34,13 +34,13 @@ def verify_symbiote():
 
         # Test Parasite Spawn and Drain
         page.evaluate("window.game.player.mass = 150") # Set mass > 100 to trigger drain
-        initial_parasite_mass = page.evaluate('''
+        initial_parasite_mass = page.evaluate('''() => {
             const Parasite = window.Bot;
             const radius = 10;
             const parasite = new Parasite(window.game.player.x, window.game.player.y, radius, "#00FF88", "PARASITE");
             window.game.bots.push(parasite);
             return parasite.mass;
-        ''')
+        }''')
 
         # Wait for the parasite to drain mass, which will increase its own mass.
         try:

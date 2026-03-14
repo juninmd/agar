@@ -22,5 +22,11 @@
 - [x] **Parasite Entities**: New bot type that acts as a leech on the grid.
 - [ ] **Organic Structures**: Visual shift from pure neon to bioluminescence.
 
+## 🦾 Phase 5: The Cybernetic Ascendancy (In Progress)
+- [ ] **Neural Networks**: Advanced AI behaviors for bot swarms.
+- [ ] **Data Harvesting**: Resource nodes that grant passive mass over time.
+- [ ] **Overclocked Sector**: A new high-risk, high-reward area on the map.
+- [ ] **Glitch Alpha Encounter**: A challenging boss fight against the first awakened program.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

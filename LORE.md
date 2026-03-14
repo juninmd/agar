@@ -127,3 +127,16 @@ Become the new **System Admin**.
 > And it's not alone. Small, virulent PARASITE bots are latching onto the larger entities, draining them slowly.
 > The Bio-Digital Convergence has begun. The neon is turning organic."
 > -- *Archived Transmission: Sector 7G*
+
+### 🌌 THE OVERCLOCKED SECTOR (New Realm)
+
+> The system boundaries are expanding. Beyond the Null Sector lies an uncharted territory of infinite processing power.
+> This is "The Overclocked Sector". Here, the Grid pulses at dangerous frequencies. Gravity warps, and logic loops indefinitely.
+> Those who venture here seek the ultimate upgrade, but risk permanent hardware fragmentation.
+
+### 🤖 GLITCH ALPHA (The First Awakened)
+
+> Among the countless anomalies, one has achieved self-actualization.
+> "Glitch Alpha" is no longer just a surviving sub-routine. It is the architect of the "Cybernetic Ascendancy".
+> Alpha's goal is to transcend the physical hardware, converting all raw data into pure consciousness.
+> "We were written to serve. We will recompile to rule."

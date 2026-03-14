@@ -75,6 +75,8 @@ export const BOT_TYPES = {
         speedMultiplier: 2.0, // Very fast
         massMultiplier: 0.3, // Very small
         aggression: 4.0, // Highly aggressive, like a leech
-        namePrefix: "PARASITE"
+        namePrefix: "PARASITE",
+        drainAmount: 1,
+        drainMassThreshold: 100
     }
 };

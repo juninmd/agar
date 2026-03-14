@@ -17,8 +17,10 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - **Style**: Strict adherence to "Constitution" (150 lines/file, 100% tests).
 - **Protocol**: "The Antigravity Audit (Start)".
 - **Last Action**: Implemented The Glitch Weaver mechanic and Lore 35.
-- **Current Action**: Initiated the "Bio-Digital Integration" expansion. Added the `SYMBIOTE` protocol (extreme health regeneration via combat, but constant mass decay) and the `PARASITE` bot type (a fast, small enemy that slowly drains integrity). Updated collision logic and lore.
+- **Current Action**: Initiated "The Cybernetic Ascendancy" expansion. Created exclusive lore, characters (Glitch Alpha), setting (The Overclocked Sector), and updated roadmap for Phase 5.
+- Fixed a bug in the PARASITE drain logic in `js/config/bot_types.js` to ensure the threshold and amount values exist.
 - Phase 4 The Bio-Digital Convergence started
+- Phase 5 The Cybernetic Ascendancy started
 - Phase 7 Architect Protocol completed
 - Phase 7 Great Firewall completed
 - Phase 8 Omni Awakening and True Ending completed

@@ -17,6 +17,11 @@
 - **Focus**: Immersive storytelling (`LORE.md`) and consistent neon styling.
 - **Vibe**: Creative and visionary.
 
+### 4. Cypher-Scribe (World-Builder)
+- **Role**: Expanding the narrative universe of the Neon-Phage engine.
+- **Focus**: Creating new characters (e.g. Glitch Alpha), realms, and maintaining `ROADMAP.md` cohesion with `LORE.md`.
+- **Vibe**: Esoteric, narrative-driven, and mysterious.
+
 ## 📜 Development Rules (Antigravity)
 
 1. **Size Limit**: **Max 150 lines per file**. Refactor and split if logic grows too large.

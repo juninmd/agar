@@ -74,7 +74,7 @@ export class PlayerVisuals {
         const angleStep = (Math.PI * 2) / numPoints;
 
         ctx.beginPath();
-        for (let i = 0; i <= numPoints; i++) {
+        for (let i = 0; i < numPoints; i++) {
             const angle = i * angleStep;
             // Create a wobbly effect that pulsates
             const offset = Math.sin(angle * 3 + time) * (radius * 0.15);

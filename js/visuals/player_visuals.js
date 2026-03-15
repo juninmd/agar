@@ -67,6 +67,48 @@ export class PlayerVisuals {
         ctx.stroke();
     }
 
+    static drawOrganicShape(ctx, player) {
+        const time = Date.now() * 0.002;
+        const numPoints = 12;
+        const radius = player.radius;
+        const angleStep = (Math.PI * 2) / numPoints;
+
+        ctx.beginPath();
+        for (let i = 0; i <= numPoints; i++) {
+            const angle = i * angleStep;
+            // Create a wobbly effect that pulsates
+            const offset = Math.sin(angle * 3 + time) * (radius * 0.15);
+            const r = radius + offset;
+            const x = player.x + Math.cos(angle) * r;
+            const y = player.y + Math.sin(angle) * r;
+
+            if (i === 0) {
+                ctx.moveTo(x, y);
+            } else {
+                ctx.lineTo(x, y);
+            }
+        }
+        ctx.closePath();
+
+        // Inner glowing core
+        const gradient = ctx.createRadialGradient(
+            player.x, player.y, radius * 0.2,
+            player.x, player.y, radius * 1.2
+        );
+        gradient.addColorStop(0, '#FFFFFF'); // Hot inner core
+        gradient.addColorStop(0.4, player.color);
+        gradient.addColorStop(1, 'transparent');
+
+        ctx.fillStyle = gradient;
+        ctx.fill();
+        ctx.shadowColor = player.color;
+        ctx.shadowBlur = 20;
+        ctx.strokeStyle = player.color;
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.shadowBlur = 0;
+    }
+
     static drawPlayer(ctx, player) {
         if (player.abilities) player.abilities.draw(ctx, player);
         this.drawShield(ctx, player);
@@ -76,8 +118,12 @@ export class PlayerVisuals {
         // Ghosts are semi-transparent
         ctx.globalAlpha = (player.type === 'GHOST') ? 0.4 : player.alpha;
 
+        const isOrganic = (player.protocol && player.protocol.id === 'SYMBIOTE') || (player.type === 'PARASITE');
+
         if (player.isGlitching) {
             GlitchVisuals.drawGlitch(ctx, player);
+        } else if (isOrganic) {
+            this.drawOrganicShape(ctx, player);
         } else {
             ctx.beginPath();
             ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2, false);
@@ -88,9 +134,13 @@ export class PlayerVisuals {
             ctx.stroke();
             ctx.shadowBlur = 0;
         }
+
         this.drawName(ctx, player);
-        // Ghosts don't get the decorative ring
-        if (player.type !== 'GHOST') this.drawDecorativeRing(ctx, player);
+
+        // Ghosts and organics don't get the standard decorative ring
+        if (player.type !== 'GHOST' && !isOrganic) {
+            this.drawDecorativeRing(ctx, player);
+        }
         ctx.globalAlpha = originalAlpha;
     }
 }

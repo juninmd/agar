@@ -20,7 +20,7 @@
 ## 🧬 Phase 4: The Bio-Digital Convergence (New)
 - [x] **Symbiote Protocol**: Introduce biological viral mechanics (rapid regen, high decay).
 - [x] **Parasite Entities**: New bot type that acts as a leech on the grid.
-- [ ] **Organic Structures**: Visual shift from pure neon to bioluminescence.
+- [x] **Organic Structures**: Visual shift from pure neon to bioluminescence.
 
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

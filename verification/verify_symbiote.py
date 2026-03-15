@@ -19,6 +19,8 @@ def verify_symbiote():
         page.click("#start-btn")
         time.sleep(1)
 
+        # Force game loop to tick if it wasn't
+        page.evaluate("window.game.gameRunning = true")
         # Check for SYMBIOTE protocol initialized properly
         protocol_id = page.evaluate("window.game.player.protocol.id")
         assert protocol_id == "SYMBIOTE", f"Expected protocol SYMBIOTE, got {protocol_id}"
@@ -27,23 +29,29 @@ def verify_symbiote():
         initial_mass = page.evaluate("window.game.player.mass")
 
         # Manually trigger mass decay condition (mass > 50)
+        # Clear out bots and foods first so they don't get eaten and increase mass
+        page.evaluate("window.game.bots = []; window.game.foods = [];")
         page.evaluate("window.game.player.mass = 100")
-        time.sleep(1)
+        # Explicitly call update on player to ensure mass decays
+        page.evaluate("window.game.player.update(3000, 3000, [])")
+        time.sleep(0.1)
         decayed_mass = page.evaluate("window.game.player.mass")
         assert decayed_mass < 100, f"Expected mass to decay from 100, got {decayed_mass}"
 
         # Test Parasite Spawn and Drain
         page.evaluate("window.game.player.mass = 150") # Set mass > 100 to trigger drain
-        initial_parasite_mass = page.evaluate('''
+        initial_parasite_mass = page.evaluate('''() => {
             const Parasite = window.Bot;
             const radius = 10;
             const parasite = new Parasite(window.game.player.x, window.game.player.y, radius, "#00FF88", "PARASITE");
             window.game.bots.push(parasite);
             return parasite.mass;
-        ''')
+        }''')
 
         # Wait for the parasite to drain mass, which will increase its own mass.
         try:
+            # Let the game loop run so the parasite drains mass
+            page.evaluate("window.game.gameRunning = true;")
             page.wait_for_function(f"window.game.bots.find(b => b.type === 'PARASITE').mass > {initial_parasite_mass}", timeout=2000)
         except Exception:
             assert False, "Parasite drain did not occur within timeout."

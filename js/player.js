@@ -33,23 +33,12 @@ export class Player extends Entity {
 
     applyPowerUp(type) {
         if (type.id === 'MASS') this.grow(type.value);
-        else if (type.id === 'SPEED') {
-            this.speedEffectTimer = type.duration;
-            this.speedBoost = Math.max(this.speedBoost, type.value);
-        } else if (type.id === 'SHIELD') {
-            this.shieldEffectTimer = type.duration;
-            this.invulnerable = true;
-        } else if (type.id === 'VIRUS') {
-            this.grow(type.value);
-            this.invertedControls = true;
-            this.invertedTimer = type.duration;
-        }
+        else if (type.id === 'SPEED') { this.speedEffectTimer = type.duration; this.speedBoost = Math.max(this.speedBoost, type.value); }
+        else if (type.id === 'SHIELD') { this.shieldEffectTimer = type.duration; this.invulnerable = true; }
+        else if (type.id === 'VIRUS') { this.grow(type.value); this.invertedControls = true; this.invertedTimer = type.duration; }
     }
 
-    setTarget(x, y) {
-        this.targetX = x;
-        this.targetY = y;
-    }
+    setTarget(x, y) { this.targetX = x; this.targetY = y; }
 
     triggerAbility(bots) {
         return this.abilities.activate(this, bots);

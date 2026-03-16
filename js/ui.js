@@ -63,6 +63,7 @@ export class UIManager {
     }
 
     setGameActive(active) {
+        const joystickBase = document.getElementById('joystick-base');
         if (active) {
             this.startScreen.classList.add('hidden');
             this.gameOverScreen.classList.add('hidden');
@@ -70,10 +71,12 @@ export class UIManager {
             if (this.trueWinScreen) this.trueWinScreen.classList.add('hidden');
             this.hud.showWarning(false);
             this.mobileDashBtn.classList.add('active-game');
+            if (joystickBase) joystickBase.classList.add('active-game');
             this.hud.uiLayer.style.pointerEvents = 'none';
         } else {
             this.hud.uiLayer.style.pointerEvents = 'auto';
             this.mobileDashBtn.classList.remove('active-game');
+            if (joystickBase) joystickBase.classList.remove('active-game');
         }
     }
 

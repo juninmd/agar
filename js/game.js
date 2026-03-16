@@ -125,21 +125,12 @@ export class Game {
 
     _checkCollisions() {
         const all = [this.player, ...this.bots];
-
         all.forEach(e => {
-            // Check Food collisions
             this.foods = this.foods.filter(f => !this.collisionSystem.resolveFoodCollision(e, f));
             if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(Spawner.spawnFood());
-
-            // Check Rift collisions
-            this.riftSystem.rifts.forEach(rift => {
-                this.collisionSystem.resolveRiftCollision(e, rift);
-            });
+            this.riftSystem.rifts.forEach(r => this.collisionSystem.resolveRiftCollision(e, r));
         });
-
-        // Ensure marked rifts are removed
         this.riftSystem.rifts = this.riftSystem.rifts.filter(r => !r.markedForDeletion);
-
         for (let i = 0; i < all.length; i++) {
             for (let j = i + 1; j < all.length; j++) this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
         }

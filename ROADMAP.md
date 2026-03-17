@@ -10,7 +10,7 @@
 - [ ] **Multiplayer Integration**: Basic WebSocket-based room system.
 - [ ] **Skins & Cosmetics**: Visual variety for cells based on lore characters.
 - [x] **Mobile Optimization**: Touch-based controls and responsive UI.
-- [ ] **Advanced AI**: Smarter "Phage" bots for solo play.
+- [x] **Advanced AI**: Smarter "Phage" bots for solo play.
 
 ## 🚀 Phase 3: Expansion (Future)
 - [ ] **Leaderboards**: Global ranking system.

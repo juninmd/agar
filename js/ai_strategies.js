@@ -100,22 +100,24 @@ export class AIStrategies {
             if (other.radius > bot.radius * 1.1) {
                 hasThreat = true;
                 // Predictive dodging: calculate future position if velocity exists
+                const PREDICTIVE_DODGE_MULTIPLIER = 10; // Or move to a constants file
                 let futureX = other.x;
                 let futureY = other.y;
-                if (other.velocity && (other.velocity.x !== undefined) && (other.velocity.y !== undefined)) {
-                    futureX += other.velocity.x * 10;
-                    futureY += other.velocity.y * 10;
+                if (other.velocity) {
+                    futureX += other.velocity.x * PREDICTIVE_DODGE_MULTIPLIER;
+                    futureY += other.velocity.y * PREDICTIVE_DODGE_MULTIPLIER;
                 }
                 const futureDist = Math.max(1, Utils.getDistance(bot.x, bot.y, futureX, futureY));
                 threatVector.x += (bot.x - futureX) / futureDist;
                 threatVector.y += (bot.y - futureY) / futureDist;
             } else if (other.radius * 1.1 < bot.radius) {
                 // Predictive hunting: intercept smaller prey
+                const PREDICTIVE_HUNT_MULTIPLIER = 5; // Or move to a constants file
                 let futureX = other.x;
                 let futureY = other.y;
-                if (other.velocity && (other.velocity.x !== undefined) && (other.velocity.y !== undefined)) {
-                    futureX += other.velocity.x * 5;
-                    futureY += other.velocity.y * 5;
+                if (other.velocity) {
+                    futureX += other.velocity.x * PREDICTIVE_HUNT_MULTIPLIER;
+                    futureY += other.velocity.y * PREDICTIVE_HUNT_MULTIPLIER;
                 }
                 const futureDist = Math.max(1, Utils.getDistance(bot.x, bot.y, futureX, futureY));
                 const score = ((other.radius) / (futureDist + 1)) * bot.typeData.aggression;

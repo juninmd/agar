@@ -96,12 +96,29 @@ export class AIStrategies {
             const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
             const viewRange = (500 + bot.radius) * Math.max(0.5, bot.typeData.aggression);
             if (dist > viewRange) return;
+
             if (other.radius > bot.radius * 1.1) {
                 hasThreat = true;
-                threatVector.x += (bot.x - other.x) / dist;
-                threatVector.y += (bot.y - other.y) / dist;
+                // Predictive dodging: calculate future position if velocity exists
+                let futureX = other.x;
+                let futureY = other.y;
+                if (other.velocity && (other.velocity.x !== undefined) && (other.velocity.y !== undefined)) {
+                    futureX += other.velocity.x * 10;
+                    futureY += other.velocity.y * 10;
+                }
+                const futureDist = Math.max(1, Utils.getDistance(bot.x, bot.y, futureX, futureY));
+                threatVector.x += (bot.x - futureX) / futureDist;
+                threatVector.y += (bot.y - futureY) / futureDist;
             } else if (other.radius * 1.1 < bot.radius) {
-                const score = ((other.radius) / (dist + 1)) * bot.typeData.aggression;
+                // Predictive hunting: intercept smaller prey
+                let futureX = other.x;
+                let futureY = other.y;
+                if (other.velocity && (other.velocity.x !== undefined) && (other.velocity.y !== undefined)) {
+                    futureX += other.velocity.x * 5;
+                    futureY += other.velocity.y * 5;
+                }
+                const futureDist = Math.max(1, Utils.getDistance(bot.x, bot.y, futureX, futureY));
+                const score = ((other.radius) / (futureDist + 1)) * bot.typeData.aggression;
                 if (score > bestScore) {
                     bestScore = score;
                     bestTarget = other;

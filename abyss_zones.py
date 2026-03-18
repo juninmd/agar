@@ -16,7 +16,7 @@ class ObscuredEntity:
         self.is_obscured = is_obscured
         self.flicker_effect = 0.0
 
-    def update_flicker(self, time_step: float):
+    def update_flicker(self):
         """Adds a static noise flicker effect to obscured entities."""
         if self.is_obscured:
             self.flicker_effect = random.uniform(0.1, 0.4)
@@ -69,11 +69,10 @@ class AbyssZone:
             return 0.0
 
         alpha = 0.9
-        if self.lifespan < 5000:
-            alpha = 0.9 * max(0.0, self.lifespan / 5000)  # Fade out
-        elif (self.max_lifespan - self.lifespan) <= 5000:
-            alpha = 0.9 * max(0.0, (self.max_lifespan - self.lifespan) / 5000)  # Fade in
-
+        FADE_TIME = 5000.0
+        fade_in_factor = min(1.0, (self.max_lifespan - self.lifespan) / FADE_TIME)
+        fade_out_factor = min(1.0, self.lifespan / FADE_TIME)
+        alpha = 0.9 * min(fade_in_factor, fade_out_factor)
         return alpha
 
 
@@ -95,7 +94,7 @@ class AbyssManager:
         x = random.uniform(radius, self.world_width - radius)
         y = random.uniform(radius, self.world_height - radius)
         lifespan = random.uniform(60000, 120000)  # 1-2 minutes
-        zone_id = f"abyss_{int(random.random() * 9999)}"
+        zone_id = f"abyss_{random.randint(0, 9999)}"
 
         new_zone = AbyssZone(zone_id, x, y, radius, lifespan)
         self.zones.append(new_zone)

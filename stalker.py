@@ -53,7 +53,7 @@ class Stalker(Entity):
 
         self.visibility = target_alpha
 
-    def move_towards(self, target: Entity, dt: float = 1.0):
+    def move_towards(self, target: Entity, dt: float):
         """
         Calculates velocity vector towards target and applies movement.
         """

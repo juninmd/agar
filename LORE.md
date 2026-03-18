@@ -127,3 +127,13 @@ Become the new **System Admin**.
 > And it's not alone. Small, virulent PARASITE bots are latching onto the larger entities, draining them slowly.
 > The Bio-Digital Convergence has begun. The neon is turning organic."
 > -- *Archived Transmission: Sector 7G*
+
+### 🕳️ HIDDEN FRAGMENT: THE DEEP WEB ABYSS
+
+> "There are sectors on the Grid where the light simply fails. We call them Abyss Zones.
+> It is not a lack of data, but a density so absolute that rendering engines collapse under their own weight.
+> If you enter the Abyss, your vision is stripped away. You are blind, swimming in a sea of unknown entities.
+> And worse, something has adapted to this darkness. The 'STALKER' protocols.
+> They are nearly invisible, cloaking their opacity by syncing their movement with the dark matter.
+> They wait in the Deep Web. And they are always hungry."
+> -- *Log 0x5A - The Last Transmission of Protocol BASTION-9*

@@ -29,6 +29,7 @@ export class Player extends Entity {
         this.isGlitching = false;
         this.invertedControls = false;
         this.invertedTimer = 0;
+        this.eclipseTimer = 0;
     }
 
     applyPowerUp(type) {
@@ -50,6 +51,12 @@ export class Player extends Entity {
             this.mass *= 0.8;
             this.radius = Utils.getRadiusFromMass(this.mass);
             this.speedBoost = 3.0;
+
+            if (this.protocol && this.protocol.id === 'ECLIPSE') {
+                this.eclipseTimer = 30; // approx 0.5s at 60fps
+                this.invulnerable = true;
+            }
+
             return true;
         }
         return false;
@@ -86,6 +93,15 @@ export class Player extends Entity {
         if (this.invertedTimer > 0) {
             this.invertedTimer--;
             if (this.invertedTimer <= 0) this.invertedControls = false;
+        }
+        if (this.eclipseTimer > 0) {
+            this.eclipseTimer--;
+            this.invulnerable = true; // Ensure it stays true during timer
+            this.alpha = 0.5; // Visual feedback for phase shifting
+            if (this.eclipseTimer <= 0) {
+                this.invulnerable = false;
+                this.alpha = 1.0;
+            }
         }
         if (this.speedBoost > 1) {
             const floor = (this.speedEffectTimer > 0) ? 2.5 : 1.0;

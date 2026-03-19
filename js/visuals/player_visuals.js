@@ -122,6 +122,17 @@ export class PlayerVisuals {
 
         if (player.isGlitching) {
             GlitchVisuals.drawGlitch(ctx, player);
+        } else if (player.type === 'MIMIC') {
+            // Draw as a pulsing star/square to mimic lore/powerups
+            const time = Date.now() * 0.005;
+            const size = player.radius * (0.8 + Math.sin(time) * 0.2);
+            ctx.fillStyle = player.color;
+            ctx.shadowColor = player.color;
+            ctx.shadowBlur = 15;
+            ctx.fillRect(player.x - size, player.y - size, size * 2, size * 2);
+            ctx.shadowBlur = 0;
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.strokeRect(player.x - size, player.y - size, size * 2, size * 2);
         } else if (isOrganic) {
             this.drawOrganicShape(ctx, player);
         } else {

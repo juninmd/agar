@@ -10,6 +10,8 @@ export class AISystem {
             AIStrategies.thinkVoidWalker(bot, entities);
         } else if (bot.type === 'GLITCH_WEAVER') {
             AIStrategies.thinkWeaver(bot, entities, foods);
+        } else if (bot.type === 'MIMIC') {
+            AIStrategies.thinkMimic(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

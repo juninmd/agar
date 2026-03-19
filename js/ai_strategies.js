@@ -10,6 +10,36 @@ export class AIStrategies {
      * @param {Bot} bot - The bot instance.
      * @param {Entity[]} entities - List of all entities.
      */
+    static thinkMimic(bot, entities, foods) {
+        let bestTarget = null;
+        let bestScore = -Infinity;
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            // Only reacts if prey/player is within 300px
+            if (dist > 300) return;
+
+            if (other.radius < bot.radius || other.constructor.name === 'Player') {
+                const score = ((other.radius) / (dist + 1)) * bot.typeData.aggression;
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestTarget = other;
+                }
+            }
+        });
+
+        if (bestTarget) {
+            bot.setTarget(bestTarget.x, bestTarget.y);
+        } else {
+            // Stay completely still to mimic a powerup/lore
+            bot.setTarget(bot.x, bot.y);
+            if (bot.velocity) {
+                bot.velocity.x = 0;
+                bot.velocity.y = 0;
+            }
+        }
+    }
+
     static thinkWeaver(bot, entities, foods) {
         let threat = null;
         let threatDist = Infinity;

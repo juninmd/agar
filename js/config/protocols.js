@@ -62,5 +62,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.2, // Good start
         speedMultiplier: 1.2, // Fast
         description: "EXTREME DECAY. HEALS BY PARASITISM."
+    },
+    ECLIPSE: {
+        id: 'ECLIPSE',
+        name: "ECLIPSE",
+        color: "#000000", // Will be rendered with a bright fractal outline
+        massMultiplier: 0.9, // Slightly smaller
+        speedMultiplier: 1.4, // Very fast
+        description: "PHASE SHIFT. INVULNERABLE DASH."
     }
 };

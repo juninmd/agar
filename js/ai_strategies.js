@@ -17,7 +17,7 @@ export class AIStrategies {
             if (other === bot) return;
             const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
             // Only reacts if prey/player is within 300px
-            if (dist > 300) return;
+            if (dist > CONSTANTS.MIMIC_AGGRO_RANGE) return;
 
             if (other.radius < bot.radius || other.constructor.name === 'Player') {
                 const score = ((other.radius) / (dist + 1)) * bot.typeData.aggression;

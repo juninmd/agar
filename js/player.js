@@ -53,7 +53,7 @@ export class Player extends Entity {
             this.speedBoost = 3.0;
 
             if (this.protocol && this.protocol.id === 'ECLIPSE') {
-                this.eclipseTimer = 30; // approx 0.5s at 60fps
+                this.eclipseTimer = CONSTANTS.ECLIPSE_DASH_DURATION_FRAMES; // approx 0.5s at 60fps
                 this.invulnerable = true;
             }
 
@@ -97,7 +97,7 @@ export class Player extends Entity {
         if (this.eclipseTimer > 0) {
             this.eclipseTimer--;
             this.invulnerable = true; // Ensure it stays true during timer
-            this.alpha = 0.5; // Visual feedback for phase shifting
+            this.alpha = CONSTANTS.ECLIPSE_PHASING_ALPHA; // Visual feedback for phase shifting
             if (this.eclipseTimer <= 0) {
                 this.invulnerable = false;
                 this.alpha = 1.0;

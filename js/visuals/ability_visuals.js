@@ -8,6 +8,13 @@ export class AbilityVisuals {
             });
         }
 
+        if (system.protocolId === 'SOULBOUND' && system.tetheredBots) {
+            system.tetheredBots.forEach(bot => {
+                // Same tether style but dark magenta
+                this.drawViralTether(ctx, player.x, player.y, bot.x, bot.y, 1.0, player.protocol.color);
+            });
+        }
+
         ctx.save();
         ctx.translate(player.x, player.y);
 
@@ -43,21 +50,32 @@ export class AbilityVisuals {
              ctx.strokeStyle = '#FFFFFF';
              ctx.lineWidth = 5;
              ctx.stroke();
+        } else if (system.protocolId === 'SOULBOUND') {
+             const pulse = Math.sin(Date.now() / 150) * 0.2 + 1.0;
+             ctx.beginPath();
+             ctx.arc(0, 0, player.radius * 2 * pulse, 0, Math.PI * 2);
+             ctx.strokeStyle = player.protocol.color;
+             ctx.lineWidth = 3;
+             ctx.stroke();
+             ctx.fillStyle = Utils.hexToRgba(player.protocol.color, 0.1);
+             ctx.fill();
         }
 
         ctx.restore();
     }
 
-    static drawViralTether(ctx, startX, startY, endX, endY, intensity = 1.0) {
+    static drawViralTether(ctx, startX, startY, endX, endY, intensity = 1.0, color = '#9D00FF') {
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(startX, startY);
         const midX = (startX + endX) / 2 + (Math.random() - 0.5) * 20;
         const midY = (startY + endY) / 2 + (Math.random() - 0.5) * 20;
         ctx.quadraticCurveTo(midX, midY, endX, endY);
-        ctx.strokeStyle = `rgba(157, 0, 255, ${intensity})`;
+        // Extract RGB to allow rgba with intensity
+        ctx.strokeStyle = color; // Simpler to just use the color and adjust alpha manually if needed, or stick to solid color with shadow
+        ctx.globalAlpha = intensity;
         ctx.lineWidth = 2 + Math.random() * 2;
-        ctx.shadowColor = '#9D00FF';
+        ctx.shadowColor = color;
         ctx.shadowBlur = 10 * intensity;
         ctx.lineCap = 'round';
         ctx.stroke();

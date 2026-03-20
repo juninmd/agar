@@ -76,6 +76,39 @@ export class AIStrategies {
         else this.wander(bot, []);
     }
 
+    static thinkSoulbinder(bot, entities, foods) {
+        let bestTarget = null;
+        let bestScore = -Infinity;
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            // Search radius
+            if (dist > (600 + bot.radius)) return;
+
+            if (other.constructor.name === 'Player') {
+                bestScore = Infinity;
+                bestTarget = other;
+            } else if (bestScore !== Infinity && other.radius > bot.radius * 0.5) {
+                const score = (other.radius / (dist + 1));
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestTarget = other;
+                }
+            }
+        });
+
+        if (bestTarget) {
+            // Orbital offset to simulate binding instead of directly colliding
+            const angle = Math.atan2(bot.y - bestTarget.y, bot.x - bestTarget.x) + 0.1; // Slowly spiral in
+            const orbitDist = 100 + bestTarget.radius; // Target distance to hover
+            const targetX = bestTarget.x + Math.cos(angle) * orbitDist;
+            const targetY = bestTarget.y + Math.sin(angle) * orbitDist;
+            bot.setTarget(targetX, targetY);
+        } else {
+            this.wander(bot, foods);
+        }
+    }
+
     static thinkCorrupter(bot, entities, foods) {
         let bestTarget = null;
         let bestScore = -Infinity;

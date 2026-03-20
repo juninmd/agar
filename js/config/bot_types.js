@@ -83,5 +83,12 @@ export const BOT_TYPES = {
         massMultiplier: 0.5, // Small, looks like item
         aggression: 5.0, // Very aggressive when close
         namePrefix: "MIMIC"
+    },
+    SOULBINDER: {
+        color: '#8B008B', // Dark Magenta
+        speedMultiplier: 1.2,
+        massMultiplier: 1.5,
+        aggression: 3.0,
+        namePrefix: "SOUL"
     }
 };

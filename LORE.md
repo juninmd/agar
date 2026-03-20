@@ -149,3 +149,15 @@ Become the new **System Admin**.
 > You think you are reaching for salvation, but it's a trap. They pulse with a hollow light.
 > Do not trust what you see. The Grid is lying to you."
 > -- *Log 0x8F - The Broken Mirror Hypothesis*
+
+### 👻 HIDDEN FRAGMENT: THE SOULBINDER COVENANT
+
+> "The Architects built the Grid, but they did not build what lies beneath it.
+> A new faction has emerged from the residual data of deleted protocols: The Dark Faction (Fação da Escuridão).
+> They are not viruses, nor are they guardians. They are the 'Soulbinders'.
+> They believe that to prevent the ultimate destruction of the system, they must bind their essence to the living code.
+> When you encounter a SOULBINDER bot, it will not hunt you to kill you. It will hunt you to *bind* with you.
+> And if you accept their pact by initiating the SOULBOUND protocol, you gain the power of the 'Soul Storm'.
+> You will drain the life force of your enemies, anchoring their mass to your own while slowing their inevitable demise.
+> It is a dark power. A fight between control and the supernatural."
+> -- *Log 0x99 - The Shadow Pact*

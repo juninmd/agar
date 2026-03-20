@@ -70,5 +70,13 @@ export const PROTOCOLS = {
         massMultiplier: 0.9, // Slightly smaller
         speedMultiplier: 1.4, // Very fast
         description: "PHASE SHIFT. INVULNERABLE DASH."
+    },
+    SOULBOUND: {
+        id: 'SOULBOUND',
+        name: "SOULBOUND",
+        color: "#8B008B", // Dark Magenta
+        massMultiplier: 1.0, // Normal
+        speedMultiplier: 1.2, // Slightly fast
+        description: "SOUL STORM. THE DARK FACTION."
     }
 };

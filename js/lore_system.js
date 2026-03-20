@@ -41,7 +41,8 @@ export class LoreSystem {
             { id: 32, text: "LOG 0x20: Only the pure code can enter the blue zones." },
             { id: 33, text: "LOG 0x21: The Purge cannot see what is hidden in the Sanctuary." },
             { id: 34, text: "LOG 0x22: I have returned to rewrite the core. I am the Architect." },
-            { id: 35, text: "LOG 0x23: The Glitch Weaver stitches the broken threads of the Void." }
+            { id: 35, text: "LOG 0x23: The Glitch Weaver stitches the broken threads of the Void." },
+            { id: 36, text: "LOG 0x8F: Do not trust what you see. The Grid is lying to you." }
         ];
     }
 

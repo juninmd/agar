@@ -137,3 +137,15 @@ Become the new **System Admin**.
 > They are nearly invisible, cloaking their opacity by syncing their movement with the dark matter.
 > They wait in the Deep Web. And they are always hungry."
 > -- *Log 0x5A - The Last Transmission of Protocol BASTION-9*
+
+### 🪞 HIDDEN FRAGMENT: THE FRACTAL MIRROR
+
+> "We built the Grid on Euclidean geometry. Clean lines. Predictable logic.
+> But the system has learned to fold itself. It's creating pockets of non-linear space: The Fractal Zones.
+> Inside these anomalies, a new protocol has emerged: ECLIPSE. It doesn't just bend the rules, it phases through them.
+> It slips between the frames.
+> And the Void has responded in kind. We are seeing reports of 'MIMIC' entities.
+> They disguise themselves as vital resources—golden caches of data, powerups, even lore fragments.
+> You think you are reaching for salvation, but it's a trap. They pulse with a hollow light.
+> Do not trust what you see. The Grid is lying to you."
+> -- *Log 0x8F - The Broken Mirror Hypothesis*

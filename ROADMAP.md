@@ -27,5 +27,10 @@
 - [x] **Stalker Protocol**: New stealth-based bot entity that thrives in the dark.
 - [x] **Deep Web Lore**: New narrative fragments explaining the void.
 
+## 🔮 Phase 6: The Fractal Resonance (Current)
+- [x] **Eclipse Protocol**: New stealth-focused class capable of temporary invulnerability during dashes.
+- [x] **Mimic Entities**: Deceptive bots that disguise themselves as powerups or lore fragments.
+- [x] **Fractal Zones**: New visual anomalies in the background data streams.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

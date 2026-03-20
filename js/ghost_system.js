@@ -47,7 +47,7 @@ export class GhostSystem {
      * Spawns saved ghosts into the current game.
      * @param {Game} game
      */
-    spawnGhosts(game) {
+    spawnGhosts() {
         const ghosts = this._loadGhosts();
         ghosts.forEach(g => {
             const radius = Utils.getRadiusFromMass(g.mass);

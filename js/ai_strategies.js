@@ -101,6 +101,7 @@ export class AIStrategies {
                 hasThreat = true;
                 // Predictive dodging: calculate future position if velocity exists
                 const PREDICTIVE_DODGE_MULTIPLIER = 10; // Or move to a constants file
+                const PREDICTIVE_DODGE_MULTIPLIER = 10; // Or move to a constants file
                 let futureX = other.x;
                 let futureY = other.y;
                 if (other.velocity) {
@@ -112,6 +113,7 @@ export class AIStrategies {
                 threatVector.y += (bot.y - futureY) / futureDist;
             } else if (other.radius * 1.1 < bot.radius) {
                 // Predictive hunting: intercept smaller prey
+                const PREDICTIVE_HUNT_MULTIPLIER = 5; // Or move to a constants file
                 const PREDICTIVE_HUNT_MULTIPLIER = 5; // Or move to a constants file
                 let futureX = other.x;
                 let futureY = other.y;

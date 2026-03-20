@@ -11,7 +11,7 @@ export class AbilityVisuals {
         if (system.protocolId === 'SOULBOUND' && system.tetheredBots) {
             system.tetheredBots.forEach(bot => {
                 // Same tether style but dark magenta
-                this.drawViralTether(ctx, player.x, player.y, bot.x, bot.y, 1.0, '#8B008B');
+                this.drawViralTether(ctx, player.x, player.y, bot.x, bot.y, 1.0, player.protocol.color);
             });
         }
 
@@ -54,10 +54,10 @@ export class AbilityVisuals {
              const pulse = Math.sin(Date.now() / 150) * 0.2 + 1.0;
              ctx.beginPath();
              ctx.arc(0, 0, player.radius * 2 * pulse, 0, Math.PI * 2);
-             ctx.strokeStyle = '#8B008B';
+             ctx.strokeStyle = player.protocol.color;
              ctx.lineWidth = 3;
              ctx.stroke();
-             ctx.fillStyle = 'rgba(139, 0, 139, 0.1)';
+             ctx.fillStyle = Utils.hexToRgba(player.protocol.color, 0.1);
              ctx.fill();
         }
 

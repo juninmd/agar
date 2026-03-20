@@ -111,14 +111,16 @@ export class AIStrategies {
                 }
                 }
                 }
+                }
                 const futureDist = Math.max(1, Utils.getDistance(bot.x, bot.y, futureX, futureY));
                 threatVector.x += (bot.x - futureX) / futureDist;
-                threatVector.y += (bot.y - futureY) / futureDist;
                 const PREDICTIVE_HUNT_MULTIPLIER = 5; // Or move to a constants file
                 let futureX = other.x;
                 let futureY = other.y;
                 if (other.velocity) {
                     futureX += other.velocity.x * PREDICTIVE_HUNT_MULTIPLIER;
+                    futureY += other.velocity.y * PREDICTIVE_HUNT_MULTIPLIER;
+                }
                     futureY += other.velocity.y * PREDICTIVE_HUNT_MULTIPLIER;
                 }
                     futureY += other.velocity.y * PREDICTIVE_HUNT_MULTIPLIER;

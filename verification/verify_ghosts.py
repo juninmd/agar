@@ -24,7 +24,7 @@ def verify_ghosts():
         page.click("#start-btn")
 
         # Wait for game init
-        time.sleep(2)
+        page.wait_for_function("() => window.game && window.game.player")
 
         # Verify player exists
         player_exists = page.evaluate("!!window.game.player")

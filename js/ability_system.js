@@ -19,7 +19,8 @@ export class AbilitySystem {
             HACKER: { cooldown: 720, duration: 120 },  // 12s / 2s
             VIRAL:   { cooldown: 600, duration: 300 }, // 10s / 5s
             CYPHER:  { cooldown: 900, duration: 300 }, // 15s / 5s
-            ARCHITECT: { cooldown: 1200, duration: 300 } // 20s / 5s
+            ARCHITECT: { cooldown: 1200, duration: 300 }, // 20s / 5s
+            SOULBOUND: { cooldown: 600, duration: 240 } // 10s / 4s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -75,6 +76,7 @@ export class AbilitySystem {
                      player.speedBoost = Math.max(player.speedBoost, 2.0);
                      bots.forEach(b => b.isSlowed = true);
                 }
+                if (this.protocolId === 'SOULBOUND') this.updateSoulStorm(player, bots);
             }
         } else {
             player.invulnerable = false;
@@ -89,6 +91,25 @@ export class AbilitySystem {
             const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
             if (dist < range && !bot.markedForDeletion) {
                 const drain = bot.mass * 0.015; // Drain 1.5% per frame
+                if (bot.mass > 10) {
+                    bot.mass -= drain;
+                    bot.radius = Utils.getRadiusFromMass(bot.mass);
+                    player.mass += drain;
+                    player.radius = Utils.getRadiusFromMass(player.mass);
+                    this.tetheredBots.push(bot);
+                }
+            }
+        });
+    }
+
+    updateSoulStorm(player, bots) {
+        const range = 400 + player.radius;
+        this.tetheredBots = [];
+        bots.forEach(bot => {
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (dist < range && !bot.markedForDeletion) {
+                bot.isSlowed = true; // Apply slow effect
+                const drain = 0.5; // Constant drain amount
                 if (bot.mass > 10) {
                     bot.mass -= drain;
                     bot.radius = Utils.getRadiusFromMass(bot.mass);

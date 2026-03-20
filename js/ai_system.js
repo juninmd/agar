@@ -12,6 +12,8 @@ export class AISystem {
             AIStrategies.thinkWeaver(bot, entities, foods);
         } else if (bot.type === 'MIMIC') {
             AIStrategies.thinkMimic(bot, entities, foods);
+        } else if (bot.type === 'SOULBINDER') {
+            AIStrategies.thinkSoulbinder(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

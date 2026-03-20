@@ -141,6 +141,8 @@ export class AIStrategies {
                 }
                     futureY += other.velocity.y * PREDICTIVE_HUNT_MULTIPLIER;
                 }
+                    futureY += other.velocity.y * PREDICTIVE_HUNT_MULTIPLIER;
+                }
                 const futureDist = Math.max(1, Utils.getDistance(bot.x, bot.y, futureX, futureY));
                 const score = ((other.radius) / (futureDist + 1)) * bot.typeData.aggression;
                 if (score > bestScore) {

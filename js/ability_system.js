@@ -79,10 +79,10 @@ export class AbilitySystem {
                 this.isActive = false;
                 this.tetheredBots = [];
                 if (this.protocolId === 'PHANTOM') player.alpha = 1.0;
-                if (this.protocolId === 'BASTION' || this.protocolId === 'SYNDICATE') player.invulnerable = false;
+                if (this.protocolId === 'BASTION') player.invulnerable = false;
             } else {
                 if (this.protocolId === 'PHANTOM') player.alpha = 0.4;
-                if (this.protocolId === 'BASTION' || this.protocolId === 'SYNDICATE') player.invulnerable = true;
+                if (this.protocolId === 'BASTION') player.invulnerable = true;
                 if (this.protocolId === 'VIRAL') this.updateOutbreak(player, bots);
                 if (this.protocolId === 'CYPHER') {
                      player.speedBoost = Math.max(player.speedBoost, 2.0);

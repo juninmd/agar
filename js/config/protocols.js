@@ -78,5 +78,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.0, // Normal
         speedMultiplier: 1.2, // Slightly fast
         description: "SOUL STORM. THE DARK FACTION."
+    },
+    SYNDICATE: {
+        id: 'SYNDICATE',
+        name: "SYNDICATE",
+        color: "#FFD700", // Gold
+        massMultiplier: 1.5, // Wealthy
+        speedMultiplier: 0.9, // Weighed down by wealth
+        description: "TRADE RAW MASS FOR VALUABLE DROPS."
     }
 };

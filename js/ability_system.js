@@ -20,7 +20,8 @@ export class AbilitySystem {
             VIRAL:   { cooldown: 600, duration: 300 }, // 10s / 5s
             CYPHER:  { cooldown: 900, duration: 300 }, // 15s / 5s
             ARCHITECT: { cooldown: 1200, duration: 300 }, // 20s / 5s
-            SOULBOUND: { cooldown: 600, duration: 240 } // 10s / 4s
+            SOULBOUND: { cooldown: 600, duration: 240 }, // 10s / 4s
+            SYNDICATE: { cooldown: 600, duration: 120 }  // 10s / 2s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -36,8 +37,19 @@ export class AbilitySystem {
 
         if (this.protocolId === 'HACKER') this.triggerVirus(player, bots);
         if (this.protocolId === 'ARCHITECT') this.triggerArchitect(player, bots);
+        if (this.protocolId === 'SYNDICATE') this.triggerSyndicate(player);
 
         return true;
+    }
+
+    triggerSyndicate(player) {
+        // Syndicate pays mass to spawn a temporary buff
+        if (player.mass > 500) {
+            player.mass -= 300;
+            player.radius = Utils.getRadiusFromMass(player.mass);
+            player.applyPowerUp({ id: 'SHIELD', duration: 180, value: 0 }); // 3 seconds invulnerability
+            // Extra power-up effects can be added dynamically
+        }
     }
 
     triggerArchitect(bots) {

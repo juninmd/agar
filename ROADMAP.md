@@ -37,5 +37,10 @@
 - [x] **Soulbinder Entities**: New bots that orbit and attempt to bind with living code instead of directly attacking.
 - [x] **Dark Faction Lore**: New narrative elements describing a faction attempting to prevent system destruction through "Soul Binding".
 
+## 💰 Phase 9: The Neon Syndicate (Done)
+- [x] **Syndicate Protocol**: New class focused on wealth manipulation and trading mass for power.
+- [x] **Merchant Entities**: Neutral bots that wander the grid and drop valuable data when fed.
+- [x] **Syndicate Lore**: Narrative expansion introducing the rogue faction driven by data economics.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

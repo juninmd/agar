@@ -90,5 +90,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.5,
         aggression: 3.0,
         namePrefix: "SOUL"
+    },
+    MERCHANT: {
+        color: '#FFD700', // Gold/Yellow
+        speedMultiplier: 0.8, // Slightly slow and heavily armored conceptually
+        massMultiplier: 2.0, // Large base mass
+        aggression: 0.0, // Totally neutral
+        namePrefix: "MERCHANT"
     }
 };

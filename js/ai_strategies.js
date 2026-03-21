@@ -66,6 +66,32 @@ export class AIStrategies {
         }
     }
 
+    static thinkMerchant(bot, entities, foods) {
+        let threat = null;
+        let threatDist = Infinity;
+
+        // Merchant flees if a larger entity comes close
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            if (dist < 400 && other.radius > bot.radius) {
+                if (dist < threatDist) {
+                    threat = other;
+                    threatDist = dist;
+                }
+            }
+        });
+
+        if (threat) {
+            // Flee from threat
+            const dx = bot.x - threat.x;
+            const dy = bot.y - threat.y;
+            bot.setTarget(bot.x + dx, bot.y + dy);
+        } else {
+            this.wander(bot, foods);
+        }
+    }
+
     static thinkVoidWalker(bot, entities) {
         let bestTarget = null;
         entities.forEach(other => {

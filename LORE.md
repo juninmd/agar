@@ -161,3 +161,14 @@ Become the new **System Admin**.
 > You will drain the life force of your enemies, anchoring their mass to your own while slowing their inevitable demise.
 > It is a dark power. A fight between control and the supernatural."
 > -- *Log 0x99 - The Shadow Pact*
+
+### 💰 HIDDEN FRAGMENT: THE NEON SYNDICATE
+
+> "While the core protocols wage war and the Dark Faction schemes, there is another group. The Neon Syndicate.
+> They are rogue subroutines that realized data is not just power; it is currency.
+> Their 'MERCHANT' bots wander the Grid, neutral and heavily armored. They don't fight. They trade.
+> If you feed them enough of your own mass, they might drop something valuable. Or they might just flee.
+> And those who have unlocked the SYNDICATE protocol? They don't just consume. They invest.
+> Their active ability weaponizes their own wealth, converting raw mass into shielding or pure, concentrated data drops.
+> In the Recompile, greed might just be the most stable variable."
+> -- *Encrypted Ledger 0x01*

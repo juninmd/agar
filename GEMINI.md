@@ -29,3 +29,4 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Phase 6 The Fractal Resonance completed (Added ECLIPSE protocol, MIMIC bot, and Fractal Zones).
 - Phase 7 Códigos da Escuridão completed (Implemented Soulbinder Bot, Soulbound Protocol, and Soul Storm ability).
 - Phase 9 The Neon Syndicate completed (Added SYNDICATE protocol, MERCHANT bot, and exclusive Syndicate lore).
+- Deployed CI/CD Pipeline (Setup main.yml with automated build, test, release stages via pnpm and uv).

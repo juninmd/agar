@@ -16,7 +16,7 @@ class ObscuredEntity:
         self.is_obscured = is_obscured
         self.flicker_effect = 0.0
 
-    def update_flicker(self):
+    def update_flicker(self, _dt: float = 0.0):
         """Adds a static noise flicker effect to obscured entities."""
         if self.is_obscured:
             self.flicker_effect = random.uniform(0.1, 0.4)

@@ -5,6 +5,7 @@
 - [x] Collision detection for cells.
 - [x] Initial neon aesthetic implementation.
 - [x] Verification scripts for syntax.
+- [x] CI/CD Pipeline Setup.
 
 ## 🚧 Phase 2: Engagement (Current)
 - [ ] **Multiplayer Integration**: Basic WebSocket-based room system.

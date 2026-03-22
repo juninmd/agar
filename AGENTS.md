@@ -37,3 +37,4 @@
 - Completed Phase 6 The Fractal Resonance by adding the ECLIPSE protocol, MIMIC bot, and new background renderer mechanics, ensuring Playwright test coverage.
 - Completed Phase 7 Códigos da Escuridão by adding the SOULBOUND protocol, SOULBINDER bot, and the Soul Storm ability.
 - Completed Phase 9 The Neon Syndicate by adding the SYNDICATE protocol, MERCHANT bot, and exclusive Syndicate lore.
+- Deployed CI/CD setup via Release-Bot (generated .github/workflows/main.yml implementing lint, tests, build, and release steps).

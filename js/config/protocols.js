@@ -86,5 +86,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.5, // Wealthy
         speedMultiplier: 0.9, // Weighed down by wealth
         description: "TRADE RAW MASS FOR VALUABLE DROPS."
+    },
+    MIRAGE: {
+        id: 'MIRAGE',
+        name: "MIRAGE",
+        color: "#00FFFF", // Cyan
+        massMultiplier: 0.9, // Slightly smaller
+        speedMultiplier: 1.3, // Fast
+        description: "HOLOGRAM DECOYS. ILLUSION."
     }
 };

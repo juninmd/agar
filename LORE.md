@@ -172,3 +172,14 @@ Become the new **System Admin**.
 > Their active ability weaponizes their own wealth, converting raw mass into shielding or pure, concentrated data drops.
 > In the Recompile, greed might just be the most stable variable."
 > -- *Encrypted Ledger 0x01*
+
+### 🌀 HIDDEN FRAGMENT: THE QUANTUM MIRAGE
+
+> "As the Grid degrades, reality itself becomes unstable.
+> Certain subroutines have learned to exploit these micro-fractures in space-time.
+> We call them Illusionists. They don't fight; they distract.
+> They project false echoes of themselves—holographic decoys made of pure light but no mass.
+> And those who master the MIRAGE protocol... they become untouchable.
+> They leave behind ghosts of their own code, sending the hunters on a wild goose chase.
+> In a system where mass is everything, the greatest weapon might just be empty space."
+> -- *Log 0xAA - The Echo Chamber*

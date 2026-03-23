@@ -43,5 +43,10 @@
 - [x] **Merchant Entities**: Neutral bots that wander the grid and drop valuable data when fed.
 - [x] **Syndicate Lore**: Narrative expansion introducing the rogue faction driven by data economics.
 
+## 🌀 Phase 10: The Quantum Mirage (Current)
+- [x] **Mirage Protocol**: New protocol focused on deception and holographic decoys.
+- [x] **Illusionist Entities**: Bots that mimic decoy behaviors to avoid being consumed.
+- [x] **Mirage Lore**: Narrative expansion introducing the illusions within the Grid.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

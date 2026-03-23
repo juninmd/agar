@@ -48,6 +48,10 @@ export class CollisionSystem {
                         this.ui.showCorruptionAlert();
                     }
                     prey.markedForDeletion = true;
+                } else if (prey instanceof Bot && prey.type === 'DECOY') {
+                    // Decoys provide no mass and disappear
+                    prey.markedForDeletion = true;
+                    this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, 20);
                 } else {
                     let massGain = prey.mass;
                     if (predator.protocol && predator.protocol.id === 'VIRAL' && prey instanceof Bot) {

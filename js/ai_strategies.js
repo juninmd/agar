@@ -154,6 +154,32 @@ export class AIStrategies {
         else this.wander(bot, foods);
     }
 
+    static thinkIllusionist(bot, entities, foods) {
+        let bestTarget = null;
+        let bestScore = -Infinity;
+        let threatVector = { x: 0, y: 0 };
+        let hasThreat = false;
+
+        entities.forEach(other => {
+            if (other === bot || other.type === 'DECOY') return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            const viewRange = 500 + bot.radius;
+            if (dist > viewRange) return;
+
+            if (other.radius > bot.radius * 1.1) {
+                hasThreat = true;
+                threatVector.x += (bot.x - other.x) / dist;
+                threatVector.y += (bot.y - other.y) / dist;
+            }
+        });
+
+        if (hasThreat) {
+            bot.setTarget(bot.x + threatVector.x * 200, bot.y + threatVector.y * 200);
+        } else {
+            this.wander(bot, foods);
+        }
+    }
+
     static thinkHunter(bot, entities, foods) {
         let bestTarget = null;
         let bestScore = -Infinity;

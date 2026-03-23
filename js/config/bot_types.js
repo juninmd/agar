@@ -97,5 +97,19 @@ export const BOT_TYPES = {
         massMultiplier: 2.0, // Large base mass
         aggression: 0.0, // Totally neutral
         namePrefix: "MERCHANT"
+    },
+    ILLUSIONIST: {
+        color: '#00FFFF', // Cyan
+        speedMultiplier: 1.1,
+        massMultiplier: 1.0,
+        aggression: 1.0,
+        namePrefix: "MIRAGE"
+    },
+    DECOY: {
+        color: '#FFFFFF', // Inherits player/bot color later
+        speedMultiplier: 1.0,
+        massMultiplier: 1.0,
+        aggression: 0.0, // Passive
+        namePrefix: "DECOY"
     }
 };

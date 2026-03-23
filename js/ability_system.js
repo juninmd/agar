@@ -21,7 +21,8 @@ export class AbilitySystem {
             CYPHER:  { cooldown: 900, duration: 300 }, // 15s / 5s
             ARCHITECT: { cooldown: 1200, duration: 300 }, // 20s / 5s
             SOULBOUND: { cooldown: 600, duration: 240 }, // 10s / 4s
-            SYNDICATE: { cooldown: 600, duration: 120 }  // 10s / 2s
+            SYNDICATE: { cooldown: 600, duration: 120 }, // 10s / 2s
+            MIRAGE: { cooldown: 600, duration: 180 }     // 10s / 3s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -38,8 +39,25 @@ export class AbilitySystem {
         if (this.protocolId === 'HACKER') this.triggerVirus(player, bots);
         if (this.protocolId === 'ARCHITECT') this.triggerArchitect(player, bots);
         if (this.protocolId === 'SYNDICATE') this.triggerSyndicate(player);
+        if (this.protocolId === 'MIRAGE') this.triggerMirage(player, bots);
 
         return true;
+    }
+
+    triggerMirage(player, bots) {
+        // Spawn 2 Decoy bots that look like the player
+        for (let i = 0; i < 2; i++) {
+            // Create a fake bot but using the Bot class pattern.
+            // We have to dynamically import Bot or assume it's available via window if we want to avoid circular deps.
+            // Fortunately, bots array contains Bot instances. We can instantiate one using the same constructor if needed.
+            // Or simply rely on the fact that window.Bot is exposed in main.js.
+            const decoy = new window.Bot(player.x, player.y, player.radius, player.color, 'DECOY');
+            decoy.mass = player.mass;
+            decoy.alpha = 0.5; // Visual cue that it's a decoy
+            decoy.isDecoy = true;
+            decoy.setTarget(player.x + (Math.random() - 0.5) * 500, player.y + (Math.random() - 0.5) * 500);
+            bots.push(decoy);
+        }
     }
 
     triggerSyndicate(player) {

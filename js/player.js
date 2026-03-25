@@ -3,6 +3,7 @@ import { CONSTANTS } from './constants.js';
 import { Utils } from './utils.js';
 import { AbilitySystem } from './ability_system.js';
 import { VisualEffects } from './visual_effects.js';
+import { PlayerMovement } from './player_movement.js';
 
 /**
  * Represents the player entity controlled by the user.
@@ -66,7 +67,7 @@ export class Player extends Entity {
         this.abilities.update(this, bots);
         this._updatePassives();
         this._updateEffects();
-        this._updateMovement(worldWidth, worldHeight);
+        PlayerMovement.updateMovement(this, worldWidth, worldHeight);
         VisualEffects.updateTrail(this);
     }
 
@@ -108,41 +109,6 @@ export class Player extends Entity {
             if (this.speedBoost > floor) this.speedBoost *= 0.96;
             else if (this.speedBoost < floor) this.speedBoost = floor;
         }
-    }
-
-    _updateMovement(worldWidth, worldHeight) {
-        const dist = Utils.getDistance(this.x, this.y, this.targetX, this.targetY);
-        const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / this.radius, 0.4);
-        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * this.speedBoost * this.protocol.speedMultiplier;
-
-        if (dist > 5) {
-            let dx = this.targetX - this.x;
-            let dy = this.targetY - this.y;
-
-            if (this.invertedControls) {
-                dx = -dx;
-                dy = -dy;
-            }
-
-            this.velocity.x = (dx / dist) * maxSpeed;
-            this.velocity.y = (dy / dist) * maxSpeed;
-        } else {
-            this.velocity.x = 0;
-            this.velocity.y = 0;
-        }
-
-        const corruptionFactor = Math.max(0, (this.mass - 500) / 2000);
-        if (corruptionFactor > 0 && this.speedBoost <= 1.2) {
-            this.velocity.x += (Math.random() - 0.5) * corruptionFactor * 2;
-            this.velocity.y += (Math.random() - 0.5) * corruptionFactor * 2;
-            this.isGlitching = (Math.random() < corruptionFactor * 0.1);
-        } else {
-            this.isGlitching = false;
-        }
-
-        this.x += this.velocity.x;
-        this.y += this.velocity.y;
-        this.checkBounds(worldWidth, worldHeight);
     }
 
     grow(amount) {

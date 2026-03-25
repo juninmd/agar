@@ -12,7 +12,7 @@
 - [ ] **Skins & Cosmetics**: Visual variety for cells based on lore characters.
 - [x] **Mobile Optimization**: Touch-based controls and responsive UI.
 - [x] **Advanced AI**: Smarter "Phage" bots for solo play.
-- [ ] **Antigravity Refactor**: Fix file constraints for `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js`.
+- [x] **Antigravity Refactor**: Fix file constraints for `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js`.
 
 ## 🚀 Phase 3: Expansion (Future)
 - [ ] **Leaderboards**: Global ranking system.

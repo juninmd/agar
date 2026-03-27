@@ -17,7 +17,7 @@ def run_cuj(page):
     page.evaluate('window.game.riftSystem.triggerRiftStorm();')
 
     # Wait for the storm to pull things and show the narrative UI
-    page.wait_for_timeout(2000)
+    page.wait_for_selector('.narrative-toast.warning', state='visible')
 
     # Take screenshot of the event
     page.screenshot(path="verification_rift_storm.png")

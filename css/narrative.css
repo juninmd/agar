@@ -16,7 +16,7 @@
     pointer-events: none;
     animation: slideDownToast 0.5s ease-out;
     opacity: 1;
-    transition: opacity 0.5s ease-in;
+    transition: opacity 0.5s ease-in, top 0.3s ease-out;
     white-space: nowrap;
     border-radius: 4px;
 }

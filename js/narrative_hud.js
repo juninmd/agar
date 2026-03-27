@@ -21,6 +21,16 @@ export class NarrativeHUD {
             toast.setAttribute('data-text', text);
         }
 
+        // Position it explicitly. Get existing toasts to calculate top offset
+        const existingToasts = Array.from(this.container.querySelectorAll('.narrative-toast:not(.fade-out)'));
+        let topOffset = 15; // Starting top offset in vh/percent
+
+        if (existingToasts.length > 0) {
+            topOffset = 15 + (existingToasts.length * 10); // stack downwards with 10% gap
+        }
+
+        toast.style.top = `${topOffset}%`;
+
         this.container.appendChild(toast);
 
         // Remove after animation

@@ -36,7 +36,10 @@ export class RiftSystem {
 
         // Global pull effect if rifts exist
         if (this.rifts.length > 0) {
-            const entities = [this.game.player, ...this.game.bots, ...this.game.foods].filter(Boolean);
+            const entities = [];
+            if (this.game.player) entities.push(this.game.player);
+            if (this.game.bots) entities.push(...this.game.bots);
+            if (this.game.foods) entities.push(...this.game.foods);
 
             entities.forEach(entity => {
                 if (!entity || entity.markedForDeletion) return;

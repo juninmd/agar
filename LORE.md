@@ -183,3 +183,14 @@ Become the new **System Admin**.
 > They leave behind ghosts of their own code, sending the hunters on a wild goose chase.
 > In a system where mass is everything, the greatest weapon might just be empty space."
 > -- *Log 0xAA - The Echo Chamber*
+
+### ⏳ HIDDEN FRAGMENT: THE CHRONO ANOMALY
+
+> "We always assumed time in the Grid moved forward. A linear progression of cycles.
+> We were wrong. As the Core fractures, data is bleeding into the past.
+> 'ANOMALY' entities are appearing. They don't move; they rewind. When pursued, they slip backwards along their own timeline, appearing erratic and disjointed.
+> And now, a new protocol has compiled from the residual chronal energy: CHRONOS.
+> It allows the user to store their physical state—position and mass—and revert to it upon command.
+> To fight a CHRONOS user is to fight someone who has already lived the battle.
+> They erase their mistakes. They cheat death. They break the fundamental law of entropy."
+> -- *Log 0xBB - The Temporal Paradox*

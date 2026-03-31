@@ -1,6 +1,32 @@
 import { Utils } from './utils.js';
 
 export class AIStrategiesAdvanced {
+    static thinkAnomaly(bot, entities, foods, wanderFn) {
+        // Occasionally glitch backwards or away from targets
+        if (Math.random() < 0.05) {
+            let threatVector = { x: 0, y: 0 };
+            let hasThreat = false;
+            entities.forEach(other => {
+                if (other === bot) return;
+                const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+                if (dist > 300) return;
+                hasThreat = true;
+                threatVector.x += (bot.x - other.x) / dist;
+                threatVector.y += (bot.y - other.y) / dist;
+            });
+
+            if (hasThreat) {
+                // Rewind effect: fast dash away from threat
+                bot.setTarget(bot.x + threatVector.x * 500, bot.y + threatVector.y * 500);
+            } else {
+                // Random temporal jump
+                bot.setTarget(bot.x + (Math.random() - 0.5) * 800, bot.y + (Math.random() - 0.5) * 800);
+            }
+        } else if (!bot.targetX || Math.random() < 0.02) {
+            wanderFn(bot, foods);
+        }
+    }
+
     static thinkSoulbinder(bot, entities, foods, wanderFn) {
         let bestTarget = null;
         let bestScore = -Infinity;

@@ -18,6 +18,8 @@ export class AISystem {
             AIStrategies.thinkMerchant(bot, entities, foods);
         } else if (bot.type === 'ILLUSIONIST') {
             AIStrategies.thinkIllusionist(bot, entities, foods);
+        } else if (bot.type === 'ANOMALY') {
+            AIStrategies.thinkAnomaly(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

@@ -94,5 +94,13 @@ export const PROTOCOLS = {
         massMultiplier: 0.9, // Slightly smaller
         speedMultiplier: 1.3, // Fast
         description: "HOLOGRAM DECOYS. ILLUSION."
+    },
+    CHRONOS: {
+        id: 'CHRONOS',
+        name: "CHRONOS",
+        color: "#FF4500", // OrangeRed
+        massMultiplier: 1.1, // Slightly larger
+        speedMultiplier: 0.9, // Slightly slower
+        description: "TIME REVERSAL. REWIND STATE."
     }
 };

@@ -111,5 +111,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.0,
         aggression: 0.0, // Passive
         namePrefix: "DECOY"
+    },
+    ANOMALY: {
+        color: '#FFA500', // Orange
+        speedMultiplier: 1.5, // Fast but erratic
+        massMultiplier: 0.8,
+        aggression: 1.0,
+        namePrefix: "ANOMALY"
     }
 };

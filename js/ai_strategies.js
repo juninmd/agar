@@ -14,6 +14,10 @@ export class AIStrategies {
         AIStrategiesBasic.thinkMerchant(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkAnomaly(bot, entities, foods) {
+        AIStrategiesAdvanced.thinkAnomaly(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkVoidWalker(bot, entities) {
         AIStrategiesBasic.thinkVoidWalker(bot, entities, AIStrategiesBasic.wander);
     }

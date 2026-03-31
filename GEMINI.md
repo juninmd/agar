@@ -31,3 +31,4 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Phase 9 The Neon Syndicate completed (Added SYNDICATE protocol, MERCHANT bot, and exclusive Syndicate lore).
 - Deployed CI/CD Pipeline (Setup main.yml with automated build, test, release stages via pnpm and uv).
 - Phase 10 The Quantum Mirage completed (Added MIRAGE protocol and ILLUSIONIST/DECOY bots).
+- Phase 11 The Chrono Anomaly completed (Added CHRONOS protocol and ANOMALY entities with temporal rewind abilities).

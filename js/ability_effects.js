@@ -1,6 +1,19 @@
 import { Utils } from './utils.js';
 
 export class AbilityEffects {
+    static triggerChronos(player) {
+        if (player.history && player.history.length > 0) {
+            const pastState = player.history[0]; // oldest state
+            player.x = pastState.x;
+            player.y = pastState.y;
+            player.mass = pastState.mass;
+            player.radius = pastState.radius;
+            // Provide a brief invulnerability window after rewinding
+            player.applyPowerUp({ id: 'SHIELD', duration: 30, value: 0 });
+            player.history = []; // Clear history to prevent chain rewinding
+        }
+    }
+
     static triggerMirage(player, bots) {
         for (let i = 0; i < 2; i++) {
             const decoy = new window.Bot(player.x, player.y, player.radius, player.color, 'DECOY');

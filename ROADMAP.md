@@ -49,5 +49,10 @@
 - [x] **Illusionist Entities**: Bots that mimic decoy behaviors to avoid being consumed.
 - [x] **Mirage Lore**: Narrative expansion introducing the illusions within the Grid.
 
+## ⏳ Phase 11: The Chrono Anomaly (Current)
+- [x] **Chronos Protocol**: New protocol focused on time manipulation and rewinding states.
+- [x] **Anomaly Entities**: Erratic bots that rewind their own position and dodge attacks temporally.
+- [x] **Chronos Lore**: Narrative expansion introducing temporal paradoxes on the Grid.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

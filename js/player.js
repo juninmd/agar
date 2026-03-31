@@ -31,6 +31,7 @@ export class Player extends Entity {
         this.invertedControls = false;
         this.invertedTimer = 0;
         this.eclipseTimer = 0;
+        this.history = [];
     }
 
     applyPowerUp(type) {
@@ -69,6 +70,21 @@ export class Player extends Entity {
         this._updateEffects();
         PlayerMovement.updateMovement(this, worldWidth, worldHeight);
         VisualEffects.updateTrail(this);
+        this._updateHistory();
+    }
+
+    _updateHistory() {
+        if (this.protocol && this.protocol.id === 'CHRONOS') {
+            this.history.push({
+                x: this.x,
+                y: this.y,
+                mass: this.mass,
+                radius: this.radius
+            });
+            if (this.history.length > 180) {
+                this.history.shift();
+            }
+        }
     }
 
     _updatePassives() {

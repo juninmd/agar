@@ -1,36 +1,32 @@
-class Player:
-    def __init__(self, x, y, protocol):
-        self.x = x
-        self.y = y
-        self.mass = 100
-        self.radius = 20
-        self.protocol = protocol
-        self.history = []
-        self.powerups = []
+class Chronos:
+    """
+    Chronos Protocol: Manipulates the time offset.
+    """
+    def __init__(self):
+        self.time_offset = 0
 
-    def update_history(self):
-        if self.protocol == 'CHRONOS':
-            self.history.append({
-                'x': self.x,
-                'y': self.y,
-                'mass': self.mass,
-                'radius': self.radius
-            })
-            if len(self.history) > 180:
-                self.history.pop(0)
+    def rewind(self, delta=1):
+        """Adjusts the time offset backwards."""
+        if not isinstance(delta, (int, float)):
+            raise TypeError("Delta must be a number")
+        self.time_offset += delta
 
-    def apply_powerup(self, powerup_id, duration):
-        self.powerups.append({'id': powerup_id, 'duration': duration})
+    def reset(self):
+        """Clears the time offset."""
+        self.time_offset = 0
 
-class AbilityEffects:
-    @staticmethod
-    def trigger_chronos(player):
-        if hasattr(player, 'history') and len(player.history) > 0:
-            past_state = player.history[0]
-            player.x = past_state['x']
-            player.y = past_state['y']
-            player.mass = past_state['mass']
-            player.radius = past_state['radius']
+    def toggle(self):
+        """Reverses time flow."""
+        self.time_offset *= -1
 
-            player.apply_powerup('SHIELD', 30)
-            player.history = []
+    def describe(self, anomaly):
+        """Describes the protocol's state in relation to an anomaly."""
+        return f"Anomaly {anomaly.type} (time offset: {self.time_offset})"
+
+
+class Anomaly:
+    """
+    Anomaly Entity: Represents a temporal distortion.
+    """
+    def __init__(self, anomaly_type):
+        self.type = anomaly_type

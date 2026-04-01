@@ -8,7 +8,7 @@ export class AIStrategiesAdvanced {
             let hasThreat = false;
             entities.forEach(other => {
                 if (other === bot) return;
-                const dist = Math.max(0.1, Utils.getDistance(bot.x, bot.y, other.x, other.y));
+                const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
                 if (dist > 300) return;
                 hasThreat = true;
                 threatVector.x += (bot.x - other.x) / dist;
@@ -22,7 +22,7 @@ export class AIStrategiesAdvanced {
                 // Random temporal jump
                 bot.setTarget(bot.x + (Math.random() - 0.5) * 800, bot.y + (Math.random() - 0.5) * 800);
             }
-        } else if (bot.targetX === undefined || Math.random() < 0.02) {
+        } else if (!bot.targetX || Math.random() < 0.02) {
             wanderFn(bot, foods);
         }
     }

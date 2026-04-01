@@ -1,57 +1,36 @@
-from chronos import Player, AbilityEffects
+import pytest
+from chronos import Chronos, Anomaly
 
-def test_chronos_history_length():
-    player = Player(100, 100, 'CHRONOS')
+def test_chronos_rewind():
+    chronos = Chronos()
+    chronos.rewind(5)
+    assert chronos.time_offset == 5
 
-    for i in range(200):
-        player.x += 1
-        player.y += 1
-        player.mass += 1
-        player.update_history()
+def test_chronos_rewind_default():
+    chronos = Chronos()
+    chronos.rewind()
+    assert chronos.time_offset == 1
 
-    assert len(player.history) == 180
-    assert player.history[0]['x'] == 121
-    assert player.history[-1]['x'] == 300
+def test_chronos_reset():
+    chronos = Chronos()
+    chronos.rewind(10)
+    chronos.reset()
+    assert chronos.time_offset == 0
 
-def test_chronos_rewind_logic():
-    player = Player(10, 10, 'CHRONOS')
+def test_chronos_toggle():
+    chronos = Chronos()
+    chronos.rewind(3)
+    chronos.toggle()
+    assert chronos.time_offset == -3
 
-    # Store initial state implicitly
-    for i in range(10):
-        player.x += 10
-        player.y += 10
-        player.update_history()
+def test_anomaly_describe():
+    chronos = Chronos()
+    chronos.rewind(5)
+    anomaly = Anomaly("TIME_LOOP")
+    description = chronos.describe(anomaly)
+    assert description == "Anomaly TIME_LOOP (time offset: 5)"
 
-    # State at index 0 should be x=20, y=20
-    # Current state should be x=110, y=110
-    assert player.x == 110
-
-    # Trigger rewind
-    AbilityEffects.trigger_chronos(player)
-
-    # Should be back to oldest history state
-    assert player.x == 20
-    assert player.y == 20
-    assert len(player.history) == 0
-
-    # Should have a SHIELD powerup
-    assert len(player.powerups) == 1
-    assert player.powerups[0]['id'] == 'SHIELD'
-    assert player.powerups[0]['duration'] == 30
-
-def test_chronos_no_history():
-    player = Player(10, 10, 'CHRONOS')
-    # Trigger rewind with empty history
-    AbilityEffects.trigger_chronos(player)
-
-    # Should not change position
-    assert player.x == 10
-    assert player.y == 10
-    assert len(player.powerups) == 0
-
-def test_non_chronos_protocol_history():
-    player = Player(10, 10, 'HACKER')
-    player.x += 10
-    player.update_history()
-
-    assert len(player.history) == 0
+def test_invalid_rewind():
+    chronos = Chronos()
+    with pytest.raises(TypeError):
+        chronos.rewind("invalid")

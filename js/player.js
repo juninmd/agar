@@ -65,7 +65,7 @@ export class Player extends Entity {
     }
 
     update(worldWidth, worldHeight, bots = []) {
-        if (this.protocol.id === 'CHRONOS' && !this.invulnerable) {
+        if (this.protocol.id === 'CHRONOS') {
              this.history.push({ x: this.x, y: this.y, mass: this.mass });
              if (this.history.length > 180) { // Keep last ~3 seconds at 60fps
                  this.history.shift();

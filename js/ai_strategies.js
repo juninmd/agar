@@ -22,6 +22,10 @@ export class AIStrategies {
         AIStrategiesAdvanced.thinkSoulbinder(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkAnomaly(bot, entities, foods) {
+        AIStrategiesAdvanced.thinkAnomaly(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkCorrupter(bot, entities, foods) {
         AIStrategiesAdvanced.thinkCorrupter(bot, entities, foods, AIStrategiesBasic.wander);
     }

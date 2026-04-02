@@ -31,6 +31,7 @@ export class Player extends Entity {
         this.invertedControls = false;
         this.invertedTimer = 0;
         this.eclipseTimer = 0;
+        this.history = [];
     }
 
     applyPowerUp(type) {
@@ -64,6 +65,13 @@ export class Player extends Entity {
     }
 
     update(worldWidth, worldHeight, bots = []) {
+        if (this.protocol.id === 'CHRONOS' && !this.invulnerable) {
+             this.history.push({ x: this.x, y: this.y, mass: this.mass });
+             if (this.history.length > 180) { // Keep last ~3 seconds at 60fps
+                 this.history.shift();
+             }
+        }
+
         this.abilities.update(this, bots);
         this._updatePassives();
         this._updateEffects();

@@ -23,7 +23,8 @@ export class AbilitySystem {
             ARCHITECT: { cooldown: 1200, duration: 300 }, // 20s / 5s
             SOULBOUND: { cooldown: 600, duration: 240 }, // 10s / 4s
             SYNDICATE: { cooldown: 600, duration: 120 }, // 10s / 2s
-            MIRAGE: { cooldown: 600, duration: 180 }     // 10s / 3s
+            MIRAGE: { cooldown: 600, duration: 180 },    // 10s / 3s
+            CHRONOS: { cooldown: 900, duration: 0 }      // 15s / Instant
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -41,6 +42,10 @@ export class AbilitySystem {
         if (this.protocolId === 'ARCHITECT') AbilityEffects.triggerArchitect(bots);
         if (this.protocolId === 'SYNDICATE') AbilityEffects.triggerSyndicate(player);
         if (this.protocolId === 'MIRAGE') AbilityEffects.triggerMirage(player, bots);
+        if (this.protocolId === 'CHRONOS') {
+            AbilityEffects.triggerChronos(player);
+            this.isActive = false; // Instant ability
+        }
 
         return true;
     }

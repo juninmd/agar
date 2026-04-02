@@ -1,6 +1,23 @@
 import { Utils } from './utils.js';
 
 export class AbilityEffects {
+    /**
+     * Triggers the Chronos time rewind ability, reverting the player to a previous state.
+     * @param {Player} player - The player entity triggering the ability.
+     */
+    static triggerChronos(player) {
+        if (player.history && player.history.length > 0) {
+            const pastState = player.history[0]; // oldest state
+            player.x = pastState.x;
+            player.y = pastState.y;
+            player.mass = pastState.mass;
+            player.radius = Utils.getRadiusFromMass(player.mass);
+            player.history = []; // Clear history after rewind
+            // Briefly invincible after rewinding to prevent instant re-death
+            player.applyPowerUp({ id: 'SHIELD', duration: 60, value: 0 });
+        }
+    }
+
     static triggerMirage(player, bots) {
         for (let i = 0; i < 2; i++) {
             const decoy = new window.Bot(player.x, player.y, player.radius, player.color, 'DECOY');

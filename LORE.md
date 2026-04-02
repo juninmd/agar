@@ -183,3 +183,14 @@ Become the new **System Admin**.
 > They leave behind ghosts of their own code, sending the hunters on a wild goose chase.
 > In a system where mass is everything, the greatest weapon might just be empty space."
 > -- *Log 0xAA - The Echo Chamber*
+
+### ⏳ HIDDEN FRAGMENT: THE CHRONO ANOMALY
+
+> "We built the clock. We defined the ticks. But the Grid is starting to remember things that haven't happened yet.
+> There are entities out there—we call them ANOMALIES—that don't fight or flee.
+> When they are cornered, they simply... rewind. They slip backward through the instruction set, returning to a previous state.
+> And now, a new protocol has isolated this behavior. The CHRONOS protocol.
+> By constantly caching their own state history, they can tear a hole in the timeline and revert to their past mass and position.
+> It's not invulnerability. It's denial. They deny the very event of their consumption.
+> The Architects are terrified. If you can rewind time, you can undo the Purge."
+> -- *Log 0xCC - The Temporal Paradox*

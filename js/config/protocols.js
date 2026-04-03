@@ -102,5 +102,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.0, // Normal
         speedMultiplier: 1.1, // Slightly fast
         description: "TIME REVERSAL. REWIND STATE."
+    },
+    ASTRAL: {
+        id: 'ASTRAL',
+        name: "ASTRAL",
+        color: "#E6E6FA", // Lavender
+        massMultiplier: 1.1, // Normal
+        speedMultiplier: 1.1, // Normal
+        description: "STAR LIGHT. THE ASTRAL GRID."
     }
 };

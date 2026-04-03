@@ -49,10 +49,15 @@
 - [x] **Illusionist Entities**: Bots that mimic decoy behaviors to avoid being consumed.
 - [x] **Mirage Lore**: Narrative expansion introducing the illusions within the Grid.
 
-## ⏳ Phase 11: The Chrono Anomaly (Current)
-- [ ] **Chronos Protocol**: New protocol focused on time reversal and state rewinding.
-- [ ] **Anomaly Entities**: Bots that glitch backwards in time when threatened.
-- [ ] **Chrono Lore**: Narrative expansion introducing the manipulation of time within the Grid.
+## ⏳ Phase 11: The Chrono Anomaly (Done)
+- [x] **Chronos Protocol**: New protocol focused on time reversal and state rewinding.
+- [x] **Anomaly Entities**: Bots that glitch backwards in time when threatened.
+- [x] **Chrono Lore**: Narrative expansion introducing the manipulation of time within the Grid.
+
+## ✨ Phase 12: The Astral Grid (Done)
+- [x] **Astral Protocol**: New protocol focused on star light.
+- [x] **Pulsar Entities**: Bots that expand and contract.
+- [x] **Astral Lore**: Narrative expansion introducing the layer above the Grid.
 
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

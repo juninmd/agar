@@ -118,5 +118,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.0,
         aggression: 1.0,
         namePrefix: "ANOMALY"
+    },
+    PULSAR: {
+        color: '#E6E6FA', // Lavender
+        speedMultiplier: 1.0,
+        massMultiplier: 1.5,
+        aggression: 1.5,
+        namePrefix: "PULSAR"
     }
 };

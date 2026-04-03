@@ -42,3 +42,5 @@
 - Initialized new prompt context from the user. Executed Phase 1: The Antigravity Audit and noted file size violations in `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js` for upcoming refactoring.
 - Completed Phase 2 Engagement (Antigravity Refactor) by extracting static methods to `js/ai_strategies_basic.js`, `js/ai_strategies_advanced.js`, `js/ability_effects.js`, `js/player_movement.js`, and `js/visuals/player_visuals_effects.js`.
 - Completed Phase 11 The Chrono Anomaly by adding the CHRONOS protocol with state rewinding logic, the ANOMALY bot, and corresponding Python verification scripts.
+- Refactored `js/ai_strategies_advanced.js` into `js/ai_strategies_combat.js` enforcing the <150 lines Antigravity rule.
+- Completed Phase 12 The Astral Grid by adding the ASTRAL protocol, PULSAR bot, and Astral Lore.

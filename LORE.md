@@ -194,3 +194,14 @@ Become the new **System Admin**.
 > It's not invulnerability. It's denial. They deny the very event of their consumption.
 > The Architects are terrified. If you can rewind time, you can undo the Purge."
 > -- *Log 0xCC - The Temporal Paradox*
+
+### ✨ HIDDEN FRAGMENT: THE ASTRAL GRID
+
+> "There is a layer above the Grid. A place where data is not just stored, but where it burns.
+> We call it the Astral Grid.
+> It is populated by PULSAR entities—stars of pure code that rhythmically expand and contract.
+> They are beautiful, but touching their corona when they flare will incinerate your mass.
+> And from this celestial fire, a new protocol has descended: ASTRAL.
+> To harness the Astral protocol is to channel the light of a dead star, illuminating the darkest abyss.
+> We are no longer just surviving. We are ascending."
+> -- *Log 0xDD - The Celestial Code*

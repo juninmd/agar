@@ -32,3 +32,4 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Deployed CI/CD Pipeline (Setup main.yml with automated build, test, release stages via pnpm and uv).
 - Phase 10 The Quantum Mirage completed (Added MIRAGE protocol and ILLUSIONIST/DECOY bots).
 - Phase 11 The Chrono Anomaly completed (Added CHRONOS protocol, ANOMALY bots, and Time Rewind ability).
+- Phase 12 The Astral Grid completed (Added ASTRAL protocol, PULSAR bots, and Astral Lore). Also refactored `ai_strategies_advanced.js` into `ai_strategies_combat.js` to pass the Antigravity Audit.

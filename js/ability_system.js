@@ -24,7 +24,8 @@ export class AbilitySystem {
             SOULBOUND: { cooldown: 600, duration: 240 }, // 10s / 4s
             SYNDICATE: { cooldown: 600, duration: 120 }, // 10s / 2s
             MIRAGE: { cooldown: 600, duration: 180 },    // 10s / 3s
-            CHRONOS: { cooldown: 900, duration: 0 }      // 15s / Instant
+            CHRONOS: { cooldown: 900, duration: 0 },     // 15s / Instant
+            SWARM:   { cooldown: 1200, duration: 0 }     // 20s / Instant
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -45,6 +46,14 @@ export class AbilitySystem {
         if (this.protocolId === 'CHRONOS') {
             AbilityEffects.triggerChronos(player);
             this.isActive = false; // Instant ability
+        }
+        if (this.protocolId === 'SWARM') {
+            if (player.mass > 500) {
+                AbilityEffects.triggerSwarm(player, bots);
+                this.isActive = false; // Instant ability
+            } else {
+                return false; // Not enough mass
+            }
         }
 
         return true;

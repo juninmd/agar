@@ -18,6 +18,29 @@ export class AbilityEffects {
         }
     }
 
+    static triggerSwarm(player, bots) {
+        // Spawn 5 drones
+const DRONE_COUNT = 5;
+        for (let i = 0; i < DRONE_COUNT; i++) {
+            const drone = new window.Bot(player.x, player.y, 10, player.protocol.color, 'DRONE');
+            drone.mass = 50;
+            drone.swarmOwner = player;
+            drone.droneIndex = i;
+
+            const angle = (i / DRONE_COUNT) * Math.PI * 2;
+            drone.x += Math.cos(angle) * (player.radius + 20);
+            drone.y += Math.sin(angle) * (player.radius + 20);
+
+            bots.push(drone);
+        }
+
+        // Player loses mass to spawn drones
+        if (player.mass > 500) {
+            player.mass -= 250;
+            player.radius = Utils.getRadiusFromMass(player.mass);
+        }
+    }
+
     static triggerMirage(player, bots) {
         for (let i = 0; i < 2; i++) {
             const decoy = new window.Bot(player.x, player.y, player.radius, player.color, 'DECOY');

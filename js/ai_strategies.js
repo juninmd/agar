@@ -35,6 +35,10 @@ export class AIStrategies {
         AIStrategiesAdvanced.thinkIllusionist(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkDrone(bot, entities, foods) {
+        AIStrategiesAdvanced.thinkDrone(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkHunter(bot, entities, foods) {
         AIStrategiesCombat.thinkHunter(bot, entities, foods, AIStrategiesBasic.wander);
     }

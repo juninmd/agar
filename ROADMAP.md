@@ -59,5 +59,10 @@
 - [x] **Pulsar Entities**: Bots that expand and contract.
 - [x] **Astral Lore**: Narrative expansion introducing the layer above the Grid.
 
+## 🐝 Phase 13: The Cybernetic Hive (Done)
+- [x] **Swarm Protocol**: New protocol focused on drone spawning.
+- [x] **Drone Entities**: Bots that orbit and protect their swarm owner.
+- [x] **Hive Lore**: Narrative expansion introducing the collective consciousness.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

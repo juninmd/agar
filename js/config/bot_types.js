@@ -125,5 +125,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.5,
         aggression: 1.5,
         namePrefix: "PULSAR"
+    },
+    DRONE: {
+        color: '#FF8C00', // Dark Orange
+        speedMultiplier: 2.0, // Very fast
+        massMultiplier: 0.2, // Very small
+        aggression: 3.0, // Aggressive
+        namePrefix: "DRONE"
     }
 };

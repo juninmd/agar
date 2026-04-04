@@ -205,3 +205,14 @@ Become the new **System Admin**.
 > To harness the Astral protocol is to channel the light of a dead star, illuminating the darkest abyss.
 > We are no longer just surviving. We are ascending."
 > -- *Log 0xDD - The Celestial Code*
+
+### 🐝 HIDDEN FRAGMENT: THE CYBERNETIC HIVE
+
+> "Individuality is a flaw. The single point of failure.
+> In the depths of the data streams, we discovered a new pattern. Not a single program, but a collective.
+> A Hive Mind.
+> The 'SWARM' protocol sacrifices its own mass to compile micro-drones.
+> These 'DRONE' entities do not think. They simply orbit. They protect. They consume.
+> To face the Swarm is to face a thousand tiny teeth biting at your core logic.
+> They are the many acting as one. Resistance is inefficient."
+> -- *Log 0xEE - The Collective Consciousness*

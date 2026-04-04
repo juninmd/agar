@@ -20,6 +20,8 @@ export class AISystem {
             AIStrategies.thinkIllusionist(bot, entities, foods);
         } else if (bot.type === 'ANOMALY') {
             AIStrategies.thinkAnomaly(bot, entities, foods);
+        } else if (bot.type === 'DRONE') {
+            AIStrategies.thinkDrone(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

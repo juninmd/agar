@@ -110,5 +110,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.1, // Normal
         speedMultiplier: 1.1, // Normal
         description: "STAR LIGHT. THE ASTRAL GRID."
+    },
+    SWARM: {
+        id: 'SWARM',
+        name: "SWARM",
+        color: "#FF8C00", // Dark Orange
+        massMultiplier: 0.8, // Slightly smaller
+        speedMultiplier: 1.2, // Fast
+        description: "HIVE MIND. DRONE SPAWN."
     }
 };

@@ -143,7 +143,7 @@ export class AIStrategiesAdvanced {
             // Orbit the owner
             const time = Date.now() * 0.001;
             const orbitIndex = bot.droneIndex || 0;
-            const angle = time * 2 + (orbitIndex * Math.PI * 2 / 5); // Assuming up to 5 drones usually
+const angle = time * 2 + (orbitIndex * Math.PI * 2 / 5);
             const orbitDist = 100 + bot.swarmOwner.radius;
 
             const targetX = bot.swarmOwner.x + Math.cos(angle) * orbitDist;

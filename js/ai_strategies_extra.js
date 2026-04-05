@@ -9,14 +9,15 @@ export class AIStrategiesExtra {
         let bestTarget = null;
         let bestScore = -Infinity;
 
-        entities.forEach(other => {
-            if (other === bot || other === bot.swarmOwner || other.type === 'DRONE' || other.swarmOwner === bot.swarmOwner) return;
+        for (let i = 0; i < entities.length; i++) {
+            const other = entities[i];
+            if (other === bot || other === bot.swarmOwner || other.type === 'DRONE' || other.swarmOwner === bot.swarmOwner) continue;
             const distToOwner = Utils.getDistance(bot.swarmOwner.x, bot.swarmOwner.y, other.x, other.y);
             if (distToOwner < 500 + bot.swarmOwner.radius) {
                 const score = (1000 - distToOwner) / (other.radius + 1);
                 if (score > bestScore) { bestScore = score; bestTarget = other; }
             }
-        });
+        }
 
         if (bestTarget) {
             bot.setTarget(bestTarget.x, bestTarget.y);
@@ -46,7 +47,7 @@ export class AIStrategiesExtra {
         if (nearestThreat) {
             bot.targetX = bot.x + (bot.x - nearestThreat.x);
             bot.targetY = bot.y + (bot.y - nearestThreat.y);
-        } else if (!bot.targetX || Math.random() < 0.02) {
+        } else if (Math.random() < 0.02) {
             bot.targetX = bot.x + (Math.random() - 0.5) * 200;
             bot.targetY = bot.y + (Math.random() - 0.5) * 200;
         }

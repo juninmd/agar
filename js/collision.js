@@ -52,6 +52,17 @@ export class CollisionSystem {
                     // Decoys provide no mass and disappear
                     prey.markedForDeletion = true;
                     this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, 20);
+                } else if (prey instanceof Bot && prey.type === 'FRAGMENTER') {
+                    // Fragmenters shatter into smaller pieces instead of giving full mass immediately
+                    prey.markedForDeletion = true;
+                    const shards = 5;
+                    for(let i=0; i<shards; i++) {
+                        // We push to particle system instead of bots to avoid cyclic dependencies here,
+                        // or we just emit a huge explosion and give a little mass
+                        this.particleSystem.emitExplosion(prey.x + (Math.random()-0.5)*50, prey.y + (Math.random()-0.5)*50, prey.color, 10);
+                    }
+                    predator.grow(prey.mass * 0.2); // Only get 20% mass, rest is shattered
+                    if (predator === player) result.screenShake = 15;
                 } else {
                     let massGain = prey.mass;
                     if (predator.protocol && predator.protocol.id === 'VIRAL' && prey instanceof Bot) {

@@ -64,5 +64,10 @@
 - [x] **Drone Entities**: Bots that orbit and protect their swarm owner.
 - [x] **Hive Lore**: Narrative expansion introducing the collective consciousness.
 
+## 💎 Phase 14: The Nexus Core (Current)
+- [x] **Nexus Protocol**: New protocol focused on fragmentation and structural integrity.
+- [x] **Fragmenter Entities**: Bots that shatter into smaller fragments upon consumption.
+- [x] **Nexus Lore**: Narrative expansion introducing the crystalline core of the system.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

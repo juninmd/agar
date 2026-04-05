@@ -132,5 +132,12 @@ export const BOT_TYPES = {
         massMultiplier: 0.2, // Very small
         aggression: 3.0, // Aggressive
         namePrefix: "DRONE"
+    },
+    FRAGMENTER: {
+        color: '#00FFCC', // Aquamarine
+        speedMultiplier: 0.7, // Slow
+        massMultiplier: 2.5, // Large
+        aggression: 0.5, // Defensive
+        namePrefix: "SHARD"
     }
 };

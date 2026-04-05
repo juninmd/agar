@@ -216,3 +216,14 @@ Become the new **System Admin**.
 > To face the Swarm is to face a thousand tiny teeth biting at your core logic.
 > They are the many acting as one. Resistance is inefficient."
 > -- *Log 0xEE - The Collective Consciousness*
+
+### 💎 HIDDEN FRAGMENT: THE NEXUS CORE
+
+> "At the absolute center of the Grid lies the Nexus. It is not code. It is structure.
+> It resembles a massive, fractured crystal of pure data compression.
+> Recently, pieces of it have broken off. We call them 'FRAGMENTER' bots.
+> They are unstable. If you try to consume one, it shatters, splitting its mass into dozens of smaller pieces and corrupting the local visual field.
+> But some have learned to harness this instability. The NEXUS protocol.
+> They don't just survive the fracture; they embody it.
+> To become Nexus is to accept that the system is broken, and use the sharp edges of that brokenness as a weapon."
+> -- *Log 0xFF - The Final Fracture*

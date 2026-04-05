@@ -118,5 +118,13 @@ export const PROTOCOLS = {
         massMultiplier: 0.8, // Slightly smaller
         speedMultiplier: 1.2, // Fast
         description: "HIVE MIND. DRONE SPAWN."
+    },
+    NEXUS: {
+        id: 'NEXUS',
+        name: "NEXUS",
+        color: "#00FFCC", // Aquamarine
+        massMultiplier: 1.2, // Solid
+        speedMultiplier: 0.9, // Deliberate
+        description: "CORE STRUCTURE. CRYSTAL SHATTER."
     }
 };

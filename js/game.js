@@ -141,8 +141,8 @@ export class Game {
                     for (let k = 0; k < shardCount; k++) {
                         const angle = Math.random() * Math.PI * 2;
                         const dist = Math.random() * 50;
-                        const fx = res.shards.x + Math.cos(angle) * dist;
-                        const fy = res.shards.y + Math.sin(angle) * dist;
+                        const fx = Math.max(0, Math.min(CONSTANTS.WORLD_WIDTH, res.shards.x + Math.cos(angle) * dist));
+                        const fy = Math.max(0, Math.min(CONSTANTS.WORLD_HEIGHT, res.shards.y + Math.sin(angle) * dist));
                         const fRadius = Utils.getRadiusFromMass(res.shards.mass / shardCount);
                         this.foods.push(new Food(fx, fy, fRadius, res.shards.color));
                     }

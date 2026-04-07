@@ -134,9 +134,9 @@ const DRONE_COUNT = 5;
 
                     // Push back logic
                     if (dist > 0) {
-                        const pushPower = 20;
-                        bot.velocity.x += ((bot.x - player.x) / dist) * pushPower;
-                        bot.velocity.y += ((bot.y - player.y) / dist) * pushPower;
+                        const pushPower = 40;
+                        bot.x += ((bot.x - player.x) / dist) * pushPower;
+                        bot.y += ((bot.y - player.y) / dist) * pushPower;
                     }
 
                     // Optional: You'd want to emit particles here but we don't have particle system access easily in this static function

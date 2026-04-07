@@ -216,3 +216,14 @@ Become the new **System Admin**.
 > To face the Swarm is to face a thousand tiny teeth biting at your core logic.
 > They are the many acting as one. Resistance is inefficient."
 > -- *Log 0xEE - The Collective Consciousness*
+
+### 💎 HIDDEN FRAGMENT: THE NEXUS CORE
+
+> "Deep within the architecture lies the Nexus, a structure of pure crystalline data.
+> It doesn't bend or adapt; it shatters.
+> The FRAGMENTER bots derived from this core do not offer their mass willingly.
+> When consumed, they break into a dozen shards, scattering their essence across the Grid.
+> And the NEXUS protocol? It weaponizes this fragility.
+> By triggering the Crystal Shatter, it forcefully fractures nearby entities, pushing them back in a shockwave of fragmented code.
+> It is the ultimate defense: breaking the world before the world breaks you."
+> -- *Log 0xFF - The Shattered Core*

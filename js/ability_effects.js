@@ -111,4 +111,39 @@ const DRONE_COUNT = 5;
             }
         });
     }
+
+    /**
+     * Triggers the Nexus Crystal Shatter ability, damaging and pushing back nearby bots.
+     * @param {Player} player - The player entity triggering the ability.
+     * @param {Array} bots - List of all bots in the game.
+     */
+    static triggerNexus(player, bots) {
+        const range = 400 + player.radius;
+        // Cost of the ability: 200 mass
+        if (player.mass > 250) {
+            player.mass -= 200;
+            player.radius = Utils.getRadiusFromMass(player.mass);
+
+            bots.forEach(bot => {
+                const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+                if (dist < range && !bot.markedForDeletion) {
+                    // Shatter effect: reduce mass and push back
+                    const damage = bot.mass * 0.3;
+                    bot.mass = Math.max(10, bot.mass - damage);
+                    bot.radius = Utils.getRadiusFromMass(bot.mass);
+
+                    // Push back logic
+                    if (dist > 0) {
+                        const pushPower = 40;
+                        bot.x += ((bot.x - player.x) / dist) * pushPower;
+                        bot.y += ((bot.y - player.y) / dist) * pushPower;
+                    }
+
+                    // Optional: You'd want to emit particles here but we don't have particle system access easily in this static function
+                    // unless we pass game/particle system. So we'll skip direct particles here or handle via visuals later.
+                    bot.isSlowed = true; // Temporary effect
+                }
+            });
+        }
+    }
 }

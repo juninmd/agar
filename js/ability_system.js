@@ -25,7 +25,8 @@ export class AbilitySystem {
             SYNDICATE: { cooldown: 600, duration: 120 }, // 10s / 2s
             MIRAGE: { cooldown: 600, duration: 180 },    // 10s / 3s
             CHRONOS: { cooldown: 900, duration: 0 },     // 15s / Instant
-            SWARM:   { cooldown: 1200, duration: 0 }     // 20s / Instant
+            SWARM:   { cooldown: 1200, duration: 0 },    // 20s / Instant
+            NEXUS:   { cooldown: 600, duration: 0 }      // 10s / Instant
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -50,6 +51,14 @@ export class AbilitySystem {
         if (this.protocolId === 'SWARM') {
             if (player.mass > 500) {
                 AbilityEffects.triggerSwarm(player, bots);
+                this.isActive = false; // Instant ability
+            } else {
+                return false; // Not enough mass
+            }
+        }
+        if (this.protocolId === 'NEXUS') {
+            if (player.mass > 250) {
+                AbilityEffects.triggerNexus(player, bots);
                 this.isActive = false; // Instant ability
             } else {
                 return false; // Not enough mass

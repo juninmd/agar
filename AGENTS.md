@@ -44,3 +44,4 @@
 - Completed Phase 11 The Chrono Anomaly by adding the CHRONOS protocol with state rewinding logic, the ANOMALY bot, and corresponding Python verification scripts.
 - Refactored `js/ai_strategies_advanced.js` into `js/ai_strategies_combat.js` enforcing the <150 lines Antigravity rule.
 - Completed Phase 12 The Astral Grid by adding the ASTRAL protocol, PULSAR bot, and Astral Lore.
+- Completed Phase 14 The Nexus Core by adding the NEXUS protocol, FRAGMENTER bot, Crystal Shatter active ability, and Nexus Core lore, adhering to file constraints by modularizing into `ai_strategies_extra.js`.

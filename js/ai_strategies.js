@@ -1,6 +1,7 @@
 import { AIStrategiesBasic } from './ai_strategies_basic.js';
 import { AIStrategiesAdvanced } from './ai_strategies_advanced.js';
 import { AIStrategiesCombat } from './ai_strategies_combat.js';
+import { AIStrategiesExtra } from './ai_strategies_extra.js';
 
 export class AIStrategies {
     static thinkMimic(bot, entities, foods) {
@@ -36,7 +37,11 @@ export class AIStrategies {
     }
 
     static thinkDrone(bot, entities, foods) {
-        AIStrategiesAdvanced.thinkDrone(bot, entities, foods, AIStrategiesBasic.wander);
+        AIStrategiesExtra.thinkDrone(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
+    static thinkFragmenter(bot, entities, foods) {
+        AIStrategiesExtra.thinkFragmenter(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
     static thinkHunter(bot, entities, foods) {

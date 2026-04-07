@@ -22,6 +22,8 @@ export class AISystem {
             AIStrategies.thinkAnomaly(bot, entities, foods);
         } else if (bot.type === 'DRONE') {
             AIStrategies.thinkDrone(bot, entities, foods);
+        } else if (bot.type === 'FRAGMENTER') {
+            AIStrategies.thinkFragmenter(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

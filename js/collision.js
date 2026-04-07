@@ -52,6 +52,11 @@ export class CollisionSystem {
                     // Decoys provide no mass and disappear
                     prey.markedForDeletion = true;
                     this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, 20);
+                } else if (prey instanceof Bot && prey.type === 'FRAGMENTER') {
+                    // Fragmenter shatters into food shards
+                    prey.markedForDeletion = true;
+                    this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, 50);
+                    result.shards = { mass: prey.mass, x: prey.x, y: prey.y, color: prey.color };
                 } else {
                     let massGain = prey.mass;
                     if (predator.protocol && predator.protocol.id === 'VIRAL' && prey instanceof Bot) {

@@ -13,6 +13,8 @@ import { RaidSystem } from './raid_system.js';
 import { WeaverSystem } from './weaver_system.js';
 import { RiftSystem } from './rift_system.js';
 import { GameSystems } from './game_systems.js';
+import { Food } from './food.js';
+import { Utils } from './utils.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -132,7 +134,20 @@ export class Game {
         });
         this.riftSystem.rifts = this.riftSystem.rifts.filter(r => !r.markedForDeletion);
         for (let i = 0; i < all.length; i++) {
-            for (let j = i + 1; j < all.length; j++) this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
+            for (let j = i + 1; j < all.length; j++) {
+                const res = this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
+                if (res && res.shards) {
+                    const shardCount = Math.min(10, Math.max(5, Math.floor(res.shards.mass / 20)));
+                    for (let k = 0; k < shardCount; k++) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const dist = Math.random() * 50;
+                        const fx = res.shards.x + Math.cos(angle) * dist;
+                        const fy = res.shards.y + Math.sin(angle) * dist;
+                        const fRadius = Utils.getRadiusFromMass(res.shards.mass / shardCount);
+                        this.foods.push(new Food(fx, fy, fRadius, res.shards.color));
+                    }
+                }
+            }
         }
     }
 

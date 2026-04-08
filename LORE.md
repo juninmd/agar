@@ -227,3 +227,15 @@ Become the new **System Admin**.
 > By triggering the Crystal Shatter, it forcefully fractures nearby entities, pushing them back in a shockwave of fragmented code.
 > It is the ultimate defense: breaking the world before the world breaks you."
 > -- *Log 0xFF - The Shattered Core*
+
+### 🕰️ HIDDEN FRAGMENT: THE TIME ORACLE
+
+> "We built the Grid to flow forward. Entropy increases. Data degrades. Time is linear.
+> But in the deepest, oldest sectors of the Recompile, we found an anchor.
+> They are the Chronovores, or as the bots call them, the ORACLE entities.
+> They do not move. They do not hunt. They simply *exist*, Dilating time around them to a crawl.
+> And those who learn to harness their power through the AEON protocol?
+> They can drop a Time Anchor into the fabric of the Grid.
+> No matter what happens, no matter how much mass they lose, they can always pull themselves back.
+> It's not just a rewind. It's a guarantee. A localized save state in a universe of permanent deletion."
+> -- *Log 0xTIME - The Oracle's Whisper*

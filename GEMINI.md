@@ -35,3 +35,4 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Phase 12 The Astral Grid completed (Added ASTRAL protocol, PULSAR bots, and Astral Lore). Also refactored `ai_strategies_advanced.js` into `ai_strategies_combat.js` to pass the Antigravity Audit.
 - Phase 13 The Cybernetic Hive completed (Added SWARM protocol, DRONE bots, and Hive Mind Lore).
 - Phase 14 The Nexus Core completed (Added NEXUS protocol, FRAGMENTER bots, and Nexus Core Lore. Extracted thinkDrone to ai_strategies_extra.js).
+- Phase 15 The Time Loop completed (Added AEON protocol, ORACLE bots, and Chronovores Lore. Also updated `player_movement.js` to ensure the `isSlowed` time dilation flag is cleared properly per frame to prevent permanent slow loops).

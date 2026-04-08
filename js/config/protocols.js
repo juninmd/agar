@@ -126,5 +126,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.2,
         speedMultiplier: 0.9,
         description: "CORE STRUCTURE. CRYSTAL SHATTER."
+    },
+    AEON: {
+        id: 'AEON',
+        name: "AEON",
+        color: "#00FA9A", // MediumSpringGreen
+        massMultiplier: 1.0,
+        speedMultiplier: 1.1,
+        description: "TIME ANCHOR. RELOCATE."
     }
 };

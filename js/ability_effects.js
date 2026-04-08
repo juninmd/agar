@@ -2,6 +2,27 @@ import { Utils } from './utils.js';
 
 export class AbilityEffects {
     /**
+     * Triggers the Aeon time anchor ability.
+     * @param {Player} player - The player entity triggering the ability.
+     */
+    static triggerAeon(player) {
+        if (player.hasAnchor && player.anchorState) {
+            // Teleport back
+            player.x = player.anchorState.x;
+            player.y = player.anchorState.y;
+            player.mass = player.anchorState.mass;
+            player.radius = Utils.getRadiusFromMass(player.mass);
+            player.hasAnchor = false;
+            // Shield for 3 seconds
+            player.applyPowerUp({ id: 'SHIELD', duration: 180, value: 0 });
+        } else {
+            // Set anchor
+            player.hasAnchor = true;
+            player.anchorState = { x: player.x, y: player.y, mass: player.mass };
+        }
+    }
+
+    /**
      * Triggers the Chronos time rewind ability, reverting the player to a previous state.
      * @param {Player} player - The player entity triggering the ability.
      */

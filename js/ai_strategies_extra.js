@@ -60,6 +60,28 @@ export class AIStrategiesExtra {
     }
 
     /**
+     * AI Strategy for Oracle bots: perfectly stationary, applying a slow effect (time dilation) to nearby entities.
+     * @param {Bot} bot - The oracle bot entity.
+     * @param {Array} entities - List of all entities in the game.
+     * @param {Array} foods - List of all food items.
+     * @param {Function} wanderFn - Fallback wandering function (unused here).
+     */
+    static thinkOracle(bot, entities, foods, wanderFn) {
+        // Remain perfectly stationary
+        bot.setTarget(bot.x, bot.y);
+
+        // Apply time dilation field (slow effect) to nearby entities
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            const effectRange = 200 + bot.radius;
+            if (dist < effectRange) {
+                other.isSlowed = true;
+            }
+        });
+    }
+
+    /**
      * AI Strategy for Fragmenter bots: erratic evasion when threatened.
      * @param {Bot} bot - The fragmenter bot entity.
      * @param {Array} entities - List of all entities in the game.

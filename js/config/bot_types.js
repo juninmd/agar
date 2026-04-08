@@ -139,5 +139,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.0,
         aggression: 0.5, // Erratic
         namePrefix: "FRAG"
+    },
+    ORACLE: {
+        color: '#00FA9A', // MediumSpringGreen
+        speedMultiplier: 0.0, // Stationary
+        massMultiplier: 1.5,
+        aggression: 0.0, // Passive
+        namePrefix: "ORACLE"
     }
 };

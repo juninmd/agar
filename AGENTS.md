@@ -45,3 +45,4 @@
 - Refactored `js/ai_strategies_advanced.js` into `js/ai_strategies_combat.js` enforcing the <150 lines Antigravity rule.
 - Completed Phase 12 The Astral Grid by adding the ASTRAL protocol, PULSAR bot, and Astral Lore.
 - Completed Phase 14 The Nexus Core by adding the NEXUS protocol, FRAGMENTER bot, Crystal Shatter active ability, and Nexus Core lore, adhering to file constraints by modularizing into `ai_strategies_extra.js`.
+- Completed Phase 15 The Time Loop by adding the AEON protocol, ORACLE bot, and Chronovores Lore. Implemented Time Anchor rewinding ability and stationary Oracle bots emitting time dilation fields.

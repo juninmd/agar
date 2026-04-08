@@ -26,7 +26,8 @@ export class AbilitySystem {
             MIRAGE: { cooldown: 600, duration: 180 },    // 10s / 3s
             CHRONOS: { cooldown: 900, duration: 0 },     // 15s / Instant
             SWARM:   { cooldown: 1200, duration: 0 },    // 20s / Instant
-            NEXUS:   { cooldown: 600, duration: 0 }      // 10s / Instant
+            NEXUS:   { cooldown: 600, duration: 0 },     // 10s / Instant
+            AEON:    { cooldown: 600, duration: 0 }      // 10s / Instant
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -63,6 +64,10 @@ export class AbilitySystem {
             } else {
                 return false; // Not enough mass
             }
+        }
+        if (this.protocolId === 'AEON') {
+            AbilityEffects.triggerAeon(player);
+            this.isActive = false; // Instant ability
         }
 
         return true;

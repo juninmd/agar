@@ -5,7 +5,12 @@ export class PlayerMovement {
     static updateMovement(player, worldWidth, worldHeight) {
         const dist = Utils.getDistance(player.x, player.y, player.targetX, player.targetY);
         const speedDecay = Math.pow(CONSTANTS.INITIAL_RADIUS / player.radius, 0.4);
-        const maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * player.speedBoost * player.protocol.speedMultiplier;
+        let maxSpeed = CONSTANTS.PLAYER_SPEED_BASE * speedDecay * player.speedBoost * player.protocol.speedMultiplier;
+
+        if (player.isSlowed) {
+             maxSpeed *= 0.5;
+             player.isSlowed = false; // Reset for next frame
+        }
 
         if (dist > 5) {
             let dx = player.targetX - player.x;

@@ -64,10 +64,15 @@
 - [x] **Drone Entities**: Bots that orbit and protect their swarm owner.
 - [x] **Hive Lore**: Narrative expansion introducing the collective consciousness.
 
-## 💎 Phase 14: The Nexus Core (Current)
+## 💎 Phase 14: The Nexus Core (Done)
 - [x] **Nexus Protocol**: New protocol focused on shattering.
 - [x] **Fragmenter Entities**: Bots that shatter into multiple shards when consumed.
 - [x] **Nexus Lore**: Narrative expansion introducing the core structure.
+
+## 🕰️ Phase 15: The Time Loop (Current)
+- [x] **Aeon Protocol**: New protocol capable of placing a time anchor to relocate back to a previous state.
+- [x] **Oracle Entities**: Stationary bots that emit a time dilation field slowing nearby entities.
+- [x] **Chronovores Lore**: Narrative expansion introducing the ancient time-masters who manipulate the timeline.
 
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

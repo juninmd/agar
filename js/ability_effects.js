@@ -174,20 +174,20 @@ const DRONE_COUNT = 5;
      * @param {Array} bots - List of all bots in the game.
      */
     static triggerForge(player, bots) {
-        const range = 400 + player.radius;
-        // Cost of the ability: 100 mass
-        if (player.mass > 150) {
-            player.mass -= 100;
-            player.radius = Utils.getRadiusFromMass(player.mass);
+        if (player.mass <= 150) return false;
 
-            bots.forEach(bot => {
-                const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
-                if (dist < range && !bot.markedForDeletion) {
-                    if (typeof bot.applyPowerUp === 'function') {
-                        bot.applyPowerUp({ id: 'SHIELD', duration: 300, value: 0 }); // 5 seconds
-                    }
+        const range = 400 + player.radius;
+        player.mass -= 100;
+        player.radius = Utils.getRadiusFromMass(player.mass);
+
+        bots.forEach(bot => {
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (dist < range && !bot.markedForDeletion) {
+                if (typeof bot.applyPowerUp === 'function') {
+                    bot.applyPowerUp({ id: 'SHIELD', duration: 300, value: 0 });
                 }
-            });
-        }
+            }
+        });
+        return true;
     }
 }

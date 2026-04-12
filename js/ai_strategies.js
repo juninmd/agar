@@ -48,6 +48,10 @@ export class AIStrategies {
         AIStrategiesExtra.thinkOracle(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkSmith(bot, entities, foods) {
+        AIStrategiesExtra.thinkSmith(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkHunter(bot, entities, foods) {
         AIStrategiesCombat.thinkHunter(bot, entities, foods, AIStrategiesBasic.wander);
     }

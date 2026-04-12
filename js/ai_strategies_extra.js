@@ -113,4 +113,26 @@ export class AIStrategiesExtra {
             wanderFn(bot, foods);
         }
     }
+
+    static thinkSmith(bot, entities, foods, wanderFn) {
+        let bestTarget = null;
+        let bestDist = Infinity;
+        entities.forEach(other => {
+            if (other === bot || other.type === 'SMITH' || other.isPlayer) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            if (dist < 600 + bot.radius && dist < bestDist) {
+                bestDist = dist;
+                bestTarget = other;
+            }
+        });
+
+        if (bestTarget) {
+            bot.setTarget(bestTarget.x, bestTarget.y);
+            if (bestDist < bot.radius + bestTarget.radius + 50 && typeof bestTarget.applyPowerUp === 'function') {
+                bestTarget.applyPowerUp({ id: 'SHIELD', duration: 180, value: 0 });
+            }
+        } else {
+            wanderFn(bot, foods);
+        }
+    }
 }

@@ -134,5 +134,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.0,
         speedMultiplier: 1.1,
         description: "TIME ANCHOR. RELOCATE."
+    },
+    FORGE: {
+        id: 'FORGE',
+        name: "FORGE",
+        color: "#A9A9A9", // DarkGray
+        massMultiplier: 1.5,
+        speedMultiplier: 0.8,
+        description: "THE QUANTUM ANVIL. REINFORCE."
     }
 };

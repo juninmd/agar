@@ -146,5 +146,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.5,
         aggression: 0.0, // Passive
         namePrefix: "ORACLE"
+    },
+    SMITH: {
+        color: '#A9A9A9', // DarkGray
+        speedMultiplier: 1.1,
+        massMultiplier: 1.2,
+        aggression: 0.0, // Passive, follows bots
+        namePrefix: "SMITH"
     }
 };

@@ -26,6 +26,8 @@ export class AISystem {
             AIStrategies.thinkFragmenter(bot, entities, foods);
         } else if (bot.type === 'ORACLE') {
             AIStrategies.thinkOracle(bot, entities, foods);
+        } else if (bot.type === 'SMITH') {
+            AIStrategies.thinkSmith(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

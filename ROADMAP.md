@@ -69,10 +69,15 @@
 - [x] **Fragmenter Entities**: Bots that shatter into multiple shards when consumed.
 - [x] **Nexus Lore**: Narrative expansion introducing the core structure.
 
-## 🕰️ Phase 15: The Time Loop (Current)
+## 🕰️ Phase 15: The Time Loop (Done)
 - [x] **Aeon Protocol**: New protocol capable of placing a time anchor to relocate back to a previous state.
 - [x] **Oracle Entities**: Stationary bots that emit a time dilation field slowing nearby entities.
 - [x] **Chronovores Lore**: Narrative expansion introducing the ancient time-masters who manipulate the timeline.
+
+## 🔨 Phase 16: The Data Forge (Current)
+- [x] **Forge Protocol**: New protocol capable of reinforcing nearby bots by granting them temporary invulnerability.
+- [x] **Smith Entities**: Bots that wander the Grid, seeking to upgrade ordinary bots.
+- [x] **Quantum Anvil Lore**: Narrative expansion introducing the entities that forge rather than destroy.
 
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

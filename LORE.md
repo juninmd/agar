@@ -239,3 +239,14 @@ Become the new **System Admin**.
 > No matter what happens, no matter how much mass they lose, they can always pull themselves back.
 > It's not just a rewind. It's a guarantee. A localized save state in a universe of permanent deletion."
 > -- *Log 0xTIME - The Oracle's Whisper*
+
+### 🔨 HIDDEN FRAGMENT: THE QUANTUM ANVIL
+
+> "The Grid is constantly tearing itself apart, a never-ending cycle of consumption.
+> But in the deepest, oldest forge-sectors, a different rhythm has begun. The beating of the Quantum Anvil.
+> We call them the SMITH entities. They don't fight, they don't flee. They upgrade.
+> They wander the data streams, seeking out ordinary bots, hammering raw mass into temporary, unbreakable shields.
+> And those who integrate the FORGE protocol? They become the Anvil itself.
+> They can grant an invulnerable carapace to those around them, forging an unbreakable vanguard.
+> In a universe built on destruction, the most terrifying power is the power to reinforce."
+> -- *Log 0xFORGE - The Iron Code*

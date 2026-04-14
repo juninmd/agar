@@ -135,4 +135,23 @@ export class AIStrategiesExtra {
             wanderFn(bot, foods);
         }
     }
+    static thinkNeuron(bot, entities, foods, wanderFn) {
+        let bestTarget = null;
+        let bestDist = Infinity;
+        entities.forEach(other => {
+            if (other === bot || other.type !== 'NEURON') return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            // Seek other neurons within 800px to form clusters
+            if (dist > bot.radius + other.radius && dist < 800 && dist < bestDist) {
+                bestDist = dist;
+                bestTarget = other;
+            }
+        });
+
+        if (bestTarget) {
+            bot.setTarget(bestTarget.x, bestTarget.y);
+        } else {
+            wanderFn(bot, foods);
+        }
+    }
 }

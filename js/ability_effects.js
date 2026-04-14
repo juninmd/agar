@@ -190,4 +190,17 @@ const DRONE_COUNT = 5;
         });
         return true;
     }
+    static triggerSynapse(player, bots, cost = 100) {
+        if (player.mass <= cost) return false;
+        player.mass -= cost;
+        player.radius = Utils.getRadiusFromMass(player.mass);
+        bots.forEach(bot => {
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (dist < 400 + player.radius) {
+                bot.confusedTimer = 180; // 3 seconds at 60fps
+                bot.confusedTimer = 180; // 3 seconds at 60fps
+            }
+        });
+        return true;
+    }
 }

@@ -28,6 +28,7 @@ export class Player extends Entity {
         this.speedEffectTimer = 0;
         this.shieldEffectTimer = 0;
         this.isGlitching = false;
+        this.confusedTimer = 0;
         this.invertedControls = false;
         this.invertedTimer = 0;
         this.eclipseTimer = 0;

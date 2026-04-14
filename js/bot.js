@@ -27,7 +27,12 @@ export class Bot extends Player {
     }
 
     update(worldWidth, worldHeight, entities, foods) {
-        if (this.type === 'ELITE_HUNTER') {
+        if (this.confusedTimer > 0) {
+            this.confusedTimer--;
+            // Random jitter instead of AI
+            this.targetX = this.x + (Math.random() - 0.5) * 200;
+            this.targetY = this.y + (Math.random() - 0.5) * 200;
+        } else if (this.type === 'ELITE_HUNTER') {
              // Elite Hunters always know where the player is
              const player = entities.find(e => e.constructor.name === 'Player');
              if (player) {

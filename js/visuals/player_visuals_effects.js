@@ -12,6 +12,20 @@ export class PlayerVisualsEffects {
         }
     }
 
+    static drawConfused(ctx, player) {
+        if (player.confusedTimer > 0) {
+            ctx.save();
+            ctx.fillStyle = '#FF007F';
+            ctx.font = `bold ${Math.max(16, player.radius)}px 'Orbitron'`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            // Wobble
+            const offsetY = Math.sin(Date.now() / 100) * 5;
+            ctx.fillText('?', player.x, player.y - player.radius - 15 + offsetY);
+            ctx.restore();
+        }
+    }
+
     static drawSpeedEffect(ctx, player) {
         if (player.speedEffectTimer > 0) {
             ctx.save();

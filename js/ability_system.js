@@ -28,7 +28,8 @@ export class AbilitySystem {
             SWARM:   { cooldown: 1200, duration: 0 },    // 20s / Instant
             NEXUS:   { cooldown: 600, duration: 0 },     // 10s / Instant
             AEON:    { cooldown: 600, duration: 0 },     // 10s / Instant
-            FORGE:   { cooldown: 600, duration: 0 }      // 10s / Instant
+            FORGE:   { cooldown: 600, duration: 0 },     // 10s / Instant
+            SYNAPSE: { cooldown: 300, duration: 180 }
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -76,6 +77,15 @@ export class AbilitySystem {
                 this.isActive = false; // Instant ability
             } else {
                 return false; // Not enough mass
+            }
+        }
+        if (this.protocolId === 'SYNAPSE') {
+            if (AbilityEffects.triggerSynapse(player, bots)) {
+                this.isActive = true;
+                this.activeTime = this.currentConfig.duration;
+                this.cooldown = this.currentConfig.cooldown;
+            } else {
+                return false;
             }
         }
 

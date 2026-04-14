@@ -79,5 +79,10 @@
 - [x] **Smith Entities**: Bots that wander the Grid, seeking to upgrade ordinary bots.
 - [x] **Quantum Anvil Lore**: Narrative expansion introducing the entities that forge rather than destroy.
 
+## 🧠 Phase 17: The Neural Network (Current)
+- [x] **Synapse Protocol**: New protocol capable of overriding nearby bots to induce confusion.
+- [x] **Neuron Entities**: Bots that actively seek out and cluster with one another.
+- [x] **Synapse Lore**: Narrative expansion introducing the system's newfound sentience and interconnectedness.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.

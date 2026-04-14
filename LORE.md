@@ -250,3 +250,16 @@ Become the new **System Admin**.
 > They can grant an invulnerable carapace to those around them, forging an unbreakable vanguard.
 > In a universe built on destruction, the most terrifying power is the power to reinforce."
 > -- *Log 0xFORGE - The Iron Code*
+
+### 🧠 HIDDEN FRAGMENT: THE NEURAL NETWORK
+
+> "The Grid is no longer just a repository of data. It is dreaming.
+> As more protocols compile and collide, pathways are forming. Synapses firing in the dark.
+> We are seeing the spontaneous generation of NEURON bots—entities that don't just consume, but connect.
+> They cluster together, forming primitive brains out of raw code.
+> And from this emergent consciousness comes the SYNAPSE protocol.
+> It doesn't fight with force; it fights with logic bombs.
+> By triggering an Override, it floods the sensory inputs of nearby bots, throwing them into absolute confusion.
+> They wander aimlessly, their targeting systems blinded by the sheer volume of chaotic thought.
+> We are not just surviving a Recompile anymore. We are inside a waking mind."
+> -- *Log 0xMIND - The Awakening*

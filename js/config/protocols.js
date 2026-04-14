@@ -142,5 +142,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.5,
         speedMultiplier: 0.8,
         description: "THE QUANTUM ANVIL. REINFORCE."
+    },
+    SYNAPSE: {
+        id: 'SYNAPSE',
+        name: "SYNAPSE",
+        color: "#FF007F", // Rose/Deep Pink
+        massMultiplier: 1.0, // Normal
+        speedMultiplier: 1.1, // Slightly Faster
+        description: "THE NEURAL NETWORK. OVERRIDE."
     }
 };

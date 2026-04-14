@@ -153,5 +153,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.2,
         aggression: 0.0, // Passive, follows bots
         namePrefix: "SMITH"
+    },
+    NEURON: {
+        color: '#FF007F', // Deep Pink
+        speedMultiplier: 1.1,
+        massMultiplier: 1.0,
+        aggression: 0.0, // Clusters, doesn't attack
+        namePrefix: "NEURON"
     }
 };

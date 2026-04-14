@@ -86,6 +86,7 @@ export class PlayerVisuals {
         }
 
         PlayerVisualsEffects.drawName(ctx, player);
+        PlayerVisualsEffects.drawConfused(ctx, player);
 
         // Ghosts and organics don't get the standard decorative ring
         if (player.type !== 'GHOST' && !isOrganic) {

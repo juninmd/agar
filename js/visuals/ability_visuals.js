@@ -59,6 +59,14 @@ export class AbilityVisuals {
              ctx.stroke();
              ctx.fillStyle = Utils.hexToRgba(player.protocol.color, 0.1);
              ctx.fill();
+        } else if (system.protocolId === 'SYNAPSE') {
+             const pulse = Math.sin(Date.now() / 100) * 0.3 + 1.0;
+             ctx.beginPath();
+             ctx.arc(0, 0, 400 * (1 - system.activeTime / system.currentConfig.duration), 0, Math.PI * 2);
+             ctx.strokeStyle = '#FF007F';
+             ctx.lineWidth = 4 * pulse;
+             ctx.setLineDash([15, 10]);
+             ctx.stroke();
         }
 
         ctx.restore();

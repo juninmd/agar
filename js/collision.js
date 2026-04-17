@@ -27,6 +27,24 @@ export class CollisionSystem {
         let result = {};
 
         if (dist < minOverlap) {
+            // Bumper collision check: push away instead of consume if bumper
+            if ((e1 instanceof Bot && e1.type === 'BUMPER') || (e2 instanceof Bot && e2.type === 'BUMPER')) {
+                // simple physics push back
+                if (dist > 0) {
+                    const nx = (e2.x - e1.x) / dist;
+                    const ny = (e2.y - e1.y) / dist;
+                    const pushForce = 5;
+                    e1.x -= nx * pushForce;
+                    e1.y -= ny * pushForce;
+                    e2.x += nx * pushForce;
+                    e2.y += ny * pushForce;
+
+                    if (e1.type === 'BUMPER') e1.speedBoost = Math.max(e1.speedBoost || 1.0, 2.0);
+                    if (e2.type === 'BUMPER') e2.speedBoost = Math.max(e2.speedBoost || 1.0, 2.0);
+                }
+                return result; // Skip normal consume logic
+            }
+
             let predator = e1.mass > e2.mass * 1.1 ? e1 : (e2.mass > e1.mass * 1.1 ? e2 : null);
             let prey = predator === e1 ? e2 : e1;
 

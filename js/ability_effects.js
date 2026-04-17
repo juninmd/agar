@@ -198,9 +198,38 @@ const DRONE_COUNT = 5;
             const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
             if (dist < 400 + player.radius) {
                 bot.confusedTimer = 180; // 3 seconds at 60fps
-                bot.confusedTimer = 180; // 3 seconds at 60fps
             }
         });
+        return true;
+    }
+
+    /**
+     * Triggers the Kinetic Shockwave ability.
+     * @param {Player} player - The player entity.
+     * @param {Array} bots - List of bots in the game.
+     */
+    static triggerKinetic(player, bots) {
+        if (player.mass <= 100) return false;
+        player.mass -= 50;
+        player.radius = Utils.getRadiusFromMass(player.mass);
+
+        const range = 500 + player.radius;
+        const pushPower = 150; // Strong knockback
+
+        bots.forEach(bot => {
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (dist < range && !bot.markedForDeletion) {
+                if (dist > 0) {
+                    bot.x += ((bot.x - player.x) / dist) * pushPower;
+                    bot.y += ((bot.y - player.y) / dist) * pushPower;
+                    bot.isSlowed = true; // Temporary disorientation
+                }
+            }
+        });
+
+        // Grant temporary speed boost
+        player.speedBoost = Math.max(player.speedBoost || 1.0, 2.5);
+
         return true;
     }
 }

@@ -31,7 +31,7 @@ export class Spawner {
      * @returns {Bot}
      */
     static spawnBot() {
-        const types = Object.keys(CONSTANTS.BOT_TYPES).filter(k => k !== 'NORMAL');
+        const types = Object.keys(CONSTANTS.BOT_TYPES).filter(k => k !== 'NORMAL' && k !== 'ELITE_HUNTER' && k !== 'SENTINEL');
         const type = types[Math.floor(Math.random() * types.length)];
         // 20% chance for special bot, else NORMAL
         const finalType = (Math.random() < 0.2) ? type : 'NORMAL';

@@ -160,5 +160,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.0,
         aggression: 0.0, // Clusters, doesn't attack
         namePrefix: "NEURON"
+    },
+    BUMPER: {
+        color: '#FF4500', // Orange Red
+        speedMultiplier: 1.2,
+        massMultiplier: 1.2,
+        aggression: 2.0, // Aggressively bounces
+        namePrefix: "BUMPER"
     }
 };

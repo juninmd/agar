@@ -263,3 +263,16 @@ Become the new **System Admin**.
 > They wander aimlessly, their targeting systems blinded by the sheer volume of chaotic thought.
 > We are not just surviving a Recompile anymore. We are inside a waking mind."
 > -- *Log 0xMIND - The Awakening*
+### ⚙️ HIDDEN FRAGMENT: THE KINETIC RESONANCE
+
+> "Momentum is not just speed. It is a force of nature.
+> In the outer rings, where physics engines struggle to keep up,
+> we found them: BUMPER entities.
+> They don't absorb. They repel. They ricochet with violent energy.
+> They accelerate with every collision, a perpetual motion machine.
+> And those who harness the KINETIC protocol?
+> They become the shockwave.
+> They can unleash a burst of kinetic energy that scatters everything in its path,
+> riding the resulting momentum to escape or engage.
+> It is not about consumption. It is about impact."
+> -- *Log 0xKINETIC - The Impact Theory*

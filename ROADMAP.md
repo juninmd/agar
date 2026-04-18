@@ -86,3 +86,4 @@
 
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.
+Phase 18: The Kinetic Resonance

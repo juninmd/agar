@@ -53,6 +53,10 @@ export class AIStrategies {
         AIStrategiesExtra.thinkNeuron(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkBumper(bot, entities, foods) {
+        AIStrategiesExtra.thinkBumper(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkSmith(bot, entities, foods) {
         AIStrategiesExtra.thinkSmith(bot, entities, foods, AIStrategiesBasic.wander);
     }

@@ -135,6 +135,30 @@ export class AIStrategiesExtra {
             wanderFn(bot, foods);
         }
     }
+    static thinkBumper(bot, entities, foods, wanderFn) {
+        let bestTarget = null;
+        let bestScore = -Infinity;
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            // Bumper wants to collide with things, so it targets nearby entities
+            // It particularly likes targeting larger entities to bounce off them
+            if (dist < 800) {
+                const score = (other.radius * 2) - dist; // Prefer large, close targets
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestTarget = other;
+                }
+            }
+        });
+
+        if (bestTarget) {
+            bot.setTarget(bestTarget.x, bestTarget.y);
+        } else {
+            wanderFn(bot, foods);
+        }
+    }
+
     static thinkNeuron(bot, entities, foods, wanderFn) {
         let bestTarget = null;
         let bestDist = Infinity;

@@ -61,6 +61,7 @@ jobs:
           python3 verification/verify_singularity.py
           python3 verification/verify_symbiote.py
           python3 verification/verify_fractal.py
+          python3 verification/verify_kinetic.py
           # The others run automatically too if included in the suite
   build-and-release:
     needs: setup-lint-test

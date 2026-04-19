@@ -86,4 +86,8 @@
 
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.
-Phase 18: The Kinetic Resonance
+- [x] **Kinetic Protocol**: Added Kinetic Resonance mechanics.
+- [x] **Bumper Entities**: Bots that ricochet.
+- [x] **Kinetic Lore**: Narrative fragment added.
+
+## Phase 19: ???

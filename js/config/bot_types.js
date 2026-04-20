@@ -75,7 +75,9 @@ export const BOT_TYPES = {
         speedMultiplier: 2.0, // Very fast
         massMultiplier: 0.3, // Very small
         aggression: 4.0, // Highly aggressive, like a leech
-        namePrefix: "PARASITE"
+        namePrefix: "PARASITE",
+        drainAmount: 0.5,
+        drainMassThreshold: 20
     },
     MIMIC: {
         color: '#FFD700', // Gold (looks like powerup/lore)

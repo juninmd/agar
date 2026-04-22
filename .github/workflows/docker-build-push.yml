@@ -3,8 +3,7 @@ name: Build and Push Docker Image
 on:
   push:
     branches:
-      - master
-      - main
+      - neon-phage-game-4341192680626066668
   workflow_dispatch:
 
 jobs:

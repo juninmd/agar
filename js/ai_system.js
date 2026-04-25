@@ -32,6 +32,8 @@ export class AISystem {
             AIStrategies.thinkSmith(bot, entities, foods);
         } else if (bot.type === 'BUMPER') {
             AIStrategies.thinkBumper(bot, entities, foods);
+        } else if (bot.type === 'LODESTONE') {
+            AIStrategies.thinkLodestone(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

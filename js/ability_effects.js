@@ -232,4 +232,33 @@ const DRONE_COUNT = 5;
 
         return true;
     }
+
+    /**
+     * Updates the Magnetar gravitational pull.
+     * @param {Player} player - The player entity.
+     * @param {Array} bots - List of bots.
+     * @param {Array} foods - List of foods.
+     */
+    static updateMagnetar(player, bots, foods = []) {
+        const range = 600 + player.radius;
+        const pullStrength = 0.5;
+
+        const applyPull = (entities) => {
+            entities.forEach(entity => {
+                if (entity.markedForDeletion) return;
+                const dist = Utils.getDistance(player.x, player.y, entity.x, entity.y);
+                if (dist < range && dist > 0) {
+                    const angle = Math.atan2(player.y - entity.y, player.x - entity.x);
+                    entity.x += Math.cos(angle) * pullStrength * 3;
+                    entity.y += Math.sin(angle) * pullStrength * 3;
+                    if (entity.isSlowed !== undefined) {
+                        entity.isSlowed = true; // Temporary disorientation
+                    }
+                }
+            });
+        };
+
+        applyPull(bots);
+        applyPull(foods);
+    }
 }

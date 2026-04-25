@@ -150,5 +150,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.0, // Normal
         speedMultiplier: 1.1, // Slightly Faster
         description: "THE NEURAL NETWORK. OVERRIDE."
+    },
+    MAGNETAR: {
+        id: 'MAGNETAR',
+        name: "MAGNETAR",
+        color: "#800080", // Purple/Magnet color
+        massMultiplier: 1.3,
+        speedMultiplier: 0.9,
+        description: "THE MAGNETIC POLE. GRAVITATIONAL PULL."
     }
 };

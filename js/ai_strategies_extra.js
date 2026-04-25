@@ -178,4 +178,48 @@ export class AIStrategiesExtra {
             wanderFn(bot, foods);
         }
     }
+
+    /**
+     * AI Strategy for Lodestone bots: stationary or slow drift, constantly pulling nearby entities towards itself.
+     * @param {Bot} bot - The lodestone bot entity.
+     * @param {Array} entities - List of all entities in the game.
+     * @param {Array} foods - List of all food items.
+     * @param {Function} wanderFn - Fallback wandering function.
+     */
+    static thinkLodestone(bot, entities, foods, wanderFn) {
+        // Slow drift
+        wanderFn(bot, foods);
+
+        const range = 500 + bot.radius;
+        const pullStrength = 0.3;
+
+        const applyPull = (items) => {
+            if (!items) return;
+            items.forEach(entity => {
+                if (entity === bot || entity.markedForDeletion) return;
+                const dist = Utils.getDistance(bot.x, bot.y, entity.x, entity.y);
+                if (dist < range && dist > 0) {
+                    const angle = Math.atan2(bot.y - entity.y, bot.x - entity.x);
+
+                    // Directly move the entity (overriding typical velocity handling slightly)
+                    // We just need it to get closer.
+                    entity.x += Math.cos(angle) * pullStrength * 2;
+                    entity.y += Math.sin(angle) * pullStrength * 2;
+
+                    if (entity.velocity !== undefined) {
+                         // Dampen their escape velocity if they try to run away
+                         entity.velocity.x += Math.cos(angle) * pullStrength * 0.5;
+                         entity.velocity.y += Math.sin(angle) * pullStrength * 0.5;
+                    }
+                }
+            });
+        };
+
+        applyPull(entities);
+        if (foods && Array.isArray(foods)) {
+            applyPull(foods);
+        } else if (foods && foods.items) {
+             applyPull(foods.items);
+        }
+    }
 }

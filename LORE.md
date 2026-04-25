@@ -276,3 +276,14 @@ Become the new **System Admin**.
 > riding the resulting momentum to escape or engage.
 > It is not about consumption. It is about impact."
 > -- *Log 0xKINETIC - The Impact Theory*
+
+### 🧲 HIDDEN FRAGMENT: THE MAGNETIC POLE
+
+> "Not all entities in the Grid seek to consume by force or speed.
+> Some simply let the world come to them. We call them LODESTONE entities.
+> They are gravitational anomalies, black holes of code that constantly pull everything around them.
+> You don't realize you are caught in their orbit until it's too late to escape.
+> And the MAGNETAR protocol? It is the ultimate expression of this attractive force.
+> To wield the Magnetar is to become the center of gravity, dragging allies, enemies, and raw data into your core.
+> It is not a hunt. It is an inevitable collapse."
+> -- *Log 0xMAGNET - The Inevitable Pull*

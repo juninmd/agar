@@ -90,4 +90,9 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Bumper Entities**: Bots that ricochet.
 - [x] **Kinetic Lore**: Narrative fragment added.
 
-## Phase 19: ???
+## 🧲 Phase 19: The Magnetic Pole (Current)
+- [x] **Magnetar Protocol**: New protocol that passively exerts a gravitational pull on nearby entities.
+- [x] **Lodestone Entities**: Bots that constantly attract other bots and food towards them.
+- [x] **Magnetic Pole Lore**: Narrative expansion introducing the gravitational anomalies within the Grid.
+
+## Phase 20: ???

@@ -29,7 +29,8 @@ export class AbilitySystem {
             NEXUS:   { cooldown: 600, duration: 0 },     // 10s / Instant
             AEON:    { cooldown: 600, duration: 0 },     // 10s / Instant
             FORGE:   { cooldown: 600, duration: 0 },     // 10s / Instant
-            SYNAPSE: { cooldown: 300, duration: 180 }
+            SYNAPSE: { cooldown: 300, duration: 180 },
+            MAGNETAR:{ cooldown: 900, duration: 240 }    // 15s / 4s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -88,6 +89,12 @@ export class AbilitySystem {
                 return false;
             }
         }
+        if (this.protocolId === 'MAGNETAR') {
+            // Passive-like active duration
+            this.isActive = true;
+            this.activeTime = this.currentConfig.duration;
+            this.cooldown = this.currentConfig.cooldown;
+        }
 
         return true;
     }
@@ -117,6 +124,12 @@ export class AbilitySystem {
                 if (this.protocolId === 'SOULBOUND') {
                     this.tetheredBots = [];
                     AbilityEffects.updateSoulStorm(player, bots, this.tetheredBots);
+                }
+                if (this.protocolId === 'MAGNETAR') {
+                    // Assuming foods array is available via the window.game context for this scope.
+                    // A better architecture would pass game directly into update, but we work within constraints.
+                    const foods = (window.game && window.game.foods) ? window.game.foods : [];
+                    AbilityEffects.updateMagnetar(player, bots, foods);
                 }
             }
         } else {

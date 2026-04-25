@@ -169,5 +169,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.2,
         aggression: 2.0, // Aggressively bounces
         namePrefix: "BUMPER"
+    },
+    LODESTONE: {
+        color: '#4B0082', // Indigo
+        speedMultiplier: 0.8,
+        massMultiplier: 1.5,
+        aggression: 1.0,
+        namePrefix: "LODESTONE"
     }
 };

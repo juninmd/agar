@@ -15,6 +15,13 @@ export class AbilityVisuals {
             });
         }
 
+        if (system.protocolId === 'VAMPYR' && system.tetheredBots) {
+            system.tetheredBots.forEach(bot => {
+                // Crimson blood tethers
+                this.drawViralTether(ctx, player.x, player.y, bot.x, bot.y, 1.0, '#8B0000');
+            });
+        }
+
         ctx.save();
         ctx.translate(player.x, player.y);
 
@@ -67,6 +74,15 @@ export class AbilityVisuals {
              ctx.lineWidth = 4 * pulse;
              ctx.setLineDash([15, 10]);
              ctx.stroke();
+        } else if (system.protocolId === 'VAMPYR') {
+             const pulse = Math.sin(Date.now() / 200) * 0.2 + 1.0;
+             ctx.beginPath();
+             ctx.arc(0, 0, player.radius * 2 * pulse, 0, Math.PI * 2);
+             ctx.strokeStyle = '#8B0000'; // Crimson aura
+             ctx.lineWidth = 4;
+             ctx.stroke();
+             ctx.fillStyle = 'rgba(139, 0, 0, 0.15)';
+             ctx.fill();
         }
 
         ctx.restore();

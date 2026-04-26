@@ -176,5 +176,12 @@ export const BOT_TYPES = {
         massMultiplier: 1.5,
         aggression: 1.0,
         namePrefix: "LODESTONE"
+    },
+    GHOUL: {
+        color: '#8B0000', // Dark Red / Crimson
+        speedMultiplier: 1.3,
+        massMultiplier: 0.8, // Typically smaller scavengers
+        aggression: 4.0, // High aggression towards weak targets
+        namePrefix: "GHOUL"
     }
 };

@@ -30,7 +30,8 @@ export class AbilitySystem {
             AEON:    { cooldown: 600, duration: 0 },     // 10s / Instant
             FORGE:   { cooldown: 600, duration: 0 },     // 10s / Instant
             SYNAPSE: { cooldown: 300, duration: 180 },
-            MAGNETAR:{ cooldown: 900, duration: 240 }    // 15s / 4s
+            MAGNETAR:{ cooldown: 900, duration: 240 },   // 15s / 4s
+            VAMPYR:  { cooldown: 600, duration: 300 }    // 10s / 5s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -95,6 +96,11 @@ export class AbilitySystem {
             this.activeTime = this.currentConfig.duration;
             this.cooldown = this.currentConfig.cooldown;
         }
+        if (this.protocolId === 'VAMPYR') {
+            this.isActive = true;
+            this.activeTime = this.currentConfig.duration;
+            this.cooldown = this.currentConfig.cooldown;
+        }
 
         return true;
     }
@@ -130,6 +136,10 @@ export class AbilitySystem {
                     // A better architecture would pass game directly into update, but we work within constraints.
                     const foods = (window.game && window.game.foods) ? window.game.foods : [];
                     AbilityEffects.updateMagnetar(player, bots, foods);
+                }
+                if (this.protocolId === 'VAMPYR') {
+                    this.tetheredBots = [];
+                    AbilityEffects.updateVampyr(player, bots, this.tetheredBots);
                 }
             }
         } else {

@@ -2,6 +2,7 @@ import { AIStrategiesBasic } from './ai_strategies_basic.js';
 import { AIStrategiesAdvanced } from './ai_strategies_advanced.js';
 import { AIStrategiesCombat } from './ai_strategies_combat.js';
 import { AIStrategiesExtra } from './ai_strategies_extra.js';
+import { AIStrategiesPhysics } from './ai_strategies_physics.js';
 
 export class AIStrategies {
     static thinkMimic(bot, entities, foods) {
@@ -54,15 +55,19 @@ export class AIStrategies {
     }
 
     static thinkBumper(bot, entities, foods) {
-        AIStrategiesExtra.thinkBumper(bot, entities, foods, AIStrategiesBasic.wander);
+        AIStrategiesPhysics.thinkBumper(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
     static thinkLodestone(bot, entities, foods) {
-        AIStrategiesExtra.thinkLodestone(bot, entities, foods, AIStrategiesBasic.wander);
+        AIStrategiesPhysics.thinkLodestone(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
     static thinkSmith(bot, entities, foods) {
-        AIStrategiesExtra.thinkSmith(bot, entities, foods, AIStrategiesBasic.wander);
+        AIStrategiesPhysics.thinkSmith(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
+    static thinkGhoul(bot, entities, foods) {
+        AIStrategiesPhysics.thinkGhoul(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
     static thinkHunter(bot, entities, foods) {

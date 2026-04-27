@@ -37,4 +37,5 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Phase 14 The Nexus Core completed (Added NEXUS protocol, FRAGMENTER bots, and Nexus Core Lore. Extracted thinkDrone to ai_strategies_extra.js).
 - Phase 15 The Time Loop completed (Added AEON protocol, ORACLE bots, and Chronovores Lore. Also updated `player_movement.js` to ensure the `isSlowed` time dilation flag is cleared properly per frame to prevent permanent slow loops).
 - Phase 18 The Kinetic Resonance completed (Added KINETIC protocol, BUMPER bots, and Kinetic Resonance lore).
-- Initialized Jules-DevOps Prime Antigravity Audit: 0 floating entities detected. Warning: Files violating the 150-line limit remain, marked for refactor in Phase 3 Development. 100% test coverage maintained.
+- Initialized Jules-DevOps Prime Antigravity Audit: Refactored `ai_strategies_extra.js` into `ai_strategies_physics.js` to enforce the 150-line file limit. 0 floating entities detected. 100% test coverage maintained.
+- Phase 20 The Crimson Harvest completed (Added VAMPYR protocol, GHOUL bots, and Crimson lore. Created test scripts to verify life steal tether ability and scavenger AI logic).

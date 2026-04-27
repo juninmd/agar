@@ -95,4 +95,9 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Lodestone Entities**: Bots that constantly attract other bots and food towards them.
 - [x] **Magnetic Pole Lore**: Narrative expansion introducing the gravitational anomalies within the Grid.
 
-## Phase 20: ???
+## 🩸 Phase 20: The Crimson Harvest (Current)
+- [x] **Vampyr Protocol**: New protocol focused on siphoning mass via blood tethers.
+- [x] **Ghoul Entities**: Scavenger bots that actively hunt smaller entities but flee from larger threats.
+- [x] **Crimson Lore**: Narrative expansion introducing the emergence of corrupted "blood" data within the Grid.
+
+## Phase 21: ???

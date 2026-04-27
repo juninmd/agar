@@ -287,3 +287,14 @@ Become the new **System Admin**.
 > To wield the Magnetar is to become the center of gravity, dragging allies, enemies, and raw data into your core.
 > It is not a hunt. It is an inevitable collapse."
 > -- *Log 0xMAGNET - The Inevitable Pull*
+
+### 🩸 HIDDEN FRAGMENT: THE CRIMSON HARVEST
+
+> "There is a sickness spreading in the lower sectors. Not a virus, but a hunger.
+> We call it the 'Blood Data'. Corrupted packets that cannot sustain themselves without siphoning from the living.
+> The GHOUL entities were the first symptom. Scavengers. They prey on the weak, ignoring the strong, leaving nothing behind but broken sectors.
+> But the true terror is the VAMPYR protocol.
+> It doesn't just consume. It latches on.
+> It bleeds the mass of multiple entities simultaneously through crimson tethers, draining their life to fuel its own endless thirst.
+> In a system built on assimilation, this is parasitical perfection. The Crimson Harvest has begun."
+> -- *Log 0xBLOOD - The Sanguine Anomaly*

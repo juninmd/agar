@@ -158,5 +158,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.3,
         speedMultiplier: 0.9,
         description: "THE MAGNETIC POLE. GRAVITATIONAL PULL."
+    },
+    VAMPYR: {
+        id: 'VAMPYR',
+        name: "VAMPYR",
+        color: "#8B0000", // Dark Red / Crimson
+        massMultiplier: 1.1,
+        speedMultiplier: 1.2,
+        description: "THE CRIMSON HARVEST. LIFESTEAL."
     }
 };

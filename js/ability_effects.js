@@ -261,4 +261,37 @@ const DRONE_COUNT = 5;
         applyPull(bots);
         applyPull(foods);
     }
+
+    /**
+     * Updates the VAMPYR lifesteal ability.
+     * Tethers to nearby enemies and drains mass to the player.
+     */
+    static updateVampyr(player, bots, tetheredBots) {
+        const range = 400 + player.radius;
+        const drainAmount = 1.5;
+
+        bots.forEach(bot => {
+            if (bot.markedForDeletion) return;
+
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (dist < range) {
+                // Ignore friends/decoys/merchants if we want, or just drain everything
+                if (bot.type === 'DECOY' || bot.type === 'MERCHANT' || bot.type === 'SMITH') return;
+
+                // Drain logic
+                bot.mass -= drainAmount;
+                if (bot.mass < 20) bot.markedForDeletion = true;
+                bot.radius = Utils.getRadiusFromMass(bot.mass);
+
+                player.mass += drainAmount;
+                player.radius = Utils.getRadiusFromMass(player.mass);
+
+                // Disorient
+                bot.isSlowed = true;
+
+                // Visual tracking
+                if (tetheredBots) tetheredBots.push(bot);
+            }
+        });
+    }
 }

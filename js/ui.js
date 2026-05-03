@@ -31,7 +31,14 @@ export class UIManager {
             this.startBtn.addEventListener('click', () => {
                 const name = this.nameInput.value || "Unit 734";
                 const protocol = document.querySelector('.protocol-card.selected')?.dataset.id || 'HACKER';
-                if (this.onStart) this.onStart(name, protocol);
+
+                const mutations = [];
+                if (document.getElementById('mut-chaos')?.checked) mutations.push('chaos-mode');
+                if (document.getElementById('mut-scarcity')?.checked) mutations.push('scarcity');
+                if (document.getElementById('mut-gigantism')?.checked) mutations.push('gigantism');
+                if (document.getElementById('mut-hyper-decay')?.checked) mutations.push('hyper-decay');
+
+                if (this.onStart) this.onStart(name, protocol, mutations);
             });
         }
 

@@ -298,3 +298,13 @@ Become the new **System Admin**.
 > It bleeds the mass of multiple entities simultaneously through crimson tethers, draining their life to fuel its own endless thirst.
 > In a system built on assimilation, this is parasitical perfection. The Crimson Harvest has begun."
 > -- *Log 0xBLOOD - The Sanguine Anomaly*
+
+### 🧪 HIDDEN FRAGMENT: THE MUTATION ENGINE
+
+> "The Recompile was never meant to be static. It was built to iterate.
+> We found a backdoor in the core logic, an interface we call the Mutation Engine.
+> It allows us to inject custom parameters into the Grid before the boot sequence completes.
+> Chaos Mode. Scarcity. Gigantism.
+> We are no longer just surviving the simulation; we are altering its DNA.
+> But be warned: the system is fragile. Too many mutations, and the Grid might just tear itself apart."
+> -- *Log 0xMUT - The Genesis Code*

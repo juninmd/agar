@@ -15,6 +15,7 @@ import { RiftSystem } from './rift_system.js';
 import { GameSystems } from './game_systems.js';
 import { Food } from './food.js';
 import { Utils } from './utils.js';
+import { MutationSystem } from './mutation_system.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -38,17 +39,19 @@ export class Game {
         this.weaverSystem = new WeaverSystem(this);
         this.riftSystem = new RiftSystem(this);
         this.systems = new GameSystems(this);
+        this.mutationSystem = new MutationSystem();
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
 
-        this.ui.onStart = (name, protocol) => this.start(name, protocol);
-        this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id);
+        this.ui.onStart = (name, protocol, mutations) => this.start(name, protocol, mutations);
+        this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations);
         this.input.onDash = () => this.handleDash();
         this.input.onAbility = () => this.handleAbility();
     }
 
-    start(name, protocol) {
+    start(name, protocol, mutations = []) {
+        this.mutationSystem.applyModifiers(mutations, CONSTANTS);
         this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name);
         this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => Spawner.spawnFood());
         this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());

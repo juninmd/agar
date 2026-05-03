@@ -83,6 +83,25 @@ export class AbilityVisuals {
              ctx.stroke();
              ctx.fillStyle = 'rgba(139, 0, 0, 0.15)';
              ctx.fill();
+        } else if (system.protocolId === 'BREAKER') {
+             const points = 12;
+             const outerRadius = player.radius * 1.5;
+             const innerRadius = player.radius * 1.2;
+             const rotation = Date.now() / 500;
+
+             ctx.beginPath();
+             for (let i = 0; i < points * 2; i++) {
+                 const radius = i % 2 === 0 ? outerRadius : innerRadius;
+                 const angle = (i * Math.PI) / points + rotation;
+                 const px = Math.cos(angle) * radius;
+                 const py = Math.sin(angle) * radius;
+                 if (i === 0) ctx.moveTo(px, py);
+                 else ctx.lineTo(px, py);
+             }
+             ctx.closePath();
+             ctx.strokeStyle = '#FF8C00';
+             ctx.lineWidth = 3;
+             ctx.stroke();
         }
 
         ctx.restore();

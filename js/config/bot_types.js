@@ -183,5 +183,12 @@ export const BOT_TYPES = {
         massMultiplier: 0.8, // Typically smaller scavengers
         aggression: 4.0, // High aggression towards weak targets
         namePrefix: "GHOUL"
+    },
+    TANK: {
+        color: '#8B4513', // SaddleBrown
+        speedMultiplier: 0.5,
+        massMultiplier: 2.5,
+        aggression: 0.5,
+        namePrefix: "TANK"
     }
 };

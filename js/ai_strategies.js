@@ -70,6 +70,10 @@ export class AIStrategies {
         AIStrategiesPhysics.thinkGhoul(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkTank(bot, entities, foods) {
+        AIStrategiesPhysics.thinkTank(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkHunter(bot, entities, foods) {
         AIStrategiesCombat.thinkHunter(bot, entities, foods, AIStrategiesBasic.wander);
     }

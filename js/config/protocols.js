@@ -166,5 +166,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.1,
         speedMultiplier: 1.2,
         description: "THE CRIMSON HARVEST. LIFESTEAL."
+    },
+    BREAKER: {
+        id: 'BREAKER',
+        name: "BREAKER",
+        color: "#FF8C00", // Dark Orange
+        massMultiplier: 1.2,
+        speedMultiplier: 0.9,
+        description: "ARMOR PIERCING. 1.5x MASS FROM BOTS."
     }
 };

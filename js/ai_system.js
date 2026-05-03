@@ -36,6 +36,8 @@ export class AISystem {
             AIStrategies.thinkLodestone(bot, entities, foods);
         } else if (bot.type === 'GHOUL') {
             AIStrategies.thinkGhoul(bot, entities, foods);
+        } else if (bot.type === 'TANK') {
+            AIStrategies.thinkTank(bot, entities, foods);
         } else {
             AIStrategies.thinkNormal(bot, entities, foods);
         }

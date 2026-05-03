@@ -101,6 +101,35 @@ export class AIStrategiesPhysics {
      * @param {Array} foods - List of all food items.
      * @param {Function} wanderFn - Fallback wandering function.
      */
+    static thinkTank(bot, entities, foods, wanderFn) {
+        let bestTarget = null;
+        let bestScore = -Infinity;
+
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            const viewRange = 500 + bot.radius;
+
+            if (dist < viewRange) {
+                // Ignore small targets completely
+                if (other.mass < bot.mass * 0.3) return;
+
+                // Move towards anything that isn't too small, but favor large things
+                const score = other.mass / dist;
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestTarget = other;
+                }
+            }
+        });
+
+        if (bestTarget) {
+            bot.setTarget(bestTarget.x, bestTarget.y);
+        } else {
+            wanderFn(bot, foods);
+        }
+    }
+
     static thinkGhoul(bot, entities, foods, wanderFn) {
         let bestTarget = null;
         let bestScore = -Infinity;

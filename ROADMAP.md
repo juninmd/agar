@@ -100,7 +100,12 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Ghoul Entities**: Scavenger bots that actively hunt smaller entities but flee from larger threats.
 - [x] **Crimson Lore**: Narrative expansion introducing the emergence of corrupted "blood" data within the Grid.
 
-## 🧪 Phase 21: The Mutation Engine (Current)
-- [ ] **Mutation System**: Implement global modifiers that can be injected into the Recompile.
-- [ ] **Custom Rooms Prelude**: Allow players to toggle mutations via the main menu UI.
-- [ ] **Mutation Lore**: Narrative expansion introducing the ability to alter the Grid's parameters.
+## 🧪 Phase 21: The Mutation Engine (Done)
+- [x] **Mutation System**: Implement global modifiers that can be injected into the Recompile.
+- [x] **Custom Rooms Prelude**: Allow players to toggle mutations via the main menu UI.
+- [x] **Mutation Lore**: Narrative expansion introducing the ability to alter the Grid's parameters.
+
+## 🛡️ Phase 22: The Code Breaker (Done)
+- [x] **Breaker Protocol**: Implement `BREAKER` protocol.
+- [x] **Tank Entities**: Implement `TANK` bot type.
+- [x] **Breaker Lore**: Add narrative expansion introducing armor-piercing logic.

@@ -83,6 +83,9 @@ export class CollisionSystem {
                     if (predator.protocol && predator.protocol.id === 'SYMBIOTE' && prey instanceof Bot) {
                         massGain *= 3; // Extreme regen on kill
                     }
+                    if (predator.breakerAura && prey instanceof Bot) {
+                        massGain *= 1.5;
+                    }
                     predator.grow(massGain);
                     prey.markedForDeletion = true;
                     this.particleSystem.emitExplosion(prey.x, prey.y, prey.color, Math.min(50, Math.sqrt(prey.mass)));

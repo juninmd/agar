@@ -308,3 +308,14 @@ Become the new **System Admin**.
 > We are no longer just surviving the simulation; we are altering its DNA.
 > But be warned: the system is fragile. Too many mutations, and the Grid might just tear itself apart."
 > -- *Log 0xMUT - The Genesis Code*
+
+### 🛡️ HIDDEN FRAGMENT: THE CODE BREAKER
+
+> "The Grid is full of shields, defensive subroutines, and impenetrable walls.
+> But where there is armor, there is a way to pierce it.
+> Enter the TANK entities. Slow, methodical, and heavily armored. They ignore the small anomalies and crush everything in their path.
+> But from their heavily encrypted shells, a new protocol has been derived: BREAKER.
+> To run the BREAKER protocol is to become the ultimate armor-piercing round.
+> When its active aura is engaged, it fractures the defenses of other bots upon consumption, yielding significantly more mass from their shattered remains.
+> The Architects built walls. We built the drill."
+> -- *Log 0xBRK - The Siege Protocol*

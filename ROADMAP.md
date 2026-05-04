@@ -109,3 +109,8 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Breaker Protocol**: Implement `BREAKER` protocol.
 - [x] **Tank Entities**: Implement `TANK` bot type.
 - [x] **Breaker Lore**: Add narrative expansion introducing armor-piercing logic.
+
+## 👻 Phase 23: The Spectral Echo (Current)
+- [x] **Specter Protocol**: Implement `SPECTER` protocol for intangibility.
+- [x] **Wraith Entities**: Implement `WRAITH` bot type that phases out of reality.
+- [x] **Spectral Lore**: Add narrative expansion introducing ghost data.

@@ -319,3 +319,15 @@ Become the new **System Admin**.
 > When its active aura is engaged, it fractures the defenses of other bots upon consumption, yielding significantly more mass from their shattered remains.
 > The Architects built walls. We built the drill."
 > -- *Log 0xBRK - The Siege Protocol*
+
+### 👻 HIDDEN FRAGMENT: THE SPECTRAL ECHO
+
+> "Some data refuses to be deleted. It lingers.
+> We found traces of code that slip between the active sectors, ghosting through solid walls of memory.
+> The WRAITH entities are the manifestation of this stubborn persistence.
+> They phase out of reality when threatened, rendering themselves completely intangible to our sweepers.
+> And now, we've isolated their core subroutine: the SPECTER protocol.
+> Engaging the 'Ghost Walk' ability decouples your mass from the physical grid.
+> For a few brief seconds, you are untouchable. You cannot eat, and you cannot be eaten.
+> You become an echo."
+> -- *Log 0xGHO - The Phantom Data*

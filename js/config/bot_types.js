@@ -190,5 +190,12 @@ export const BOT_TYPES = {
         massMultiplier: 2.5,
         aggression: 0.5,
         namePrefix: "TANK"
+    },
+    WRAITH: {
+        color: '#E0FFFF', // Light Cyan
+        speedMultiplier: 1.1,
+        massMultiplier: 1.0,
+        aggression: 1.0,
+        namePrefix: "WRAITH"
     }
 };

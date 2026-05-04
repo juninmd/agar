@@ -294,4 +294,13 @@ const DRONE_COUNT = 5;
             }
         });
     }
+
+    /**
+     * Triggers the SPECTER intangibility ability.
+     * @param {Player} player - The player entity.
+     */
+    static triggerSpecter(player) {
+        player.isTangible = false;
+        player.alpha = 0.3;
+    }
 }

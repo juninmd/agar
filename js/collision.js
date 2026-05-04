@@ -48,6 +48,9 @@ export class CollisionSystem {
             let predator = e1.mass > e2.mass * 1.1 ? e1 : (e2.mass > e1.mass * 1.1 ? e2 : null);
             let prey = predator === e1 ? e2 : e1;
 
+            // Intangibility check
+            if (e1.isTangible === false || e2.isTangible === false) return result;
+
             // Allow player death unless invulnerable
             if (!predator || (prey === player && player.invulnerable)) return result;
 

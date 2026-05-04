@@ -174,5 +174,13 @@ export const PROTOCOLS = {
         massMultiplier: 1.2,
         speedMultiplier: 0.9,
         description: "ARMOR PIERCING. 1.5x MASS FROM BOTS."
+    },
+    SPECTER: {
+        id: 'SPECTER',
+        name: "SPECTER",
+        color: "#E0FFFF", // Light Cyan
+        massMultiplier: 1.0,
+        speedMultiplier: 1.2,
+        description: "GHOST WALK. INTANGIBILITY."
     }
 };

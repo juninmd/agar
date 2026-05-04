@@ -32,7 +32,8 @@ export class AbilitySystem {
             SYNAPSE: { cooldown: 300, duration: 180 },
             MAGNETAR:{ cooldown: 900, duration: 240 },   // 15s / 4s
             VAMPYR:  { cooldown: 600, duration: 300 },   // 10s / 5s
-            BREAKER: { cooldown: 600, duration: 180 }    // 10s / 3s
+            BREAKER: { cooldown: 600, duration: 180 },   // 10s / 3s
+            SPECTER: { cooldown: 900, duration: 180 }    // 15s / 3s
         };
 
         this.currentConfig = this.config[protocolId] || this.config.HACKER;
@@ -108,6 +109,12 @@ export class AbilitySystem {
             this.activeTime = this.currentConfig.duration;
             this.cooldown = this.currentConfig.cooldown;
         }
+        if (this.protocolId === 'SPECTER') {
+            AbilityEffects.triggerSpecter(player);
+            this.isActive = true;
+            this.activeTime = this.currentConfig.duration;
+            this.cooldown = this.currentConfig.cooldown;
+        }
 
         return true;
     }
@@ -123,6 +130,10 @@ export class AbilitySystem {
                 if (this.protocolId === 'PHANTOM') player.alpha = 1.0;
                 if (this.protocolId === 'BASTION') player.invulnerable = false;
                 if (this.protocolId === 'BREAKER') player.breakerAura = false;
+                if (this.protocolId === 'SPECTER') {
+                    player.isTangible = true;
+                    player.alpha = 1.0;
+                }
             } else {
                 if (this.protocolId === 'PHANTOM') player.alpha = 0.4;
                 if (this.protocolId === 'BASTION') player.invulnerable = true;
@@ -154,6 +165,10 @@ export class AbilitySystem {
             player.invulnerable = false;
             if (this.protocolId === 'PHANTOM') player.alpha = 1.0;
             if (this.protocolId === 'BREAKER') player.breakerAura = false;
+            if (this.protocolId === 'SPECTER') {
+                player.isTangible = true;
+                player.alpha = 1.0;
+            }
         }
     }
 

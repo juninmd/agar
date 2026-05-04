@@ -40,3 +40,4 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Initialized Jules-DevOps Prime Antigravity Audit: Refactored `ai_strategies_extra.js` into `ai_strategies_physics.js` to enforce the 150-line file limit. 0 floating entities detected. 100% test coverage maintained.
 - Phase 20 The Crimson Harvest completed (Added VAMPYR protocol, GHOUL bots, and Crimson lore. Created test scripts to verify life steal tether ability and scavenger AI logic).
 - Phase 21 The Mutation Engine completed (Added MutationSystem to override constants via main menu UI, allowing Chaos, Scarcity, Gigantism, and Hyper Decay modifiers. Wrote Playwright test verify_mutations.py).
+- Phase 23 The Spectral Echo completed (Added SPECTER protocol with intangibility 'Ghost Walk' ability, WRAITH bots that phase out when threatened, and spectral lore).

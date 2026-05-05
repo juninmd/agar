@@ -41,3 +41,8 @@ The narrative theme is "System Recompile" where the player is a backup routine f
 - Phase 20 The Crimson Harvest completed (Added VAMPYR protocol, GHOUL bots, and Crimson lore. Created test scripts to verify life steal tether ability and scavenger AI logic).
 - Phase 21 The Mutation Engine completed (Added MutationSystem to override constants via main menu UI, allowing Chaos, Scarcity, Gigantism, and Hyper Decay modifiers. Wrote Playwright test verify_mutations.py).
 - Phase 23 The Spectral Echo completed (Added SPECTER protocol with intangibility 'Ghost Walk' ability, WRAITH bots that phase out when threatened, and spectral lore).
+
+- **Jules-DevOps Prime** Action: Performed Antigravity Refactor.
+- `js/ability_effects.js` was refactored into `js/effects/ability_effects_combat.js`, `js/effects/ability_effects_combat2.js`, and `js/effects/ability_effects_time.js`.
+- `js/collision.js` was refactored by extracting resolution logic into `js/core/collision_resolver.js`.
+- Run playwright validation scripts `verify_specter.py`, `verify_mutations.py` and `verify_breaker.py` to ensure correctness.

@@ -78,4 +78,42 @@ export class PlayerVisualsEffects {
         ctx.arc(player.x, player.y, player.radius - 5, 0, Math.PI * 2);
         ctx.stroke();
     }
+
+    /**
+     * Renders cosmetic skin effects (like MATRIX data streams or GLITCH lines) over the player.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     * @param {Player} player - The player entity to draw effects on.
+     */
+    static drawSkinEffects(ctx, player) {
+        if (!player.skin || player.skin === 'DEFAULT') return;
+
+        ctx.save();
+        if (player.skin === 'GLITCH') {
+            if (Math.random() < 0.3) {
+                const offsetX = (Math.random() - 0.5) * 10;
+                const offsetY = (Math.random() - 0.5) * 10;
+                ctx.fillStyle = Math.random() < 0.5 ? '#00ffff' : '#ff00ff';
+                ctx.globalAlpha = 0.5;
+                ctx.fillRect(player.x + offsetX - player.radius, player.y + offsetY, player.radius * 2, 4);
+            }
+        } else if (player.skin === 'MATRIX') {
+            ctx.fillStyle = '#00ff41';
+            ctx.font = `${player.radius * 0.8}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            const char = String.fromCharCode(0x30A0 + Math.random() * 96);
+            ctx.globalAlpha = 0.7;
+            ctx.fillText(char, player.x, player.y + player.radius * 0.5);
+        } else if (player.skin === 'NEON_PULSE') {
+            const time = Date.now() * 0.005;
+            const pulse = (Math.sin(time) + 1) * 0.5; // 0 to 1
+            ctx.beginPath();
+            ctx.arc(player.x, player.y, player.radius + 10 + (pulse * 15), 0, Math.PI * 2);
+            ctx.strokeStyle = player.color;
+            ctx.globalAlpha = 1.0 - pulse;
+            ctx.lineWidth = 3;
+            ctx.stroke();
+        }
+        ctx.restore();
+    }
 }

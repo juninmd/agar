@@ -44,15 +44,15 @@ export class Game {
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
 
-        this.ui.onStart = (name, protocol, mutations) => this.start(name, protocol, mutations);
-        this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations);
+        this.ui.onStart = (name, protocol, mutations, skin) => this.start(name, protocol, mutations, skin);
+        this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin);
         this.input.onDash = () => this.handleDash();
         this.input.onAbility = () => this.handleAbility();
     }
 
-    start(name, protocol, mutations = []) {
+    start(name, protocol, mutations = [], skin = 'DEFAULT') {
         this.mutationSystem.applyModifiers(mutations, CONSTANTS);
-        this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name);
+        this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name, skin);
         this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => Spawner.spawnFood());
         this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());
         this.ghostSystem.spawnGhosts(this);

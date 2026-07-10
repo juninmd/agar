@@ -9,7 +9,7 @@
 
 ## 🚧 Phase 2: Engagement (Current)
 - [ ] **Multiplayer Integration**: Basic WebSocket-based room system.
-- [ ] **Skins & Cosmetics**: Visual variety for cells based on lore characters.
+- [x] **Skins & Cosmetics**: Visual variety for cells based on lore characters.
 - [x] **Mobile Optimization**: Touch-based controls and responsive UI.
 - [x] **Advanced AI**: Smarter "Phage" bots for solo play.
 - [x] **Antigravity Refactor**: Fix file constraints for `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js`.

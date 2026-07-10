@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "kernel-io",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kernel.io - A macroscopic Antivirus vs. PC Virus digital ecosystem.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -15,5 +15,13 @@
     "eslint": "^10.0.3",
     "prettier": "^3.8.1",
     "vitest": "^4.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juninmd/agar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/juninmd/agar/issues"
+  },
+  "homepage": "https://github.com/juninmd/agar#readme"
 }

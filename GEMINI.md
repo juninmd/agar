@@ -1,9 +1,9 @@
 # GEMINI Memory File
 
 ## Context
-This project is "NEON-PHAGE", a cyberpunk-themed Agar.io clone using HTML5 Canvas and vanilla JavaScript.
+This project is "Kernel.io", a macroscopic "Antivirus vs. PC Virus" cyberpunk-themed Agar.io clone using HTML5 Canvas and vanilla JavaScript.
 It runs on a local HTTP server.
-The narrative theme is "System Recompile" where the player is a backup routine fighting daemons.
+The narrative theme is a dark, neon-lit Cyberpunk/Noir OS environment where the player is an antivirus or virus routine fighting within the host system.
 
 ## Technical Details
 - **Frontend**: Vanilla JS (ES6 Modules), HTML5 Canvas.

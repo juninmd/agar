@@ -38,7 +38,10 @@ export class UIManager {
                 if (document.getElementById('mut-gigantism')?.checked) mutations.push('gigantism');
                 if (document.getElementById('mut-hyper-decay')?.checked) mutations.push('hyper-decay');
 
-                if (this.onStart) this.onStart(name, protocol, mutations);
+                const skinSelector = document.getElementById('skin-selector');
+                const skin = skinSelector ? skinSelector.value : 'DEFAULT';
+
+                if (this.onStart) this.onStart(name, protocol, mutations, skin);
             });
         }
 

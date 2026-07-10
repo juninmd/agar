@@ -10,13 +10,14 @@ import { PlayerMovement } from './player_movement.js';
  * Handles movement, input, and delegation of visual effects.
  */
 export class Player extends Entity {
-    constructor(x, y, protocolId, name) {
+    constructor(x, y, protocolId, name, skin) {
         const protocol = CONSTANTS.PROTOCOLS[protocolId] || CONSTANTS.PROTOCOLS.HACKER;
         const radius = CONSTANTS.INITIAL_RADIUS * Math.sqrt(protocol.massMultiplier);
         super(x, y, radius, protocol.color);
 
         this.protocol = protocol;
         this.name = name || "Unit 734";
+        this.skin = skin || 'DEFAULT';
         this.targetX = x;
         this.targetY = y;
         this.velocity = { x: 0, y: 0 };

@@ -18,6 +18,9 @@ export class Particle {
             y: Math.sin(angle) * speed * Math.random()
         };
         this.size = Math.random() * 3 + 1;
+        this.shape = Math.random() > 0.6 ? 'square' : (Math.random() > 0.5 ? 'line' : 'circle');
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.2;
     }
 
     update() {
@@ -25,15 +28,31 @@ export class Particle {
         this.y += this.velocity.y;
         this.life--;
         this.size *= 0.95;
+        this.rotation += this.rotationSpeed;
     }
 
     draw(ctx) {
         ctx.save();
-        ctx.globalAlpha = this.life / this.maxLife;
+        ctx.globalAlpha = Math.max(0, this.life / this.maxLife);
         ctx.fillStyle = this.color;
+        ctx.strokeStyle = this.color;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
         ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+
+        if (this.shape === 'square') {
+            ctx.rect(-this.size / 2, -this.size / 2, this.size, this.size);
+            ctx.fill();
+        } else if (this.shape === 'line') {
+            ctx.moveTo(-this.size, 0);
+            ctx.lineTo(this.size, 0);
+            ctx.lineWidth = Math.max(1, this.size / 2);
+            ctx.stroke();
+        } else {
+            ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
         ctx.restore();
     }
 }

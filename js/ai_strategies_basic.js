@@ -1,4 +1,5 @@
 import { Utils } from './utils.js';
+import { CONSTANTS } from './constants.js';
 
 export class AIStrategiesBasic {
     static thinkMimic(bot, entities, foods) {
@@ -8,7 +9,7 @@ export class AIStrategiesBasic {
             if (other === bot) return;
             // Assuming CONSTANTS is accessible globally as in other files
             const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
-            if (dist > window.CONSTANTS.MIMIC_AGGRO_RANGE) return;
+            if (dist > CONSTANTS.MIMIC_AGGRO_RANGE) return;
 
             if (other.radius < bot.radius || other.constructor.name === 'Player') {
                 const score = ((other.radius) / (dist + 1)) * bot.typeData.aggression;

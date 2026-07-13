@@ -114,3 +114,8 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Specter Protocol**: Implement `SPECTER` protocol for intangibility.
 - [x] **Wraith Entities**: Implement `WRAITH` bot type that phases out of reality.
 - [x] **Spectral Lore**: Add narrative expansion introducing ghost data.
+
+## 🎨 Phase 24: UX/UI & Rendering Overhaul (Current)
+- [ ] **Interface Richness**: Enhance canvas rendering, styling, and animations.
+- [ ] **Performance Audit**: Ensure 60 FPS, check for memory leaks, and optimize Spatial Hashing for collisions.
+- [ ] **Testing & Quality Assurance**: Write additional tests to ensure robust game loop.

@@ -46,3 +46,10 @@ The narrative theme is a dark, neon-lit Cyberpunk/Noir OS environment where the 
 - `js/ability_effects.js` was refactored into `js/effects/ability_effects_combat.js`, `js/effects/ability_effects_combat2.js`, and `js/effects/ability_effects_time.js`.
 - `js/collision.js` was refactored by extracting resolution logic into `js/core/collision_resolver.js`.
 - Run playwright validation scripts `verify_specter.py`, `verify_mutations.py` and `verify_breaker.py` to ensure correctness.
+
+## Architectural Plan (Phase 1)
+- **Frontend Stack**: TypeScript (planned migration), HTML5 Canvas API for raw rendering performance, CSS3 for overlay UI.
+- **Backend Stack**: Node.js with Socket.io for multiplayer state management (planned).
+- **Package Management**: `pnpm` (Node), `uv` (Python).
+- **Tooling**: Vite/Vitest for bundling and unit testing. Playwright for end-to-end game state verification.
+- **Goal**: Massive UX/UI upgrade, proactive bug patching, 100% test coverage, and strict enforcement of the 150-line file limit.

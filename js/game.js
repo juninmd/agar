@@ -16,6 +16,7 @@ import { GameSystems } from './game_systems.js';
 import { Food } from './food.js';
 import { Utils } from './utils.js';
 import { MutationSystem } from './mutation_system.js';
+import { SpatialHash } from './core/spatial_hash.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -40,6 +41,7 @@ export class Game {
         this.riftSystem = new RiftSystem(this);
         this.systems = new GameSystems(this);
         this.mutationSystem = new MutationSystem();
+        this.spatialHash = new SpatialHash(200); // 200px cell size
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -129,16 +131,47 @@ export class Game {
     }
 
     _checkCollisions() {
-        const all = [this.player, ...this.bots];
-        all.forEach(e => {
-            this.foods = this.foods.filter(f => !this.collisionSystem.resolveFoodCollision(e, f));
-            if (this.foods.length < CONSTANTS.FOOD_COUNT) this.foods.push(Spawner.spawnFood());
-            this.riftSystem.rifts.forEach(r => this.collisionSystem.resolveRiftCollision(e, r));
+        const allEntities = [this.player, ...this.bots];
+
+        this.spatialHash.clear();
+        this.foods.forEach(f => this.spatialHash.insert(f));
+        this.riftSystem.rifts.forEach(r => this.spatialHash.insert(r));
+        allEntities.forEach(e => this.spatialHash.insert(e));
+
+        allEntities.forEach(e => {
+            const nearby = this.spatialHash.query(e.x, e.y, e.radius + 100);
+
+            for (const other of nearby) {
+                if (e === other || other.markedForDeletion) continue;
+
+                if (other instanceof Food) {
+                    if (this.collisionSystem.resolveFoodCollision(e, other)) {
+                        other.markedForDeletion = true;
+                    }
+                } else if (other.type === 'RIFT') {
+                    this.collisionSystem.resolveRiftCollision(e, other);
+                }
+            }
         });
+
+        this.foods = this.foods.filter(f => !f.markedForDeletion);
+        while (this.foods.length < CONSTANTS.FOOD_COUNT) {
+            this.foods.push(Spawner.spawnFood());
+        }
         this.riftSystem.rifts = this.riftSystem.rifts.filter(r => !r.markedForDeletion);
-        for (let i = 0; i < all.length; i++) {
-            for (let j = i + 1; j < all.length; j++) {
-                const res = this.collisionSystem.resolveEntityCollision(all[i], all[j], this.player);
+
+        const checkedPairs = new Set();
+        for (let i = 0; i < allEntities.length; i++) {
+            const e1 = allEntities[i];
+            const nearbyEntities = this.spatialHash.query(e1.x, e1.y, e1.radius * 2);
+            for (const e2 of nearbyEntities) {
+                if (e1 === e2 || e2 instanceof Food || e2.type === 'RIFT') continue;
+
+                const pairId = e1.id < e2.id ? `${e1.id}-${e2.id}` : `${e2.id}-${e1.id}`;
+                if (checkedPairs.has(pairId)) continue;
+                checkedPairs.add(pairId);
+
+                const res = this.collisionSystem.resolveEntityCollision(e1, e2, this.player);
                 if (res && res.shards) {
                     const shardCount = Math.min(10, Math.max(5, Math.floor(res.shards.mass / 20)));
                     for (let k = 0; k < shardCount; k++) {

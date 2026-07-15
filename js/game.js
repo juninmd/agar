@@ -138,8 +138,10 @@ export class Game {
         this.riftSystem.rifts.forEach(r => this.spatialHash.insert(r));
         allEntities.forEach(e => this.spatialHash.insert(e));
 
+        const queryResult = new Set();
+
         allEntities.forEach(e => {
-            const nearby = this.spatialHash.query(e.x, e.y, e.radius + 100);
+            const nearby = this.spatialHash.query(e.x, e.y, e.radius + 100, queryResult);
 
             for (const other of nearby) {
                 if (e === other || other.markedForDeletion) continue;
@@ -163,7 +165,7 @@ export class Game {
         const checkedPairs = new Set();
         for (let i = 0; i < allEntities.length; i++) {
             const e1 = allEntities[i];
-            const nearbyEntities = this.spatialHash.query(e1.x, e1.y, e1.radius * 2);
+            const nearbyEntities = this.spatialHash.query(e1.x, e1.y, e1.radius * 2, queryResult);
             for (const e2 of nearbyEntities) {
                 if (e1 === e2 || e2 instanceof Food || e2.type === 'RIFT') continue;
 
@@ -192,6 +194,7 @@ export class Game {
         this.update();
         this.renderer.updateCamera(this.player);
         this.renderer.render(this);
+        this.ui.updateFPS(this.renderer.fps);
         requestAnimationFrame(() => this.loop());
     }
 }

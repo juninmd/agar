@@ -53,14 +53,15 @@ export class SpatialHash {
 
     /**
      * Queries for potential collisions near a specific coordinate and radius.
-     * Returns a Set of unique entities.
+     * Populates and returns a Set of unique entities.
      * @param {number} px - The x coordinate to query.
      * @param {number} py - The y coordinate to query.
      * @param {number} radius - The search radius.
+     * @param {Set} [result] - Optional existing Set to reuse (it will be cleared).
      * @returns {Set} A Set of entities within the bounding box of the query.
      */
-    query(px, py, radius) {
-        const result = new Set();
+    query(px, py, radius, result = new Set()) {
+        result.clear();
         const minX = Math.floor((px - radius) / this.cellSize);
         const maxX = Math.floor((px + radius) / this.cellSize);
         const minY = Math.floor((py - radius) / this.cellSize);
@@ -71,8 +72,8 @@ export class SpatialHash {
                 const key = `${x},${y}`;
                 const cell = this.cells.get(key);
                 if (cell) {
-                    for (const entity of cell) {
-                        result.add(entity);
+                    for (let i = 0; i < cell.length; i++) {
+                        result.add(cell[i]);
                     }
                 }
             }

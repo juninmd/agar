@@ -17,6 +17,9 @@ export class Renderer {
         this.screenShake = 0;
         this.camX = 0;
         this.camY = 0;
+        this.lastTime = performance.now();
+        this.frameCount = 0;
+        this.fps = 0;
     }
 
     clear() {
@@ -51,6 +54,14 @@ export class Renderer {
     }
 
     render(gameState) {
+        const now = performance.now();
+        this.frameCount++;
+        if (now - this.lastTime >= 1000) {
+            this.fps = this.frameCount;
+            this.frameCount = 0;
+            this.lastTime = now;
+        }
+
         this.clear();
         this.applyTransform(gameState.systemIntegrity);
 

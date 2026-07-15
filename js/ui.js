@@ -90,6 +90,7 @@ export class UIManager {
         }
     }
 
+    updateFPS(fps) { this.hud.updateFPS(fps); }
     updateScore(mass) { this.hud.updateScore(mass); }
     updateIntegrity(percent) { this.hud.updateIntegrity(percent); }
     updateAbilityCooldown(percent) { this.hud.updateAbilityCooldown(percent); }

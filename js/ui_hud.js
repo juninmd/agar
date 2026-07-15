@@ -5,8 +5,13 @@ export class UIHud {
         this.abilityOverlay = document.getElementById('ability-overlay');
         this.warningMessage = document.getElementById('warning-message');
         this.uiLayer = document.getElementById('ui-layer');
+        this.fpsCounter = document.getElementById('fps-counter');
         this.titanBarContainer = null;
         this.titanBar = null;
+    }
+
+    updateFPS(fps) {
+        if (this.fpsCounter) this.fpsCounter.innerText = `${fps} FPS`;
     }
 
     updateScore(mass) {

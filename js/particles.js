@@ -6,24 +6,38 @@
 import { Utils } from './utils.js';
 
 export class Particle {
-    constructor(x, y, color, speed, life) {
+    constructor() {
+        this.active = false;
+        this.x = 0;
+        this.y = 0;
+        this.color = '#FFF';
+        this.life = 0;
+        this.maxLife = 0;
+        this.velocity = { x: 0, y: 0 };
+        this.size = 0;
+        this.shape = 'circle';
+        this.rotation = 0;
+        this.rotationSpeed = 0;
+    }
+
+    init(x, y, color, speed, life, sizeMultiplier = 1) {
+        this.active = true;
         this.x = x;
         this.y = y;
         this.color = color;
         this.life = life;
         this.maxLife = life;
         const angle = Math.random() * Math.PI * 2;
-        this.velocity = {
-            x: Math.cos(angle) * speed * Math.random(),
-            y: Math.sin(angle) * speed * Math.random()
-        };
-        this.size = Math.random() * 3 + 1;
+        this.velocity.x = Math.cos(angle) * speed * Math.random();
+        this.velocity.y = Math.sin(angle) * speed * Math.random();
+        this.size = (Math.random() * 3 + 1) * sizeMultiplier;
         this.shape = Math.random() > 0.6 ? 'square' : (Math.random() > 0.5 ? 'line' : 'circle');
         this.rotation = Math.random() * Math.PI * 2;
         this.rotationSpeed = (Math.random() - 0.5) * 0.2;
     }
 
     update() {
+        if (!this.active) return;
         this.x += this.velocity.x;
         this.y += this.velocity.y;
         this.life--;
@@ -58,41 +72,65 @@ export class Particle {
 }
 
 export class ParticleSystem {
-    constructor() {
-        this.particles = [];
+    constructor(poolSize = 2000) {
+        this.pool = Array(poolSize).fill().map(() => new Particle());
+        this.activeParticles = [];
+    }
+
+    _getParticle() {
+        for (let i = 0; i < this.pool.length; i++) {
+            if (!this.pool[i].active) {
+                return this.pool[i];
+            }
+        }
+        // If pool is full, just overwrite the first one (oldest) to avoid allocations
+        const p = this.pool[0];
+        p.active = false;
+        return p;
     }
 
     emitExplosion(x, y, color, count = 20) {
         for (let i = 0; i < count; i++) {
-            this.particles.push(new Particle(x, y, color, 5, 30));
+            const p = this._getParticle();
+            p.init(x, y, color, 5, 30);
+            if (!this.activeParticles.includes(p)) this.activeParticles.push(p);
         }
     }
 
     emitDash(x, y, color) {
-        // Directional burst opposite to movement would be cool, but radial is easier for generic generic
         for (let i = 0; i < 10; i++) {
-            this.particles.push(new Particle(x, y, color, 3, 20));
+            const p = this._getParticle();
+            p.init(x, y, color, 3, 20);
+            if (!this.activeParticles.includes(p)) this.activeParticles.push(p);
         }
     }
 
     emit(x, y, color, count, speed, size, life) {
         for (let i = 0; i < count; i++) {
-            const p = new Particle(x, y, color, speed, life);
-            if (size) p.size = size * (0.5 + Math.random());
-            this.particles.push(p);
+            const p = this._getParticle();
+            const sizeMultiplier = size ? (0.5 + Math.random()) * size / 2 : 1;
+            p.init(x, y, color, speed, life, sizeMultiplier);
+            if (!this.activeParticles.includes(p)) this.activeParticles.push(p);
         }
     }
 
     update() {
-        for (let i = this.particles.length - 1; i >= 0; i--) {
-            this.particles[i].update();
-            if (this.particles[i].life <= 0) {
-                this.particles.splice(i, 1);
+        for (let i = this.activeParticles.length - 1; i >= 0; i--) {
+            const p = this.activeParticles[i];
+            p.update();
+            if (p.life <= 0) {
+                p.active = false;
+                // Swap with last element and pop to avoid O(N) splice
+                const last = this.activeParticles[this.activeParticles.length - 1];
+                this.activeParticles[i] = last;
+                this.activeParticles.pop();
             }
         }
     }
 
     draw(ctx) {
-        this.particles.forEach(p => p.draw(ctx));
+        for (let i = 0; i < this.activeParticles.length; i++) {
+            this.activeParticles[i].draw(ctx);
+        }
     }
 }

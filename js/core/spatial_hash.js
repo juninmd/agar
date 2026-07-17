@@ -12,15 +12,13 @@ export class SpatialHash {
     }
 
     /**
-     * Hashes an x, y coordinate to a string key.
-     * @param {number} x - X coordinate.
-     * @param {number} y - Y coordinate.
-     * @returns {string} The cell key (e.g., "x,y").
+     * Hashes an x, y coordinate to an integer key to avoid GC pressure.
+     * @param {number} x - X coordinate index.
+     * @param {number} y - Y coordinate index.
+     * @returns {number} The cell integer key.
      */
     _hash(x, y) {
-        const col = Math.floor(x / this.cellSize);
-        const row = Math.floor(y / this.cellSize);
-        return `${col},${row}`;
+        return (x + 1000) * 10000 + (y + 1000);
     }
 
     /**
@@ -42,7 +40,7 @@ export class SpatialHash {
 
         for (let x = minX; x <= maxX; x++) {
             for (let y = minY; y <= maxY; y++) {
-                const key = `${x},${y}`;
+                const key = this._hash(x, y);
                 if (!this.cells.has(key)) {
                     this.cells.set(key, []);
                 }
@@ -69,7 +67,7 @@ export class SpatialHash {
 
         for (let x = minX; x <= maxX; x++) {
             for (let y = minY; y <= maxY; y++) {
-                const key = `${x},${y}`;
+                const key = this._hash(x, y);
                 const cell = this.cells.get(key);
                 if (cell) {
                     for (let i = 0; i < cell.length; i++) {

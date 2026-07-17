@@ -74,8 +74,8 @@ export class RendererBackground {
 
         // Horizontal Scanline
         const scanY = (time * 0.2) % height;
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.05)`;
-        ctx.fillRect(screenLeft, screenTop + scanY, width, 50);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.08)`;
+        ctx.fillRect(screenLeft, screenTop + scanY, width, 100);
 
         // Fractal Zones (Phase 6)
         // If the color implies Eclipse (cyan/dark theme) or random conditions

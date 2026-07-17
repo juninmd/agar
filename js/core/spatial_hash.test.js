@@ -9,9 +9,10 @@ describe('SpatialHash', () => {
     });
 
     test('should hash coordinates correctly', () => {
-        expect(hash._hash(50, 50)).toBe('0,0');
-        expect(hash._hash(150, 50)).toBe('1,0');
-        expect(hash._hash(-50, 150)).toBe('-1,1');
+        // formula is (x + 1000) * 10000 + (y + 1000)
+        expect(hash._hash(50, 50)).toBe((50 + 1000) * 10000 + (50 + 1000));
+        expect(hash._hash(150, 50)).toBe((150 + 1000) * 10000 + (50 + 1000));
+        expect(hash._hash(-50, 150)).toBe((-50 + 1000) * 10000 + (150 + 1000));
     });
 
     test('should insert and query entities correctly', () => {

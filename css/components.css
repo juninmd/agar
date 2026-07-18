@@ -29,11 +29,21 @@ button {
     clip-path: polygon(10% 0, 100% 0, 100% 80%, 90% 100%, 0 100%, 0 20%);
 }
 
+#start-btn {
+    background: linear-gradient(45deg, #ff00ff, #00f3ff, #ff00ff);
+    background-size: 200% 200%;
+    animation: gradientBG 3s ease infinite, buttonPulse 1.5s infinite alternate;
+}
+
 button:hover {
     transform: scale(1.05);
     background: #ff4dff;
     box-shadow: 0 0 25px #ff4dff, 0 0 40px #ff4dff;
-    animation: buttonPulse 1.5s infinite alternate;
+}
+
+#start-btn:hover {
+    background: linear-gradient(45deg, #ff4dff, #00ffff, #ff4dff);
+    background-size: 200% 200%;
 }
 
 @keyframes buttonPulse {

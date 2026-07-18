@@ -46,6 +46,8 @@ export class Particle {
     }
 
     draw(ctx) {
+        // Individual draw is kept for flexibility, but we can do it inline in the system if needed.
+        // For now, this is kept unchanged as batching transforms per particle is complex.
         ctx.save();
         ctx.globalAlpha = Math.max(0, this.life / this.maxLife);
         ctx.fillStyle = this.color;
@@ -105,6 +107,17 @@ export class ParticleSystem {
         }
     }
 
+    emitGlitchEffect(x, y, color, count = 30) {
+        for (let i = 0; i < count; i++) {
+            const p = this._getParticle();
+            // High speed, short life, square shape for glitch effect
+            p.init(x, y, color, 8, 15, 2);
+            p.shape = 'square';
+            p.rotationSpeed = (Math.random() - 0.5) * 1.5; // fast spin
+            if (!this.activeParticles.includes(p)) this.activeParticles.push(p);
+        }
+    }
+
     emit(x, y, color, count, speed, size, life) {
         for (let i = 0; i < count; i++) {
             const p = this._getParticle();
@@ -129,6 +142,8 @@ export class ParticleSystem {
     }
 
     draw(ctx) {
+        // Grouping particles isn't highly beneficial since each has its own translate/rotate/alpha.
+        // We will just iterate and draw to keep it clean.
         for (let i = 0; i < this.activeParticles.length; i++) {
             this.activeParticles[i].draw(ctx);
         }

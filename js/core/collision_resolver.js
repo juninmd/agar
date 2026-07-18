@@ -37,8 +37,8 @@ export class CollisionResolver {
                     predator.mass = Math.max(predator.mass - lostMass, CONSTANTS.INITIAL_RADIUS * CONSTANTS.INITIAL_RADIUS * Math.PI);
                     predator.radius = Utils.getRadiusFromMass(predator.mass);
 
-                    particleSystem.emitExplosion(predator.x, predator.y, predator.color, 100);
-                    particleSystem.emitExplosion(prey.x, prey.y, '#FF0000', 50);
+                    particleSystem.emitGlitchEffect(predator.x, predator.y, predator.color, 50);
+                    particleSystem.emitGlitchEffect(prey.x, prey.y, '#FF0000', 50);
 
                     if (predator === player) {
                         result.screenShake = 30;

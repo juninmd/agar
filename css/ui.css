@@ -411,3 +411,14 @@
     background: #000;
     padding: 10px;
 }
+
+.mutation-container {
+    margin-top: 1rem;
+    text-align: center;
+    border: 1px solid var(--neon-pink);
+    padding: 10px;
+    background: rgba(255, 0, 255, 0.05);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+    border-radius: 5px;
+    animation: mutationGlow 3s infinite alternate;
+}

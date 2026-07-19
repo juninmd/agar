@@ -46,6 +46,9 @@ export class Game {
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
 
+        this.queryResult = new Set();
+        this.checkedPairs = new Set();
+
         this.ui.onStart = (name, protocol, mutations, skin) => this.start(name, protocol, mutations, skin);
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin);
         this.input.onDash = () => this.handleDash();
@@ -138,7 +141,8 @@ export class Game {
         this.riftSystem.rifts.forEach(r => this.spatialHash.insert(r));
         allEntities.forEach(e => this.spatialHash.insert(e));
 
-        const queryResult = new Set();
+        this.queryResult.clear();
+        const queryResult = this.queryResult;
 
         allEntities.forEach(e => {
             const nearby = this.spatialHash.query(e.x, e.y, e.radius + 100, queryResult);
@@ -162,7 +166,8 @@ export class Game {
         }
         this.riftSystem.rifts = this.riftSystem.rifts.filter(r => !r.markedForDeletion);
 
-        const checkedPairs = new Set();
+        this.checkedPairs.clear();
+        const checkedPairs = this.checkedPairs;
         for (let i = 0; i < allEntities.length; i++) {
             const e1 = allEntities[i];
             const nearbyEntities = this.spatialHash.query(e1.x, e1.y, e1.radius * 2, queryResult);

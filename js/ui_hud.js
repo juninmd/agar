@@ -6,6 +6,12 @@ export class UIHud {
         this.warningMessage = document.getElementById('warning-message');
         this.uiLayer = document.getElementById('ui-layer');
         this.fpsCounter = document.getElementById('fps-counter');
+
+        // Apply neon-glow class for Interface Richness
+        const integrityContainer = document.getElementById('integrity-container');
+        if (integrityContainer) integrityContainer.classList.add('neon-glow');
+        const scoreBoard = document.getElementById('score-board');
+        if (scoreBoard) scoreBoard.classList.add('neon-glow');
         this.titanBarContainer = null;
         this.titanBar = null;
     }

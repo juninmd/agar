@@ -47,3 +47,9 @@
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
+
+@keyframes uiPulse {
+    0% { transform: scale(1); filter: brightness(1); }
+    50% { transform: scale(1.05); filter: brightness(1.2); }
+    100% { transform: scale(1); filter: brightness(1); }
+}

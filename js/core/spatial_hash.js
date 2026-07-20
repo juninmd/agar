@@ -25,7 +25,11 @@ export class SpatialHash {
      * Clears all entities from the spatial hash.
      */
     clear() {
-        this.cells.clear();
+        // Object Pooling: Instead of clearing the map and discarding arrays (which causes GC),
+        // we keep the map and just reset the length of existing arrays to 0.
+        for (const array of this.cells.values()) {
+            array.length = 0;
+        }
     }
 
     /**

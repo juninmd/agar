@@ -422,3 +422,9 @@
     border-radius: 5px;
     animation: mutationGlow 3s infinite alternate;
 }
+
+.neon-glow {
+    box-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue);
+    border: 1px solid var(--neon-blue);
+    animation: uiPulse 2s infinite ease-in-out;
+}

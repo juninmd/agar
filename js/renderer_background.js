@@ -23,16 +23,26 @@ export class RendererBackground {
         // Digital Void / Data Streams (Screen Space Background)
         this._drawDataStreams(ctx, camX, camY, width, height, r, g, b, time);
 
-        // Grid (World Space)
+        // Grid (Parallax Space)
         const pulse = Math.sin(time / 500) * 0.2 + 0.8;
         ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${0.15 * pulse})`;
         ctx.lineWidth = 1;
 
         const gridSize = CONSTANTS.GRID_SIZE;
-        const startX = Math.floor(-camX / gridSize) * gridSize;
-        const endX = startX + width + gridSize;
-        const startY = Math.floor(-camY / gridSize) * gridSize;
-        const endY = startY + height + gridSize;
+        // Apply a fractional multiplier (e.g., 0.5) to camX/Y for the parallax effect
+        const parallaxFactor = 0.5;
+        const parallaxX = -camX * parallaxFactor;
+        const parallaxY = -camY * parallaxFactor;
+
+        // The grid must cover the entire viewport, so start from the screen edges
+        const screenLeft = -camX;
+        const screenTop = -camY;
+
+        // Offset the start positions by the parallax offset modulo gridSize
+        const startX = screenLeft - (parallaxX % gridSize) - gridSize;
+        const endX = screenLeft + width + gridSize;
+        const startY = screenTop - (parallaxY % gridSize) - gridSize;
+        const endY = screenTop + height + gridSize;
 
         ctx.beginPath();
         for (let x = startX; x < endX; x += gridSize) {

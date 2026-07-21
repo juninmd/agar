@@ -11,7 +11,7 @@ def test_specter_protocol():
         page.wait_for_selector("#start-btn", state="visible")
 
         # Select SPECTER protocol
-        page.click(".protocol-card[data-id='SPECTER']")
+        page.evaluate("document.querySelector('.protocol-card[data-id=\"SPECTER\"]').click()")
 
         # Start game
         page.click("#start-btn")

@@ -1,10 +1,14 @@
 import { UIHud } from './ui_hud.js';
 import { NarrativeHUD } from './narrative_hud.js';
+import { UIEvents } from './ui_events.js';
 
 /**
  * Manages all UI interactions and updates.
  */
 export class UIManager {
+    /**
+     * Initializes the UIManager, setting up UI components and DOM references.
+     */
     constructor() {
         this.hud = new UIHud();
         this.narrative = new NarrativeHUD(this.hud.uiLayer);
@@ -23,55 +27,13 @@ export class UIManager {
         this.onStart = null;
         this.onRestart = null;
 
-        this._initListeners();
+        UIEvents.initListeners(this);
     }
 
-    _initListeners() {
-        if (this.startBtn) {
-            this.startBtn.addEventListener('click', () => {
-                const name = this.nameInput.value || "Unit 734";
-                const protocol = document.querySelector('.protocol-card.selected')?.dataset.id || 'HACKER';
-
-                const mutations = [];
-                if (document.getElementById('mut-chaos')?.checked) mutations.push('chaos-mode');
-                if (document.getElementById('mut-scarcity')?.checked) mutations.push('scarcity');
-                if (document.getElementById('mut-gigantism')?.checked) mutations.push('gigantism');
-                if (document.getElementById('mut-hyper-decay')?.checked) mutations.push('hyper-decay');
-
-                const skinSelector = document.getElementById('skin-selector');
-                const skin = skinSelector ? skinSelector.value : 'DEFAULT';
-
-                if (this.onStart) this.onStart(name, protocol, mutations, skin);
-            });
-        }
-
-        const protocolCards = document.querySelectorAll('.protocol-card');
-        protocolCards.forEach(card => {
-            card.addEventListener('click', () => {
-                protocolCards.forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-            });
-        });
-
-        if (this.restartBtn) {
-            this.restartBtn.addEventListener('click', () => {
-                if (this.onRestart) this.onRestart();
-            });
-        }
-
-        if (this.winBtn) {
-            this.winBtn.addEventListener('click', () => {
-                if (this.onRestart) this.onRestart();
-            });
-        }
-
-        if (this.trueWinBtn) {
-            this.trueWinBtn.addEventListener('click', () => {
-                if (this.onRestart) this.onRestart();
-            });
-        }
-    }
-
+    /**
+     * Toggles the active state of the game UI.
+     * @param {boolean} active - Whether the game is active.
+     */
     setGameActive(active) {
         const joystickBase = document.getElementById('joystick-base');
         if (active) {
@@ -90,18 +52,37 @@ export class UIManager {
         }
     }
 
+    /** @param {number} fps */
     updateFPS(fps) { this.hud.updateFPS(fps); }
+    /** @param {number} mass */
     updateScore(mass) { this.hud.updateScore(mass); }
+    /** @param {number} percent */
     updateIntegrity(percent) { this.hud.updateIntegrity(percent); }
+    /** @param {number} percent */
     updateAbilityCooldown(percent) { this.hud.updateAbilityCooldown(percent); }
+    /** @param {string} text */
     showLorePopup(text) { this.hud.showLorePopup(text); }
+    /** @param {boolean} show */
     showWarning(show) { this.hud.showWarning(show); }
+    /** Shows the system purge alert. */
     showPurgeAlert() { this.hud.showPurgeAlert(); }
+    /** @param {string} [message] */
     showCorruptionAlert(message) { this.hud.showCorruptionAlert(message); }
+    /** Shows the raid event warning. */
     showRaidWarning() { this.hud.showRaidWarning(); }
+    /** @param {number} percent */
     updateTitanHealth(percent) { this.hud.updateTitanHealth(percent); }
+    /**
+     * @param {string} text
+     * @param {string} [type]
+     */
     showNarrative(text, type) { this.narrative.show(text, type); }
 
+    /**
+     * Shows the game over screen.
+     * @param {string} reason - The reason for failure.
+     * @param {number} score - The final score.
+     */
     showGameOver(reason, score) {
         this.finalScoreDisplay.innerText = Math.floor(score);
         const reasonEl = this.gameOverScreen.querySelector('.error-text');
@@ -110,11 +91,17 @@ export class UIManager {
         this.setGameActive(false);
     }
 
+    /**
+     * Shows the standard win screen.
+     */
     showWin() {
         this.winScreen.classList.remove('hidden');
         this.setGameActive(false);
     }
 
+    /**
+     * Shows the true (omni) win screen.
+     */
     showTrueWin() {
         if (this.trueWinScreen) {
             this.trueWinScreen.classList.remove('hidden');
@@ -124,6 +111,10 @@ export class UIManager {
         }
     }
 
+    /**
+     * Checks if the OMNI protocol should be unlocked in the UI.
+     * @param {import('./lore_system.js').LoreSystem} loreSystem - The lore system instance.
+     */
     checkOmniUnlock(loreSystem) {
         if (loreSystem.unlocked.size >= 34) {
             const omniCard = document.getElementById('omni-protocol-card');

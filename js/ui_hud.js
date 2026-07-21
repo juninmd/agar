@@ -1,4 +1,12 @@
+import { UIAlerts } from './ui_alerts.js';
+
+/**
+ * UIHud manages individual HUD elements like score, integrity bar, and alerts.
+ */
 export class UIHud {
+    /**
+     * Initializes the HUD elements.
+     */
     constructor() {
         this.scoreDisplay = document.getElementById('score-display');
         this.integrityBar = document.getElementById('integrity-bar');
@@ -16,25 +24,45 @@ export class UIHud {
         this.titanBar = null;
     }
 
+    /**
+     * Updates the FPS counter.
+     * @param {number} fps - The current frames per second.
+     */
     updateFPS(fps) {
         if (this.fpsCounter) this.fpsCounter.innerText = `${fps} FPS`;
     }
 
+    /**
+     * Updates the score (mass) display.
+     * @param {number} mass - The player's current mass.
+     */
     updateScore(mass) {
         const kb = Math.floor(mass);
         if (this.scoreDisplay) this.scoreDisplay.innerText = `${kb} KB`;
     }
 
+    /**
+     * Updates the system integrity bar.
+     * @param {number} percent - The integrity percentage (0-100).
+     */
     updateIntegrity(percent) {
         if (this.integrityBar) this.integrityBar.style.width = `${Math.max(0, percent)}%`;
     }
 
+    /**
+     * Updates the ability cooldown overlay.
+     * @param {number} percent - The cooldown percentage (0-100).
+     */
     updateAbilityCooldown(percent) {
         if (this.abilityOverlay) {
             this.abilityOverlay.style.height = `${percent}%`;
         }
     }
 
+    /**
+     * Updates the Null Void Titan boss health bar.
+     * @param {number} percent - The health percentage (0-100).
+     */
     updateTitanHealth(percent) {
         if (!this.titanBar) this._createTitanBar();
         this.titanBar.style.width = `${Math.max(0, percent)}%`;
@@ -45,6 +73,10 @@ export class UIHud {
         }
     }
 
+    /**
+     * Creates the Titan health bar dynamically.
+     * @private
+     */
     _createTitanBar() {
         if (this.titanBarContainer) return;
 
@@ -61,21 +93,18 @@ export class UIHud {
         this.titanBar = container.querySelector('.titan-health-bar-fill');
     }
 
+    /**
+     * Shows a popup when a lore fragment is collected.
+     * @param {string} text - The lore fragment text.
+     */
     showLorePopup(text) {
-        const popup = document.createElement('div');
-        popup.className = 'lore-popup';
-        popup.innerHTML = `
-            <div class="lore-header">DATA FRAGMENT RECOVERED</div>
-            <div class="lore-body">${text}</div>
-        `;
-        this.uiLayer.appendChild(popup);
-
-        setTimeout(() => {
-            popup.classList.add('fade-out');
-            setTimeout(() => popup.remove(), 1000);
-        }, 5000);
+        UIAlerts.showLorePopup(this.uiLayer, text);
     }
 
+    /**
+     * Toggles the critical system warning message.
+     * @param {boolean} show - Whether to show the warning.
+     */
     showWarning(show) {
         if (!this.warningMessage) return;
         if (show) {
@@ -86,32 +115,25 @@ export class UIHud {
         }
     }
 
+    /**
+     * Shows the raid warning event message.
+     */
     showRaidWarning() {
-        const warning = document.createElement('div');
-        warning.className = 'raid-warning';
-        warning.innerHTML = `
-            <h1 class="glitch-text" data-text="WARNING">WARNING</h1>
-            <p>DIMENSIONAL TEAR DETECTED</p>
-        `;
-        this.uiLayer.appendChild(warning);
-        setTimeout(() => warning.remove(), 5000);
+        UIAlerts.showRaidWarning(this.uiLayer);
     }
 
+    /**
+     * Shows the system purge alert message.
+     */
     showPurgeAlert() {
-        const alert = document.createElement('div');
-        alert.className = 'purge-alert';
-        alert.innerText = 'SYSTEM PURGE INITIATED // NULL VOID DETECTED';
-        this.uiLayer.appendChild(alert);
-        setTimeout(() => {
-            if (alert.parentNode) alert.remove();
-        }, 10000);
+        UIAlerts.showPurgeAlert(this.uiLayer);
     }
 
+    /**
+     * Shows a data corruption alert message.
+     * @param {string} [message] - Custom message to display.
+     */
     showCorruptionAlert(message) {
-        const alert = document.createElement('div');
-        alert.className = 'corruption-alert';
-        alert.innerText = message || 'DATA CORRUPTED // MASS LOST';
-        this.uiLayer.appendChild(alert);
-        setTimeout(() => alert.remove(), 2000);
+        UIAlerts.showCorruptionAlert(this.uiLayer, message);
     }
 }

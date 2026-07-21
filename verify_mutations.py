@@ -11,11 +11,11 @@ def test_mutations():
         page.wait_for_selector("#start-btn", state="visible")
 
         # Select Scarcity and Gigantism
-        page.check("#mut-scarcity")
-        page.check("#mut-gigantism")
+        page.locator("#mut-scarcity").check(force=True)
+        page.locator("#mut-gigantism").check(force=True)
 
         # Start game
-        page.click("#start-btn")
+        page.locator("#start-btn").click(force=True)
 
         # Wait a moment for the game to start and spawn foods
         page.wait_for_timeout(1000)

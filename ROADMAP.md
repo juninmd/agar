@@ -17,7 +17,7 @@
 
 ## 🚀 Phase 3: Expansion (Future)
 - [ ] **Leaderboards**: Global ranking system.
-- [ ] **Rift Events**: Dynamic map changes based on the lore.
+- [x] **Rift Events**: Dynamic map changes based on the lore.
 - [ ] **Custom Rooms**: Allow players to set up private matches with specific rules.
 
 ## 🧬 Phase 4: The Bio-Digital Convergence (Done)

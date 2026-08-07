@@ -118,5 +118,6 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 🎨 Phase 24: UX/UI & Rendering Overhaul (Done)
 - [x] **Interface Richness**: Enhance canvas rendering, styling, and animations.
+- [x] **Cyberpunk/Noir OS Menu UI Refinement**: Add animated scanline effects and polish `.protocol-card` for rich interface immersion.
 - [x] **Performance Audit**: Ensure 60 FPS, check for memory leaks, and optimize Spatial Hashing for collisions.
 - [x] **Testing & Quality Assurance**: Write additional tests to ensure robust game loop.

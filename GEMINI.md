@@ -48,6 +48,7 @@ The narrative theme is a dark, neon-lit Cyberpunk/Noir OS environment where the 
 - `js/collision.js` was refactored by extracting resolution logic into `js/core/collision_resolver.js`.
 - Run playwright validation scripts `verify_specter.py`, `verify_mutations.py` and `verify_breaker.py` to ensure correctness.
 - Action (Stitch Persona): Executed proactive UX/UI visual enhancement. Added an animated Cyberpunk/Noir OS scanline gradient to `.protocol-card::before` and `.protocol-card:hover` inside `css/components.css`. Ran playwright verifications to confirm stability.
+- Action (Stitch Persona): Executed proactive UX/UI visual enhancement. Augmented `#start-btn` glow and hover effects in `css/components.css` for a punchier Cyberpunk aesthetic with stronger text-shadow and scale transformations.
 
 ## Architectural Plan (Phase 1)
 - **Frontend Stack**: TypeScript (planned migration), HTML5 Canvas API for raw rendering performance, CSS3 for overlay UI.

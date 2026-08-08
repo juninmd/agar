@@ -32,6 +32,7 @@ button {
 #start-btn {
     background: linear-gradient(45deg, #ff00ff, #00f3ff, #ff00ff);
     background-size: 200% 200%;
+    text-shadow: 0 0 5px white, 0 0 10px #ff00ff;
     animation: gradientBG 3s ease infinite, buttonPulse 1.5s infinite alternate;
 }
 
@@ -44,6 +45,9 @@ button:hover {
 #start-btn:hover {
     background: linear-gradient(45deg, #ff4dff, #00ffff, #ff4dff);
     background-size: 200% 200%;
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #00ffff, 0 0 50px #ff4dff, inset 0 0 20px #ff00ff;
+    text-shadow: 0 0 10px white, 0 0 20px #00ffff;
 }
 
 @keyframes buttonPulse {

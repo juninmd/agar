@@ -46,8 +46,6 @@ export class Particle {
     }
 
     draw(ctx) {
-        // Individual draw is kept for flexibility, but we can do it inline in the system if needed.
-        // For now, this is kept unchanged as batching transforms per particle is complex.
         ctx.save();
         ctx.globalAlpha = Math.max(0, this.life / this.maxLife);
         ctx.fillStyle = this.color;
@@ -55,7 +53,6 @@ export class Particle {
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
         ctx.beginPath();
-
         if (this.shape === 'square') {
             ctx.rect(-this.size / 2, -this.size / 2, this.size, this.size);
             ctx.fill();
@@ -68,7 +65,6 @@ export class Particle {
             ctx.arc(0, 0, this.size, 0, Math.PI * 2);
             ctx.fill();
         }
-
         ctx.restore();
     }
 }

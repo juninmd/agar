@@ -1,6 +1,8 @@
 import { Utils } from './utils.js';
 import { VisualEffects } from './visual_effects.js';
 import { AbilityEffects } from './ability_effects.js';
+import { ABILITY_CONFIG } from './effects/ability_config.js';
+import { AbilityActivator } from './effects/ability_activator.js';
 
 /**
  * Manages active abilities for players based on their protocol.
@@ -14,109 +16,12 @@ export class AbilitySystem {
         this.isActive = false;
         this.tetheredBots = [];
 
-        this.config = {
-            BASTION: { cooldown: 900, duration: 180 }, // 15s / 3s
-            PHANTOM: { cooldown: 600, duration: 180 }, // 10s / 3s
-            HACKER: { cooldown: 720, duration: 120 },  // 12s / 2s
-            VIRAL:   { cooldown: 600, duration: 300 }, // 10s / 5s
-            CYPHER:  { cooldown: 900, duration: 300 }, // 15s / 5s
-            ARCHITECT: { cooldown: 1200, duration: 300 }, // 20s / 5s
-            SOULBOUND: { cooldown: 600, duration: 240 }, // 10s / 4s
-            SYNDICATE: { cooldown: 600, duration: 120 }, // 10s / 2s
-            MIRAGE: { cooldown: 600, duration: 180 },    // 10s / 3s
-            CHRONOS: { cooldown: 900, duration: 0 },     // 15s / Instant
-            SWARM:   { cooldown: 1200, duration: 0 },    // 20s / Instant
-            NEXUS:   { cooldown: 600, duration: 0 },     // 10s / Instant
-            AEON:    { cooldown: 600, duration: 0 },     // 10s / Instant
-            FORGE:   { cooldown: 600, duration: 0 },     // 10s / Instant
-            SYNAPSE: { cooldown: 300, duration: 180 },
-            MAGNETAR:{ cooldown: 900, duration: 240 },   // 15s / 4s
-            VAMPYR:  { cooldown: 600, duration: 300 },   // 10s / 5s
-            BREAKER: { cooldown: 600, duration: 180 },   // 10s / 3s
-            SPECTER: { cooldown: 900, duration: 180 }    // 15s / 3s
-        };
-
-        this.currentConfig = this.config[protocolId] || this.config.HACKER;
+        this.currentConfig = ABILITY_CONFIG[protocolId] || ABILITY_CONFIG.HACKER;
         this.maxCooldown = this.currentConfig.cooldown;
     }
 
     activate(player, bots) {
-        if (this.cooldown > 0 || this.isActive) return false;
-
-        this.isActive = true;
-        this.activeTime = this.currentConfig.duration;
-        this.cooldown = this.maxCooldown;
-
-        if (this.protocolId === 'HACKER') AbilityEffects.triggerVirus(player, bots);
-        if (this.protocolId === 'ARCHITECT') AbilityEffects.triggerArchitect(bots);
-        if (this.protocolId === 'SYNDICATE') AbilityEffects.triggerSyndicate(player);
-        if (this.protocolId === 'MIRAGE') AbilityEffects.triggerMirage(player, bots);
-        if (this.protocolId === 'CHRONOS') {
-            AbilityEffects.triggerChronos(player);
-            this.isActive = false; // Instant ability
-        }
-        if (this.protocolId === 'SWARM') {
-            if (player.mass > 500) {
-                AbilityEffects.triggerSwarm(player, bots);
-                this.isActive = false; // Instant ability
-            } else {
-                return false; // Not enough mass
-            }
-        }
-        if (this.protocolId === 'NEXUS') {
-            if (player.mass > 250) {
-                AbilityEffects.triggerNexus(player, bots);
-                this.isActive = false; // Instant ability
-            } else {
-                return false; // Not enough mass
-            }
-        }
-        if (this.protocolId === 'AEON') {
-            AbilityEffects.triggerAeon(player);
-            this.isActive = false; // Instant ability
-        }
-        if (this.protocolId === 'FORGE') {
-            if (player.mass > 150) {
-                AbilityEffects.triggerForge(player, bots);
-                this.isActive = false; // Instant ability
-            } else {
-                return false; // Not enough mass
-            }
-        }
-        if (this.protocolId === 'SYNAPSE') {
-            if (AbilityEffects.triggerSynapse(player, bots)) {
-                this.isActive = true;
-                this.activeTime = this.currentConfig.duration;
-                this.cooldown = this.currentConfig.cooldown;
-            } else {
-                return false;
-            }
-        }
-        if (this.protocolId === 'MAGNETAR') {
-            // Passive-like active duration
-            this.isActive = true;
-            this.activeTime = this.currentConfig.duration;
-            this.cooldown = this.currentConfig.cooldown;
-        }
-        if (this.protocolId === 'VAMPYR') {
-            this.isActive = true;
-            this.activeTime = this.currentConfig.duration;
-            this.cooldown = this.currentConfig.cooldown;
-        }
-        if (this.protocolId === 'BREAKER') {
-            player.breakerAura = true;
-            this.isActive = true;
-            this.activeTime = this.currentConfig.duration;
-            this.cooldown = this.currentConfig.cooldown;
-        }
-        if (this.protocolId === 'SPECTER') {
-            AbilityEffects.triggerSpecter(player);
-            this.isActive = true;
-            this.activeTime = this.currentConfig.duration;
-            this.cooldown = this.currentConfig.cooldown;
-        }
-
-        return true;
+        return AbilityActivator.activate(this, player, bots);
     }
 
     update(player, bots = []) {

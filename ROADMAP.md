@@ -15,8 +15,8 @@
 - [x] **Advanced AI**: Smarter "Phage" bots for solo play.
 - [x] **Antigravity Refactor**: Fix file constraints for `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js`.
 
-## 🚀 Phase 3: Expansion (Future)
-- [ ] **Leaderboards**: Global ranking system.
+## 🚀 Phase 3: Expansion (Current)
+- [x] **Leaderboards**: Global ranking system (Local mock implemented).
 - [x] **Rift Events**: Dynamic map changes based on the lore.
 - [ ] **Custom Rooms**: Allow players to set up private matches with specific rules.
 

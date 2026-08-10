@@ -1,6 +1,7 @@
 import { UIHud } from './ui_hud.js';
 import { NarrativeHUD } from './narrative_hud.js';
 import { UIEvents } from './ui_events.js';
+import { UILeaderboard } from './ui_leaderboard.js';
 
 /**
  * Manages all UI interactions and updates.
@@ -23,6 +24,7 @@ export class UIManager {
         this.trueWinScreen = document.getElementById('true-win-screen');
         this.trueWinBtn = document.getElementById('true-win-btn');
         this.mobileDashBtn = document.getElementById('mobile-dash-btn');
+        this.leaderboard = new UILeaderboard();
 
         this.onStart = null;
         this.onRestart = null;
@@ -45,10 +47,12 @@ export class UIManager {
             this.mobileDashBtn.classList.add('active-game');
             if (joystickBase) joystickBase.classList.add('active-game');
             this.hud.uiLayer.style.pointerEvents = 'none';
+            this.leaderboard.show(true);
         } else {
             this.hud.uiLayer.style.pointerEvents = 'auto';
             this.mobileDashBtn.classList.remove('active-game');
             if (joystickBase) joystickBase.classList.remove('active-game');
+            this.leaderboard.show(false);
         }
     }
 
@@ -72,6 +76,13 @@ export class UIManager {
     showRaidWarning() { this.hud.showRaidWarning(); }
     /** @param {number} percent */
     updateTitanHealth(percent) { this.hud.updateTitanHealth(percent); }
+    /**
+     * Updates the leaderboard with current entities.
+     * @param {Object} player - The player object.
+     * @param {Array} bots - The list of bots.
+     */
+    updateLeaderboard(player, bots) { this.leaderboard.update(player, bots); }
+
     /**
      * @param {string} text
      * @param {string} [type]

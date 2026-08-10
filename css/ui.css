@@ -428,3 +428,47 @@
     border: 1px solid var(--neon-blue);
     animation: uiPulse 2s infinite ease-in-out;
 }
+
+#leaderboard {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    width: 250px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid var(--neon-blue);
+    padding: 10px;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--neon-blue);
+    z-index: 99;
+}
+
+#leaderboard h3 {
+    margin: 0 0 10px 0;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+    border-bottom: 1px solid var(--neon-pink);
+    padding-bottom: 5px;
+}
+
+#leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+#leaderboard-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    border-bottom: 1px dashed rgba(0, 243, 255, 0.3);
+}
+
+#leaderboard-list li span:first-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 70%;
+}

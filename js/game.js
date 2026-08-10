@@ -106,6 +106,7 @@ export class Game {
         this.ui.updateScore(this.player.mass);
         this.ui.updateIntegrity(this.systemIntegrity);
         if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
+        this.ui.updateLeaderboard(this.player, this.bots);
         this.narrativeSystem.update(this.player, this.systemIntegrity);
     }
 

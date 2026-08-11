@@ -18,7 +18,7 @@
 ## 🚀 Phase 3: Expansion (Current)
 - [x] **Leaderboards**: Global ranking system (Local mock implemented).
 - [x] **Rift Events**: Dynamic map changes based on the lore.
-- [ ] **Custom Rooms**: Allow players to set up private matches with specific rules.
+- [x] **Custom Rooms**: Allow players to set up private matches with specific rules.
 
 ## 🧬 Phase 4: The Bio-Digital Convergence (Done)
 - [x] **Symbiote Protocol**: Introduce biological viral mechanics (rapid regen, high decay).

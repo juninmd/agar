@@ -25,6 +25,18 @@ export class UIEvents {
             });
         }
 
+
+        const mutationCheckboxes = document.querySelectorAll('.mutation-btn input[type="checkbox"]');
+        mutationCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    e.target.parentElement.classList.add('active');
+                } else {
+                    e.target.parentElement.classList.remove('active');
+                }
+            });
+        });
+
         const protocolCards = document.querySelectorAll('.protocol-card');
         protocolCards.forEach(card => {
             card.addEventListener('click', () => {

@@ -56,3 +56,4 @@ The narrative theme is a dark, neon-lit Cyberpunk/Noir OS environment where the 
 - **Package Management**: `pnpm` (Node), `uv` (Python).
 - **Tooling**: Vite/Vitest for bundling and unit testing. Playwright for end-to-end game state verification.
 - **Goal**: Massive UX/UI upgrade, proactive bug patching, 100% test coverage, and strict enforcement of the 150-line file limit.
+- Enhanced mutation UI toggles with interactive buttons and visual feedback, fulfilling the 'Refine Interface' mandate.

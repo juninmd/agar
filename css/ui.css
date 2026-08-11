@@ -472,3 +472,34 @@
     text-overflow: ellipsis;
     max-width: 70%;
 }
+
+.mutation-btn {
+    display: inline-block;
+    padding: 8px 15px;
+    margin: 5px;
+    border: 1px solid var(--neon-blue);
+    color: var(--neon-blue);
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    font-family: 'Share Tech Mono', monospace;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+    text-shadow: 0 0 5px var(--neon-blue);
+}
+
+.mutation-btn input[type="checkbox"] {
+    display: none;
+}
+
+.mutation-btn:hover {
+    background: rgba(0, 243, 255, 0.2);
+    box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.mutation-btn.active {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+    background: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 15px var(--neon-pink), inset 0 0 5px var(--neon-pink);
+    text-shadow: 0 0 5px var(--neon-pink);
+}

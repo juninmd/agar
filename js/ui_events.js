@@ -10,6 +10,7 @@ export class UIEvents {
         if (uiManager.startBtn) {
             uiManager.startBtn.addEventListener('click', () => {
                 const name = uiManager.nameInput.value || "Unit 734";
+                const roomId = uiManager.roomIdInput?.value.trim() || null;
                 const protocol = document.querySelector('.protocol-card.selected')?.dataset.id || 'HACKER';
 
                 const mutations = [];
@@ -21,7 +22,7 @@ export class UIEvents {
                 const skinSelector = document.getElementById('skin-selector');
                 const skin = skinSelector ? skinSelector.value : 'DEFAULT';
 
-                if (uiManager.onStart) uiManager.onStart(name, protocol, mutations, skin);
+                if (uiManager.onStart) uiManager.onStart(name, protocol, mutations, skin, roomId);
             });
         }
 

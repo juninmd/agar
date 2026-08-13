@@ -95,6 +95,22 @@ export class Renderer {
             }
         });
 
+        if (gameState.network && gameState.network.otherPlayers) {
+            for (const [id, remote] of gameState.network.otherPlayers.entries()) {
+                const rRadius = Utils.getRadiusFromMass(remote.mass);
+                if (Utils.isInViewport(remote.x, remote.y, rRadius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
+                    this.ctx.beginPath();
+                    this.ctx.arc(remote.x, remote.y, rRadius, 0, Math.PI * 2);
+                    this.ctx.strokeStyle = remote.color;
+                    this.ctx.lineWidth = 3;
+                    this.ctx.setLineDash([5, 5]);
+                    this.ctx.stroke();
+                    this.ctx.setLineDash([]);
+                    this.ctx.closePath();
+                }
+            }
+        }
+
         const entities = [gameState.player, ...gameState.bots].sort((a, b) => a.mass - b.mass);
         entities.forEach(e => {
             if (!e.markedForDeletion && Utils.isInViewport(e.x, e.y, e.radius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {

@@ -18,6 +18,7 @@ import { Utils } from './utils.js';
 import { MutationSystem } from './mutation_system.js';
 import { SpatialHash } from './core/spatial_hash.js';
 import { GameCollisions } from './core/game_collisions.js';
+import { NetworkSystem } from './network_system.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -43,6 +44,7 @@ export class Game {
         this.systems = new GameSystems(this);
         this.mutationSystem = new MutationSystem();
         this.spatialHash = new SpatialHash(200); // 200px cell size
+        this.network = new NetworkSystem();
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
@@ -50,14 +52,18 @@ export class Game {
         this.queryResult = new Set();
         this.checkedPairs = new Set();
 
-        this.ui.onStart = (name, protocol, mutations, skin) => this.start(name, protocol, mutations, skin);
-        this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin);
+        this.ui.onStart = (name, protocol, mutations, skin, roomId) => this.start(name, protocol, mutations, skin, roomId);
+        this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin, this.network.roomId);
         this.input.onDash = () => this.handleDash();
         this.input.onAbility = () => this.handleAbility();
     }
 
-    start(name, protocol, mutations = [], skin = 'DEFAULT') {
+    start(name, protocol, mutations = [], skin = 'DEFAULT', roomId = null) {
         this.mutationSystem.applyModifiers(mutations, CONSTANTS);
+
+        if (roomId) {
+            this.network.connect(roomId);
+        }
         this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name, skin);
         this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => Spawner.spawnFood());
         this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());
@@ -102,6 +108,8 @@ export class Game {
         this._updateSystems();
         this._updateEntities();
         this._checkCollisions();
+
+        this.network.update(this.player);
 
         this.ui.updateScore(this.player.mass);
         this.ui.updateIntegrity(this.systemIntegrity);

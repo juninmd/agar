@@ -57,3 +57,5 @@ The narrative theme is a dark, neon-lit Cyberpunk/Noir OS environment where the 
 - **Tooling**: Vite/Vitest for bundling and unit testing. Playwright for end-to-end game state verification.
 - **Goal**: Massive UX/UI upgrade, proactive bug patching, 100% test coverage, and strict enforcement of the 150-line file limit.
 - Enhanced mutation UI toggles with interactive buttons and visual feedback, fulfilling the 'Refine Interface' mandate.
+- Action (Spark Persona): Implemented `server.js` (Express + Socket.io) and `js/network_system.js` to handle basic multiplayer room state broadcasting.
+- Action (Stitch Persona): Updated UI to accept room ID, rendered remote players as dashed visual entities via `NetworkSystem` integration. Checked off Multiplayer Integration in ROADMAP.md.

@@ -18,6 +18,7 @@ export class UIManager {
         this.winScreen = document.getElementById('win-screen');
         this.finalScoreDisplay = document.getElementById('final-score');
         this.nameInput = document.getElementById('player-name');
+        this.roomIdInput = document.getElementById('room-id');
         this.startBtn = document.getElementById('start-btn');
         this.restartBtn = document.getElementById('restart-btn');
         this.winBtn = document.getElementById('win-btn');

@@ -25,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/juninmd/agar/issues"
   },
-  "homepage": "https://github.com/juninmd/agar#readme"
+  "homepage": "https://github.com/juninmd/agar#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "socket.io": "^4.8.3",
+    "socket.io-client": "^4.8.3"
+  }
 }

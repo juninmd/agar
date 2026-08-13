@@ -9,7 +9,7 @@
 
 ## 🚧 Phase 2: Engagement (Current)
 - [x] **Mobile UX Enhancement**: Improved protocol selection grid layout for smaller screens.
-- [ ] **Multiplayer Integration**: Basic WebSocket-based room system.
+- [x] **Multiplayer Integration**: Basic WebSocket-based room system.
 - [x] **Skins & Cosmetics**: Visual variety for cells based on lore characters.
 - [x] **Mobile Optimization**: Touch-based controls and responsive UI.
 - [x] **Advanced AI**: Smarter "Phage" bots for solo play.

@@ -28,6 +28,13 @@
     margin-right: 10px;
 }
 
+.narrative-toast.info, .narrative-toast.INFO {
+    border-color: #00FFFF;
+    color: #00FFFF;
+    text-shadow: 0 0 10px #00FFFF;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
 .narrative-toast.warning {
     border-color: #FFA500;
     color: #FFA500;
@@ -41,6 +48,13 @@
     text-shadow: 0 0 20px #FF0000;
     box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
     animation: glitch-anim 0.3s infinite alternate-reverse;
+}
+
+.narrative-toast.success, .narrative-toast.SUCCESS {
+    border-color: #00FF00;
+    color: #00FF00;
+    text-shadow: 0 0 10px #00FF00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
 }
 
 .narrative-toast.glitch {

@@ -45,12 +45,14 @@ export class UIManager {
             this.winScreen.classList.add('hidden');
             if (this.trueWinScreen) this.trueWinScreen.classList.add('hidden');
             this.hud.showWarning(false);
+            this.hud.show(true);
             this.mobileDashBtn.classList.add('active-game');
             if (joystickBase) joystickBase.classList.add('active-game');
             this.hud.uiLayer.style.pointerEvents = 'none';
             this.leaderboard.show(true);
         } else {
             this.hud.uiLayer.style.pointerEvents = 'auto';
+            this.hud.show(false);
             this.mobileDashBtn.classList.remove('active-game');
             if (joystickBase) joystickBase.classList.remove('active-game');
             this.leaderboard.show(false);

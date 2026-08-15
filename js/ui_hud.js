@@ -28,6 +28,21 @@ export class UIHud {
      * Updates the FPS counter.
      * @param {number} fps - The current frames per second.
      */
+    /**
+     * Toggles the visibility of the main HUD elements.
+     * @param {boolean} active - Whether the HUD should be visible.
+     */
+    show(active) {
+        const action = active ? 'remove' : 'add';
+        const scoreBoard = document.getElementById('score-board');
+        if (scoreBoard) scoreBoard.classList[action]('hidden');
+        if (this.fpsCounter) this.fpsCounter.classList[action]('hidden');
+        const integrityContainer = document.getElementById('integrity-container');
+        if (integrityContainer) integrityContainer.classList[action]('hidden');
+        const abilityHud = document.getElementById('ability-hud');
+        if (abilityHud) abilityHud.classList[action]('hidden');
+    }
+
     updateFPS(fps) {
         if (this.fpsCounter) this.fpsCounter.innerText = `${fps} FPS`;
     }

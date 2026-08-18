@@ -15,6 +15,13 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    animation: boot-flicker 0.15s infinite;
+}
+
+@keyframes boot-flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
 }
 
 .boot-line {

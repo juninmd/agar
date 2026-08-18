@@ -52,6 +52,7 @@ export class BootSequence {
     _createOverlay() {
         this.container = document.createElement('div');
         this.container.id = 'boot-screen';
+        this.container.classList.add('crt-overlay', 'scanlines');
 
         const logo = document.createElement('div');
         logo.className = 'ascii-logo';

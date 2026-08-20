@@ -18,3 +18,4 @@ Thumbs.db
 # Project Specific
 *.log
 screenshots/
+coverage/

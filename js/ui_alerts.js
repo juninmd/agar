@@ -44,7 +44,7 @@ export class UIAlerts {
     static showPurgeAlert(layer) {
         const alert = document.createElement('div');
         alert.className = 'purge-alert';
-        alert.innerText = 'SYSTEM PURGE INITIATED // NULL VOID DETECTED';
+        alert.textContent = 'SYSTEM PURGE INITIATED // NULL VOID DETECTED';
         layer.appendChild(alert);
         setTimeout(() => {
             if (alert.parentNode) alert.remove();
@@ -59,7 +59,7 @@ export class UIAlerts {
     static showCorruptionAlert(layer, message) {
         const alert = document.createElement('div');
         alert.className = 'corruption-alert';
-        alert.innerText = message || 'DATA CORRUPTED // MASS LOST';
+        alert.textContent = message || 'DATA CORRUPTED // MASS LOST';
         layer.appendChild(alert);
         setTimeout(() => alert.remove(), 2000);
     }

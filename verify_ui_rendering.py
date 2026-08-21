@@ -7,6 +7,13 @@ def test_ui_rendering():
         page = browser.new_page()
         page.goto("http://localhost:8000")
 
+        # Verify the presence of crt-overlay and scanlines on the start screen
+        crt_overlay = page.locator(".crt-overlay")
+        assert crt_overlay.count() > 0, "Expected .crt-overlay to be present on the screen"
+
+        scanlines = page.locator(".scanlines")
+        assert scanlines.count() > 0, "Expected .scanlines to be present on the screen"
+
         # Wait for the start screen to be hidden
         page.locator("#start-btn").click()
 

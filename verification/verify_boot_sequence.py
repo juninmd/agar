@@ -3,7 +3,10 @@ from playwright.sync_api import sync_playwright
 def test_boot_sequence():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+        context = browser.new_context(user_agent="Mozilla/5.0")
+        page = context.new_page()
+        page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => false})")
+
         page.goto("http://localhost:8000")
 
         # Check if boot-screen exists and has correct classes

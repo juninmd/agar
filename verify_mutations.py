@@ -11,8 +11,8 @@ def test_mutations():
         page.wait_for_selector("#start-btn", state="visible")
 
         # Select Scarcity and Gigantism
-        page.locator("#mut-scarcity").check(force=True)
-        page.locator("#mut-gigantism").check(force=True)
+        page.evaluate("document.getElementById('mut-scarcity').checked = true")
+        page.evaluate("document.getElementById('mut-gigantism').checked = true")
 
         # Start game
         page.locator("#start-btn").click(force=True)

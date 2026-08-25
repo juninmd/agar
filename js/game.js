@@ -49,9 +49,6 @@ export class Game {
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
 
-        this.queryResult = new Set();
-        this.checkedPairs = new Set();
-
         this.ui.onStart = (name, protocol, mutations, skin, roomId) => this.start(name, protocol, mutations, skin, roomId);
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin, this.network.roomId);
         this.input.onDash = () => this.handleDash();
@@ -105,9 +102,22 @@ export class Game {
              }
         }
 
-        this._updateSystems();
-        this._updateEntities();
-        this._checkCollisions();
+        this.systems.update();
+
+        this.foods = this.foods.filter(f => !f.markedForDeletion);
+        this.bots = this.bots.filter(b => !b.markedForDeletion);
+
+        const all = [this.player, ...this.bots];
+        this.player.setTarget(
+            this.player.x + (this.input.mouseX - this.canvas.width/2),
+            this.player.y + (this.input.mouseY - this.canvas.height/2)
+        );
+        this.player.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, this.bots);
+        this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods, this));
+
+        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot());
+
+        GameCollisions.checkCollisions(this);
 
         this.network.update(this.player);
 
@@ -122,29 +132,6 @@ export class Game {
         this.ghostSystem.saveGhost(this.player);
         this.gameRunning = false;
         return this.ui.showGameOver("DATA PURGED", this.player.mass);
-    }
-
-    _updateSystems() {
-        this.systems.update();
-    }
-
-    _updateEntities() {
-        this.foods = this.foods.filter(f => !f.markedForDeletion);
-        this.bots = this.bots.filter(b => !b.markedForDeletion);
-
-        const all = [this.player, ...this.bots];
-        this.player.setTarget(
-            this.player.x + (this.input.mouseX - this.canvas.width/2),
-            this.player.y + (this.input.mouseY - this.canvas.height/2)
-        );
-        this.player.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, this.bots);
-        this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods, this));
-
-        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot());
-    }
-
-    _checkCollisions() {
-        GameCollisions.checkCollisions(this);
     }
 
     loop() {

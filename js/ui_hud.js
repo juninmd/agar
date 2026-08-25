@@ -1,4 +1,5 @@
 import { UIAlerts } from './ui_alerts.js';
+import { UITitanBar } from './ui_titan_bar.js';
 
 /**
  * UIHud manages individual HUD elements like score, integrity bar, and alerts.
@@ -20,8 +21,8 @@ export class UIHud {
         if (integrityContainer) integrityContainer.classList.add('neon-glow');
         const scoreBoard = document.getElementById('score-board');
         if (scoreBoard) scoreBoard.classList.add('neon-glow');
-        this.titanBarContainer = null;
-        this.titanBar = null;
+
+        this.titanBar = new UITitanBar(this.uiLayer);
     }
 
     /**
@@ -79,33 +80,7 @@ export class UIHud {
      * @param {number} percent - The health percentage (0-100).
      */
     updateTitanHealth(percent) {
-        if (!this.titanBar) this._createTitanBar();
-        this.titanBar.style.width = `${Math.max(0, percent)}%`;
-        if (percent <= 0 && this.titanBarContainer) {
-            this.titanBarContainer.remove();
-            this.titanBar = null;
-            this.titanBarContainer = null;
-        }
-    }
-
-    /**
-     * Creates the Titan health bar dynamically.
-     * @private
-     */
-    _createTitanBar() {
-        if (this.titanBarContainer) return;
-
-        const container = document.createElement('div');
-        container.className = 'titan-health-container';
-        container.innerHTML = `
-            <div class="titan-label">NULL VOID TITAN</div>
-            <div class="titan-health-bar-bg">
-                <div class="titan-health-bar-fill"></div>
-            </div>
-        `;
-        this.uiLayer.appendChild(container);
-        this.titanBarContainer = container;
-        this.titanBar = container.querySelector('.titan-health-bar-fill');
+        this.titanBar.update(percent);
     }
 
     /**

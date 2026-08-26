@@ -19,6 +19,7 @@ import { MutationSystem } from './mutation_system.js';
 import { SpatialHash } from './core/spatial_hash.js';
 import { GameCollisions } from './core/game_collisions.js';
 import { NetworkSystem } from './network_system.js';
+import { RendererBackground } from './renderer_background.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -53,6 +54,9 @@ export class Game {
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin, this.network.roomId);
         this.input.onDash = () => this.handleDash();
         this.input.onAbility = () => this.handleAbility();
+
+        // Start background loop for UI
+        this.loop();
     }
 
     start(name, protocol, mutations = [], skin = 'DEFAULT', roomId = null) {
@@ -80,7 +84,6 @@ export class Game {
         this.riftSystem.reset();
         this.gameRunning = true;
         this.ui.setGameActive(true);
-        this.loop();
     }
 
     handleDash() {
@@ -135,11 +138,18 @@ export class Game {
     }
 
     loop() {
-        if (!this.gameRunning) return;
-        this.update();
-        this.renderer.updateCamera(this.player);
-        this.renderer.render(this);
-        this.ui.updateFPS(this.renderer.fps);
+        if (!this.gameRunning) {
+            this.renderer.clear();
+            this.renderer.applyTransform(this.systemIntegrity);
+            RendererBackground.drawGrid(this.renderer.ctx, this, this.renderer.camX, this.renderer.camY, this.canvas.width, this.canvas.height);
+            this.renderer.ctx.restore();
+        } else {
+            this.update();
+            this.renderer.updateCamera(this.player);
+            this.renderer.render(this);
+            this.ui.updateFPS(this.renderer.fps);
+        }
+
         requestAnimationFrame(() => this.loop());
     }
 }

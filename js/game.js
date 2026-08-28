@@ -128,6 +128,7 @@ export class Game {
         this.ui.updateIntegrity(this.systemIntegrity);
         if (this.player.abilities) this.ui.updateAbilityCooldown(this.player.abilities.getCooldownPercent());
         this.ui.updateLeaderboard(this.player, this.bots);
+        this.ui.minimap.update(this.player, this.bots, CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT);
         this.narrativeSystem.update(this.player, this.systemIntegrity);
     }
 

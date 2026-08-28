@@ -125,3 +125,7 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 ## 💻 Phase 25: The Quantum Interface (Done)
 - [x] **Advanced Glitch Effects**: Refine main title aesthetics with complex multi-layer keyframe glitch animations to enhance the "Cyberpunk OS" boot sequence.
 - [x] **Dynamic CRT Overlay**: Add a flickering CRT overlay to the boot sequence to enrich the interface immersion.
+
+## 🗺️ Phase 26: The Tactical Minimap (Current)
+- [x] **Minimap UI Element**: Add a responsive, scaled canvas minimap to the bottom right of the HUD.
+- [x] **Entity Tracking**: Visualize the player, bots, and the spatial dimensions of the world border dynamically.

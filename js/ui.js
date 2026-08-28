@@ -2,6 +2,7 @@ import { UIHud } from './ui_hud.js';
 import { NarrativeHUD } from './narrative_hud.js';
 import { UIEvents } from './ui_events.js';
 import { UILeaderboard } from './ui_leaderboard.js';
+import { UIMinimap } from './ui_minimap.js';
 
 /**
  * Manages all UI interactions and updates.
@@ -26,6 +27,7 @@ export class UIManager {
         this.trueWinBtn = document.getElementById('true-win-btn');
         this.mobileDashBtn = document.getElementById('mobile-dash-btn');
         this.leaderboard = new UILeaderboard();
+        this.minimap = new UIMinimap();
 
         this.onStart = null;
         this.onRestart = null;
@@ -50,12 +52,14 @@ export class UIManager {
             if (joystickBase) joystickBase.classList.add('active-game');
             this.hud.uiLayer.style.pointerEvents = 'none';
             this.leaderboard.show(true);
+            this.minimap.show(true);
         } else {
             this.hud.uiLayer.style.pointerEvents = 'auto';
             this.hud.show(false);
             this.mobileDashBtn.classList.remove('active-game');
             if (joystickBase) joystickBase.classList.remove('active-game');
             this.leaderboard.show(false);
+            this.minimap.show(false);
         }
     }
 

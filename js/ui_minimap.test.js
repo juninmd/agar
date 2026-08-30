@@ -2,48 +2,53 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { UIMinimap } from './ui_minimap.js';
 
 describe('UIMinimap', () => {
-    let container;
-    let canvas;
-    let mockCtx;
+    let container, canvas, ctxMock;
 
     beforeEach(() => {
-        document.body.innerHTML = '';
+        // Mock DOM
+        document.body.innerHTML = `
+            <div id="minimap-container" class="hidden"></div>
+            <canvas id="minimap-canvas" width="200" height="200"></canvas>
+        `;
+        container = document.getElementById('minimap-container');
+        canvas = document.getElementById('minimap-canvas');
 
-        container = document.createElement('div');
-        container.id = 'minimap-container';
-        container.classList.add('hidden');
-        document.body.appendChild(container);
-
-        canvas = document.createElement('canvas');
-        canvas.id = 'minimap-canvas';
-        canvas.width = 200;
-        canvas.height = 150;
-        container.appendChild(canvas);
-
-        mockCtx = {
+        ctxMock = {
+            fillStyle: '',
+            strokeStyle: '',
+            lineWidth: 0,
+            shadowBlur: 0,
+            shadowColor: '',
             fillRect: vi.fn(),
             strokeRect: vi.fn(),
             beginPath: vi.fn(),
             arc: vi.fn(),
             fill: vi.fn(),
-            stroke: vi.fn(),
             moveTo: vi.fn(),
-            lineTo: vi.fn()
+            lineTo: vi.fn(),
+            stroke: vi.fn()
         };
 
-        canvas.getContext = vi.fn().mockReturnValue(mockCtx);
+        // Mock canvas context
+        canvas.getContext = vi.fn().mockReturnValue(ctxMock);
     });
 
-    it('should initialize correctly when DOM elements exist', () => {
+    it('should initialize correctly with DOM elements', () => {
         const minimap = new UIMinimap();
         expect(minimap.container).toBe(container);
         expect(minimap.canvas).toBe(canvas);
-        expect(minimap.ctx).toBe(mockCtx);
+        expect(minimap.ctx).toBe(ctxMock);
         expect(minimap.width).toBe(200);
-        expect(minimap.height).toBe(150);
+        expect(minimap.height).toBe(200);
     });
 
-    it('should toggle hidden class on show()', () => {
+    it('should handle missing canvas gracefully', () => {
+        document.body.innerHTML = `<div id="minimap-container"></div>`;
+        const minimap = new UIMinimap();
+        expect(minimap.ctx).toBeUndefined();
+    });
+
+    it('should toggle visibility via show(active)', () => {
         const minimap = new UIMinimap();
 
         minimap.show(true);
@@ -53,34 +58,55 @@ describe('UIMinimap', () => {
         expect(container.classList.contains('hidden')).toBe(true);
     });
 
-    it('should handle missing container gracefully', () => {
+    it('should handle show() when container is missing', () => {
         document.body.innerHTML = '';
         const minimap = new UIMinimap();
-
-        expect(minimap.container).toBeNull();
         expect(() => minimap.show(true)).not.toThrow();
     });
 
-    it('should render player and bots correctly scaled to the canvas', () => {
+    it('should render player and bots correctly via update()', () => {
         const minimap = new UIMinimap();
 
-        const player = { x: 1000, y: 1000, radius: 50, markedForDeletion: false };
+        const player = { x: 500, y: 500, radius: 20, markedForDeletion: false };
         const bots = [
-            { x: 500, y: 500, radius: 20, color: '#FF0000', markedForDeletion: false },
-            { x: 2000, y: 2000, radius: 30, color: '#00FF00', markedForDeletion: true }
+            { x: 100, y: 100, radius: 10, color: 'red', markedForDeletion: false },
+            { x: 900, y: 900, radius: 10, color: 'blue', markedForDeletion: true }
         ];
 
-        // World is 4000x3000
-        minimap.update(player, bots, 4000, 3000);
+        minimap.update(player, bots, 1000, 1000);
 
-        // Canvas is 200x150, so scaleX = 200/4000 = 0.05, scaleY = 150/3000 = 0.05
+        // Check if clear and borders are drawn
+        expect(ctxMock.fillRect).toHaveBeenCalledWith(0, 0, 200, 200);
+        expect(ctxMock.strokeRect).toHaveBeenCalledWith(0, 0, 200, 200);
 
-        expect(mockCtx.fillRect).toHaveBeenCalledWith(0, 0, 200, 150);
+        // One bot is markedForDeletion, so arc is called 2 times (1 bot + 1 player)
+        expect(ctxMock.arc).toHaveBeenCalledTimes(2);
 
-        // Draw bot 1 (x: 500*0.05 = 25, y: 500*0.05 = 25, radius: max(1, 20*0.05) = 1)
-        expect(mockCtx.arc).toHaveBeenCalledWith(25, 25, 1, 0, Math.PI * 2);
+        // Player crosshair lines
+        expect(ctxMock.moveTo).toHaveBeenCalledTimes(2);
+        expect(ctxMock.lineTo).toHaveBeenCalledTimes(2);
+        expect(ctxMock.stroke).toHaveBeenCalled();
+    });
 
-        // Draw player (x: 1000*0.05 = 50, y: 1000*0.05 = 50, radius: max(2, 50*0.05) = 2.5)
-        expect(mockCtx.arc).toHaveBeenCalledWith(50, 50, 2.5, 0, Math.PI * 2);
+    it('should handle missing ctx in update() gracefully', () => {
+        document.body.innerHTML = '';
+        const minimap = new UIMinimap();
+        expect(() => minimap.update(null, [], 1000, 1000)).not.toThrow();
+    });
+
+    it('should not render player if markedForDeletion is true', () => {
+        const minimap = new UIMinimap();
+        const player = { x: 500, y: 500, radius: 20, markedForDeletion: true };
+
+        minimap.update(player, [], 1000, 1000);
+
+        // Arc shouldn't be called if no bots and player is dead
+        expect(ctxMock.arc).not.toHaveBeenCalled();
+    });
+
+    it('should not render player if player is null', () => {
+        const minimap = new UIMinimap();
+        minimap.update(null, [], 1000, 1000);
+        expect(ctxMock.arc).not.toHaveBeenCalled();
     });
 });

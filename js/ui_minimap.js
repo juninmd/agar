@@ -7,6 +7,7 @@ export class UIMinimap {
             this.width = this.canvas.width;
             this.height = this.canvas.height;
         }
+        this.radarAngle = 0;
     }
 
     show(active) {
@@ -29,6 +30,37 @@ export class UIMinimap {
         this.ctx.strokeStyle = 'rgba(0, 243, 255, 0.3)';
         this.ctx.lineWidth = 1;
         this.ctx.strokeRect(0, 0, this.width, this.height);
+
+        // Draw radar sweep
+        const centerX = this.width / 2;
+        const centerY = this.height / 2;
+        const radius = Math.max(this.width, this.height);
+
+        this.radarAngle += 0.05;
+        if (this.radarAngle > Math.PI * 2) this.radarAngle -= Math.PI * 2;
+
+        this.ctx.save();
+        this.ctx.translate(centerX, centerY);
+        this.ctx.rotate(this.radarAngle);
+
+        const gradient = this.ctx.createConicGradient(0, 0, 0);
+        gradient.addColorStop(0, 'rgba(0, 243, 255, 0.4)');
+        gradient.addColorStop(0.2, 'rgba(0, 243, 255, 0)');
+        gradient.addColorStop(1, 'rgba(0, 243, 255, 0)');
+
+        this.ctx.fillStyle = gradient;
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, 0);
+        this.ctx.arc(0, 0, radius, 0, Math.PI * 2);
+        this.ctx.fill();
+
+        this.ctx.strokeStyle = 'rgba(0, 243, 255, 0.8)';
+        this.ctx.lineWidth = 2;
+        this.ctx.beginPath();
+        this.ctx.moveTo(0, 0);
+        this.ctx.lineTo(radius, 0);
+        this.ctx.stroke();
+        this.ctx.restore();
 
         const scaleX = this.width / worldWidth;
         const scaleY = this.height / worldHeight;

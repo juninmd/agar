@@ -26,7 +26,14 @@ describe('UIMinimap', () => {
             fill: vi.fn(),
             moveTo: vi.fn(),
             lineTo: vi.fn(),
-            stroke: vi.fn()
+            stroke: vi.fn(),
+            save: vi.fn(),
+            restore: vi.fn(),
+            translate: vi.fn(),
+            rotate: vi.fn(),
+            createConicGradient: vi.fn().mockReturnValue({
+                addColorStop: vi.fn()
+            })
         };
 
         // Mock canvas context
@@ -79,12 +86,16 @@ describe('UIMinimap', () => {
         expect(ctxMock.fillRect).toHaveBeenCalledWith(0, 0, 200, 200);
         expect(ctxMock.strokeRect).toHaveBeenCalledWith(0, 0, 200, 200);
 
-        // One bot is markedForDeletion, so arc is called 2 times (1 bot + 1 player)
-        expect(ctxMock.arc).toHaveBeenCalledTimes(2);
+        // One bot is markedForDeletion, so arc is called 3 times (1 radar sweep + 1 bot + 1 player)
+        expect(ctxMock.arc).toHaveBeenCalledTimes(3);
 
-        // Player crosshair lines
-        expect(ctxMock.moveTo).toHaveBeenCalledTimes(2);
-        expect(ctxMock.lineTo).toHaveBeenCalledTimes(2);
+        // Player crosshair lines (2 lines) (plus radar line 1 line) = 3 total? Wait:
+        // Radar sweep draws 1 line (moveTo 0,0, lineTo radius,0) -> 1 moveTo, 1 lineTo
+        // Crosshair draws 2 lines (moveTo x, y, lineTo x, y) -> 2 moveTo, 2 lineTo
+        // Also Radar has arc: moveTo(0,0), arc -> 1 moveTo
+        // So Radar: 2 moveTo, 1 lineTo. Crosshair: 2 moveTo, 2 lineTo. Total: 4 moveTo, 3 lineTo.
+        expect(ctxMock.moveTo).toHaveBeenCalledTimes(4);
+        expect(ctxMock.lineTo).toHaveBeenCalledTimes(3);
         expect(ctxMock.stroke).toHaveBeenCalled();
     });
 
@@ -100,13 +111,14 @@ describe('UIMinimap', () => {
 
         minimap.update(player, [], 1000, 1000);
 
-        // Arc shouldn't be called if no bots and player is dead
-        expect(ctxMock.arc).not.toHaveBeenCalled();
+        // Arc should be called once for radar sweep
+        expect(ctxMock.arc).toHaveBeenCalledTimes(1);
     });
 
     it('should not render player if player is null', () => {
         const minimap = new UIMinimap();
         minimap.update(null, [], 1000, 1000);
-        expect(ctxMock.arc).not.toHaveBeenCalled();
+        // Arc should be called once for radar sweep
+        expect(ctxMock.arc).toHaveBeenCalledTimes(1);
     });
 });

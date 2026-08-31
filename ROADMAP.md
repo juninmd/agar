@@ -126,6 +126,9 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Advanced Glitch Effects**: Refine main title aesthetics with complex multi-layer keyframe glitch animations to enhance the "Cyberpunk OS" boot sequence.
 - [x] **Dynamic CRT Overlay**: Add a flickering CRT overlay to the boot sequence to enrich the interface immersion.
 
-## 🗺️ Phase 26: The Tactical Minimap (Current)
+## 🗺️ Phase 26: The Tactical Minimap (Done)
 - [x] **Minimap UI Element**: Add a responsive, scaled canvas minimap to the bottom right of the HUD.
 - [x] **Entity Tracking**: Visualize the player, bots, and the spatial dimensions of the world border dynamically.
+
+## 📡 Phase 27: The Radar Sweep (Current)
+- [x] **Radar Animation**: Implement a dynamic, rotating radar sweep cone on the Minimap canvas to enhance the Cyberpunk UI feel.

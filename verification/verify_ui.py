@@ -1,37 +1,31 @@
 from playwright.sync_api import sync_playwright
-import os
 
-def run_cuj(page):
-    page.goto("http://localhost:8000")
-    page.wait_for_timeout(2000)
-
-    # Take screenshot of default state
-    page.screenshot(path="/home/jules/verification/screenshots/verification_pre.png")
-
-    # Try multiple hover methods
-    hacker_card = page.locator('.protocol-card[data-id="HACKER"]')
-    hacker_card.hover()
-
-    # wait for animation to run a bit
-    page.wait_for_timeout(2000)
-
-    # Take screenshot at the key moment
-    page.screenshot(path="/home/jules/verification/screenshots/verification.png")
-    page.wait_for_timeout(1000)
-
-if __name__ == "__main__":
-    os.makedirs("/home/jules/verification/screenshots", exist_ok=True)
-    os.makedirs("/home/jules/verification/videos", exist_ok=True)
-
+def verify_ui():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        context = browser.new_context(
-            record_video_dir="/home/jules/verification/videos",
-            viewport={"width": 1280, "height": 720}
-        )
-        page = context.new_page()
-        try:
-            run_cuj(page)
-        finally:
-            context.close()
-            browser.close()
+        page = browser.new_page()
+
+        # Spoof webdriver flag to bypass bot detection on start screen
+        page.add_init_script("Object.defineProperty(navigator, 'webdriver', {get: () => false})")
+
+        # Also use skipBoot=true query parameter to bypass initial boot animations which can cause timeouts
+        page.goto("http://localhost:8000/?skipBoot=true")
+
+        # Wait for the database button and click it
+        page.wait_for_selector("#database-btn", state="visible")
+        page.wait_for_timeout(1000)
+
+        # Click the button natively since the UI overlays might block it
+        page.evaluate("document.getElementById('database-btn').click()")
+
+        # Wait for the modal content to appear
+        page.wait_for_selector(".modal-content", state="visible")
+        page.wait_for_timeout(1000)
+
+        page.screenshot(path="verification/modal_grid.png")
+        print("Screenshot captured at verification/modal_grid.png")
+
+        browser.close()
+
+if __name__ == "__main__":
+    verify_ui()

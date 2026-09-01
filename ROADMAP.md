@@ -130,5 +130,5 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Minimap UI Element**: Add a responsive, scaled canvas minimap to the bottom right of the HUD.
 - [x] **Entity Tracking**: Visualize the player, bots, and the spatial dimensions of the world border dynamically.
 
-## 📡 Phase 27: The Radar Sweep (Current)
+## 📡 Phase 27: The Radar Sweep (Done)
 - [x] **Radar Animation**: Implement a dynamic, rotating radar sweep cone on the Minimap canvas to enhance the Cyberpunk UI feel.

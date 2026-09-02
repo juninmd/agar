@@ -53,3 +53,13 @@
     50% { transform: scale(1.05); filter: brightness(1.2); }
     100% { transform: scale(1); filter: brightness(1); }
 }
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-right-color: transparent }
+    50% { border-right-color: var(--neon-green); border-right: 2px solid var(--neon-green); }
+}

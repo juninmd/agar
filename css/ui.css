@@ -157,7 +157,7 @@
     max-height: 80vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 0 30px rgba(255, 0, 255, 0.3);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4), 0 0 30px rgba(255, 0, 255, 0.3);
     color: #ccc;
     font-family: 'Share Tech Mono', monospace;
 }
@@ -542,4 +542,25 @@
 #minimap-canvas {
     width: 100%;
     height: 100%;
+}
+
+.lore-entry {
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff41;
+    margin-bottom: 10px;
+    border-left: 2px solid #00ff41;
+    padding-left: 10px;
+    text-shadow: 0 0 5px #00ff41;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 2s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+.lore-entry.locked {
+    color: #555;
+    text-shadow: none;
+    border-left: none;
+    padding-left: 0;
+    animation: none;
+    white-space: normal;
 }

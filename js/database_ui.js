@@ -53,13 +53,8 @@ export class DatabaseUI {
             if (!isUnlocked) {
                  entry.classList.add('locked');
                  entry.innerText = `LOG 0x${fragment.id.toString(16).toUpperCase().padStart(2, '0')}: [ENCRYPTED DATA]`;
-                 entry.style.color = '#555';
             } else {
                  entry.innerText = fragment.text;
-                 entry.style.color = '#00ff41';
-                 entry.style.marginBottom = '10px';
-                 entry.style.borderLeft = '2px solid #00ff41';
-                 entry.style.paddingLeft = '10px';
             }
             this.loreList.appendChild(entry);
         });

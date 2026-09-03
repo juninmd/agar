@@ -59,3 +59,4 @@
 - Action (Stitch Persona): Refined mutation UI toggles with interactive buttons and visual feedback, fulfilling the 'Refine Interface' mandate. Added CRT scanline overlay elements and refined animation keyframes (uiPulse, crtFlicker). Phase 25 is complete.
 - Action (Stitch Persona): Executed Phase 26 "The Tactical Minimap". Architected `UIMinimap` and integrated it with the HTML5 Canvas layout. Adjusted `css/ui.css` for optimal visual placement in the bottom-right corner, ensuring responsive HUD design.
 - Action (Stitch Persona): Executed Phase 27 "The Radar Sweep" Minimap Upgrade. Added a dynamic radar sweep animation to `UIMinimap` using Canvas rotation and conic gradients, executing the "Refine Interface" mandate.
+- Action (Stitch Persona): Proactively executed UI/UX Enhancement by adding a `.digital-noise-panel` CSS class and `@keyframes digitalNoise` for dynamic cyberpunk panel backgrounds.

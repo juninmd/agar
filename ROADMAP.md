@@ -121,6 +121,7 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Cyberpunk/Noir OS Menu UI Refinement**: Add animated scanline effects and polish `.protocol-card` for rich interface immersion.
 - [x] **Performance Audit**: Ensure 60 FPS, check for memory leaks, and optimize Spatial Hashing for collisions.
 - [x] **Testing & Quality Assurance**: Write additional tests to ensure robust game loop.
+- [x] **Digital Noise Panels**: Implemented `.digital-noise-panel` CSS class for dynamic cyberpunk panel backgrounds.
 
 ## 💻 Phase 25: The Quantum Interface (Done)
 - [x] **Advanced Glitch Effects**: Refine main title aesthetics with complex multi-layer keyframe glitch animations to enhance the "Cyberpunk OS" boot sequence.

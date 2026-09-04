@@ -133,3 +133,6 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 📡 Phase 27: The Radar Sweep (Done)
 - [x] **Radar Animation**: Implement a dynamic, rotating radar sweep cone on the Minimap canvas to enhance the Cyberpunk UI feel.
+
+## 💀 Phase 28: The Terminal Post-Mortem (Done)
+- [x] **Post-Mortem Screens**: Upgrade Game Over and Win screens with rich Cyberpunk/Noir OS aesthetics, including pulsating neon borders and glitchy typography.

@@ -118,6 +118,75 @@ export class Renderer {
             }
         });
 
+        this.drawTargetingSystem(this.ctx, gameState.player, gameState.bots);
+
         this.ctx.restore();
+    }
+
+    /**
+     * Draws the diagnostic targeting overlay (closest bot brackets).
+     * @param {CanvasRenderingContext2D} ctx
+     * @param {Object} player
+     * @param {Array} bots
+     */
+    drawTargetingSystem(ctx, player, bots) {
+        if (!player || bots.length === 0) return;
+
+        let closestBot = null;
+        let minDistance = Infinity;
+
+        for (const bot of bots) {
+            if (bot.markedForDeletion) continue;
+            // Using Math.hypot directly to avoid external dependencies breaking
+            const dist = Math.hypot(bot.x - player.x, bot.y - player.y);
+            if (dist < minDistance) {
+                minDistance = dist;
+                closestBot = bot;
+            }
+        }
+
+        if (closestBot && Utils.isInViewport(closestBot.x, closestBot.y, closestBot.radius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
+            const br = closestBot.radius + 15;
+            ctx.save();
+            ctx.translate(closestBot.x, closestBot.y);
+
+            // Draw futuristic cyan brackets
+            ctx.strokeStyle = '#00ffcc';
+            ctx.lineWidth = 2;
+            ctx.shadowColor = '#00ffcc';
+            ctx.shadowBlur = 10;
+
+            const len = 10;
+
+            // Top Left
+            ctx.beginPath();
+            ctx.moveTo(-br, -br + len);
+            ctx.lineTo(-br, -br);
+            ctx.lineTo(-br + len, -br);
+            ctx.stroke();
+
+            // Top Right
+            ctx.beginPath();
+            ctx.moveTo(br - len, -br);
+            ctx.lineTo(br, -br);
+            ctx.lineTo(br, -br + len);
+            ctx.stroke();
+
+            // Bottom Left
+            ctx.beginPath();
+            ctx.moveTo(-br, br - len);
+            ctx.lineTo(-br, br);
+            ctx.lineTo(-br + len, br);
+            ctx.stroke();
+
+            // Bottom Right
+            ctx.beginPath();
+            ctx.moveTo(br - len, br);
+            ctx.lineTo(br, br);
+            ctx.lineTo(br, br - len);
+            ctx.stroke();
+
+            ctx.restore();
+        }
     }
 }

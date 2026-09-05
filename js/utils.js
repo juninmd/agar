@@ -13,6 +13,11 @@ export const Utils = {
         return Math.sqrt(dx * dx + dy * dy);
     },
 
+    // Alias for getDistance to prevent regressions
+    distance: (x1, y1, x2, y2) => {
+        return Utils.getDistance(x1, y1, x2, y2);
+    },
+
     // Convert hex to rgba for glow effects
     hexToRgba: (hex, alpha) => {
         const r = parseInt(hex.slice(1, 3), 16);

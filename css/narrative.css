@@ -28,7 +28,7 @@
     margin-right: 10px;
 }
 
-.narrative-toast.info, .narrative-toast.INFO {
+.narrative-toast.info {
     border-color: #00FFFF;
     color: #00FFFF;
     text-shadow: 0 0 10px #00FFFF;
@@ -50,7 +50,7 @@
     animation: glitch-anim 0.3s infinite alternate-reverse;
 }
 
-.narrative-toast.success, .narrative-toast.SUCCESS {
+.narrative-toast.success {
     border-color: #00FF00;
     color: #00FF00;
     text-shadow: 0 0 10px #00FF00;

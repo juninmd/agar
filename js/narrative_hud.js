@@ -16,7 +16,7 @@ export class NarrativeHUD {
         const lowerType = type.toLowerCase();
         const toast = document.createElement('div');
         toast.className = `narrative-toast ${lowerType}`;
-        toast.innerText = text;
+        toast.textContent = text;
 
         // Glitch effect for critical messages
         if (type === 'glitch' || type === 'critical') {

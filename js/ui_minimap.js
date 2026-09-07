@@ -43,17 +43,16 @@ export class UIMinimap {
         this.ctx.translate(centerX, centerY);
         this.ctx.rotate(this.radarAngle);
 
-        const gradient = this.ctx.createConicGradient(0, 0, 0);
-        gradient.addColorStop(0, 'rgba(0, 243, 255, 0.4)');
-        gradient.addColorStop(0.2, 'rgba(0, 243, 255, 0)');
-        gradient.addColorStop(1, 'rgba(0, 243, 255, 0)');
-
-        this.ctx.fillStyle = gradient;
+        // Simulated conic gradient using a semi-transparent wedge
+        this.ctx.fillStyle = 'rgba(0, 243, 255, 0.15)';
         this.ctx.beginPath();
         this.ctx.moveTo(0, 0);
-        this.ctx.arc(0, 0, radius, 0, Math.PI * 2);
+        // Draw a wedge covering ~1/4 of the circle, ending at angle 0 (the sweep front)
+        this.ctx.arc(0, 0, radius, -Math.PI / 2, 0);
+        this.ctx.lineTo(0, 0);
         this.ctx.fill();
 
+        // Draw the leading edge line of the radar
         this.ctx.strokeStyle = 'rgba(0, 243, 255, 0.8)';
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();

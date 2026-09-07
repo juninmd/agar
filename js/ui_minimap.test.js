@@ -93,9 +93,9 @@ describe('UIMinimap', () => {
         // Radar sweep draws 1 line (moveTo 0,0, lineTo radius,0) -> 1 moveTo, 1 lineTo
         // Crosshair draws 2 lines (moveTo x, y, lineTo x, y) -> 2 moveTo, 2 lineTo
         // Also Radar has arc: moveTo(0,0), arc -> 1 moveTo
-        // So Radar: 2 moveTo, 1 lineTo. Crosshair: 2 moveTo, 2 lineTo. Total: 4 moveTo, 3 lineTo.
+        // So Radar: 2 moveTo, 2 lineTo (wedge lineTo + radius lineTo). Crosshair: 2 moveTo, 2 lineTo. Total: 4 moveTo, 4 lineTo.
         expect(ctxMock.moveTo).toHaveBeenCalledTimes(4);
-        expect(ctxMock.lineTo).toHaveBeenCalledTimes(3);
+        expect(ctxMock.lineTo).toHaveBeenCalledTimes(4);
         expect(ctxMock.stroke).toHaveBeenCalled();
     });
 

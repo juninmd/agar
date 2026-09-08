@@ -87,8 +87,13 @@ export class Game {
     }
 
     handleDash() {
-        if (this.gameRunning && this.player && this.player.dash())
-            this.particleSystem.emitDash(this.player.x, this.player.y, this.player.color);
+        if (this.gameRunning && this.player) {
+            const ejectedMass = this.player.dash();
+            if (ejectedMass > 0) {
+                this.particleSystem.emitDash(this.player.x, this.player.y, this.player.color);
+                Spawner.spawnEjectedMass(this.player, ejectedMass, this.foods);
+            }
+        }
     }
 
     handleAbility() {

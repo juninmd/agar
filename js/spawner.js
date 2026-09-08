@@ -85,4 +85,33 @@ export class Spawner {
         bot.radius = radius;
         return bot;
     }
+
+    /**
+     * Spawns ejected mass chunks behind the player after dashing.
+     * @param {Player} player - The player ejecting mass.
+     * @param {number} ejectedMass - Total mass to split into shards.
+     * @param {Array} foodsArray - The global foods array to push new entities into.
+     */
+    static spawnEjectedMass(player, ejectedMass, foodsArray) {
+        const speed = Math.hypot(player.velocity.x, player.velocity.y);
+        let nx = speed > 0 ? -player.velocity.x / speed : Math.cos(Math.random() * Math.PI * 2);
+        let ny = speed > 0 ? -player.velocity.y / speed : Math.sin(Math.random() * Math.PI * 2);
+
+        const shardCount = 3;
+        const massPerShard = ejectedMass / shardCount;
+        const radiusPerShard = Utils.getRadiusFromMass(massPerShard);
+
+        for (let i = 0; i < shardCount; i++) {
+            const offsetAngle = (Math.random() - 0.5) * 0.5; // slight spread
+            const pushX = nx * Math.cos(offsetAngle) - ny * Math.sin(offsetAngle);
+            const pushY = nx * Math.sin(offsetAngle) + ny * Math.cos(offsetAngle);
+
+            const spawnX = player.x + pushX * (player.radius + radiusPerShard + 15);
+            const spawnY = player.y + pushY * (player.radius + radiusPerShard + 15);
+
+            // Create new Food, and set its mass equivalent to the shard (since its radius will represent it in collisions)
+            const shard = new Food(spawnX, spawnY, radiusPerShard, player.color);
+            foodsArray.push(shard);
+        }
+    }
 }

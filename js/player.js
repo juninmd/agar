@@ -52,6 +52,7 @@ export class Player extends Entity {
     dash() {
         const minMass = Utils.getMassFromRadius(CONSTANTS.INITIAL_RADIUS);
         if (this.mass > minMass * 1.2) {
+            const ejectedMass = this.mass * 0.2;
             this.mass *= 0.8;
             this.radius = Utils.getRadiusFromMass(this.mass);
             this.speedBoost = 3.0;
@@ -61,9 +62,9 @@ export class Player extends Entity {
                 this.invulnerable = true;
             }
 
-            return true;
+            return ejectedMass;
         }
-        return false;
+        return 0;
     }
 
     update(worldWidth, worldHeight, bots = []) {

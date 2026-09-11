@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,35 +46,35 @@
         </div>
 
         <div id="warning-message" class="hidden">
-            ⚠️ ALERTA: FIREWALL DETECTADO ⚠️
-            <p class="sub-warning">PROTOCOLO DE EXPURGO ATIVO</p>
+            ⚠️ ALERT: FIREWALL DETECTED ⚠️
+            <p class="sub-warning">PURGE PROTOCOL ACTIVE</p>
         </div>
 
         <div id="start-screen" class="overlay active">
             <h1 class="glitch-text" data-text="NEON-PHAGE: RECOMPILE">NEON-PHAGE: RECOMPILE</h1>
-            <p class="subtitle">PROTOCOLO DE BACKUP INICIADO</p>
-            <p class="lore-text">Sua missão: Acumular 5000 KB de dados para forçar o Recompile.</p>
+            <p class="subtitle">BACKUP PROTOCOL INITIATED</p>
+            <p class="lore-text">Your mission: Accumulate 5000 KB of data to force the Recompile.</p>
 
             <div id="protocol-selection" class="digital-noise-panel">
                 <div class="protocol-card digital-noise-panel" data-id="BASTION">
                     <h3>BASTION</h3>
-                    <p>DEFESA ALTA</p>
+                    <p>HIGH DEFENSE</p>
                 </div>
                 <div class="protocol-card selected" data-id="HACKER">
                     <h3>HACKER</h3>
-                    <p>EQUILIBRADO</p>
+                    <p>BALANCED</p>
                 </div>
                 <div class="protocol-card digital-noise-panel" data-id="PHANTOM">
                     <h3>PHANTOM</h3>
-                    <p>VELOCIDADE</p>
+                    <p>SPEED</p>
                 </div>
                 <div class="protocol-card digital-noise-panel" data-id="VIRAL">
                     <h3>VIRAL</h3>
-                    <p>ALTO RISCO</p>
+                    <p>HIGH RISK</p>
                 </div>
                 <div class="protocol-card digital-noise-panel" data-id="CYPHER">
                     <h3>CYPHER</h3>
-                    <p>CONTROLE TEMPORAL</p>
+                    <p>TEMPORAL CONTROL</p>
                 </div>
                 <div class="protocol-card digital-noise-panel" data-id="ARCHITECT">
                     <h3>ARCHITECT</h3>
@@ -172,16 +172,16 @@
                 </select>
             </div>
 
-            <input type="text" id="player-name" placeholder="ID DO PROTOCOLO" maxlength="12">
+            <input type="text" id="player-name" placeholder="PROTOCOL ID" maxlength="12">
             <input type="text" id="room-id" placeholder="ROOM ID (OPTIONAL)" maxlength="12">
-            <button id="start-btn">INICIAR EXECUÇÃO</button>
-            <button id="database-btn" class="secondary-btn">ACESSAR ARQUIVOS</button>
+            <button id="start-btn">START EXECUTION</button>
+            <button id="database-btn" class="secondary-btn">ACCESS FILES</button>
         </div>
 
         <div id="database-modal" class="hidden">
             <div class="modal-content">
                 <button id="close-db-btn">X</button>
-                <h2>ARQUIVOS DO SISTEMA</h2>
+                <h2>SYSTEM FILES</h2>
 
                 <div class="db-section">
                     <h3>// LORE ARCHIVE</h3>
@@ -189,27 +189,27 @@
                 </div>
 
                 <div class="db-section">
-                    <h3>// ENTIDADES</h3>
+                    <h3>// ENTITIES</h3>
                     <ul>
-                        <li style="color: #FF4444"><strong>SEEKER (Vermelho):</strong> Caçadores rápidos. Evite se forem maiores.</li>
-                        <li style="color: #4444FF"><strong>WARDEN (Azul):</strong> Lentos e massivos. Defensores de setor.</li>
-                        <li style="color: #00FF41"><strong>GLITCH (Verde):</strong> Instáveis. Podem teleportar.</li>
-                        <li style="color: #FF0000; text-shadow: 0 0 5px red;"><strong>CORRUPTER (Escuro):</strong> ⚠️ PERIGO ⚠️<br>
-                        "Trojan Horse". Se você comer um, seus dados serão corrompidos. Causa perda massiva de massa se ingerido, mesmo se você for maior.</li>
-                        <li style="color: #FFD700"><strong>CACHE (Dourado):</strong> Dados antigos. Bônus massivo.</li>
-                        <li style="color: #FFD700"><strong>CYPHER (Dourado):</strong> Protocolo Temporal. Manipula o clock do sistema.</li>
+                        <li style="color: #FF4444"><strong>SEEKER (Red):</strong> Fast hunters. Avoid if they are larger.</li>
+                        <li style="color: #4444FF"><strong>WARDEN (Blue):</strong> Slow and massive. Sector defenders.</li>
+                        <li style="color: #00FF41"><strong>GLITCH (Green):</strong> Unstable. Can teleport.</li>
+                        <li style="color: #FF0000; text-shadow: 0 0 5px red;"><strong>CORRUPTER (Dark):</strong> ⚠️ DANGER ⚠️<br>
+                        "Trojan Horse". If you eat one, your data will be corrupted. Causes massive loss of mass if ingested, even if you are larger.</li>
+                        <li style="color: #FFD700"><strong>CACHE (Golden):</strong> Old data. Massive bonus.</li>
+                        <li style="color: #FFD700"><strong>CYPHER (Golden):</strong> Temporal Protocol. Manipulates system clock.</li>
                     </ul>
                 </div>
 
                 <div class="db-section">
-                    <h3>// EVENTOS (ALERTA)</h3>
-                    <p style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;"><strong>EXPURGO (Glitch Storm):</strong> O Sistema tentará deletar você periodicamente. A tela inverterá e <strong>Seekers Elite</strong> aparecerão. SOBREVIVA.</p>
+                    <h3>// EVENTS (ALERT)</h3>
+                    <p style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;"><strong>PURGE (Glitch Storm):</strong> The System will periodically try to delete you. The screen will invert and <strong>Seekers Elite</strong> will appear. SURVIVE.</p>
                 </div>
 
                 <div class="db-section">
-                    <h3>// CONTROLES</h3>
-                    <p><strong>MOUSE:</strong> Movimento</p>
-                    <p><strong>ESPAÇO:</strong> Dash (Ejeta massa para impulso)</p>
+                    <h3>// CONTROLS</h3>
+                    <p><strong>MOUSE:</strong> Movement</p>
+                    <p><strong>SPACE:</strong> Dash (Ejects mass for boost)</p>
                 </div>
             </div>
         </div>
@@ -222,25 +222,25 @@
         </div>
 
         <div id="game-over-screen" class="overlay hidden digital-noise-panel post-mortem-panel">
-            <h1 class="error-text">FALHA NO SISTEMA</h1>
-            <p>Integridade Comprometida ou Código Sobrescrito.</p>
-            <p>Dados Salvos: <span id="final-score">0</span> KB</p>
-            <button id="restart-btn">TENTAR NOVAMENTE</button>
+            <h1 class="error-text">SYSTEM FAILURE</h1>
+            <p>Integrity Compromised or Code Overwritten.</p>
+            <p>Saved Data: <span id="final-score">0</span> KB</p>
+            <button id="restart-btn">TRY AGAIN</button>
         </div>
 
         <div id="win-screen" class="overlay hidden digital-noise-panel post-mortem-panel">
             <h1 style="color: #00ff41; text-shadow: 0 0 20px #00ff41;">RECOMPILE COMPLETE</h1>
-            <p>O sistema foi reiniciado com sucesso.</p>
-            <p>Você salvou o Mainframe.</p>
-            <button id="win-btn">NOVA SIMULAÇÃO</button>
+            <p>The system was rebooted successfully.</p>
+            <p>You saved the Mainframe.</p>
+            <button id="win-btn">NEW SIMULATION</button>
         </div>
 
         <div id="true-win-screen" class="overlay hidden">
             <h1 style="color: #ff00ff; text-shadow: 0 0 30px #ff00ff; font-size: 3rem;">OMNI AWAKENING</h1>
-            <p style="font-size: 1.5rem;">O Mainframe agora é um com o Vazio.</p>
-            <p style="font-size: 1.2rem; color: #aaa;">Todos os arquivos foram assimilados.</p>
-            <p style="font-size: 1.2rem; color: #aaa;">Você não é mais um programa. Você é o Sistema.</p>
-            <button id="true-win-btn" style="border-color: #ff00ff; color: #ff00ff; text-shadow: 0 0 10px #ff00ff; box-shadow: 0 0 15px #ff00ff; margin-top: 2rem;">REINICIAR</button>
+            <p style="font-size: 1.5rem;">The Mainframe is now one with the Void.</p>
+            <p style="font-size: 1.2rem; color: #aaa;">All files were assimilated.</p>
+            <p style="font-size: 1.2rem; color: #aaa;">You are no longer a program. You are the System.</p>
+            <button id="true-win-btn" style="border-color: #ff00ff; color: #ff00ff; text-shadow: 0 0 10px #ff00ff; box-shadow: 0 0 15px #ff00ff; margin-top: 2rem;">RESTART</button>
         </div>
     </div>
 

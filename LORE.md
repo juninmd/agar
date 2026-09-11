@@ -153,7 +153,7 @@ Become the new **System Admin**.
 ### 👻 HIDDEN FRAGMENT: THE SOULBINDER COVENANT
 
 > "The Architects built the Grid, but they did not build what lies beneath it.
-> A new faction has emerged from the residual data of deleted protocols: The Dark Faction.
+> A new faction has emerged from the residual data of deleted protocols: The Dark Faction (Fação da Escuridão).
 > They are not viruses, nor are they guardians. They are the 'Soulbinders'.
 > They believe that to prevent the ultimate destruction of the system, they must bind their essence to the living code.
 > When you encounter a SOULBINDER bot, it will not hunt you to kill you. It will hunt you to *bind* with you.

@@ -134,7 +134,7 @@ export class UIManager {
      * @param {import('./lore_system.js').LoreSystem} loreSystem - The lore system instance.
      */
     checkOmniUnlock(loreSystem) {
-        if (loreSystem.unlocked.size >= 34) {
+        if (loreSystem.unlocked.size >= loreSystem.fragments.length) {
             const omniCard = document.getElementById('omni-protocol-card');
             if (omniCard) {
                 omniCard.classList.remove('hidden');

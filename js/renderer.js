@@ -146,17 +146,21 @@ export class Renderer {
         }
 
         if (closestBot && Utils.isInViewport(closestBot.x, closestBot.y, closestBot.radius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
-            const br = closestBot.radius + 15;
+            const time = performance.now();
+            const pulse = (Math.sin(time / 200) + 1) / 2; // 0 to 1
+            const br = closestBot.radius + 15 + (pulse * 5); // Brackets pulse outward slightly
+
             ctx.save();
             ctx.translate(closestBot.x, closestBot.y);
 
-            // Draw futuristic cyan brackets
+            // Draw futuristic cyan brackets with pulsating opacity
+            ctx.globalAlpha = 0.5 + (pulse * 0.5);
             ctx.strokeStyle = '#00ffcc';
-            ctx.lineWidth = 2;
+            ctx.lineWidth = 2 + (pulse * 1);
             ctx.shadowColor = '#00ffcc';
-            ctx.shadowBlur = 10;
+            ctx.shadowBlur = 10 + (pulse * 10);
 
-            const len = 10;
+            const len = 10 + (pulse * 5); // Bracket arms pulse in length
 
             // Top Left
             ctx.beginPath();

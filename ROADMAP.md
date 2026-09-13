@@ -136,3 +136,6 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 💀 Phase 28: The Terminal Post-Mortem (Done)
 - [x] **Post-Mortem Screens**: Upgrade Game Over and Win screens with rich Cyberpunk/Noir OS aesthetics, including pulsating neon borders and glitchy typography.
+
+## 🎯 Phase 29: The Diagnostic Overlay (Done)
+- [x] **Targeting Brackets Animation**: Enhance the Diagnostic Targeting Overlay with dynamic pulsing (size, length, and opacity) using time-based sine waves for a richer Cyberpunk feel.

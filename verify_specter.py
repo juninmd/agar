@@ -32,7 +32,12 @@ def test_specter_protocol():
         assert is_tangible is False, "Player should be intangible after triggering SPECTER ability"
 
         # Wait for ability to expire (3 seconds = 180 frames)
-        page.wait_for_timeout(3500)
+        page.wait_for_timeout(100)
+        page.evaluate("""
+            for(let i=0; i<200; i++) {
+                window.game.update();
+            }
+        """)
 
         # Check intangibility is inactive
         is_tangible = page.evaluate("window.game.player.isTangible")

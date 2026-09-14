@@ -9,6 +9,8 @@ export class Entity {
         this.markedForDeletion = false;
         this.isGlitching = false;
         this.firewallHitTimer = 0;
+        this.id = Math.random().toString(36).substr(2, 9);
+        this.isTangible = true;
         // Calculate initial mass based on radius
         this.mass = Utils.getMassFromRadius(radius);
     }

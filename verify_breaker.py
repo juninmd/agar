@@ -26,6 +26,8 @@ def test_breaker_protocol():
         # Trigger ability (E key)
         page.keyboard.press("e")
 
+        page.wait_for_timeout(100)
+
         # Check breakerAura active
         aura_active = page.evaluate("window.game.player.breakerAura")
         assert aura_active is True, "breakerAura was not set to true after activation"
@@ -37,11 +39,16 @@ def test_breaker_protocol():
         page.evaluate("""
             const tank = new window.Bot(window.game.player.x, window.game.player.y, 10, '#8B4513', 'TANK');
             tank.mass = 100;
+            tank.radius = 1;
+            tank.id = "test_tank";
             window.game.bots.push(tank);
         """)
 
         # Let the game loop process the collision
-        page.wait_for_timeout(500)
+        page.wait_for_timeout(100)
+        page.evaluate("""
+            window.game.update();
+        """)
 
         mass_after = page.evaluate("window.game.player.mass")
 

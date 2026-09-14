@@ -46,6 +46,8 @@ export class Game {
         this.mutationSystem = new MutationSystem();
         this.spatialHash = new SpatialHash(200); // 200px cell size
         this.network = new NetworkSystem();
+        this.checkedPairs = new Set();
+        this.queryResult = new Set();
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;

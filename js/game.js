@@ -92,7 +92,7 @@ export class Game {
         if (this.gameRunning && this.player) {
             const ejectedMass = this.player.dash();
             if (ejectedMass > 0) {
-                this.particleSystem.emitDash(this.player.x, this.player.y, this.player.color);
+                this.particleSystem.emitDash(this.player.x, this.player.y, this.player.color, this.player.velocity.x, this.player.velocity.y);
                 Spawner.spawnEjectedMass(this.player, ejectedMass, this.foods);
             }
         }

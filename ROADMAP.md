@@ -139,3 +139,6 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 🎯 Phase 29: The Diagnostic Overlay (Done)
 - [x] **Targeting Brackets Animation**: Enhance the Diagnostic Targeting Overlay with dynamic pulsing (size, length, and opacity) using time-based sine waves for a richer Cyberpunk feel.
+
+## 💨 Phase 30: The Dash Particle Overhaul (Done)
+- [x] **Dash Trail Upgrade**: Refined the dash particle effect to emit a richer, cyberpunk-colored cone of geometric particles opposite to the player's movement direction.

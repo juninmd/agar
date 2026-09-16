@@ -139,3 +139,7 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 🎯 Phase 29: The Diagnostic Overlay (Done)
 - [x] **Targeting Brackets Animation**: Enhance the Diagnostic Targeting Overlay with dynamic pulsing (size, length, and opacity) using time-based sine waves for a richer Cyberpunk feel.
+
+## 🕶️ Phase 30: The Holographic HUD (Done)
+- [x] **Digital Noise Panels**: Enhance gameplay HUD elements (`#leaderboard`, `#score-board`, `#ability-hud`, `#integrity-container`) with the `.digital-noise-panel` class for Cyberpunk OS immersion.
+- [x] **Scanline Glow Elements**: Refine leaderboard list items (`#leaderboard-list li`) with a subtle scanline background and bottom border glow.

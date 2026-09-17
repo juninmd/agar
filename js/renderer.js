@@ -28,8 +28,17 @@ export class Renderer {
     }
 
     updateCamera(player) {
-        this.camX = this.canvas.width / 2 - player.x;
-        this.camY = this.canvas.height / 2 - player.y;
+        const targetX = this.canvas.width / 2 - player.x;
+        const targetY = this.canvas.height / 2 - player.y;
+
+        // If camera is uninitialized, snap to target immediately
+        if (this.camX === 0 && this.camY === 0) {
+            this.camX = targetX;
+            this.camY = targetY;
+        } else {
+            this.camX += (targetX - this.camX) * 0.1;
+            this.camY += (targetY - this.camY) * 0.1;
+        }
     }
 
     applyTransform(systemIntegrity) {

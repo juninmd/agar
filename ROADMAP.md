@@ -139,3 +139,7 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 🎯 Phase 29: The Diagnostic Overlay (Done)
 - [x] **Targeting Brackets Animation**: Enhance the Diagnostic Targeting Overlay with dynamic pulsing (size, length, and opacity) using time-based sine waves for a richer Cyberpunk feel.
+
+## 🛠️ Phase 30: The Interface Polishing (Done)
+- [x] **Global Scrollbars**: Centralized and themed the custom scrollbars across the entire app for a consistent Cyberpunk look.
+- [x] **Responsive Overlays**: Fixed cut-off UI elements on low-height screens by introducing `overflow-y: auto` to `.overlay`.

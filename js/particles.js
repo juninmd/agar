@@ -56,6 +56,12 @@ export class Particle {
         if (this.shape === 'square') {
             ctx.rect(-this.size / 2, -this.size / 2, this.size, this.size);
             ctx.fill();
+        } else if (this.shape === 'triangle') {
+            ctx.moveTo(0, -this.size);
+            ctx.lineTo(this.size * 0.866, this.size * 0.5); // 0.866 is approx sin(60)
+            ctx.lineTo(-this.size * 0.866, this.size * 0.5);
+            ctx.closePath();
+            ctx.fill();
         } else if (this.shape === 'line') {
             ctx.moveTo(-this.size, 0);
             ctx.lineTo(this.size, 0);
@@ -95,10 +101,28 @@ export class ParticleSystem {
         }
     }
 
-    emitDash(x, y, color) {
-        for (let i = 0; i < 10; i++) {
+    emitDash(x, y, color, vx = 0, vy = 0) {
+        let baseAngle = Math.atan2(-vy, -vx); // opposite direction
+        if (vx === 0 && vy === 0) {
+             baseAngle = Math.random() * Math.PI * 2;
+        }
+
+        const colors = [color, '#00FFFF', '#FF00FF']; // player color, cyan, magenta
+
+        for (let i = 0; i < 15; i++) {
             const p = this._getParticle();
-            p.init(x, y, color, 3, 20);
+            const pColor = colors[Math.floor(Math.random() * colors.length)];
+            p.init(x, y, pColor, 3, 20);
+
+            p.shape = Math.random() > 0.5 ? 'triangle' : 'square';
+
+            // Override velocity to form a cone opposite to movement
+            const angle = baseAngle + (Math.random() - 0.5) * 1.5; // cone spread
+            const speed = Math.random() * 6 + 3;
+            p.velocity.x = Math.cos(angle) * speed;
+            p.velocity.y = Math.sin(angle) * speed;
+            p.rotationSpeed = (Math.random() - 0.5) * 0.4;
+
             if (!this.activeParticles.includes(p)) this.activeParticles.push(p);
         }
     }

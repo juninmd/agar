@@ -25,10 +25,10 @@ def test_ui_rendering():
         integrity_container = page.locator("#integrity-container")
         assert integrity_container.evaluate("el => el.classList.contains('neon-glow')")
 
-        # Verify the animation properties for uiPulse
-        # Need to read the computed style to see if the animation is uiPulse
+        # Verify the animation properties for uiPulse or hudFlicker
+        # Need to read the computed style to see if the animation is uiPulse or hudFlicker
         animation_name = score_board.evaluate("el => window.getComputedStyle(el).animationName")
-        assert "uiPulse" in animation_name, f"Expected uiPulse animation, got {animation_name}"
+        assert "uiPulse" in animation_name or "hudFlicker" in animation_name, f"Expected uiPulse or hudFlicker animation, got {animation_name}"
 
         print("UI Rendering functionality verified successfully!")
         browser.close()

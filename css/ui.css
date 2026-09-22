@@ -452,6 +452,7 @@
     box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
     border-radius: 5px;
     animation: mutationGlow 3s infinite alternate;
+    flex-shrink: 0;
 }
 
 .neon-glow {

@@ -26,10 +26,12 @@ def test_sanctuary_spawn_and_mechanics(page: Page):
 
     # 4. Trigger Purge manually
     # We need to expose game to window. In main.js it does: window.game = game;
-    page.evaluate("window.game.purgeSystem.startPurge()")
+    page.evaluate("window.game.purgeSystem.startPurge(window.game); window.game.update();")
 
     # 5. Verify Sanctuaries exist
-    sanctuaries = page.evaluate("window.game.purgeSystem.sanctuaries")
+    sanctuaries = page.evaluate("window.game.purgeSystem.sanctuaries || []")
+    if sanctuaries is None:
+        sanctuaries = []
     assert len(sanctuaries) > 0, "Sanctuaries should spawn on purge start"
 
     # Get first sanctuary

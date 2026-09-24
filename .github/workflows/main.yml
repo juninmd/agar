@@ -73,7 +73,7 @@ jobs:
       - name: Build Web
         run: |
           mkdir -p dist
-          cp -r css js index.html README.md LORE.md _redirects dist/
+          cp -r css js index.html README.md LORE.md dist/
           echo "Build complete"
 
       - name: Inject Environment

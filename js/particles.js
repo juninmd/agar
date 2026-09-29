@@ -102,26 +102,34 @@ export class ParticleSystem {
     }
 
     emitDash(x, y, color, vx = 0, vy = 0) {
-        let baseAngle = Math.atan2(-vy, -vx); // opposite direction
-        if (vx === 0 && vy === 0) {
-             baseAngle = Math.random() * Math.PI * 2;
-        }
+        // Calculate the opposite direction of the player's movement
+        const speed = Math.hypot(vx, vy);
+        let nx = speed > 0 ? -vx / speed : Math.cos(Math.random() * Math.PI * 2);
+        let ny = speed > 0 ? -vy / speed : Math.sin(Math.random() * Math.PI * 2);
 
-        const colors = [color, '#00FFFF', '#FF00FF']; // player color, cyan, magenta
+        // Emit a richer burst of cyberpunk-colored particles
+        const dashColors = [color, '#00ffcc', '#ff00ff', '#ffffff'];
+        const numParticles = 25;
 
-        for (let i = 0; i < 15; i++) {
+        for (let i = 0; i < numParticles; i++) {
             const p = this._getParticle();
-            const pColor = colors[Math.floor(Math.random() * colors.length)];
-            p.init(x, y, pColor, 3, 20);
 
-            p.shape = Math.random() > 0.5 ? 'triangle' : 'square';
+            // Random spread angle (cone opposite to movement)
+            const spread = (Math.random() - 0.5) * Math.PI;
+            const angle = Math.atan2(ny, nx) + spread;
 
-            // Override velocity to form a cone opposite to movement
-            const angle = baseAngle + (Math.random() - 0.5) * 1.5; // cone spread
-            const speed = Math.random() * 6 + 3;
-            p.velocity.x = Math.cos(angle) * speed;
-            p.velocity.y = Math.sin(angle) * speed;
-            p.rotationSpeed = (Math.random() - 0.5) * 0.4;
+            // Randomly pick a color from the cyberpunk palette
+            const pColor = dashColors[Math.floor(Math.random() * dashColors.length)];
+
+            p.init(x, y, pColor, Math.random() * 5 + 2, Math.random() * 15 + 15, Math.random() * 1.5 + 0.5);
+
+            // Override init velocity to point in the cone direction
+            const pSpeed = Math.random() * 6 + 2;
+            p.velocity.x = Math.cos(angle) * pSpeed;
+            p.velocity.y = Math.sin(angle) * pSpeed;
+
+            // Vary shapes for a glitched/cyberpunk look
+            p.shape = Math.random() > 0.5 ? 'square' : 'line';
 
             if (!this.activeParticles.includes(p)) this.activeParticles.push(p);
         }

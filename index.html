@@ -46,14 +46,14 @@
         </div>
 
         <div id="warning-message" class="hidden">
-            ⚠️ WARNING: FIREWALL DETECTED ⚠️
+            ⚠️ ALERT: FIREWALL DETECTED ⚠️
             <p class="sub-warning">PURGE PROTOCOL ACTIVE</p>
         </div>
 
         <div id="start-screen" class="overlay active">
             <h1 class="glitch-text" data-text="NEON-PHAGE: RECOMPILE">NEON-PHAGE: RECOMPILE</h1>
             <p class="subtitle">BACKUP PROTOCOL INITIATED</p>
-            <p class="lore-text">Objective: Accumulate 5000 KB of data to trigger System Recompile.</p>
+            <p class="lore-text">Your mission: Accumulate 5000 KB of data to force the Recompile.</p>
 
             <div id="protocol-selection">
                 <div class="protocol-card" data-id="BASTION">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="protocol-card" data-id="PHANTOM">
                     <h3>PHANTOM</h3>
-                    <p>HIGH SPEED</p>
+                    <p>SPEED</p>
                 </div>
                 <div class="protocol-card" data-id="VIRAL">
                     <h3>VIRAL</h3>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="protocol-card" data-id="CYPHER">
                     <h3>CYPHER</h3>
-                    <p>TIME CONTROL</p>
+                    <p>TEMPORAL CONTROL</p>
                 </div>
                 <div class="protocol-card" data-id="ARCHITECT">
                     <h3>ARCHITECT</h3>
@@ -174,14 +174,14 @@
 
             <input type="text" id="player-name" placeholder="PROTOCOL ID" maxlength="12">
             <input type="text" id="room-id" placeholder="ROOM ID (OPTIONAL)" maxlength="12">
-            <button id="start-btn">EXECUTE PROTOCOL</button>
-            <button id="database-btn" class="secondary-btn">ACCESS FILES</button>
+            <button id="start-btn">START EXECUTION</button>
+            <button id="database-btn" class="secondary-btn">ACCESS ARCHIVES</button>
         </div>
 
         <div id="database-modal" class="hidden">
             <div class="modal-content">
                 <button id="close-db-btn">X</button>
-                <h2>SYSTEM FILES</h2>
+                <h2>SYSTEM ARCHIVES</h2>
 
                 <div class="db-section">
                     <h3>// LORE ARCHIVE</h3>
@@ -193,23 +193,23 @@
                     <ul>
                         <li style="color: #FF4444"><strong>SEEKER (Red):</strong> Fast hunters. Avoid if they are larger.</li>
                         <li style="color: #4444FF"><strong>WARDEN (Blue):</strong> Slow and massive. Sector defenders.</li>
-                        <li style="color: #00FF41"><strong>GLITCH (Green):</strong> Unstable. Capable of teleportation.</li>
+                        <li style="color: #00FF41"><strong>GLITCH (Green):</strong> Unstable. Can teleport.</li>
                         <li style="color: #FF0000; text-shadow: 0 0 5px red;"><strong>CORRUPTER (Dark):</strong> ⚠️ DANGER ⚠️<br>
-                        "Trojan Horse". Consuming this corrupts data, causing massive loss of mass regardless of size.</li>
-                        <li style="color: #FFD700"><strong>CACHE (Gold):</strong> Legacy data. Massive bonus.</li>
-                        <li style="color: #FFD700"><strong>CYPHER (Gold):</strong> Temporal Protocol. Manipulates system clock.</li>
+                        "Trojan Horse". If you eat one, your data will be corrupted. Causes massive mass loss if ingested, even if you are larger.</li>
+                        <li style="color: #FFD700"><strong>CACHE (Gold):</strong> Old data. Massive bonus.</li>
+                        <li style="color: #FFD700"><strong>CYPHER (Gold):</strong> Temporal Protocol. Manipulates the system clock.</li>
                     </ul>
                 </div>
 
                 <div class="db-section">
                     <h3>// EVENTS (ALERT)</h3>
-                    <p style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;"><strong>PURGE (Glitch Storm):</strong> The System periodically attempts deletion. World inverts and <strong>Elite Seekers</strong> deploy. SURVIVE.</p>
+                    <p style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;"><strong>PURGE (Glitch Storm):</strong> The System will attempt to delete you periodically. The screen will invert and <strong>Elite Seekers</strong> will appear. SURVIVE.</p>
                 </div>
 
                 <div class="db-section">
                     <h3>// CONTROLS</h3>
                     <p><strong>MOUSE:</strong> Movement</p>
-                    <p><strong>SPACE:</strong> Dash (Ejects mass for speed burst)</p>
+                    <p><strong>SPACE:</strong> Dash (Ejects mass for boost)</p>
                 </div>
             </div>
         </div>
@@ -225,22 +225,22 @@
             <h1 class="error-text">SYSTEM FAILURE</h1>
             <p>Integrity Compromised or Code Overwritten.</p>
             <p>Data Saved: <span id="final-score">0</span> KB</p>
-            <button id="restart-btn">RETRY</button>
+            <button id="restart-btn">TRY AGAIN</button>
         </div>
 
         <div id="win-screen" class="overlay hidden digital-noise-panel post-mortem-panel">
             <h1 style="color: #00ff41; text-shadow: 0 0 20px #00ff41;">RECOMPILE COMPLETE</h1>
-            <p>System successfully rebooted.</p>
-            <p>Mainframe secured.</p>
+            <p>The system was restarted successfully.</p>
+            <p>You saved the Mainframe.</p>
             <button id="win-btn">NEW SIMULATION</button>
         </div>
 
         <div id="true-win-screen" class="overlay hidden">
             <h1 style="color: #ff00ff; text-shadow: 0 0 30px #ff00ff; font-size: 3rem;">OMNI AWAKENING</h1>
             <p style="font-size: 1.5rem;">The Mainframe is now one with the Void.</p>
-            <p style="font-size: 1.2rem; color: #aaa;">All files have been assimilated.</p>
+            <p style="font-size: 1.2rem; color: #aaa;">All archives have been assimilated.</p>
             <p style="font-size: 1.2rem; color: #aaa;">You are no longer a program. You are the System.</p>
-            <button id="true-win-btn" style="border-color: #ff00ff; color: #ff00ff; text-shadow: 0 0 10px #ff00ff; box-shadow: 0 0 15px #ff00ff; margin-top: 2rem;">REBOOT</button>
+            <button id="true-win-btn" style="border-color: #ff00ff; color: #ff00ff; text-shadow: 0 0 10px #ff00ff; box-shadow: 0 0 15px #ff00ff; margin-top: 2rem;">RESTART</button>
         </div>
     </div>
 

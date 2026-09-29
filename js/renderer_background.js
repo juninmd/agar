@@ -64,7 +64,7 @@ export class RendererBackground {
     }
 
     static _drawDataStreams(ctx, camX, camY, width, height, r, g, b, time) {
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.03)`;
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.15)`;
         const streamSpacing = 150;
 
         // Screen Space Coordinates
@@ -74,12 +74,20 @@ export class RendererBackground {
         // Calculate offset based on time
         const offset = (time * 0.05) % streamSpacing;
 
+        // Matrix Rain Vertical Drops
         for (let x = 0; x < width; x += streamSpacing) {
              const drawX = screenLeft + x + offset;
-             // Random noise
-             if (Math.sin(drawX * 0.01 + time * 0.002) > 0.5) {
-                 ctx.fillRect(drawX, screenTop, 2, height);
-             }
+             const speed = 0.1 + ((x % 3) * 0.05); // Varying fall speeds
+             const dropLength = 100 + ((x % 5) * 50); // Varying line lengths
+             const fallOffset = (time * speed) % (height + dropLength);
+             const drawY = screenTop + fallOffset - dropLength;
+
+             ctx.fillRect(drawX, drawY, 2, dropLength);
+
+             // Glowing head of the stream
+             ctx.fillStyle = `rgba(255, 255, 255, 0.5)`;
+             ctx.fillRect(drawX, drawY + dropLength - 10, 2, 10);
+             ctx.fillStyle = `rgba(${r}, ${g}, ${b}, 0.15)`;
         }
 
         // Horizontal Scanline

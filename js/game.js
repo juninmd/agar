@@ -20,6 +20,7 @@ import { SpatialHash } from './core/spatial_hash.js';
 import { GameCollisions } from './core/game_collisions.js';
 import { NetworkSystem } from './network_system.js';
 import { RendererBackground } from './renderer_background.js';
+import { GameInitializer } from './core/game_initializer.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -62,30 +63,7 @@ export class Game {
     }
 
     start(name, protocol, mutations = [], skin = 'DEFAULT', roomId = null) {
-        this.mutationSystem.applyModifiers(mutations, CONSTANTS);
-
-        if (roomId) {
-            this.network.connect(roomId);
-        }
-        this.player = new Player(CONSTANTS.WORLD_WIDTH / 2, CONSTANTS.WORLD_HEIGHT / 2, protocol, name, skin);
-        this.foods = Array(CONSTANTS.FOOD_COUNT).fill().map(() => Spawner.spawnFood());
-        this.bots = Array(CONSTANTS.BOT_COUNT).fill().map(() => Spawner.spawnBot());
-        this.ghostSystem.spawnGhosts(this);
-        this.firewall = new Firewall();
-        this.systemIntegrity = 100;
-        this.singularitySystem.active = false;
-        this.purgeSystem.isActive = false;
-        this.purgeSystem.timer = 0;
-        this.bossSystem.activeBoss = null;
-        this.bossSystem.bossSpawned = false;
-        this.raidSystem.isActive = false;
-        this.raidSystem.activeTitan = null;
-        this.weaverSystem.isActive = false;
-        this.weaverSystem.hasSpawned = false;
-        this.weaverSystem.activeWeaver = null;
-        this.riftSystem.reset();
-        this.gameRunning = true;
-        this.ui.setGameActive(true);
+        GameInitializer.start(this, name, protocol, mutations, skin, roomId);
     }
 
     handleDash() {

@@ -179,16 +179,6 @@ button:hover {
     box-sizing: border-box;
 }
 
-#protocol-selection::-webkit-scrollbar {
-    width: 8px;
-}
-#protocol-selection::-webkit-scrollbar-track {
-    background: #000;
-}
-#protocol-selection::-webkit-scrollbar-thumb {
-    background: var(--neon-blue);
-}
-
 @media (max-width: 768px) {
     #protocol-selection {
         grid-template-columns: repeat(2, 1fr);

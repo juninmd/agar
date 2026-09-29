@@ -13,6 +13,22 @@
     user-select: none;
 }
 
+/* Global Scrollbar Styles */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--neon-blue);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-pink);
+}
+
 body {
     background-color: var(--dark-bg);
     overflow: hidden;

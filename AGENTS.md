@@ -61,4 +61,4 @@
 - Action (Stitch Persona): Executed Phase 27 "The Radar Sweep" Minimap Upgrade. Added a dynamic radar sweep animation to `UIMinimap` using Canvas rotation and conic gradients, executing the "Refine Interface" mandate.
 - Action (Stitch Persona): Proactively executed UI/UX Enhancement by adding a `.digital-noise-panel` CSS class and `@keyframes digitalNoise` for dynamic cyberpunk panel backgrounds.
 - Action (Stitch Persona): Executed Phase 29 "The Diagnostic Overlay" upgrade. Infused `drawTargetingSystem` in `js/renderer.js` with a pulsating sine-wave animation for the brackets, adding size and opacity dynamics for enhanced Cyberpunk visual feedback.
-- Action (Stitch Persona): Executed Phase 30 "The Holographic HUD" upgrade. Enhanced the active gameplay HUD elements with `.digital-noise-panel` effects and a scanline list item style for deeper Cyberpunk OS immersion.
+- Action (Stitch Persona): Executed Phase 30 "The Interface Polishing" upgrade. Refactored `.overlay` to support scrolling on smaller vertical viewports and centralized the custom scrollbar UI logic into `css/base.css` to enforce a consistent Cyberpunk aesthetic across the entire app.

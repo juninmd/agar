@@ -8,7 +8,7 @@ def run_cuj(page):
     page.wait_for_timeout(1000)
 
     # Start the game with some default settings
-    page.get_by_role("button", name="INICIAR EXECUÇÃO").click()
+    page.get_by_role("button", name="INITIATE EXECUTION").click()
     page.wait_for_timeout(2000)
 
     # Leaderboard should be visible

@@ -17,7 +17,7 @@ def run():
         # Wait for modal
         modal = page.locator("#database-modal")
         expect(modal).to_be_visible()
-        expect(page.locator("h2", has_text="ARQUIVOS DO SISTEMA")).to_be_visible()
+        expect(page.locator("h2", has_text="SYSTEM ARCHIVES")).to_be_visible()
         expect(page.locator("li", has_text="CORRUPTER")).to_be_visible()
 
         # Check for dynamic lore

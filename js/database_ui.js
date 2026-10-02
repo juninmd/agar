@@ -52,9 +52,9 @@ export class DatabaseUI {
 
             if (!isUnlocked) {
                  entry.classList.add('locked');
-                 entry.innerText = `LOG 0x${fragment.id.toString(16).toUpperCase().padStart(2, '0')}: [ENCRYPTED DATA]`;
+                 entry.textContent = `LOG 0x${fragment.id.toString(16).toUpperCase().padStart(2, '0')}: [ENCRYPTED DATA]`;
             } else {
-                 entry.innerText = fragment.text;
+                 entry.textContent = fragment.text;
             }
             this.loreList.appendChild(entry);
         });

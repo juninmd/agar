@@ -102,9 +102,9 @@ export class UIManager {
      * @param {number} score - The final score.
      */
     showGameOver(reason, score) {
-        this.finalScoreDisplay.innerText = Math.floor(score);
+        this.finalScoreDisplay.textContent = Math.floor(score);
         const reasonEl = this.gameOverScreen.querySelector('.error-text');
-        if (reasonEl) reasonEl.innerText = reason || "FATAL ERROR";
+        if (reasonEl) reasonEl.textContent = reason || "FATAL ERROR";
         this.gameOverScreen.classList.remove('hidden');
         this.setGameActive(false);
     }

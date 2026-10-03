@@ -35,4 +35,28 @@ describe('UIHud', () => {
         expect(document.getElementById('integrity-container').classList.contains('hidden')).toBe(true);
         expect(document.getElementById('ability-hud').classList.contains('hidden')).toBe(true);
     });
+
+    it('should update integrity bar width and color', () => {
+        const bar = document.getElementById('integrity-bar');
+
+        hud.updateIntegrity(75);
+        expect(bar.style.width).toBe('75%');
+        expect(bar.style.backgroundColor).toBe('green');
+
+        hud.updateIntegrity(50);
+        expect(bar.style.width).toBe('50%');
+        expect(bar.style.backgroundColor).toBe('yellow');
+
+        hud.updateIntegrity(30);
+        expect(bar.style.width).toBe('30%');
+        expect(bar.style.backgroundColor).toBe('yellow');
+
+        hud.updateIntegrity(25);
+        expect(bar.style.width).toBe('25%');
+        expect(bar.style.backgroundColor).toBe('red');
+
+        hud.updateIntegrity(10);
+        expect(bar.style.width).toBe('10%');
+        expect(bar.style.backgroundColor).toBe('red');
+    });
 });

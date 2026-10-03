@@ -62,7 +62,17 @@ export class UIHud {
      * @param {number} percent - The integrity percentage (0-100).
      */
     updateIntegrity(percent) {
-        if (this.integrityBar) this.integrityBar.style.width = `${Math.max(0, percent)}%`;
+        if (this.integrityBar) {
+            const p = Math.max(0, percent);
+            this.integrityBar.style.width = `${p}%`;
+            if (p > 50) {
+                this.integrityBar.style.backgroundColor = 'green';
+            } else if (p > 25) {
+                this.integrityBar.style.backgroundColor = 'yellow';
+            } else {
+                this.integrityBar.style.backgroundColor = 'red';
+            }
+        }
     }
 
     /**

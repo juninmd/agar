@@ -6,6 +6,8 @@
 - [x] Initial neon aesthetic implementation.
 - [x] Verification scripts for syntax.
 - [x] CI/CD Pipeline Setup.
+- [x] **Initialization & Audit**: Generate core documents (`ROADMAP.md`, `GEMINI.md`) and define the architectural plan.
+- [x] **Architectural Plan**: Tech Stack defined as TypeScript + Canvas API + Socket.io (using `pnpm` for Node and `uv` for Python).
 
 ## 🚧 Phase 2: Engagement (Current)
 - [x] **Mobile UX Enhancement**: Improved protocol selection grid layout for smaller screens.

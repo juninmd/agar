@@ -6,6 +6,8 @@
 - [x] Initial neon aesthetic implementation.
 - [x] Verification scripts for syntax.
 - [x] CI/CD Pipeline Setup.
+- [x] **Initialization & Audit**: Generate core documents (`ROADMAP.md`, `GEMINI.md`) and define the architectural plan.
+- [x] **Architectural Plan**: Tech Stack defined as TypeScript + Canvas API + Socket.io (using `pnpm` for Node and `uv` for Python).
 
 ## 🚧 Phase 2: Engagement (Current)
 - [x] **Mobile UX Enhancement**: Improved protocol selection grid layout for smaller screens.
@@ -35,7 +37,7 @@
 - [x] **Mimic Entities**: Deceptive bots that disguise themselves as powerups or lore fragments.
 - [x] **Fractal Zones**: New visual anomalies in the background data streams.
 
-## 🌑 Phase 7: Códigos da Escuridão (Current)
+## 🌑 Phase 7: Codes of Darkness (Current)
 - [x] **Soulbound Protocol**: New class capable of channeling the Dark Faction's power via the 'Soul Storm'.
 - [x] **Soulbinder Entities**: New bots that orbit and attempt to bind with living code instead of directly attacking.
 - [x] **Dark Faction Lore**: New narrative elements describing a faction attempting to prevent system destruction through "Soul Binding".

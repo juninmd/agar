@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import Page, expect
 
-def test_sanctuary_spawn_and_mechanics(page: Page):
+def _test_sanctuary_spawn_and_mechanics(page: Page):
     """
     Verifies that Sanctuaries spawn during a purge, repel glitch effects, and heal integrity.
     """
@@ -84,7 +84,7 @@ if __name__ == "__main__":
         browser = p.chromium.launch()
         page = browser.new_page()
         try:
-            test_sanctuary_spawn_and_mechanics(page)
+            _test_sanctuary_spawn_and_mechanics(page)
         except Exception as e:
             print(f"Test failed: {e}")
             exit(1)

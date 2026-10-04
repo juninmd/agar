@@ -145,3 +145,6 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 ## 🛠️ Phase 30: The Interface Polishing (Done)
 - [x] **Global Scrollbars**: Centralized and themed the custom scrollbars across the entire app for a consistent Cyberpunk look.
 - [x] **Responsive Overlays**: Fixed cut-off UI elements on low-height screens by introducing `overflow-y: auto` to `.overlay`.
+
+## 🌧️ Phase 31: The Matrix Rain (Done)
+- [x] **Digital Void Enhancements**: Overhaul the background rendering data streams (`_drawDataStreams`) into a vertical Matrix Rain scrolling effect with varying drop lengths, speeds, and glowing heads to immerse the player deeper into the digital abyss.

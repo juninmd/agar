@@ -12,6 +12,7 @@ import { BossSystem } from './boss_system.js';
 import { RaidSystem } from './raid_system.js';
 import { WeaverSystem } from './weaver_system.js';
 import { RiftSystem } from './rift_system.js';
+import { AbyssSystem } from './abyss_system.js';
 import { GameSystems } from './game_systems.js';
 import { Food } from './food.js';
 import { Utils } from './utils.js';
@@ -43,6 +44,7 @@ export class Game {
         this.raidSystem = new RaidSystem();
         this.weaverSystem = new WeaverSystem(this);
         this.riftSystem = new RiftSystem(this);
+        this.abyssSystem = new AbyssSystem(this);
         this.systems = new GameSystems(this);
         this.mutationSystem = new MutationSystem();
         this.spatialHash = new SpatialHash(200); // 200px cell size

@@ -1,4 +1,12 @@
 export const PROTOCOLS_SPECIAL = {
+    STALKER: {
+        id: 'STALKER',
+        name: "STALKER",
+        color: "#1a1a1a", // Almost black
+        massMultiplier: 1.0,
+        speedMultiplier: 1.6, // Matches python test: base_speed = 1.6
+        description: "STEALTH PROTOCOL. THE DEEP WEB ABYSS."
+    },
     CHRONOS: {
         id: 'CHRONOS',
         name: "CHRONOS",

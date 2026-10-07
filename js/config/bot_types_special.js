@@ -1,4 +1,11 @@
 export const BOT_TYPES_SPECIAL = {
+    STALKER: {
+        color: '#1a1a1a', // Almost black
+        speedMultiplier: 1.6,
+        massMultiplier: 1.0,
+        aggression: 5.0, // High aggression for hunting
+        namePrefix: "STALKER"
+    },
     ILLUSIONIST: {
         color: '#00FFFF', // Cyan
         speedMultiplier: 1.1,

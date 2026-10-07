@@ -6,6 +6,10 @@ import { AIStrategiesPhysics } from './ai_strategies_physics.js';
 import { AIStrategiesPhysicsAdvanced } from './ai_strategies_physics_advanced.js';
 
 export class AIStrategies {
+    static thinkStalker(bot, entities, foods) {
+        AIStrategiesAdvanced.thinkStalker(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkMimic(bot, entities, foods) {
         AIStrategiesBasic.thinkMimic(bot, entities, foods);
     }

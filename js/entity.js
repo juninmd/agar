@@ -55,9 +55,20 @@ export class Entity {
     }
 
     draw(ctx) {
+        ctx.save();
+
+        let currentAlpha = 1.0;
+        if (this.alpha !== undefined) currentAlpha = this.alpha;
+
+        if (this.isObscured) {
+            currentAlpha *= (this.flickerEffect || 0.3); // Apply flicker
+        }
+
+        ctx.globalAlpha = currentAlpha;
+
         if (this.isGlitching) {
             this.drawGlitch(ctx);
-            // Draw name and other stuff on top usually handled by subclass
+            ctx.restore();
             return;
         }
 
@@ -73,9 +84,8 @@ export class Entity {
         ctx.shadowOffsetY = 0;
 
         ctx.closePath();
-
-        // Reset shadow for performance if needed, but for now we keep the neon look
         ctx.shadowBlur = 0;
+        ctx.restore();
     }
 
     getBounds() {

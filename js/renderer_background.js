@@ -60,7 +60,34 @@ export class RendererBackground {
         ctx.lineWidth = 5;
         ctx.strokeRect(0, 0, CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT);
 
-        ctx.restore();
+                // Draw Abyss Zones
+        if (gameState.abyssSystem && gameState.abyssSystem.zones) {
+            gameState.abyssSystem.zones.forEach(zone => {
+                const alpha = zone.getAlpha();
+                if (alpha > 0) {
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.arc(zone.x, zone.y, zone.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(10, 10, 10, ${alpha * 0.8})`;
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.arc(zone.x, zone.y, zone.radius * 0.5, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 0, 0, ${alpha})`;
+                    ctx.fill();
+
+                    // Add some noise/flicker effect
+                    if (Math.random() < 0.1) {
+                         ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.1})`;
+                         ctx.fillRect(zone.x + Math.random() * zone.radius - zone.radius*0.5,
+                                      zone.y + Math.random() * zone.radius - zone.radius*0.5,
+                                      10, 2);
+                    }
+                    ctx.restore();
+                }
+            });
+        }
+ctx.restore();
     }
 
     static _drawDataStreams(ctx, camX, camY, width, height, r, g, b, time) {

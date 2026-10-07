@@ -38,6 +38,7 @@ export class GameSystems {
         this.game.raidSystem.update(this.game);
         this.game.weaverSystem.update(this.game);
         this.game.riftSystem.update(this.game);
+        this.game.abyssSystem.update([...this.game.bots, this.game.player]);
         this.game.singularityActive = this.game.singularitySystem.active;
     }
 

@@ -8,7 +8,7 @@ on:
 
 jobs:
   setup-lint-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
 
@@ -65,7 +65,7 @@ jobs:
           # The others run automatically too if included in the suite
   build-and-release:
     needs: setup-lint-test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3

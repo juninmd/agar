@@ -1,8 +1,6 @@
-refactor(ui): translate HTML strings from Portuguese to English
+refactor(particles): extract Particle class to fix file size limit
 
-Translated text content in index.html to English, to make it consistent with the variable names and code base. Also changed the document language attribute to 'en'.
-
-- Translated menu screen titles and placeholders
-- Translated database text content and tooltips
-- Translated game over and win screen messages
-- Modified 'lang' attribute on html tag to 'en'
+- Extracts the `Particle` class from `js/particles.js` into its own module `js/particle.js`.
+- Updates `ParticleSystem` in `js/particles.js` to import `Particle`.
+- Brings `js/particles.js` under the 150-line size limit constraint.
+- Adds comprehensive unit tests in `js/tests/particle.test.js` to ensure 100% code coverage.

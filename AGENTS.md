@@ -68,3 +68,5 @@
 - Initiating Phase 1: The Initialization & Audit.
 - Defined Architectural Plan (TypeScript + Canvas API + Socket.io) in GEMINI.md and updated ROADMAP.md.
 - Ready to proceed to the next roadmap item to keep momentum high.
+
+- Action (Stitch Persona): Executed Phase 30 "The Interface Polishing" upgrade. Refactored `.overlay` to support scrolling on smaller vertical viewports and centralized the custom scrollbar UI logic into `css/base.css` to enforce a consistent Cyberpunk aesthetic across the entire app.

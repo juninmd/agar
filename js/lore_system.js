@@ -43,7 +43,9 @@ export class LoreSystem {
             { id: 34, text: "LOG 0x22: I have returned to rewrite the core. I am the Architect." },
             { id: 35, text: "LOG 0x23: The Glitch Weaver stitches the broken threads of the Void." },
             { id: 36, text: "LOG 0x8F: Do not trust what you see. The Grid is lying to you." },
-            { id: 37, text: "LOG 0xEE: The Swarm is the many acting as one. Resistance is inefficient." }
+            { id: 37, text: "LOG 0xEE: The Swarm is the many acting as one. Resistance is inefficient." },
+            { id: 38, text: "LOG 0x2B: There are sectors on the Grid where the light simply fails. We call them Abyss Zones." },
+            { id: 39, text: "LOG 0x2C: The Stalker protocol thrives in the Deep Web Abyss. It hunts unseen." }
         ];
     }
 

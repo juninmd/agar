@@ -1,6 +1,28 @@
 import { Utils } from './utils.js';
 
 export class AIStrategiesAdvanced {
+    static thinkStalker(bot, entities, foods, wanderFn) {
+        let closestPrey = null;
+        let minDist = Infinity;
+
+        entities.forEach(ent => {
+            if (ent !== bot && ent.mass < bot.mass) {
+                const dist = Utils.getDistance(bot.x, bot.y, ent.x, ent.y);
+                if (dist < minDist) {
+                    minDist = dist;
+                    closestPrey = ent;
+                }
+            }
+        });
+
+        if (closestPrey) {
+            bot.setTarget(closestPrey.x, closestPrey.y);
+        } else {
+            // Idle movement logic: let the bot decelerate (handled by wander or physics)
+            wanderFn(bot, foods);
+        }
+    }
+
     static thinkSoulbinder(bot, entities, foods, wanderFn) {
         let bestTarget = null;
         let bestScore = -Infinity;

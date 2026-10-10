@@ -81,6 +81,28 @@ export class Bot extends Player {
             }
         }
 
+                if (this.type === "STALKER") {
+            const speed = Math.hypot(this.velocity.x, this.velocity.y);
+            let targetAlpha = 0.1; // Base stealth
+
+            let closestPreyDist = Infinity;
+            entities.forEach(e => {
+                if (e !== this && e.mass < this.mass) {
+                    const d = Utils.getDistance(this.x, this.y, e.x, e.y);
+                    if (d < closestPreyDist) closestPreyDist = d;
+                }
+            });
+
+            if (closestPreyDist < 300) {
+                targetAlpha = Math.max(0.1, 1.0 - (closestPreyDist / 300));
+            }
+            if (speed > 2) {
+                targetAlpha = Math.max(targetAlpha, Math.min(1.0, speed / 5));
+            }
+
+            this.alpha = targetAlpha;
+        }
+
         this.x += this.velocity.x;
         this.y += this.velocity.y;
         this.checkBounds(worldWidth, worldHeight);

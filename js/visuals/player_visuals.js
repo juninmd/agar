@@ -49,6 +49,14 @@ export class PlayerVisuals {
     }
 
     static drawPlayer(ctx, player) {
+        ctx.save();
+
+        let alpha = player.alpha !== undefined ? player.alpha : 1.0;
+        if (player.isObscured) {
+            alpha *= (player.flickerEffect || 0.3);
+        }
+        ctx.globalAlpha = alpha;
+
         if (player.abilities) player.abilities.draw(ctx, player);
         PlayerVisualsEffects.drawShield(ctx, player);
         PlayerVisualsEffects.drawSpeedEffect(ctx, player);
@@ -95,5 +103,6 @@ export class PlayerVisuals {
             PlayerVisualsEffects.drawDecorativeRing(ctx, player);
         }
         ctx.globalAlpha = originalAlpha;
+        ctx.restore();
     }
 }

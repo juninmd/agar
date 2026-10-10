@@ -18,9 +18,11 @@ export class UIHud {
 
         // Apply neon-glow class for Interface Richness
         const integrityContainer = document.getElementById('integrity-container');
-        if (integrityContainer) integrityContainer.classList.add('neon-glow');
+        if (integrityContainer) integrityContainer.classList.add('neon-glow', 'holographic-hud');
         const scoreBoard = document.getElementById('score-board');
-        if (scoreBoard) scoreBoard.classList.add('neon-glow');
+        if (scoreBoard) scoreBoard.classList.add('neon-glow', 'holographic-hud');
+        const abilityHud = document.getElementById('ability-hud');
+        if (abilityHud) abilityHud.classList.add('holographic-hud');
 
         this.titanBar = new UITitanBar(this.uiLayer);
     }

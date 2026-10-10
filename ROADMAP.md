@@ -148,3 +148,5 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## 🌧️ Phase 31: The Matrix Rain (Done)
 - [x] **Digital Void Enhancements**: Overhaul the background rendering data streams (`_drawDataStreams`) into a vertical Matrix Rain scrolling effect with varying drop lengths, speeds, and glowing heads to immerse the player deeper into the digital abyss.
+## 🕶️ Phase 32: The Holographic HUD (Done)
+- [x] **3D HUD Elements**: Applied 3D perspective transformations (`transform: perspective(800px) rotateX(5deg) rotateY(-5deg)`) to main HUD elements to enhance the Cyberpunk UI aesthetic.

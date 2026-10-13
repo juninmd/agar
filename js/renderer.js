@@ -23,9 +23,9 @@ export class Renderer {
         this.fps = 0;
     }
 
-    clear() {
+    clear(zoomLevel = 1) {
         this.ctx.fillStyle = '#050505';
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillRect(0, 0, this.canvas.width / zoomLevel, this.canvas.height / zoomLevel);
     }
 
     updateCamera(player) {
@@ -42,8 +42,13 @@ export class Renderer {
         }
     }
 
-    applyTransform(systemIntegrity) {
+    applyTransform(systemIntegrity, zoomLevel = 1) {
         this.ctx.save();
+        // Scale around the center of the screen
+        this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
+        this.ctx.scale(zoomLevel, zoomLevel);
+        this.ctx.translate(-this.canvas.width / 2, -this.canvas.height / 2);
+
         let jitterX = 0;
         let jitterY = 0;
 
@@ -64,6 +69,10 @@ export class Renderer {
     }
 
     render(gameState) {
+        const zoomLevel = gameState.input ? gameState.input.zoomLevel : 1;
+        const viewportWidth = this.canvas.width / zoomLevel;
+        const viewportHeight = this.canvas.height / zoomLevel;
+
         const now = performance.now();
         this.frameCount++;
         if (now - this.lastTime >= 1000) {
@@ -72,10 +81,10 @@ export class Renderer {
             this.lastTime = now;
         }
 
-        this.clear();
-        this.applyTransform(gameState.systemIntegrity);
+        this.clear(zoomLevel);
+        this.applyTransform(gameState.systemIntegrity, zoomLevel);
 
-        RendererBackground.drawGrid(this.ctx, gameState, this.camX, this.camY, this.canvas.width, this.canvas.height);
+        RendererBackground.drawGrid(this.ctx, gameState, this.camX, this.camY, viewportWidth, viewportHeight);
 
         if (gameState.purgeSystem && gameState.purgeSystem.sanctuaries) {
             gameState.purgeSystem.sanctuaries.forEach(s => s.draw(this.ctx));
@@ -100,7 +109,7 @@ export class Renderer {
         }
 
         gameState.foods.forEach(food => {
-            if (Utils.isInViewport(food.x, food.y, food.radius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
+            if (Utils.isInViewport(food.x, food.y, food.radius, this.camX, this.camY, viewportWidth, viewportHeight)) {
                 food.draw(this.ctx);
             }
         });
@@ -108,7 +117,7 @@ export class Renderer {
         if (gameState.network && gameState.network.otherPlayers) {
             for (const [id, remote] of gameState.network.otherPlayers.entries()) {
                 const rRadius = Utils.getRadiusFromMass(remote.mass);
-                if (Utils.isInViewport(remote.x, remote.y, rRadius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
+                if (Utils.isInViewport(remote.x, remote.y, rRadius, this.camX, this.camY, viewportWidth, viewportHeight)) {
                     this.ctx.beginPath();
                     this.ctx.arc(remote.x, remote.y, rRadius, 0, Math.PI * 2);
                     this.ctx.strokeStyle = remote.color;
@@ -123,12 +132,12 @@ export class Renderer {
 
         const entities = [gameState.player, ...gameState.bots].sort((a, b) => a.mass - b.mass);
         entities.forEach(e => {
-            if (!e.markedForDeletion && Utils.isInViewport(e.x, e.y, e.radius, this.camX, this.camY, this.canvas.width, this.canvas.height)) {
+            if (!e.markedForDeletion && Utils.isInViewport(e.x, e.y, e.radius, this.camX, this.camY, viewportWidth, viewportHeight)) {
                 e.draw(this.ctx);
             }
         });
 
-        TargetingVisuals.drawTargetingSystem(this.ctx, gameState.player, gameState.bots, this.camX, this.camY, this.canvas.width, this.canvas.height);
+        TargetingVisuals.drawTargetingSystem(this.ctx, gameState.player, gameState.bots, this.camX, this.camY, viewportWidth, viewportHeight);
 
         this.ctx.restore();
     }

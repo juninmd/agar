@@ -20,6 +20,7 @@ export class InputHandler {
         this.touchStartX = 0;
         this.touchStartY = 0;
         this.maxJoystickRadius = 50;
+        this.zoomLevel = 1;
         this.isMobile = false;
 
         this._initListeners();
@@ -104,6 +105,18 @@ export class InputHandler {
         });
 
         // Keyboard (Dash and Ability)
+                // Mouse Wheel (Zoom)
+        window.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            if (this.isMobile) return;
+            const zoomSpeed = 0.1;
+            if (e.deltaY < 0) {
+                this.zoomLevel = Math.min(this.zoomLevel + zoomSpeed, 2);
+            } else {
+                this.zoomLevel = Math.max(this.zoomLevel - zoomSpeed, 0.5);
+            }
+        });
+
         window.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 if (this.onDash) this.onDash();

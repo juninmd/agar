@@ -15,6 +15,7 @@ describe('UIHud', () => {
             <div id="integrity-container" class="hidden"></div>
             <div id="score-board" class="hidden"></div>
             <div id="ability-hud" class="hidden"></div>
+            <div id="terminal-ticker" class="hidden"></div>
         `;
         hud = new UIHud();
     });
@@ -25,6 +26,7 @@ describe('UIHud', () => {
         expect(document.getElementById('fps-counter').classList.contains('hidden')).toBe(false);
         expect(document.getElementById('integrity-container').classList.contains('hidden')).toBe(false);
         expect(document.getElementById('ability-hud').classList.contains('hidden')).toBe(false);
+        expect(document.getElementById('terminal-ticker').classList.contains('hidden')).toBe(false);
     });
 
     it('should hide HUD elements when active is false', () => {
@@ -34,6 +36,12 @@ describe('UIHud', () => {
         expect(document.getElementById('fps-counter').classList.contains('hidden')).toBe(true);
         expect(document.getElementById('integrity-container').classList.contains('hidden')).toBe(true);
         expect(document.getElementById('ability-hud').classList.contains('hidden')).toBe(true);
+        expect(document.getElementById('terminal-ticker').classList.contains('hidden')).toBe(true);
+    });
+
+    it('should update ticker text', () => {
+        hud.updateTicker("SYSTEM SECURE");
+        expect(document.getElementById('terminal-ticker').innerText).toBe("> SYSTEM SECURE");
     });
 
     it('should update integrity bar width and color', () => {

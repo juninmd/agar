@@ -15,6 +15,7 @@ export class UIHud {
         this.warningMessage = document.getElementById('warning-message');
         this.uiLayer = document.getElementById('ui-layer');
         this.fpsCounter = document.getElementById('fps-counter');
+        this.terminalTicker = document.getElementById('terminal-ticker');
 
         // Apply neon-glow class for Interface Richness
         const integrityContainer = document.getElementById('integrity-container');
@@ -44,6 +45,17 @@ export class UIHud {
         if (integrityContainer) integrityContainer.classList[action]('hidden');
         const abilityHud = document.getElementById('ability-hud');
         if (abilityHud) abilityHud.classList[action]('hidden');
+        if (this.terminalTicker) this.terminalTicker.classList[action]('hidden');
+    }
+
+    /**
+     * Updates the terminal ticker text.
+     * @param {string} text - The text to display in the ticker.
+     */
+    updateTicker(text) {
+        if (this.terminalTicker) {
+            this.terminalTicker.innerText = `> ${text}`;
+        }
     }
 
     updateFPS(fps) {

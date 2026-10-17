@@ -609,3 +609,20 @@
     transform: perspective(800px) rotateX(5deg) rotateY(-5deg) !important;
     transition: transform 0.3s ease;
 }
+
+.terminal-ticker {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--neon-green);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    text-shadow: 0 0 5px var(--neon-green);
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 900;
+    pointer-events: none;
+    border-right: 2px solid var(--neon-green);
+    animation: typing 2s steps(40, end), blink-caret .75s step-end infinite;
+}

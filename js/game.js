@@ -54,6 +54,17 @@ export class Game {
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
+        this.tickerTimer = 0;
+        this.tickerIndex = 0;
+        this.tickerMessages = [
+            "SCANNING MEMORY BLOCKS...",
+            "ANALYZING NETWORK TRAFFIC...",
+            "MONITORING FIREWALL STATUS...",
+            "SEARCHING FOR ANOMALIES...",
+            "DECRYPTING SECURE PACKETS...",
+            "COMPILING SYSTEM LOGS...",
+            "OPTIMIZING ROUTING PROTOCOLS..."
+        ];
 
         this.ui.onStart = (name, protocol, mutations, skin, roomId) => this.start(name, protocol, mutations, skin, roomId);
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin, this.network.roomId);
@@ -117,6 +128,24 @@ export class Game {
         this.ui.updateLeaderboard(this.player, this.bots);
         this.ui.minimap.update(this.player, this.bots, CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT);
         this.narrativeSystem.update(this.player, this.systemIntegrity);
+
+        this._updateTerminalTicker();
+    }
+
+    _updateTerminalTicker() {
+        if (!this.ui.hud || !this.ui.hud.terminalTicker) return;
+        this.tickerTimer++;
+        if (this.tickerTimer > 180) { // Cycle every ~3 seconds at 60 FPS
+            this.tickerTimer = 0;
+            this.tickerIndex = (this.tickerIndex + 1) % this.tickerMessages.length;
+
+            // Re-trigger the CSS animations by cloning the element
+            const el = this.ui.hud.terminalTicker;
+            const newEl = el.cloneNode(true);
+            newEl.innerText = `> ${this.tickerMessages[this.tickerIndex]} // INTEGRITY: ${Math.floor(this.systemIntegrity)}%`;
+            el.parentNode.replaceChild(newEl, el);
+            this.ui.hud.terminalTicker = newEl;
+        }
     }
 
     _handleGameOver() {

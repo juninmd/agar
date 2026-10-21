@@ -89,6 +89,47 @@ export class AIStrategiesBasic {
         else wanderFn(bot, []);
     }
 
+
+    static thinkCollector(bot, entities, foods, wanderFn) {
+        let threat = null;
+        let threatDist = Infinity;
+
+        entities.forEach(other => {
+            if (other === bot) return;
+            const dist = Utils.getDistance(bot.x, bot.y, other.x, other.y);
+            if (dist < 400 && other.radius > bot.radius * 1.1) {
+                if (dist < threatDist) {
+                    threat = other;
+                    threatDist = dist;
+                }
+            }
+        });
+
+        if (threat) {
+            const dx = bot.x - threat.x;
+            const dy = bot.y - threat.y;
+            bot.setTarget(bot.x + dx, bot.y + dy);
+            return;
+        }
+
+        let bestFood = null;
+        let bestFoodDist = Infinity;
+        for (let i = 0; i < foods.length; i++) {
+            const f = foods[i];
+            const dist = Utils.getDistance(bot.x, bot.y, f.x, f.y);
+            if (dist < 600 && dist < bestFoodDist) {
+                bestFoodDist = dist;
+                bestFood = f;
+            }
+        }
+
+        if (bestFood) {
+            bot.setTarget(bestFood.x, bestFood.y);
+        } else {
+            wanderFn(bot, foods);
+        }
+    }
+
     static wander(bot, foods) {
         let closestFood = null;
         let minFoodDist = Infinity;

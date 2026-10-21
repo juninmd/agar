@@ -102,5 +102,13 @@ export const PROTOCOLS_SPECIAL = {
         massMultiplier: 1.0,
         speedMultiplier: 1.2,
         description: "GHOST WALK. INTANGIBILITY."
+    },
+    HARVEST: {
+        id: 'HARVEST',
+        name: "HARVEST",
+        color: "#ADFF2F", // GreenYellow
+        massMultiplier: 1.0,
+        speedMultiplier: 1.2,
+        description: "THE DATA HARVEST. CONSUME ALL NEARBY FOOD."
     }
 };

@@ -9,6 +9,7 @@ export class AbilityEffects {
     static triggerChronos(player) { AbilityEffectsTime.triggerChronos(player); }
     static triggerArchitect(bots) { AbilityEffectsTime.triggerArchitect(bots); }
     static updateMagnetar(player, bots, foods = []) { AbilityEffectsTime.updateMagnetar(player, bots, foods); }
+    static triggerHarvest(player, foods) { AbilityEffectsTime.triggerHarvest(player, foods); }
     static triggerSpecter(player) { AbilityEffectsTime.triggerSpecter(player); }
 
     static triggerSwarm(player, bots) { AbilityEffectsCombat.triggerSwarm(player, bots); }

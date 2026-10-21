@@ -87,6 +87,11 @@
 - [x] **Neuron Entities**: Bots that actively seek out and cluster with one another.
 - [x] **Synapse Lore**: Narrative expansion introducing the system's newfound sentience and interconnectedness.
 
+## 🌾 Phase 36: The Data Harvest (Current)
+- [x] **Harvest Protocol**: New protocol capable of instantly absorbing all nearby data fragments.
+- [x] **Collector Entities**: Bots that exclusively hunt for food and flee from conflicts.
+- [x] **Data Harvest Lore**: Narrative expansion introducing the automated collection systems.
+
 ## 🎯 v1.0 Release
 A polished, addictive, and lore-rich survival game that serves as a benchmark for vanilla web performance.
 - [x] **Kinetic Protocol**: Added Kinetic Resonance mechanics.

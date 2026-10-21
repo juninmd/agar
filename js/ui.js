@@ -55,6 +55,8 @@ export class UIManager {
             this.minimap.show(true);
         } else {
             this.hud.uiLayer.style.pointerEvents = 'auto';
+            document.body.classList.remove('glitch-mode');
+            this.hud.showWarning(false);
             this.hud.show(false);
             this.mobileDashBtn.classList.remove('active-game');
             if (joystickBase) joystickBase.classList.remove('active-game');

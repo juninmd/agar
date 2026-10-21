@@ -87,6 +87,14 @@ export const PROTOCOLS_SPECIAL = {
         speedMultiplier: 0.9,
         description: "ARMOR PIERCING. 1.5x MASS FROM BOTS."
     },
+    KINETIC: {
+        id: 'KINETIC',
+        name: "KINETIC",
+        color: "#FF4500", // Orange Red
+        massMultiplier: 1.1,
+        speedMultiplier: 1.1,
+        description: "MOMENTUM SHOCKWAVE. REPEL NEARBY BOTS."
+    },
     SPECTER: {
         id: 'SPECTER',
         name: "SPECTER",

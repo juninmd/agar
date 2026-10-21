@@ -28,15 +28,24 @@ export class Spawner {
 
     /**
      * Spawns a random bot.
+     * @param {{x: number, y: number}} [avoid] - Position to keep a safe distance from (e.g. the player).
+     * @param {number} [safeDistance] - Minimum distance from `avoid`.
      * @returns {Bot}
      */
-    static spawnBot() {
+    static spawnBot(avoid = null, safeDistance = 700) {
         const types = Object.keys(CONSTANTS.BOT_TYPES).filter(k => k !== 'NORMAL' && k !== 'ELITE_HUNTER' && k !== 'SENTINEL');
         const type = types[Math.floor(Math.random() * types.length)];
         // 20% chance for special bot, else NORMAL
         const finalType = (Math.random() < 0.2) ? type : 'NORMAL';
 
-        return new Bot(Utils.randomRange(0, CONSTANTS.WORLD_WIDTH), Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT), CONSTANTS.INITIAL_RADIUS, Utils.randomColor(CONSTANTS.COLORS), finalType);
+        let x, y;
+        let attempts = 0;
+        do {
+            x = Utils.randomRange(0, CONSTANTS.WORLD_WIDTH);
+            y = Utils.randomRange(0, CONSTANTS.WORLD_HEIGHT);
+        } while (avoid && ++attempts < 20 && Utils.getDistance(x, y, avoid.x, avoid.y) < safeDistance);
+
+        return new Bot(x, y, CONSTANTS.INITIAL_RADIUS, Utils.randomColor(CONSTANTS.COLORS), finalType);
     }
 
     /**

@@ -18,7 +18,7 @@ export class GameSystems {
         if (this.game.player.inSanctuary) {
             this.game.systemIntegrity = Math.min(100, this.game.systemIntegrity + 0.05);
         } else {
-            this.game.systemIntegrity -= 0.03;
+            this.game.systemIntegrity = Math.max(0, this.game.systemIntegrity - 0.03);
         }
 
         this.game.particleSystem.update();

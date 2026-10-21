@@ -29,10 +29,6 @@ export class UIHud {
     }
 
     /**
-     * Updates the FPS counter.
-     * @param {number} fps - The current frames per second.
-     */
-    /**
      * Toggles the visibility of the main HUD elements.
      * @param {boolean} active - Whether the HUD should be visible.
      */
@@ -58,6 +54,10 @@ export class UIHud {
         }
     }
 
+    /**
+     * Updates the FPS counter.
+     * @param {number} fps - The current frames per second.
+     */
     updateFPS(fps) {
         if (this.fpsCounter) this.fpsCounter.innerText = `${fps} FPS`;
     }
@@ -79,13 +79,7 @@ export class UIHud {
         if (this.integrityBar) {
             const p = Math.max(0, percent);
             this.integrityBar.style.width = `${p}%`;
-            if (p > 50) {
-                this.integrityBar.style.backgroundColor = 'green';
-            } else if (p > 25) {
-                this.integrityBar.style.backgroundColor = 'yellow';
-            } else {
-                this.integrityBar.style.backgroundColor = 'red';
-            }
+            this.integrityBar.style.backgroundColor = p > 50 ? '#00ff41' : p > 25 ? '#ffb800' : '#ff2244';
         }
     }
 
@@ -121,12 +115,9 @@ export class UIHud {
      */
     showWarning(show) {
         if (!this.warningMessage) return;
-        if (show) {
-            this.warningMessage.classList.remove('hidden');
-            setTimeout(() => this.warningMessage.classList.add('hidden'), 5000);
-        } else {
-            this.warningMessage.classList.add('hidden');
-        }
+        clearTimeout(this.warningTimer);
+        this.warningMessage.classList.toggle('hidden', !show);
+        if (show) this.warningTimer = setTimeout(() => this.warningMessage.classList.add('hidden'), 5000);
     }
 
     /**

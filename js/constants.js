@@ -11,6 +11,7 @@ export const CONSTANTS = {
     MAX_FOOD_RADIUS: 8,
     FOOD_COUNT: 400,
     BOT_COUNT: 25,
+    WIN_MASS: 5000,
     PLAYER_SPEED_BASE: 5,
     ZOOM_BASE: 1,
     COLORS: [

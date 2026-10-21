@@ -1,5 +1,6 @@
 import { AIStrategiesBasic } from './ai_strategies_basic.js';
 import { AIStrategiesAdvanced } from './ai_strategies_advanced.js';
+import { AIStrategiesWraith } from './ai_strategies_wraith.js';
 import { AIStrategiesCombat } from './ai_strategies_combat.js';
 import { AIStrategiesExtra } from './ai_strategies_extra.js';
 import { AIStrategiesPhysics } from './ai_strategies_physics.js';
@@ -43,7 +44,7 @@ export class AIStrategies {
     }
 
     static thinkWraith(bot, entities, foods) {
-        AIStrategiesAdvanced.thinkWraith(bot, entities, foods, AIStrategiesBasic.wander);
+        AIStrategiesWraith.thinkWraith(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
     static thinkDrone(bot, entities, foods) {

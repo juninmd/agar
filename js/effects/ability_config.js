@@ -17,5 +17,6 @@ export const ABILITY_CONFIG = {
     MAGNETAR:{ cooldown: 900, duration: 240 },   // 15s / 4s
     VAMPYR:  { cooldown: 600, duration: 300 },   // 10s / 5s
     BREAKER: { cooldown: 600, duration: 180 },   // 10s / 3s
+    KINETIC: { cooldown: 480, duration: 0 },     // 8s / Instant
     SPECTER: { cooldown: 900, duration: 180 }    // 15s / 3s
 };

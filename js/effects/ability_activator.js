@@ -38,6 +38,10 @@ export class AbilityActivator {
                 system.isActive = false;
             } else return false;
         }
+        if (system.protocolId === 'KINETIC') {
+            if (AbilityEffects.triggerKinetic(player, bots)) system.isActive = false;
+            else return false;
+        }
         if (system.protocolId === 'AEON') {
             AbilityEffects.triggerAeon(player);
             system.isActive = false;

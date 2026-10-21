@@ -1,0 +1,93 @@
+/* ===== In-game HUD redesign: score/FPS top-left, integrity/leaderboard top-right ===== */
+#score-board, #integrity-container, #leaderboard, #ability-hud, #minimap-container {
+    background: rgba(5, 10, 20, 0.72);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    box-shadow: 0 0 14px rgba(0, 243, 255, 0.25);
+    animation: none;
+    backdrop-filter: blur(3px);
+}
+
+#score-board {
+    top: 16px; left: 16px;
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 8px 14px;
+    font-family: 'Orbitron', sans-serif; font-size: 1.25rem;
+    color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green);
+}
+.hud-label { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--neon-blue); text-shadow: none; }
+
+#fps-counter {
+    position: absolute; top: 68px; left: 18px; z-index: 5;
+    font-family: 'Share Tech Mono', monospace; font-size: 0.85rem;
+    color: var(--neon-green); opacity: 0.75;
+}
+
+#integrity-container {
+    top: 16px; right: 16px; width: min(300px, 46vw); height: 28px;
+    overflow: hidden;
+}
+#integrity-text {
+    font-size: 0.65rem; letter-spacing: 0.2em; line-height: 28px;
+    text-shadow: 0 1px 3px #000, 0 0 6px #000;
+}
+#integrity-bar { background-color: var(--neon-green); box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.35); }
+
+#leaderboard { top: 56px; right: 16px; width: min(240px, 46vw); padding: 10px 12px; }
+#leaderboard h3 { font-size: 0.8rem; letter-spacing: 0.25em; margin-bottom: 6px; }
+#leaderboard-list { font-size: 0.8rem; }
+#leaderboard-list li { box-shadow: none; background: none; padding: 2px 0; margin: 0; }
+
+#ability-hud { bottom: 16px; left: 16px; padding: 8px 10px; }
+#ability-icon { width: 54px; height: 54px; border-radius: 8px; }
+#ability-label { font-size: 0.65rem; letter-spacing: 0.2em; }
+
+#minimap-container { bottom: 16px; right: 16px; width: 140px; height: 140px; z-index: 50; }
+
+.terminal-ticker {
+    bottom: 14px; max-width: calc(100% - 420px);
+    font-size: 0.85rem; text-overflow: ellipsis;
+    padding: 4px 10px; background: rgba(0, 0, 0, 0.55); border-radius: 4px;
+}
+
+/* Alerts: centered with the independent `translate` property so keyframe transforms never break placement */
+.corruption-alert, .purge-alert, .raid-warning, #warning-message, .lore-popup {
+    left: calc(50% - 130px);
+    top: 24%;
+    translate: -50% -50%;
+    transform: none;
+    width: auto;
+    max-width: calc(100vw - 340px);
+    font-size: clamp(1.1rem, 2.6vw, 2.2rem);
+    line-height: 1.25;
+    padding: 12px 22px;
+    border-width: 2px;
+    border-radius: 6px;
+    white-space: normal;
+}
+.corruption-alert { position: absolute; border-top-width: 2px; border-bottom-width: 2px; }
+.purge-alert { font-size: clamp(1.1rem, 2.6vw, 2.2rem); }
+.raid-warning h1 { font-size: clamp(1.8rem, 4vw, 3rem); }
+.raid-warning p { font-size: clamp(0.9rem, 1.6vw, 1.3rem); }
+#warning-message .sub-warning { font-size: 1rem; }
+.narrative-toast { height: auto; width: max-content; max-width: calc(100vw - 32px); white-space: normal; text-align: center; font-size: 1rem; }
+
+@keyframes corruption-flash { 0% { opacity: 0.85; } 100% { opacity: 1; } }
+
+/* Post-mortem screens */
+.post-mortem-panel { justify-content: center; text-align: center; gap: 10px; }
+.win-text { color: var(--neon-green); text-shadow: 0 0 20px var(--neon-green); }
+.omni-text { color: var(--neon-pink); text-shadow: 0 0 30px var(--neon-pink); font-size: clamp(1.8rem, 5vw, 3rem); margin-bottom: 16px; }
+.omni-lead { font-size: 1.3rem; margin-bottom: 10px; }
+.omni-sub { font-size: 1.05rem; color: #aaa; margin-bottom: 6px; }
+.true-win-content { position: relative; z-index: 2; margin: auto; text-align: center; }
+#true-win-btn { background: transparent; border: 2px solid var(--neon-pink); color: var(--neon-pink); margin-top: 2rem; }
+.db-event { color: var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink); }
+.db-danger { text-shadow: 0 0 5px red; }
+
+@media (max-width: 700px) {
+    #leaderboard { display: none; }
+    .corruption-alert, .purge-alert, .raid-warning, #warning-message, .lore-popup { left: 50%; max-width: calc(100vw - 24px); }
+    .terminal-ticker { max-width: calc(100% - 24px); bottom: 150px; }
+    #minimap-container { width: 96px; height: 96px; }
+}

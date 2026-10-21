@@ -1,3 +1,5 @@
+import { CONSTANTS } from './constants.js';
+
 /**
  * Manages UI event listeners.
  */
@@ -39,12 +41,20 @@ export class UIEvents {
         });
 
         const protocolCards = document.querySelectorAll('.protocol-card');
+        const descEl = document.getElementById('protocol-desc');
+        const showDescription = (card) => {
+            const protocol = CONSTANTS.PROTOCOLS[card.dataset.id];
+            if (descEl) descEl.textContent = protocol ? `> ${protocol.description}` : '';
+        };
         protocolCards.forEach(card => {
             card.addEventListener('click', () => {
                 protocolCards.forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
+                showDescription(card);
             });
         });
+        const preselected = document.querySelector('.protocol-card.selected');
+        if (preselected) showDescription(preselected);
 
         if (uiManager.restartBtn) {
             uiManager.restartBtn.addEventListener('click', () => {

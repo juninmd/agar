@@ -22,6 +22,7 @@ import { GameCollisions } from './core/game_collisions.js';
 import { NetworkSystem } from './network_system.js';
 import { RendererBackground } from './renderer_background.js';
 import { GameInitializer } from './core/game_initializer.js';
+import { TerminalTicker } from './core/terminal_ticker.js';
 
 export class Game {
     constructor(canvas, renderer, input, ui, loreSystem) {
@@ -54,17 +55,7 @@ export class Game {
         this.gameRunning = false;
         this.systemIntegrity = 100;
         this.firewallTimer = 0;
-        this.tickerTimer = 0;
-        this.tickerIndex = 0;
-        this.tickerMessages = [
-            "SCANNING MEMORY BLOCKS...",
-            "ANALYZING NETWORK TRAFFIC...",
-            "MONITORING FIREWALL STATUS...",
-            "SEARCHING FOR ANOMALIES...",
-            "DECRYPTING SECURE PACKETS...",
-            "COMPILING SYSTEM LOGS...",
-            "OPTIMIZING ROUTING PROTOCOLS..."
-        ];
+        this.ticker = new TerminalTicker();
 
         this.ui.onStart = (name, protocol, mutations, skin, roomId) => this.start(name, protocol, mutations, skin, roomId);
         this.ui.onRestart = () => this.start(this.player?.name, this.player?.protocol?.id, this.mutationSystem.activeMutations, this.player?.skin, this.network.roomId);
@@ -95,13 +86,7 @@ export class Game {
 
     update() {
         if (this.player.markedForDeletion) return this._handleGameOver();
-        if (this.bots.length === 0) {
-             if (this.player.protocol.id === 'OMNI') {
-                 return this.ui.showTrueWin();
-             } else {
-                 return this.ui.showWin();
-             }
-        }
+        if (this.player.mass >= CONSTANTS.WIN_MASS || this.bots.length === 0) return this._handleWin();
 
         this.systems.update();
 
@@ -116,7 +101,7 @@ export class Game {
         this.player.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, this.bots);
         this.bots.forEach(b => b.update(CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT, all, this.foods, this));
 
-        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot());
+        if (this.bots.length < CONSTANTS.BOT_COUNT) this.bots.push(Spawner.spawnBot(this.player));
 
         GameCollisions.checkCollisions(this);
 
@@ -129,23 +114,13 @@ export class Game {
         this.ui.minimap.update(this.player, this.bots, CONSTANTS.WORLD_WIDTH, CONSTANTS.WORLD_HEIGHT);
         this.narrativeSystem.update(this.player, this.systemIntegrity);
 
-        this._updateTerminalTicker();
+        this.ticker.update(this.ui.hud, this.systemIntegrity);
     }
 
-    _updateTerminalTicker() {
-        if (!this.ui.hud || !this.ui.hud.terminalTicker) return;
-        this.tickerTimer++;
-        if (this.tickerTimer > 180) { // Cycle every ~3 seconds at 60 FPS
-            this.tickerTimer = 0;
-            this.tickerIndex = (this.tickerIndex + 1) % this.tickerMessages.length;
-
-            // Re-trigger the CSS animations by cloning the element
-            const el = this.ui.hud.terminalTicker;
-            const newEl = el.cloneNode(true);
-            newEl.innerText = `> ${this.tickerMessages[this.tickerIndex]} // INTEGRITY: ${Math.floor(this.systemIntegrity)}%`;
-            el.parentNode.replaceChild(newEl, el);
-            this.ui.hud.terminalTicker = newEl;
-        }
+    _handleWin() {
+        this.gameRunning = false;
+        if (this.player.protocol.id === 'OMNI') return this.ui.showTrueWin();
+        return this.ui.showWin();
     }
 
     _handleGameOver() {

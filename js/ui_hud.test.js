@@ -49,22 +49,22 @@ describe('UIHud', () => {
 
         hud.updateIntegrity(75);
         expect(bar.style.width).toBe('75%');
-        expect(bar.style.backgroundColor).toBe('green');
+        expect(bar.style.backgroundColor).toBe('rgb(0, 255, 65)');
 
         hud.updateIntegrity(50);
         expect(bar.style.width).toBe('50%');
-        expect(bar.style.backgroundColor).toBe('yellow');
+        expect(bar.style.backgroundColor).toBe('rgb(255, 184, 0)');
 
         hud.updateIntegrity(30);
         expect(bar.style.width).toBe('30%');
-        expect(bar.style.backgroundColor).toBe('yellow');
+        expect(bar.style.backgroundColor).toBe('rgb(255, 184, 0)');
 
         hud.updateIntegrity(25);
         expect(bar.style.width).toBe('25%');
-        expect(bar.style.backgroundColor).toBe('red');
+        expect(bar.style.backgroundColor).toBe('rgb(255, 34, 68)');
 
         hud.updateIntegrity(10);
         expect(bar.style.width).toBe('10%');
-        expect(bar.style.backgroundColor).toBe('red');
+        expect(bar.style.backgroundColor).toBe('rgb(255, 34, 68)');
     });
 });

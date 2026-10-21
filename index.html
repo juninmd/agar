@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEON-PHAGE: RECOMPILE</title>
+    <meta name="description" content="Kernel.io - a neon antivirus vs. virus arena in your browser.">
+    <meta name="theme-color" content="#050505">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23050505' stroke='%2300f3ff' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23ff00ff'/%3E%3C/svg%3E">
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +22,14 @@
         <div class="crt-overlay"></div>
         <div class="scanlines"></div>
         <div id="terminal-ticker" class="terminal-ticker hidden"></div>
-        <div id="fps-counter" class="hidden" style="position: absolute; top: 60px; left: 20px; color: var(--neon-green); font-family: 'Orbitron', sans-serif; text-shadow: 0 0 5px var(--neon-green); z-index: 1000; font-size: 1.2rem;">60 FPS</div>
+        <div id="fps-counter" class="hidden">60 FPS</div>
         <div id="integrity-container" class="hidden digital-noise-panel">
-            <span id="integrity-text">INTEGRITY</span>
+            <span id="integrity-text">SYSTEM INTEGRITY</span>
             <div id="integrity-bar"></div>
         </div>
 
         <div id="score-board" class="hidden digital-noise-panel">
-            <span>DATA: </span><span id="score-display">0 KB</span>
+            <span class="hud-label">DATA</span><span id="score-display">0 KB</span>
         </div>
 
         <div id="leaderboard" class="neon-glow hidden digital-noise-panel">
@@ -52,135 +55,146 @@
         </div>
 
         <div id="start-screen" class="overlay active">
-            <h1 class="glitch-text" data-text="NEON-PHAGE: RECOMPILE">NEON-PHAGE: RECOMPILE</h1>
-            <p class="subtitle">BACKUP PROTOCOL INITIATED</p>
-            <p class="lore-text">Your mission: Accumulate 5000 KB of data to force the Recompile.</p>
+            <header class="start-header">
+                <h1 class="glitch-text" data-text="NEON-PHAGE: RECOMPILE">NEON-PHAGE: RECOMPILE</h1>
+                <p class="subtitle">BACKUP PROTOCOL INITIATED</p>
+                <p class="lore-text">Your mission: Accumulate 5000 KB of data to force the Recompile.</p>
+            </header>
 
-            <div id="protocol-selection">
-                <div class="protocol-card" data-id="BASTION">
-                    <h3>BASTION</h3>
-                    <p>HIGH DEFENSE</p>
+            <div class="start-main">
+                <section class="start-panel protocol-panel">
+                <h2 class="panel-title">// SELECT PROTOCOL</h2>
+                <div id="protocol-selection">
+                    <div class="protocol-card" data-id="BASTION">
+                        <h3>BASTION</h3>
+                        <p>HIGH DEFENSE</p>
+                    </div>
+                    <div class="protocol-card selected" data-id="HACKER">
+                        <h3>HACKER</h3>
+                        <p>BALANCED</p>
+                    </div>
+                    <div class="protocol-card" data-id="PHANTOM">
+                        <h3>PHANTOM</h3>
+                        <p>SPEED</p>
+                    </div>
+                    <div class="protocol-card" data-id="VIRAL">
+                        <h3>VIRAL</h3>
+                        <p>HIGH RISK</p>
+                    </div>
+                    <div class="protocol-card" data-id="CYPHER">
+                        <h3>CYPHER</h3>
+                        <p>TEMPORAL CONTROL</p>
+                    </div>
+                    <div class="protocol-card" data-id="ARCHITECT">
+                        <h3>ARCHITECT</h3>
+                        <p>SOURCE CODE</p>
+                    </div>
+                    <div class="protocol-card hidden" data-id="OMNI" id="omni-protocol-card">
+                        <h3>OMNI</h3>
+                        <p>THE AWAKENING</p>
+                    </div>
+                    <div class="protocol-card" data-id="STALKER">
+                        <h3>STALKER</h3>
+                        <p>STEALTH PROTOCOL</p>
+                    </div>
+                    <div class="protocol-card" data-id="SYMBIOTE">
+                        <h3>SYMBIOTE</h3>
+                        <p>BIO-DIGITAL STRAIN</p>
+                    </div>
+                    <div class="protocol-card protocol-card--eclipse" data-id="ECLIPSE">
+                        <h3>ECLIPSE</h3>
+                        <p>PHASE SHIFT</p>
+                    </div>
+                    <div class="protocol-card protocol-card--soulbound" data-id="SOULBOUND">
+                        <h3>SOULBOUND</h3>
+                        <p>SOUL STORM</p>
+                    </div>
+                    <div class="protocol-card protocol-card--syndicate" data-id="SYNDICATE">
+                        <h3>SYNDICATE</h3>
+                        <p>MERCENARY</p>
+                    </div>
+                    <div class="protocol-card protocol-card--mirage" data-id="MIRAGE">
+                        <h3>MIRAGE</h3>
+                        <p>HOLOGRAM DECOYS</p>
+                    </div>
+                    <div class="protocol-card" data-id="CHRONOS">
+                        <h3>CHRONOS</h3>
+                        <p>TIME REVERSAL</p>
+                    </div>
+                    <div class="protocol-card protocol-card--astral" data-id="ASTRAL">
+                        <h3>ASTRAL</h3>
+                        <p>STAR LIGHT</p>
+                    </div>
+                    <div class="protocol-card protocol-card--swarm" data-id="SWARM">
+                        <h3>SWARM</h3>
+                        <p>HIVE MIND</p>
+                    </div>
+                    <div class="protocol-card" data-id="NEXUS">
+                        <h3>NEXUS</h3>
+                        <p>CORE STRUCTURE</p>
+                    </div>
+                    <div class="protocol-card" data-id="AEON">
+                        <h3>AEON</h3>
+                        <p>TIME ANCHOR</p>
+                    </div>
+                    <div class="protocol-card" data-id="FORGE">
+                        <h3>FORGE</h3>
+                        <p>THE QUANTUM ANVIL</p>
+                    </div>
+                    <div class="protocol-card" data-id="SYNAPSE">
+                        <h3>SYNAPSE</h3>
+                        <p>NEURAL OVERRIDE</p>
+                    </div>
+                    <div class="protocol-card" data-id="KINETIC">
+                        <h3>KINETIC</h3>
+                        <p>MOMENTUM SHOCKWAVE</p>
+                    </div>
+                    <div class="protocol-card" data-id="MAGNETAR">
+                        <h3>MAGNETAR</h3>
+                        <p>GRAVITATIONAL PULL</p>
+                    </div>
+                    <div class="protocol-card" data-id="VAMPYR">
+                        <h3>VAMPYR</h3>
+                        <p>CRIMSON HARVEST</p>
+                    </div>
+                    <div class="protocol-card" data-id="BREAKER">
+                        <h3>BREAKER</h3>
+                        <p>ARMOR PIERCING</p>
+                    </div>
+                    <div class="protocol-card" data-id="SPECTER">
+                        <h3>SPECTER</h3>
+                        <p>GHOST WALK</p>
+                    </div>
                 </div>
-                <div class="protocol-card selected" data-id="HACKER">
-                    <h3>HACKER</h3>
-                    <p>BALANCED</p>
+                <p id="protocol-desc" class="protocol-desc" aria-live="polite"></p>
+            </section>
+
+            <aside class="start-panel config-panel">
+                <div id="mutation-toggles" class="mutation-container">
+                    <h2 class="panel-title panel-title--magenta">🧪 MUTATION ENGINE</h2>
+                    <label class="mutation-btn"><input type="checkbox" id="mut-chaos" value="chaos-mode"> CHAOS MODE</label>
+                    <label class="mutation-btn"><input type="checkbox" id="mut-scarcity" value="scarcity"> SCARCITY</label>
+                    <label class="mutation-btn"><input type="checkbox" id="mut-gigantism" value="gigantism"> GIGANTISM</label>
+                    <label class="mutation-btn"><input type="checkbox" id="mut-hyper-decay" value="hyper-decay"> HYPER DECAY</label>
                 </div>
-                <div class="protocol-card" data-id="PHANTOM">
-                    <h3>PHANTOM</h3>
-                    <p>SPEED</p>
+
+                <div id="skin-selection">
+                    <label for="skin-selector" class="panel-title">SKIN</label>
+                    <select id="skin-selector">
+                        <option value="DEFAULT">DEFAULT NEON</option>
+                        <option value="GLITCH">GLITCHED</option>
+                        <option value="MATRIX">DATA STREAM</option>
+                        <option value="NEON_PULSE">NEON PULSE</option>
+                    </select>
                 </div>
-                <div class="protocol-card" data-id="VIRAL">
-                    <h3>VIRAL</h3>
-                    <p>HIGH RISK</p>
-                </div>
-                <div class="protocol-card" data-id="CYPHER">
-                    <h3>CYPHER</h3>
-                    <p>TEMPORAL CONTROL</p>
-                </div>
-                <div class="protocol-card" data-id="ARCHITECT">
-                    <h3>ARCHITECT</h3>
-                    <p>SOURCE CODE</p>
-                </div>
-                <div class="protocol-card hidden" data-id="OMNI" id="omni-protocol-card" style="border-color: #ff00ff; box-shadow: 0 0 10px #ff00ff; color: #ff00ff;">
-                    <h3 style="text-shadow: 0 0 10px #ff00ff;">OMNI</h3>
-                    <p>THE AWAKENING</p>
-                </div>
-                <div class="protocol-card" data-id="STALKER">
-                    <h3>STALKER</h3>
-                    <p>STEALTH PROTOCOL</p>
-                </div>
-                <div class="protocol-card" data-id="SYMBIOTE">
-                    <h3>SYMBIOTE</h3>
-                    <p>BIO-DIGITAL STRAIN</p>
-                </div>
-                <div class="protocol-card protocol-card--eclipse" data-id="ECLIPSE">
-                    <h3>ECLIPSE</h3>
-                    <p>PHASE SHIFT</p>
-                </div>
-                <div class="protocol-card protocol-card--soulbound" data-id="SOULBOUND">
-                    <h3>SOULBOUND</h3>
-                    <p>SOUL STORM</p>
-                </div>
-                <div class="protocol-card protocol-card--syndicate" data-id="SYNDICATE">
-                    <h3>SYNDICATE</h3>
-                    <p>MERCENARY</p>
-                </div>
-                <div class="protocol-card protocol-card--mirage" data-id="MIRAGE">
-                    <h3>MIRAGE</h3>
-                    <p>HOLOGRAM DECOYS</p>
-                </div>
-                <div class="protocol-card" data-id="CHRONOS">
-                    <h3>CHRONOS</h3>
-                    <p>TIME REVERSAL</p>
-                </div>
-                <div class="protocol-card protocol-card--astral" data-id="ASTRAL">
-                    <h3>ASTRAL</h3>
-                    <p>STAR LIGHT</p>
-                </div>
-                <div class="protocol-card protocol-card--swarm" data-id="SWARM">
-                    <h3>SWARM</h3>
-                    <p>HIVE MIND</p>
-                </div>
-                <div class="protocol-card" data-id="NEXUS">
-                    <h3>NEXUS</h3>
-                    <p>CORE STRUCTURE</p>
-                </div>
-                <div class="protocol-card" data-id="AEON">
-                    <h3>AEON</h3>
-                    <p>TIME ANCHOR</p>
-                </div>
-                <div class="protocol-card" data-id="FORGE">
-                    <h3>FORGE</h3>
-                    <p>THE QUANTUM ANVIL</p>
-                </div>
-                <div class="protocol-card" data-id="SYNAPSE">
-                    <h3>SYNAPSE</h3>
-                    <p>NEURAL OVERRIDE</p>
-                </div>
-                <div class="protocol-card" data-id="KINETIC">
-                    <h3>KINETIC</h3>
-                    <p>MOMENTUM SHOCKWAVE</p>
-                </div>
-                <div class="protocol-card" data-id="MAGNETAR">
-                    <h3>MAGNETAR</h3>
-                    <p>GRAVITATIONAL PULL</p>
-                </div>
-                <div class="protocol-card" data-id="VAMPYR">
-                    <h3>VAMPYR</h3>
-                    <p>CRIMSON HARVEST</p>
-                </div>
-                <div class="protocol-card" data-id="BREAKER">
-                    <h3>BREAKER</h3>
-                    <p>ARMOR PIERCING</p>
-                </div>
-                <div class="protocol-card" data-id="SPECTER">
-                    <h3>SPECTER</h3>
-                    <p>GHOST WALK</p>
-                </div>
+
+                <h2 class="panel-title">PILOT</h2>
+                <input type="text" id="player-name" placeholder="PROTOCOL ID" maxlength="12">
+                <input type="text" id="room-id" placeholder="ROOM ID (OPTIONAL)" maxlength="12">
+                <button id="start-btn">EXECUTE BOOT SEQUENCE</button>
+                <button id="database-btn" class="secondary-btn">ACCESS ARCHIVES</button>
+            </aside>
             </div>
-
-            <div id="mutation-toggles" class="mutation-container">
-                <p style="margin-bottom: 0.5rem; color: #ff00ff; text-shadow: 0 0 5px #ff00ff;">🧪 MUTATION ENGINE</p>
-                <label class="mutation-btn"><input type="checkbox" id="mut-chaos" value="chaos-mode"> CHAOS MODE</label>
-                <label class="mutation-btn"><input type="checkbox" id="mut-scarcity" value="scarcity"> SCARCITY</label>
-                <label class="mutation-btn"><input type="checkbox" id="mut-gigantism" value="gigantism"> GIGANTISM</label>
-                <label class="mutation-btn"><input type="checkbox" id="mut-hyper-decay" value="hyper-decay"> HYPER DECAY</label>
-            </div>
-
-            <div id="skin-selection" style="margin-top: 1rem; text-align: center; margin-bottom: 1rem;">
-                <label style="color: #00ffff; text-shadow: 0 0 5px #00ffff; font-family: 'Share Tech Mono';">SKIN: </label>
-                <select id="skin-selector" style="background: rgba(0, 0, 0, 0.7); color: #00ffff; border: 1px solid #00ffff; padding: 5px; font-family: 'Share Tech Mono'; outline: none;">
-                    <option value="DEFAULT">DEFAULT NEON</option>
-                    <option value="GLITCH">GLITCHED</option>
-                    <option value="MATRIX">DATA STREAM</option>
-                    <option value="NEON_PULSE">NEON PULSE</option>
-                </select>
-            </div>
-
-            <input type="text" id="player-name" placeholder="PROTOCOL ID" maxlength="12">
-            <input type="text" id="room-id" placeholder="ROOM ID (OPTIONAL)" maxlength="12">
-            <button id="start-btn">EXECUTE BOOT SEQUENCE</button>
-            <button id="database-btn" class="secondary-btn">ACCESS ARCHIVES</button>
         </div>
 
         <div id="database-modal" class="hidden">
@@ -199,7 +213,7 @@
                         <li style="color: #FF4444"><strong>SEEKER (Red):</strong> Fast hunters. Avoid if they are larger.</li>
                         <li style="color: #4444FF"><strong>WARDEN (Blue):</strong> Slow and massive. Sector defenders.</li>
                         <li style="color: #00FF41"><strong>GLITCH (Green):</strong> Unstable. Can teleport.</li>
-                        <li style="color: #FF0000; text-shadow: 0 0 5px red;"><strong>CORRUPTER (Dark):</strong> ⚠️ DANGER ⚠️<br>
+                        <li class="db-danger" style="color: #FF0000;"><strong>CORRUPTER (Dark):</strong> ⚠️ DANGER ⚠️<br>
                         "Trojan Horse". If you eat one, your data will be corrupted. Causes massive mass loss if ingested, even if you are larger.</li>
                         <li style="color: #FFD700"><strong>CACHE (Golden):</strong> Old data. Massive bonus.</li>
                         <li style="color: #FFD700"><strong>CYPHER (Golden):</strong> Temporal Protocol. Manipulates the system clock.</li>
@@ -208,13 +222,15 @@
 
                 <div class="db-section">
                     <h3>// EVENTS (ALERT)</h3>
-                    <p style="color: #ff00ff; text-shadow: 0 0 5px #ff00ff;"><strong>PURGE (Glitch Storm):</strong> The System will attempt to delete you periodically. The screen will invert and <strong>Seekers Elite</strong> will appear. SURVIVE.</p>
+                    <p class="db-event"><strong>PURGE (Glitch Storm):</strong> The System will attempt to delete you periodically. The screen will invert and <strong>Seekers Elite</strong> will appear. SURVIVE.</p>
                 </div>
 
                 <div class="db-section">
                     <h3>// CONTROLS</h3>
                     <p><strong>MOUSE:</strong> Movement</p>
                     <p><strong>SPACE:</strong> Dash (Eject mass for boost)</p>
+                    <p><strong>E:</strong> Protocol ability</p>
+                    <p><strong>WHEEL:</strong> Tactical zoom</p>
                 </div>
             </div>
         </div>
@@ -234,19 +250,19 @@
         </div>
 
         <div id="win-screen" class="overlay hidden digital-noise-panel post-mortem-panel">
-            <h1 style="color: #00ff41; text-shadow: 0 0 20px #00ff41;">RECOMPILE COMPLETE</h1>
+            <h1 class="win-text">RECOMPILE COMPLETE</h1>
             <p>The system has been rebooted successfully.</p>
             <p>You saved the Mainframe.</p>
             <button id="win-btn">NEW SIMULATION</button>
         </div>
 
-        <div id="true-win-screen" class="overlay hidden digital-noise-panel post-mortem-panel" style="justify-content: center; align-items: center;">
-            <div style="position: relative; z-index: 2; margin: auto; text-align: center;">
-                <h1 style="color: #ff00ff; text-shadow: 0 0 30px #ff00ff; font-size: 3rem; margin-bottom: 20px;">OMNI AWAKENING</h1>
-                <p style="font-size: 1.5rem; margin-bottom: 10px;">The Mainframe is now one with the Void.</p>
-                <p style="font-size: 1.2rem; color: #aaa; margin-bottom: 5px;">All archives have been assimilated.</p>
-                <p style="font-size: 1.2rem; color: #aaa; margin-bottom: 30px;">You are no longer a program. You are the System.</p>
-                <button id="true-win-btn" style="background: transparent; border: 2px solid #ff00ff; color: #ff00ff; text-shadow: 0 0 10px #ff00ff; box-shadow: 0 0 15px #ff00ff; margin-top: 2rem;">RESTART</button>
+        <div id="true-win-screen" class="overlay hidden digital-noise-panel post-mortem-panel">
+            <div class="true-win-content">
+                <h1 class="omni-text">OMNI AWAKENING</h1>
+                <p class="omni-lead">The Mainframe is now one with the Void.</p>
+                <p class="omni-sub">All archives have been assimilated.</p>
+                <p class="omni-sub">You are no longer a program. You are the System.</p>
+                <button id="true-win-btn">RESTART</button>
             </div>
         </div>
     </div>

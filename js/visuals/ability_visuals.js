@@ -1,3 +1,5 @@
+import { Utils } from '../utils.js';
+
 export class AbilityVisuals {
     static drawAbility(ctx, player, system) {
         if (!system.isActive) return;

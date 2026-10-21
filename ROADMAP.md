@@ -156,3 +156,9 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 
 ## ⌨️ Phase 34: The Cyberpunk Terminal Ticker (Done)
 - [x] **Terminal Ticker Integration**: Connected the HTML `#terminal-ticker` to the active game loop, displaying rotating system status logs and system integrity percent, further immersing the player into the OS environment.
+
+## 🩹 Phase 35: The Stability Pass & UI Overhaul (Done)
+- [x] **Bug Fixes**: Missing `Utils` import crashing ability visuals, unreachable win condition (now `WIN_MASS` = 5000 KB), end-of-game loop that kept firing the win screen, KINETIC protocol missing from the config, bots spawning on top of the player (plus 3s spawn shield), stale purge/warning state after death, passive `wheel` listener and hidden-scroll on overlays, and a mobile layout-viewport bug that rendered the canvas 4x too large on phones.
+- [x] **UI Redesign**: New start screen (protocol grid + config panel, always-visible launch button, protocol description), unified HUD panels, alerts that no longer overlap the leaderboard, mobile-friendly layouts and README screenshots.
+- [x] **Antigravity Refactor**: Split `game.js`, `input.js`, `particles.js`, `renderer_background.js` and `ai_strategies_advanced.js` back under 150 lines.
+

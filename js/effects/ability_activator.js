@@ -70,6 +70,10 @@ export class AbilityActivator {
             system.activeTime = system.currentConfig.duration;
             system.cooldown = system.currentConfig.cooldown;
         }
+        if (system.protocolId === 'HARVEST') {
+            AbilityEffects.triggerHarvest(player, window.game.foods);
+            system.isActive = false;
+        }
         if (system.protocolId === 'SPECTER') {
             AbilityEffects.triggerSpecter(player);
             system.isActive = true;

@@ -11,6 +11,10 @@ export class AIStrategies {
         AIStrategiesAdvanced.thinkStalker(bot, entities, foods, AIStrategiesBasic.wander);
     }
 
+    static thinkCollector(bot, entities, foods) {
+        AIStrategiesBasic.thinkCollector(bot, entities, foods, AIStrategiesBasic.wander);
+    }
+
     static thinkMimic(bot, entities, foods) {
         AIStrategiesBasic.thinkMimic(bot, entities, foods);
     }

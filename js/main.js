@@ -6,6 +6,7 @@ import { LoreSystem } from './lore_system.js';
 import { DatabaseUI } from './database_ui.js';
 import { BootSequence } from './boot_sequence.js';
 import { PowerUp } from './powerup.js';
+import { Food } from './food.js';
 import { Bot } from './bot.js';
 
 const canvas = document.getElementById('gameCanvas');
@@ -51,6 +52,7 @@ function initGame() {
 // Expose classes globally for tests
 window.PowerUp = PowerUp;
 window.Bot = Bot;
+window.Food = Food;
 
 // Start Boot Sequence
 new BootSequence(initGame).start();

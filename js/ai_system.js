@@ -40,6 +40,8 @@ export class AISystem {
             AIStrategies.thinkGhoul(bot, entities, foods);
         } else if (bot.type === 'TANK') {
             AIStrategies.thinkTank(bot, entities, foods);
+        } else if (bot.type === 'COLLECTOR') {
+            AIStrategies.thinkCollector(bot, entities, foods);
         } else if (bot.type === 'WRAITH') {
             AIStrategies.thinkWraith(bot, entities, foods);
         } else {

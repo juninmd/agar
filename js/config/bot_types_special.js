@@ -103,5 +103,12 @@ export const BOT_TYPES_SPECIAL = {
         massMultiplier: 1.0,
         aggression: 1.0,
         namePrefix: "WRAITH"
+    },
+    COLLECTOR: {
+        color: '#ADFF2F', // GreenYellow
+        speedMultiplier: 1.4,
+        massMultiplier: 0.8,
+        aggression: 0.0,
+        namePrefix: "COLLECTOR"
     }
 };

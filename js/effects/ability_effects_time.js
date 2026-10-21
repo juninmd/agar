@@ -72,6 +72,24 @@ export class AbilityEffectsTime {
         applyPull(foods);
     }
 
+
+    static triggerHarvest(player, foods) {
+        const range = 600 + player.radius;
+        let addedMass = 0;
+        foods.forEach(food => {
+            if (!food.markedForDeletion) {
+                const dist = Utils.getDistance(player.x, player.y, food.x, food.y);
+                if (dist < range) {
+                    food.markedForDeletion = true;
+                    addedMass += Math.PI * food.radius * food.radius;
+                }
+            }
+        });
+        if (addedMass > 0) {
+            player.grow(addedMass);
+        }
+    }
+
     static triggerSpecter(player) {
         player.isTangible = false;
         player.alpha = 0.3;

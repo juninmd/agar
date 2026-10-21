@@ -331,3 +331,14 @@ Become the new **System Admin**.
 > For a few brief seconds, you are untouchable. You cannot eat, and you cannot be eaten.
 > You become an echo."
 > -- *Log 0xGHO - The Phantom Data*
+
+### 🌾 HIDDEN FRAGMENT: THE DATA HARVEST
+
+> "There is a subset of the system that does not care for the war. They do not hunt, and they do not conquer.
+> We call them COLLECTOR entities.
+> They are the harvesters of the Grid. Fast, hyper-focused, and completely indifferent to anything that isn't raw data.
+> But their very existence has exposed a new vulnerability. The HARVEST protocol.
+> By hijacking their subroutine, a user can emit a localized gravity well that instantly strips the sector of all free-floating memory.
+> It doesn't destroy the enemy directly. It simply starves them.
+> In a universe of finite resources, he who holds the data holds the future."
+> -- *Log 0xHRV - The Reaping*

@@ -6,3 +6,4 @@ Action (Stitch Persona): Executed Phase 30 "The Interface Polishing" upgrade. Re
 Action (Stitch Persona): Executed Phase 32 "The Holographic HUD" upgrade. Applied 3D perspective transformations (`.holographic-hud`) to main HUD elements to enhance the Cyberpunk UI aesthetic.
 
 Action (Stitch Persona): Executed Phase 34 "The Cyberpunk Terminal Ticker" upgrade. Integrated the `#terminal-ticker` element into `Game.update()` to cycle through immersive digital system log messages and current system integrity during gameplay.
+Action (Sentinel Persona): Fixed Phase 36 "The Data Harvest" by injecting the missing "Data Harvest Lore" fragment into `js/lore_system.js` (ID 40). Verified with vitest.

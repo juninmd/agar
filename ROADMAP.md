@@ -9,7 +9,7 @@
 - [x] **Initialization & Audit**: Generate core documents (`ROADMAP.md`, `GEMINI.md`) and define the architectural plan.
 - [x] **Architectural Plan**: Tech Stack defined as TypeScript + Canvas API + Socket.io (using `pnpm` for Node and `uv` for Python).
 
-## 🚧 Phase 2: Engagement (Current)
+## 🚧 Phase 2: Engagement (Done)
 - [x] **Mobile UX Enhancement**: Improved protocol selection grid layout for smaller screens.
 - [x] **Multiplayer Integration**: Basic WebSocket-based room system.
 - [x] **Skins & Cosmetics**: Visual variety for cells based on lore characters.
@@ -17,7 +17,7 @@
 - [x] **Advanced AI**: Smarter "Phage" bots for solo play.
 - [x] **Antigravity Refactor**: Fix file constraints for `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js`.
 
-## 🚀 Phase 3: Expansion (Current)
+## 🚀 Phase 3: Expansion (Done)
 - [x] **Leaderboards**: Global ranking system (Local mock implemented).
 - [x] **Rift Events**: Dynamic map changes based on the lore.
 - [x] **Custom Rooms**: Allow players to set up private matches with specific rules.
@@ -27,17 +27,17 @@
 - [x] **Parasite Entities**: New bot type that acts as a leech on the grid.
 - [x] **Organic Structures**: Visual shift from pure neon to bioluminescence.
 
-## 🕳️ Phase 5: The Deep Web Abyss (Current)
+## 🕳️ Phase 5: The Deep Web Abyss (Done)
 - [x] **Abyss Zones**: Environmental hazard that obscures vision.
 - [x] **Stalker Protocol**: New stealth-based bot entity that thrives in the dark.
 - [x] **Deep Web Lore**: New narrative fragments explaining the void.
 
-## 🔮 Phase 6: The Fractal Resonance (Current)
+## 🔮 Phase 6: The Fractal Resonance (Done)
 - [x] **Eclipse Protocol**: New stealth-focused class capable of temporary invulnerability during dashes.
 - [x] **Mimic Entities**: Deceptive bots that disguise themselves as powerups or lore fragments.
 - [x] **Fractal Zones**: New visual anomalies in the background data streams.
 
-## 🌑 Phase 7: Codes of Darkness (Current)
+## 🌑 Phase 7: Codes of Darkness (Done)
 - [x] **Soulbound Protocol**: New class capable of channeling the Dark Faction's power via the 'Soul Storm'.
 - [x] **Soulbinder Entities**: New bots that orbit and attempt to bind with living code instead of directly attacking.
 - [x] **Dark Faction Lore**: New narrative elements describing a faction attempting to prevent system destruction through "Soul Binding".
@@ -77,17 +77,17 @@
 - [x] **Oracle Entities**: Stationary bots that emit a time dilation field slowing nearby entities.
 - [x] **Chronovores Lore**: Narrative expansion introducing the ancient time-masters who manipulate the timeline.
 
-## 🔨 Phase 16: The Data Forge (Current)
+## 🔨 Phase 16: The Data Forge (Done)
 - [x] **Forge Protocol**: New protocol capable of reinforcing nearby bots by granting them temporary invulnerability.
 - [x] **Smith Entities**: Bots that wander the Grid, seeking to upgrade ordinary bots.
 - [x] **Quantum Anvil Lore**: Narrative expansion introducing the entities that forge rather than destroy.
 
-## 🧠 Phase 17: The Neural Network (Current)
+## 🧠 Phase 17: The Neural Network (Done)
 - [x] **Synapse Protocol**: New protocol capable of overriding nearby bots to induce confusion.
 - [x] **Neuron Entities**: Bots that actively seek out and cluster with one another.
 - [x] **Synapse Lore**: Narrative expansion introducing the system's newfound sentience and interconnectedness.
 
-## 🌾 Phase 36: The Data Harvest (Current)
+## 🌾 Phase 36: The Data Harvest (Done)
 - [x] **Harvest Protocol**: New protocol capable of instantly absorbing all nearby data fragments.
 - [x] **Collector Entities**: Bots that exclusively hunt for food and flee from conflicts.
 - [x] **Data Harvest Lore**: Narrative expansion introducing the automated collection systems.
@@ -98,12 +98,12 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Bumper Entities**: Bots that ricochet.
 - [x] **Kinetic Lore**: Narrative fragment added.
 
-## 🧲 Phase 19: The Magnetic Pole (Current)
+## 🧲 Phase 19: The Magnetic Pole (Done)
 - [x] **Magnetar Protocol**: New protocol that passively exerts a gravitational pull on nearby entities.
 - [x] **Lodestone Entities**: Bots that constantly attract other bots and food towards them.
 - [x] **Magnetic Pole Lore**: Narrative expansion introducing the gravitational anomalies within the Grid.
 
-## 🩸 Phase 20: The Crimson Harvest (Current)
+## 🩸 Phase 20: The Crimson Harvest (Done)
 - [x] **Vampyr Protocol**: New protocol focused on siphoning mass via blood tethers.
 - [x] **Ghoul Entities**: Scavenger bots that actively hunt smaller entities but flee from larger threats.
 - [x] **Crimson Lore**: Narrative expansion introducing the emergence of corrupted "blood" data within the Grid.
@@ -118,7 +118,7 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **Tank Entities**: Implement `TANK` bot type.
 - [x] **Breaker Lore**: Add narrative expansion introducing armor-piercing logic.
 
-## 👻 Phase 23: The Spectral Echo (Current)
+## 👻 Phase 23: The Spectral Echo (Done)
 - [x] **Specter Protocol**: Implement `SPECTER` protocol for intangibility.
 - [x] **Wraith Entities**: Implement `WRAITH` bot type that phases out of reality.
 - [x] **Spectral Lore**: Add narrative expansion introducing ghost data.

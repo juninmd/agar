@@ -4,7 +4,7 @@
     border: 1px solid var(--panel-border);
     border-radius: 6px;
     box-shadow: 0 0 14px rgba(0, 243, 255, 0.25);
-    animation: none;
+    animation: hudFlicker 2s infinite alternate;
     backdrop-filter: blur(3px);
 }
 

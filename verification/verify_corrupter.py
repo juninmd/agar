@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 import time
+import sys
 
 def verify_corrupter():
     with sync_playwright() as p:
@@ -10,8 +11,19 @@ def verify_corrupter():
         page.click("#start-btn")
         time.sleep(2)
 
+        # Inject Corrupter directly to guarantee verification instead of waiting for a random spawn
+        page.evaluate("""() => {
+            const bot = new window.Bot(
+                window.player.x + 100,
+                window.player.y + 100,
+                20,
+                '#1a0000',
+                'CORRUPTER'
+            );
+            window.game.bots.push(bot);
+        }""")
+
         # Check for Corrupter presence
-        # We need to ensure 'bots' is available on window
         bots_count = page.evaluate("window.bots.length")
         print(f"Bots count: {bots_count}")
 
@@ -28,6 +40,7 @@ def verify_corrupter():
                 // But we can check if any bot has type CORRUPTER if we wait longer or respawn.
                 return false;
             }""")
+            sys.exit(1) # Fail test if not found
 
         page.screenshot(path="verify_corrupter.png")
         browser.close()

@@ -58,3 +58,15 @@
 - Action (Stitch Persona): Executed Phase 32 "The Holographic HUD" upgrade. Applied 3D perspective transformations (`.holographic-hud`) to main HUD elements to enhance the Cyberpunk UI aesthetic.
 - Action (Stitch Persona): Executed Phase 35 "The Stability Pass & UI Overhaul". Fixed gameplay bugs (win condition, spawn protection, KINETIC protocol, missing import), redesigned the start screen and HUD (`css/start_screen.css`, `css/hud.css`), added README screenshots via `screenshots.py`, and re-split oversized JS files.
 - Completed Phase 36 The Data Harvest by adding the missing Data Harvest Lore fragment to `js/lore_system.js`.
+
+<!-- base-actions-main-policy -->
+## GitHub Actions — padrão obrigatório (@main)
+
+- Referencie as actions internas sempre pelo branch, nunca por SHA:
+  - `uses: juninmd/base-actions/<action>@main`
+  - `uses: juninmd/base-actions/.github/workflows/<arquivo>.yml@main`
+- Não fixe `@<sha>` em `juninmd/base-actions`: a atualização é centralizada no
+  `main` e passa a valer no próximo run.
+- PRs cujos checks não iniciam por billing/spending limit são mesclados pelo bot central
+  `juninmd/base-actions/.github/workflows/auto-merge-billing-blocked.yml`.
+  Para impedir o merge automático de um PR, aplique a label `do-not-merge`.

@@ -6,6 +6,13 @@ import { Utils } from './utils.js';
  * Manages the persistence and spawning of "Ghost" entities.
  * These are echoes of players from previous sessions.
  */
+const isNum = v => typeof v === 'number' && Number.isFinite(v);
+
+// Rejects tampered or corrupted localStorage entries (NaN radius, missing color, etc.)
+const isValidGhost = g => !!g && typeof g === 'object'
+    && typeof g.name === 'string' && typeof g.color === 'string'
+    && isNum(g.mass) && g.mass > 0 && isNum(g.x) && isNum(g.y);
+
 export class GhostSystem {
     constructor(game) {
         this.game = game;
@@ -76,7 +83,8 @@ export class GhostSystem {
     _loadGhosts() {
         try {
             const data = localStorage.getItem(this.storageKey);
-            return data ? JSON.parse(data) : [];
+            const parsed = data ? JSON.parse(data) : [];
+            return Array.isArray(parsed) ? parsed.filter(isValidGhost) : [];
         } catch (e) {
             console.warn('[GhostSystem] Failed to load ghosts:', e);
             return [];

@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "lint": "eslint --fix js/**/*.js"
+    "lint": "eslint --fix \"js/**/*.js\""
   },
   "keywords": [],
   "author": "",

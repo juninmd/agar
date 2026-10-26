@@ -110,5 +110,13 @@ export const PROTOCOLS_SPECIAL = {
         massMultiplier: 1.0,
         speedMultiplier: 1.2,
         description: "THE DATA HARVEST. CONSUME ALL NEARBY FOOD."
+    },
+    QUANTUM: {
+        id: 'QUANTUM',
+        name: "QUANTUM",
+        color: "#8A2BE2", // BlueViolet
+        massMultiplier: 1.0,
+        speedMultiplier: 1.2,
+        description: "THE QUANTUM ENTANGLEMENT. TELEPORT TO LINKED ENTITY."
     }
 };

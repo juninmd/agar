@@ -110,5 +110,12 @@ export const BOT_TYPES_SPECIAL = {
         massMultiplier: 0.8,
         aggression: 0.0,
         namePrefix: "COLLECTOR"
+    },
+    ENTANGLED: {
+        color: '#8A2BE2', // BlueViolet
+        speedMultiplier: 1.2,
+        massMultiplier: 1.0,
+        aggression: 1.5,
+        namePrefix: "ENTANGLED"
     }
 };

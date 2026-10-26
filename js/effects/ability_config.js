@@ -19,5 +19,6 @@ export const ABILITY_CONFIG = {
     BREAKER: { cooldown: 600, duration: 180 },   // 10s / 3s
     KINETIC: { cooldown: 480, duration: 0 },     // 8s / Instant
     SPECTER: { cooldown: 900, duration: 180 },    // 15s / 3s
-    HARVEST: { cooldown: 600, duration: 0 }    // 10s / Instant
+    HARVEST: { cooldown: 600, duration: 0 },    // 10s / Instant
+    QUANTUM: { cooldown: 600, duration: 0 }     // 10s / Instant
 };

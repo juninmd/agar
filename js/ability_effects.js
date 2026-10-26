@@ -11,6 +11,7 @@ export class AbilityEffects {
     static updateMagnetar(player, bots, foods = []) { AbilityEffectsTime.updateMagnetar(player, bots, foods); }
     static triggerHarvest(player, foods) { AbilityEffectsTime.triggerHarvest(player, foods); }
     static triggerSpecter(player) { AbilityEffectsTime.triggerSpecter(player); }
+    static triggerQuantum(player, bots) { AbilityEffectsTime.triggerQuantum(player, bots); }
 
     static triggerSwarm(player, bots) { AbilityEffectsCombat.triggerSwarm(player, bots); }
     static triggerMirage(player, bots) { AbilityEffectsCombat.triggerMirage(player, bots); }

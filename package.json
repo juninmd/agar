@@ -7,7 +7,7 @@
   "scripts": {
     "test": "vitest",
     "lint": "eslint --fix \"js/**/*.js\"",
-    "build": "mkdir -p dist && cp -r css js index.html README.md LORE.md _redirects dist/"
+    "build": "mkdir -p dist && cp -r css js index.html README.md LORE.md _redirects _headers dist/"
   },
   "keywords": [],
   "author": "",

@@ -167,3 +167,8 @@ A polished, addictive, and lore-rich survival game that serves as a benchmark fo
 - [x] **UI Redesign**: New start screen (protocol grid + config panel, always-visible launch button, protocol description), unified HUD panels, alerts that no longer overlap the leaderboard, mobile-friendly layouts and README screenshots.
 - [x] **Antigravity Refactor**: Split `game.js`, `input.js`, `particles.js`, `renderer_background.js` and `ai_strategies_advanced.js` back under 150 lines.
 
+
+## 🌌 Phase 37: The Quantum Entanglement (Done)
+- [x] **Quantum Protocol**: New protocol focused on teleportation.
+- [x] **Entangled Entities**: Bots that are entangled.
+- [x] **Quantum Lore**: Narrative expansion introducing the entanglement within the Grid.

@@ -1,53 +1,66 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { AbilityActivator } from './ability_activator.js';
 import { AbilityEffects } from '../ability_effects.js';
 
 vi.mock('../ability_effects.js', () => ({
     AbilityEffects: {
-        triggerVirus: vi.fn(),
+        triggerCypher: vi.fn(),
         triggerChronos: vi.fn(),
+        triggerAeon: vi.fn(),
+        triggerArchitect: vi.fn(),
+        updateMagnetar: vi.fn(),
+        triggerHarvest: vi.fn(),
+        triggerSpecter: vi.fn(),
+        triggerQuantum: vi.fn(),
         triggerSwarm: vi.fn(),
-        triggerSynapse: vi.fn().mockReturnValue(true)
+        triggerMirage: vi.fn(),
+        triggerSyndicate: vi.fn(),
+        triggerVirus: vi.fn(),
+        updateOutbreak: vi.fn(),
+        updateSoulStorm: vi.fn(),
+        triggerNexus: vi.fn(),
+        triggerForge: vi.fn().mockReturnValue(true),
+        triggerSynapse: vi.fn().mockReturnValue(true),
+        triggerKinetic: vi.fn().mockReturnValue(true),
+        updateVampyr: vi.fn()
     }
 }));
 
 describe('AbilityActivator', () => {
-    it('should not activate if cooldown is active', () => {
-        const system = { cooldown: 10, isActive: false };
-        const result = AbilityActivator.activate(system, {}, []);
-        expect(result).toBe(false);
+    let mockPlayer, mockBots;
+
+    beforeEach(() => {
+        vi.clearAllMocks();
+        mockPlayer = { mass: 200, grow: vi.fn(), radius: 50 };
+        mockBots = [];
+        window.game = { foods: [] };
     });
 
-    it('should activate HACKER protocol and apply cooldown', () => {
-        const system = {
-            cooldown: 0,
-            isActive: false,
-            protocolId: 'HACKER',
-            maxCooldown: 100,
-            currentConfig: { duration: 50, cooldown: 100 }
-        };
-        const result = AbilityActivator.activate(system, {}, []);
+    it('should trigger QUANTUM effect and deactivate system', () => {
+        const system = { protocolId: 'QUANTUM', isActive: false, cooldown: 0, currentConfig: { duration: 0, cooldown: 10 } };
+        AbilityActivator.activate(system, mockPlayer, mockBots);
+        expect(AbilityEffects.triggerQuantum).toHaveBeenCalledWith(mockPlayer, mockBots);
+        expect(system.isActive).toBe(false);
+    });
 
-        expect(result).toBe(true);
-        expect(system.isActive).toBe(true);
-        expect(system.cooldown).toBe(100);
-        expect(system.activeTime).toBe(50);
+    it('should trigger HACKER virus effect', () => {
+        const system = { protocolId: 'HACKER', isActive: false, cooldown: 0, currentConfig: { duration: 0, cooldown: 10 } };
+        AbilityActivator.activate(system, mockPlayer, mockBots);
         expect(AbilityEffects.triggerVirus).toHaveBeenCalled();
     });
 
-    it('should activate CHRONOS but immediately set isActive to false for instant abilities', () => {
-        const system = {
-            cooldown: 0,
-            isActive: false,
-            protocolId: 'CHRONOS',
-            maxCooldown: 200,
-            currentConfig: { duration: 0, cooldown: 200 }
-        };
-        const result = AbilityActivator.activate(system, {}, []);
+    it('should trigger SWARM drone spawn', () => {
+        const system = { protocolId: 'SWARM', isActive: false, cooldown: 0, currentConfig: { duration: 0, cooldown: 10 } };
+        // SWARM requires mass > 500
+        mockPlayer.mass = 600;
+        AbilityActivator.activate(system, mockPlayer, mockBots);
+        expect(AbilityEffects.triggerSwarm).toHaveBeenCalled();
+    });
 
-        expect(result).toBe(true);
-        expect(system.isActive).toBe(false);
-        expect(system.cooldown).toBe(200);
+    it('should trigger CHRONOS rewind and deactivate system', () => {
+        const system = { protocolId: 'CHRONOS', isActive: false, cooldown: 0, currentConfig: { duration: 0, cooldown: 10 } };
+        AbilityActivator.activate(system, mockPlayer, mockBots);
         expect(AbilityEffects.triggerChronos).toHaveBeenCalled();
+        expect(system.isActive).toBe(false);
     });
 });

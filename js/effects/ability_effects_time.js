@@ -94,4 +94,39 @@ export class AbilityEffectsTime {
         player.isTangible = false;
         player.alpha = 0.3;
     }
+
+    static triggerQuantum(player, bots) {
+        // Find the closest entangled bot (or any bot if none found, to make it somewhat useful,
+        // but ideally entangled bots). Let's search for ENTANGLED type bots.
+        let targetBot = null;
+        let minTargetDist = Infinity;
+        let anyBot = null;
+        let minAnyDist = Infinity;
+
+        bots.forEach(bot => {
+            if (bot.markedForDeletion) return;
+            const dist = Utils.getDistance(player.x, player.y, bot.x, bot.y);
+            if (bot.type === 'ENTANGLED' && dist < minTargetDist) {
+                targetBot = bot;
+                minTargetDist = dist;
+            }
+            if (dist < minAnyDist) {
+                anyBot = bot;
+                minAnyDist = dist;
+            }
+        });
+
+        const target = targetBot || anyBot;
+        if (target) {
+            // Swap positions
+            const tempX = player.x;
+            const tempY = player.y;
+            player.x = target.x;
+            player.y = target.y;
+            target.x = tempX;
+            target.y = tempY;
+
+            player.applyPowerUp({ id: 'SHIELD', duration: 60, value: 0 }); // Temporary invulnerability after teleport
+        }
+    }
 }

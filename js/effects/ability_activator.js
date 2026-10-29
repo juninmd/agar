@@ -74,6 +74,10 @@ export class AbilityActivator {
             AbilityEffects.triggerHarvest(player, window.game.foods);
             system.isActive = false;
         }
+        if (system.protocolId === 'QUANTUM') {
+            AbilityEffects.triggerQuantum(player, bots);
+            system.isActive = false;
+        }
         if (system.protocolId === 'SPECTER') {
             AbilityEffects.triggerSpecter(player);
             system.isActive = true;

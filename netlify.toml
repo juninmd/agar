@@ -1,5 +1,5 @@
 [build]
-  command = "mkdir -p dist && cp -r css js index.html README.md LORE.md _redirects _headers dist/"
+  command = "pnpm run build"
   publish = "dist"
 
 [build.environment]

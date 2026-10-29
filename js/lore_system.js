@@ -46,7 +46,8 @@ export class LoreSystem {
             { id: 37, text: "LOG 0xEE: The Swarm is the many acting as one. Resistance is inefficient." },
             { id: 38, text: "LOG 0x2B: There are sectors on the Grid where the light simply fails. We call them Abyss Zones." },
             { id: 39, text: "LOG 0x2C: The Stalker protocol thrives in the Deep Web Abyss. It hunts unseen." },
-            { id: 40, text: "LOG 0x2D: The Data Harvest protocols were built to recycle the broken; they don't fight, they only consume." }
+            { id: 40, text: "LOG 0x2D: The Data Harvest protocols were built to recycle the broken; they don't fight, they only consume." },
+            { id: 41, text: "LOG 0x2E: Distance is an illusion. The Quantum Entanglement links all." }
         ];
     }
 

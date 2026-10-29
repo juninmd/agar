@@ -7,3 +7,4 @@ Action (Stitch Persona): Executed Phase 32 "The Holographic HUD" upgrade. Applie
 
 Action (Stitch Persona): Executed Phase 34 "The Cyberpunk Terminal Ticker" upgrade. Integrated the `#terminal-ticker` element into `Game.update()` to cycle through immersive digital system log messages and current system integrity during gameplay.
 Action (Sentinel Persona): Fixed Phase 36 "The Data Harvest" by injecting the missing "Data Harvest Lore" fragment into `js/lore_system.js` (ID 40). Verified with vitest.
+Action (Spark Persona): Executed Phase 37 "The Quantum Entanglement" upgrade. Added QUANTUM protocol and ENTANGLED bot to configs, added Lore fragment to `js/lore_system.js`, and added the protocol card to the start screen UI (`index.html`). Verified that test coverage remained at 100% and manually checked visual rendering of the protocol card in the start screen.

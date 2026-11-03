@@ -89,22 +89,24 @@ Run the unit tests and linter with `pnpm install && pnpm test --run && pnpm exec
 | --- | --- | --- | --- |
 | `?skipBoot` (URL query) | Skips the boot sequence | Optional, off | `http://localhost:8000/?skipBoot` |
 | `PORT` (env, `server.js`) | Port of the multiplayer relay | Optional, `3000` | `PORT=3000 node server.js` |
+| `CORS_ORIGINS` (env, `server.js`) | Allowed CORS origins (comma-separated or wildcard) | Optional, `*` in dev, strict in prod | `CORS_ORIGINS=https://agar.example.com node server.js` |
+| `MAX_PLAYERS_PER_ROOM` (env, `server.js`) | Maximum players permitted in a single room | Optional, `20` | `MAX_PLAYERS_PER_ROOM=20 node server.js` |
 
 ## 🧰 Develop
 
 ```bash
 pnpm install                       # install dev dependencies (Vitest, ESLint, jsdom, Express, Socket.io)
-pnpm test --run                    # run the 15 Vitest suites once
+pnpm test --run                    # run the Vitest suites once
 pnpm exec eslint js                # lint the game code
 python3 -m http.server 8000        # serve the static game at http://localhost:8000
-node server.js                     # start the multiplayer relay on PORT (default 3000)
+pnpm start                         # start the multiplayer relay (node server.js) on PORT (default 3000)
 python3 screenshots.py             # regenerate docs/images (needs the server above and playwright)
 python3 verification/verify_game.py  # Playwright smoke check used by CI (needs the server above)
 ```
 
 ## 🚧 Known limitations
 
-- The multiplayer client connects to the hard-coded `http://localhost:3000` (`js/network_system.js`), and the relay only forwards positions: there is no server-side game state or validation, and CORS is open (`origin: "*"`).
+- The multiplayer client connects to `http://localhost:3000` by default (`js/network_system.js`), and the relay broadcasts validated positions among connected peers within joined rooms.
 - Without `server.js` running, the game plays single-player against bots.
 - `pnpm-lock.yaml` is git-ignored, so installs are not pinned to a lockfile.
 

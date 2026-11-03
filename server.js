@@ -3,62 +3,46 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { SERVER_CONFIG, getCorsOrigin } from './server/config.js';
+import { SocketRateLimiter } from './server/rate_limiter.js';
+import { registerSocketHandlers } from './server/socket_handler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express();
-const httpServer = createServer(app);
-const io = new Server(httpServer, {
-    cors: {
-        origin: "*", // Allow all for local dev
-        methods: ["GET", "POST"]
-    }
-});
+/**
+ * Creates and configures the Express and Socket.io server.
+ * @param {object} [customConfig]
+ * @returns {{app: express.Express, httpServer: import('http').Server, io: Server}}
+ */
+export function createKernelServer(customConfig = {}) {
+    const config = { ...SERVER_CONFIG, ...customConfig };
+    const app = express();
+    const httpServer = createServer(app);
 
-app.use(express.static(__dirname));
+    const corsOrigin = customConfig.corsOrigin !== undefined
+        ? customConfig.corsOrigin
+        : getCorsOrigin();
 
-io.on('connection', (socket) => {
-    console.log(`[NETWORK] Socket connected: ${socket.id}`);
-
-    socket.on('join_room', (roomId) => {
-        // Leave all current rooms except their own socket ID room
-        for (const room of socket.rooms) {
-            if (room !== socket.id) {
-                socket.leave(room);
-            }
-        }
-
-        socket.join(roomId);
-        console.log(`[NETWORK] Socket ${socket.id} joined room ${roomId}`);
-    });
-
-    socket.on('player_update', (data) => {
-        if (!data.roomId) return;
-        // Broadcast to everyone else in the room
-        socket.to(data.roomId).emit('player_moved', {
-            id: socket.id,
-            x: data.x,
-            y: data.y,
-            mass: data.mass,
-            color: data.color
-        });
-    });
-
-    socket.on('disconnecting', () => {
-        for (const room of socket.rooms) {
-            if (room !== socket.id) {
-                socket.to(room).emit('player_disconnected', socket.id);
-            }
+    const io = new Server(httpServer, {
+        cors: {
+            origin: corsOrigin,
+            methods: ['GET', 'POST']
         }
     });
 
-    socket.on('disconnect', () => {
-        console.log(`[NETWORK] Socket disconnected: ${socket.id}`);
-    });
-});
+    app.use(express.static(__dirname));
 
-const PORT = process.env.PORT || 3000;
-httpServer.listen(PORT, () => {
-    console.log(`[SERVER] Kernel.io Multiplayer Server running on port ${PORT}`);
-});
+    const rateLimiter = new SocketRateLimiter(config.MAX_MESSAGES_PER_SEC);
+    registerSocketHandlers(io, rateLimiter, config);
+
+    return { app, httpServer, io };
+}
+
+const isDirectRun = process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1];
+if (isDirectRun) {
+    const { httpServer } = createKernelServer();
+    httpServer.listen(SERVER_CONFIG.PORT, () => {
+        console.log(`[SERVER] Kernel.io Multiplayer Server running on port ${SERVER_CONFIG.PORT}`);
+    });
+}

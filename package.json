@@ -15,7 +15,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.32.1",
   "devDependencies": {
-    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/coverage-v8": "^5.1.0",
     "eslint": "^10.14.0",
     "jsdom": "^31.0.0",
     "prettier": "^3.9.10",

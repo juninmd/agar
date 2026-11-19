@@ -124,3 +124,4 @@ python3 verification/verify_game.py  # Playwright smoke check used by CI (needs 
 This project is served via **Nginx** on a **K3s** cluster.
 
 - **Production URL**: [https://agar.antonio-code.duckdns.org](https://agar.antonio-code.duckdns.org)
+- **GitHub Pages**: [https://juninmd.github.io/agar/](https://juninmd.github.io/agar/) (workflow `pages.yml`, a cada push em `master`)

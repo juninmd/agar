@@ -8,7 +8,7 @@
     "start": "node server.js",
     "test": "vitest",
     "lint": "eslint --fix \"js/**/*.js\"",
-    "build": "mkdir -p dist && cp -r css js index.html README.md LORE.md _redirects _headers dist/"
+    "build": "mkdir -p dist && cp -r css js index.html README.md LORE.md dist/ && cp index.html dist/404.html"
   },
   "keywords": [],
   "author": "",

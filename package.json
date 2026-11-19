@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "test": "vitest",
+    "test": "vitest run",
     "lint": "eslint --fix \"js/**/*.js\"",
     "build": "mkdir -p dist && cp -r css js index.html README.md LORE.md _redirects _headers dist/"
   },

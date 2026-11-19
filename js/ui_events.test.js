@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { UIEvents } from './ui_events.js';
 import { JSDOM } from 'jsdom';
 
@@ -19,8 +19,8 @@ describe('UIEvents', () => {
             <div class="protocol-card selected" data-id="BASTION"></div>
             <label class="mutation-btn"><input type="checkbox" id="mut-chaos" value="chaos-mode"></label>
         `);
-        global.document = dom.window.document;
-        global.window = dom.window;
+        vi.stubGlobal('document', dom.window.document);
+        vi.stubGlobal('window', dom.window);
 
         mockUI = {
             startBtn: document.getElementById('start-btn'),
@@ -32,6 +32,10 @@ describe('UIEvents', () => {
             onStart: vi.fn(),
             onRestart: vi.fn()
         };
+    });
+
+    afterEach(() => {
+        vi.unstubAllGlobals();
     });
 
     it('should initialize and attach start button event', () => {

@@ -7,12 +7,13 @@ describe('UIAlerts', () => {
 
     beforeEach(() => {
         const dom = new JSDOM('<!DOCTYPE html><div id="ui-layer"></div>');
-        global.document = dom.window.document;
+        vi.stubGlobal('document', dom.window.document);
         layer = document.getElementById('ui-layer');
         vi.useFakeTimers();
     });
 
     afterEach(() => {
+        vi.unstubAllGlobals();
         vi.useRealTimers();
     });
 

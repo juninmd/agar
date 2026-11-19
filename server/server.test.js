@@ -117,4 +117,40 @@ describe('Server integration tests', () => {
         c2.disconnect();
         c3.disconnect();
     });
+
+    it('lets a member re-join its own full room without room_full', async () => {
+        const c1 = createClient();
+        const c2 = createClient();
+        await Promise.all([new Promise((r) => c1.on('connect', r)), new Promise((r) => c2.on('connect', r))]);
+
+        c1.emit('join_room', 'rejoin');
+        c2.emit('join_room', 'rejoin');
+        await new Promise((r) => setTimeout(r, 50));
+
+        let full = false;
+        c1.on('room_full', () => { full = true; });
+        c1.emit('join_room', 'rejoin');
+        await new Promise((r) => setTimeout(r, 100));
+        expect(full).toBe(false);
+
+        c1.disconnect();
+        c2.disconnect();
+    });
+
+    it('notifies the old room with player_disconnected when a socket switches rooms', async () => {
+        const c1 = createClient();
+        const c2 = createClient();
+        await Promise.all([new Promise((r) => c1.on('connect', r)), new Promise((r) => c2.on('connect', r))]);
+
+        c1.emit('join_room', 'oldRoom');
+        c2.emit('join_room', 'oldRoom');
+        await new Promise((r) => setTimeout(r, 50));
+
+        const left = new Promise((resolve) => c2.on('player_disconnected', resolve));
+        c1.emit('join_room', 'newRoom');
+        expect(await left).toBe(c1.id);
+
+        c1.disconnect();
+        c2.disconnect();
+    });
 });

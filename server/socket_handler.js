@@ -19,6 +19,9 @@ export function registerSocketHandlers(io, rateLimiter, config) {
         socket.on('join_room', (roomId) => {
             if (!isValidRoomId(roomId)) return;
 
+            // Re-joining the current room is a no-op, not a capacity check
+            if (socket.rooms.has(roomId)) return;
+
             const room = io.sockets.adapter.rooms.get(roomId);
             const currentCount = room ? room.size : 0;
             if (currentCount >= config.MAX_PLAYERS_PER_ROOM) {
@@ -28,9 +31,11 @@ export function registerSocketHandlers(io, rateLimiter, config) {
 
             for (const existingRoom of socket.rooms) {
                 if (existingRoom !== socket.id) {
+                    socket.to(existingRoom).emit('player_disconnected', socket.id);
                     socket.leave(existingRoom);
                 }
             }
+            lastMassMap.delete(socket.id);
 
             socket.join(roomId);
             console.log(`[NETWORK] Socket ${socket.id} joined room ${roomId}`);

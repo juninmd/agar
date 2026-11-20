@@ -1,6 +1,9 @@
 import { UIAlerts } from './ui_alerts.js';
 import { UITitanBar } from './ui_titan_bar.js';
 
+// Called every frame: rewriting an unchanged text node still mutates the DOM and invalidates layout.
+const setText = (el, text) => { if (el && el.textContent !== text) el.textContent = text; };
+
 /**
  * UIHud manages individual HUD elements like score, integrity bar, and alerts.
  */
@@ -49,9 +52,7 @@ export class UIHud {
      * @param {string} text - The text to display in the ticker.
      */
     updateTicker(text) {
-        if (this.terminalTicker) {
-            this.terminalTicker.innerText = `> ${text}`;
-        }
+        setText(this.terminalTicker, `> ${text}`);
     }
 
     /**
@@ -59,7 +60,7 @@ export class UIHud {
      * @param {number} fps - The current frames per second.
      */
     updateFPS(fps) {
-        if (this.fpsCounter) this.fpsCounter.innerText = `${fps} FPS`;
+        setText(this.fpsCounter, `${fps} FPS`);
     }
 
     /**
@@ -67,8 +68,7 @@ export class UIHud {
      * @param {number} mass - The player's current mass.
      */
     updateScore(mass) {
-        const kb = Math.floor(mass);
-        if (this.scoreDisplay) this.scoreDisplay.innerText = `${kb} KB`;
+        setText(this.scoreDisplay, `${Math.floor(mass)} KB`);
     }
 
     /**

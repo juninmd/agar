@@ -41,7 +41,7 @@ describe('UIHud', () => {
 
     it('should update ticker text', () => {
         hud.updateTicker("SYSTEM SECURE");
-        expect(document.getElementById('terminal-ticker').innerText).toBe("> SYSTEM SECURE");
+        expect(document.getElementById('terminal-ticker').textContent).toBe("> SYSTEM SECURE");
     });
 
     it('should update integrity bar width and color', () => {
@@ -67,4 +67,25 @@ describe('UIHud', () => {
         expect(bar.style.width).toBe('10%');
         expect(bar.style.backgroundColor).toBe('rgb(255, 34, 68)');
     });
+
+    it('does not touch the DOM when a per-frame value is unchanged', async () => {
+        const score = document.getElementById('score-display');
+        const fps = document.getElementById('fps-counter');
+        let mutations = 0;
+        const observer = new MutationObserver((list) => { mutations += list.length; });
+        observer.observe(score, { childList: true, characterData: true, subtree: true });
+        observer.observe(fps, { childList: true, characterData: true, subtree: true });
+
+        for (let frame = 0; frame < 60; frame++) {
+            hud.updateScore(150.7);
+            hud.updateFPS(60);
+        }
+        await Promise.resolve();
+        observer.disconnect();
+
+        expect(score.textContent).toBe('150 KB');
+        expect(fps.textContent).toBe('60 FPS');
+        expect(mutations).toBe(2); // one write each, then nothing for the other 59 frames
+    });
 });
+

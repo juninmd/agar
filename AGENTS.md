@@ -1,63 +1,61 @@
-# 🧠 AGENTS.md - Agar Intelligence System
+# AGENTS.md
 
-## 👤 AI Personas
+Agar: browser cell-battle game ("Neon Phage") in vanilla JS with an optional Socket.IO multiplayer server. Narrative text lives in `LORE.md`; the assistant instruction set is `GEMINI.md`.
 
-### 1. Jules-Architect (System Architect)
-- Enacted UI styling adjustments for better mobile display of protocols and richer button visual feedback.
-- **Role**: Designing the core game engine and state synchronization.
-- **Focus**: Performance, security, and scalable logic.
-- **Vibe**: Direct, performance-obsessed, and strategic.
+## Stack
 
-### 2. Neon-Engine (Physics & VFX Expert)
-- **Role**: Implementing the "Neon Phage" physics and visual effects.
-- **Focus**: Collision detection, growth algorithms, and smooth rendering.
-- **Vibe**: Technical, precise, and fast.
+- Client: vanilla JS ES modules (`js/`), CSS (`css/`), static `index.html`. Deployed as static files (`Dockerfile` serves them with nginx).
+- Server: Node with Express 5 and Socket.IO 4 (`server.js`, `server/`).
+- Tests: Vitest 5 with jsdom (`*.test.js`, `server/*.test.js`). Browser verification: Python + Playwright (`verification/`, root `verify_*.py`).
+- Tooling: pnpm 10.32.1 (`packageManager`), ESLint 10 (`eslint.config.js`), Prettier 3.
 
-### 3. Catalyst (Assets & Lore)
-- **Role**: Managing the game's lore and visual assets.
-- **Focus**: Immersive storytelling (`LORE.md`) and consistent neon styling.
-- **Vibe**: Creative and visionary.
+## Commands
 
-## 📜 Development Rules (Antigravity)
+```bash
+corepack enable && pnpm install   # setup
+pnpm start                        # Node server (server.js)
+python3 -m http.server 8000       # serve the static client (CI does this for Playwright tests)
+pnpm test                         # vitest run (CI: unit-tests.yml)
+pnpm lint                         # eslint --fix "js/**/*.js"
+node check_syntax.js              # syntax check (CI: main.yml)
+python3 verify_weaver.py          # physics gate, required by the rules below
+python3 test_stalker.py && python3 test_abyss_zones.py   # Python checks run in main.yml
+```
 
-1. **Size Limit**: **Max 150 lines per file**. Refactor and split if logic grows too large.
-2. **Global Namespace**: Avoid polluting the global `window` object; use modules or namespaces.
-3. **Validation**: Every physics change must be verified by `verify_weaver.py`.
-4. **Clean Code**: Prioritize readability and "Self-Documenting" code.
+Build: `pnpm build` copies `css js index.html README.md LORE.md` into `dist/`.
 
-## 🤝 Interaction Protocol
-- Follow the **Plan -> Act -> Validate** cycle for every new mechanic.
-- The `GEMINI.md` file serves as the core instruction set for the AI.
+## Structure
 
-## 🧬 Jules-DevOps Prime Directives
-- Initiated the "Bio-Digital Integration" expansion, adding organic and parasitic entities.
-- Enforced strict Antigravity rules and created tests for new entities.
-- Completed Phase 4 by implementing Organic Structures for Symbiote protocol and Parasite bots.
-- Completed Phase 2 Mobile Optimization, implementing touch-based joystick controls and refactoring core files to adhere to <150 lines rule.
-- Completed Phase 2 Advanced AI by implementing predictive dodging and hunting for normal bots.
-- Completed Phase 6 The Fractal Resonance by adding the ECLIPSE protocol, MIMIC bot, and new background renderer mechanics, ensuring Playwright test coverage.
-- Completed Phase 7 Codes of Darkness by adding the SOULBOUND protocol, SOULBINDER bot, and the Soul Storm ability.
-- Completed Phase 9 The Neon Syndicate by adding the SYNDICATE protocol, MERCHANT bot, and exclusive Syndicate lore.
-- Deployed CI/CD setup via Release-Bot (generated .github/workflows/main.yml implementing lint, tests, build, and release steps).
-- Completed Phase 10 The Quantum Mirage by adding MIRAGE protocol, ILLUSIONIST, and DECOY entities, updating ai strategies and collision handler.
-- Initialized new prompt context from the user. Executed Phase 1: The Antigravity Audit and noted file size violations in `ai_strategies.js`, `ability_system.js`, `player.js`, and `player_visuals.js` for upcoming refactoring.
-- Completed Phase 2 Engagement (Antigravity Refactor) by extracting static methods to `js/ai_strategies_basic.js`, `js/ai_strategies_advanced.js`, `js/ability_effects.js`, `js/player_movement.js`, and `js/visuals/player_visuals_effects.js`.
-- Completed Phase 11 The Chrono Anomaly by adding the CHRONOS protocol with state rewinding logic, the ANOMALY bot, and corresponding Python verification scripts.
-- Refactored `js/ai_strategies_advanced.js` into `js/ai_strategies_combat.js` enforcing the <150 lines Antigravity rule.
-- Completed Phase 12 The Astral Grid by adding the ASTRAL protocol, PULSAR bot, and Astral Lore.
-- Completed Phase 14 The Nexus Core by adding the NEXUS protocol, FRAGMENTER bot, Crystal Shatter active ability, and Nexus Core lore, adhering to file constraints by modularizing into `ai_strategies_extra.js`.
-- Completed Phase 15 The Time Loop by adding the AEON protocol, ORACLE bot, and Chronovores Lore. Implemented Time Anchor rewinding ability and stationary Oracle bots emitting time dilation fields.
-- Completed Phase 20 The Crimson Harvest by adding the VAMPYR protocol, GHOUL bot, and Crimson Lore. Further enforced Antigravity rules by refactoring `ai_strategies_extra.js` and shifting logic into `ai_strategies_physics.js`.
-- Completed Phase 21 The Mutation Engine by implementing `MutationSystem` to dynamically modify game variables (like speed, size, decay) at start-time based on UI toggles. Created `verify_mutations.py` to confirm SCARCITY and GIGANTISM overrides worked correctly.
-- Acknowledged "Start Protocol" from user and executed Phase 1: Initialization & Audit. Added Architectural Plan to GEMINI.md and updated ROADMAP.md with upcoming UX/UI upgrade phase.
-- (Stitch Persona): Proactively designed a rich, visually polished UI interface overlay by adding animated Cyberpunk/Noir OS scanline effects to the protocol selection cards, verified by Playwright tests.
-- Enhanced mutation UI toggles with interactive buttons and visual feedback, fulfilling the 'Refine Interface' mandate.
-- Completed Phase 2 Multiplayer Integration by implementing `server.js` and `js/network_system.js` to broadcast player state within distinct rooms using socket.io, keeping files under the 150 lines limit.
-- Action (Stitch Persona): Executed Phase 30 "The Interface Polishing" upgrade. Refactored `.overlay` to support scrolling on smaller vertical viewports and centralized the custom scrollbar UI logic into `css/base.css` to enforce a consistent Cyberpunk aesthetic across the entire app.
-- Action (Spark Persona): Executed Phase 33 "The Tactical Zoom" upgrade. Implemented mouse-wheel dynamic zooming via `zoomLevel` integration inside `InputHandler` and `Renderer`.
-- Action (Stitch Persona): Executed Phase 32 "The Holographic HUD" upgrade. Applied 3D perspective transformations (`.holographic-hud`) to main HUD elements to enhance the Cyberpunk UI aesthetic.
-- Action (Stitch Persona): Executed Phase 35 "The Stability Pass & UI Overhaul". Fixed gameplay bugs (win condition, spawn protection, KINETIC protocol, missing import), redesigned the start screen and HUD (`css/start_screen.css`, `css/hud.css`), added README screenshots via `screenshots.py`, and re-split oversized JS files.
-- Completed Phase 36 The Data Harvest by adding the missing Data Harvest Lore fragment to `js/lore_system.js`.
+- `index.html`, `css/`: client shell and styles (one file per concern: `hud.css`, `start_screen.css`, `mobile_controls.css`, ...).
+- `js/`: game logic. `game.js` and `main.js` are the entry points; `ai_strategies_*.js` hold bot behaviors; `config/` holds bot, power-up, protocol and skin definitions; `core/` holds collisions and the spatial hash; `effects/` holds ability effects; `renderer*.js` hold drawing.
+- `server.js`, `server/`: Socket.IO rooms, validators, rate limiting.
+- `verification/`: Playwright and unit verification scripts. CI runs a subset.
+- `docs/images/`: README screenshots (`screenshots.py` regenerates them).
+- `.github/workflows/`: `main.yml` (lint, syntax, tests, build), `unit-tests.yml`, `ci.yml`, `validate.yml`, `pages.yml`, `docker-build-push.yml`, `sast.yml`, `security.yml`, `release-drafter.yml`.
+
+## Conventions
+
+- Default branch: `master`. `main.yml` triggers on `main`.
+- Contributing: `CONTRIBUTING.md`. Commits: clear, descriptive messages. Run the verification scripts before committing (e.g. `verify_game.py`, per `CONTRIBUTING.md`).
+- PR template: `PULL_REQUEST_TEMPLATE.md`.
+
+### Development Rules
+
+1. **Size Limit**: max 150 lines per file. Refactor and split when logic grows.
+2. **Global Namespace**: do not pollute the global `window` object; use modules or namespaces.
+3. **Validation**: every physics change must be verified by `verify_weaver.py`.
+4. **Clean Code**: readable, self-documenting code.
+
+### Interaction Protocol
+
+- Follow the Plan -> Act -> Validate cycle for every new mechanic.
+- `GEMINI.md` is the core instruction set for the AI assistant.
+
+### Agent Personas
+
+- **Jules-Architect** (system architect): core engine design and state sync. Focus: performance, security, scalable logic.
+- **Neon-Engine** (physics and VFX): "Neon Phage" physics and effects. Focus: collision detection, growth, smooth rendering.
+- **Catalyst** (assets and lore): game lore (`LORE.md`) and neon styling.
 
 <!-- base-actions-main-policy -->
 ## GitHub Actions — padrão obrigatório (@main)
@@ -70,3 +68,10 @@
 - PRs cujos checks não iniciam por billing/spending limit são mesclados pelo bot central
   `juninmd/base-actions/.github/workflows/auto-merge-billing-blocked.yml`.
   Para impedir o merge automático de um PR, aplique a label `do-not-merge`.
+
+## Gotchas
+
+- `main.yml` `build-and-release` has placeholder steps: the Android `.aab`/`.apk` and the Docker image are fake `echo` files, and the lint step only echoes. Do not treat them as real builds. Changing them is outside this cleanup.
+- The `lint` script uses `--fix`, so it rewrites files. Run it on a clean tree and review the diff.
+- `verification/` scripts expect a server on `localhost:8000` (`python3 -m http.server 8000`) and Playwright with Chromium.
+- No secrets are needed to run the game or tests. Optional server env vars: `PORT` (default 3000), `CORS_ORIGINS`, `NODE_ENV`, `MAX_PLAYERS_PER_ROOM` (default 20). Keep `ENV_PRODUCTION` and keystore values out of files and logs.

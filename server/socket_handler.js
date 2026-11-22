@@ -18,6 +18,8 @@ export function registerSocketHandlers(io, rateLimiter, config) {
 
         socket.on('join_room', (roomId) => {
             if (!isValidRoomId(roomId)) return;
+            // Every socket owns a private room named after its id; joining it would relay into that socket.
+            if (io.sockets.sockets.has(roomId)) return;
 
             // Re-joining the current room is a no-op, not a capacity check
             if (socket.rooms.has(roomId)) return;

@@ -54,6 +54,25 @@ describe('Server integration tests', () => {
         c2.disconnect();
     });
 
+    it('rejects joining a room named after another socket id', async () => {
+        const c1 = createClient();
+        const c2 = createClient();
+        await Promise.all([new Promise((r) => c1.on('connect', r)), new Promise((r) => c2.on('connect', r))]);
+
+        // c2's private socket.io room is its own id; c1 must not be able to join it.
+        c1.emit('join_room', c2.id);
+        await new Promise((r) => setTimeout(r, 50));
+
+        let received = false;
+        c2.on('player_moved', () => { received = true; });
+
+        c1.emit('player_update', { x: 100, y: 100, mass: 20, color: '#00FFCC' });
+        await new Promise((r) => setTimeout(r, 100));
+        expect(received).toBe(false);
+        c1.disconnect();
+        c2.disconnect();
+    });
+
     it('prevents broadcasting to unjoined rooms', async () => {
         const c1 = createClient();
         const c2 = createClient();

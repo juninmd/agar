@@ -49,9 +49,11 @@ export class GameCollisions {
         const checkedPairs = game.checkedPairs;
         for (let i = 0; i < allEntities.length; i++) {
             const e1 = allEntities[i];
+            // Something eaten earlier this frame must not eat, be eaten again, or give its mass twice.
+            if (e1.markedForDeletion) continue;
             const nearbyEntities = game.spatialHash.query(e1.x, e1.y, e1.radius * 2, queryResult);
             for (const e2 of nearbyEntities) {
-                if (e1 === e2 || e2 instanceof Food || e2.type === 'RIFT') continue;
+                if (e1 === e2 || e2 instanceof Food || e2.type === 'RIFT' || e2.markedForDeletion) continue;
 
                 const pairId = e1.id < e2.id ? `${e1.id}-${e2.id}` : `${e2.id}-${e1.id}`;
                 if (checkedPairs.has(pairId)) continue;

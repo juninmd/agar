@@ -1,0 +1,6 @@
+# Whitelist: the nginx image only needs the static client.
+*
+!index.html
+!css
+!js
+**/*.test.js

@@ -26,6 +26,7 @@ export function createKernelServer(customConfig = {}) {
         : getCorsOrigin();
 
     const io = new Server(httpServer, {
+        maxHttpBufferSize: config.MAX_PAYLOAD_BYTES,
         cors: {
             origin: corsOrigin,
             methods: ['GET', 'POST']

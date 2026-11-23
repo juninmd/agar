@@ -42,10 +42,11 @@ export function isValidCoordinate(val, max) {
  * @param {unknown} mass
  * @param {number} [lastMass]
  * @param {number} [maxGrowth]
+ * @param {number} [maxMass]
  * @returns {boolean}
  */
-export function isValidMass(mass, lastMass = null, maxGrowth = SERVER_CONFIG.MAX_MASS_GAIN_PER_UPDATE) {
-    if (typeof mass !== 'number' || !Number.isFinite(mass) || mass <= 0) {
+export function isValidMass(mass, lastMass = null, maxGrowth = SERVER_CONFIG.MAX_MASS_GAIN_PER_UPDATE, maxMass = SERVER_CONFIG.MAX_MASS) {
+    if (typeof mass !== 'number' || !Number.isFinite(mass) || mass <= 0 || mass > maxMass) {
         return false;
     }
     if (lastMass !== null && Number.isFinite(lastMass)) {
@@ -73,7 +74,7 @@ export function validatePlayerUpdate(data, lastMass = null, bounds = SERVER_CONF
 
     if (!isValidCoordinate(x, bounds.WORLD_WIDTH ?? 3000)) return null;
     if (!isValidCoordinate(y, bounds.WORLD_HEIGHT ?? 3000)) return null;
-    if (!isValidMass(mass, lastMass, bounds.MAX_MASS_GAIN_PER_UPDATE)) return null;
+    if (!isValidMass(mass, lastMass, bounds.MAX_MASS_GAIN_PER_UPDATE, bounds.MAX_MASS ?? SERVER_CONFIG.MAX_MASS)) return null;
     if (!isValidColor(color)) return null;
 
     return {

@@ -77,6 +77,12 @@ describe('server/validators.js', () => {
             expect(isValidMass('50')).toBe(false);
         });
 
+        it('rejects mass above the absolute cap even on the first update', () => {
+            expect(isValidMass(20000)).toBe(true);
+            expect(isValidMass(20001)).toBe(false);
+            expect(isValidMass(1e300)).toBe(false);
+        });
+
         it('enforces growth limit per update', () => {
             expect(isValidMass(100, 50, 200)).toBe(true);
             expect(isValidMass(350, 50, 200)).toBe(false); // +300 > 200

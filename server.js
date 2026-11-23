@@ -9,6 +9,7 @@ import { registerSocketHandlers } from './server/socket_handler.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const PUBLIC_DIRS = ['css', 'js'];
 
 /**
  * Creates and configures the Express and Socket.io server.
@@ -31,7 +32,12 @@ export function createKernelServer(customConfig = {}) {
         }
     });
 
-    app.use(express.static(__dirname));
+    // Serve only the client bundle; the repo root holds server code, tests and tooling.
+    app.get(['/', '/index.html'], (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+    app.use('/js', (req, res, next) => (req.path.endsWith('.test.js') ? res.sendStatus(404) : next()));
+    for (const dir of PUBLIC_DIRS) {
+        app.use(`/${dir}`, express.static(path.join(__dirname, dir), { dotfiles: 'deny' }));
+    }
 
     const rateLimiter = new SocketRateLimiter(config.MAX_MESSAGES_PER_SEC);
     registerSocketHandlers(io, rateLimiter, config);
